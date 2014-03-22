@@ -1,0 +1,6 @@
+1、导入data.sql文件
+2、修改data文件夹下的：common.inc.php里的数据库连接信息
+3、后台登陆地址：
+http://您的域名/admin/
+账号：admin/admin
+为了安全，请修改后台文件夹名称和管理员密码。

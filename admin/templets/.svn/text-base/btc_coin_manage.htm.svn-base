@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>币种管理</title>
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" cellpadding="1" cellspacing="1" align="center" class="tbtitle" style="background:#cfcfcf;">
+  <form name="form1" action="btc_coin_manage.php" method="post">
+    <input type="hidden" name="dopost" value="save" />
+    <tr>
+      <td height="24" colspan="12" bgcolor="#EDF9D5" background='images/tbg.gif'>
+      	<table width="98%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="30%"  style="padding-left:10px;"><strong>币种管理：</strong></td>
+            <td align="right" style="padding-top:4px;"><input type="button" name="ss1" value="交易类型管理" style="width:90px;margin-right:6px" onclick="location='btc_cv_manage.php';" class='np coolbg' />            </td>
+          </tr>
+        </table>      </td>
+    </tr>
+    <tr bgcolor="#FBFCE2">
+      <td width="4%" height="24" align="center" valign="top">编号</td>
+      <td width="10%" align="center" valign="top">标识</td>
+      <td width="12%" align="center">名称</td>
+      <td width="8%" align="center">提现手续费</td>
+      <td width="8%" align="center">充值手续费</td>
+	  <td width="8%" align="center">手续费类型</td>
+	  <td width="6%" align="center">接口类型</td>
+	  <td width="6%" align="center">充值审核</td>
+	  <td width="6%" align="center">提现审核</td>
+	  <td width="6%" align="center">远程钱包</td>
+	  <td width="6%" align="center">启用</td>
+	  <td width="6%" align="center">保留删除</td>
+    </tr>
+    <?php
+    $dsql->SetQuery("Select * From #@__btctype Order By id");
+    $dsql->Execute();
+    $k=0;
+    while($row = $dsql->GetObject())
+    {
+    	$k++;
+	?>
+    <input type="hidden" name="ID_<?php echo $k?>" value="<?php echo $row->id?>" />
+    
+    <tr align="center" bgcolor="#FFFFFF">
+      <td height="24">
+      	<?php echo $row->id?>      </td>
+      <td height="24" >
+      	<input type="text" name="cointype_<?php echo $k?>" id="cointype_<?php echo $k?>" value="<?php echo $row->cointype?>" style="width:80%" class='pubinputs' />      </td>
+      <td>
+      	<input type="text" name="coinname_<?php echo $k?>" id="coinname_<?php echo $k?>" value="<?php echo $row->coinname?>" style="width:80%" class='pubinputs' />       </td>
+	   <td>
+      	<input type="text" name="coinfee_<?php echo $k?>" id="coinfee_<?php echo $k?>" value="<?php echo $row->coinfee*10/10?>" style="width:80%" class='pubinputs' />       </td>
+	   <td>
+      	<input type="text" name="recfee_<?php echo $k?>" id="recfee_<?php echo $k?>" value="<?php echo $row->recfee*10/10?>" style="width:80%" class='pubinputs' />       </td>
+
+      <td>
+      	<select name='feetype_<?php echo $k?>' id='feetype_<?php echo $k?>' style='width:90%'>
+          <?php
+          foreach($feetypearr as $kkk=>$vvv){
+          	if($row->feetype==$kkk) echo "    <option value='{$kkk}' selected>{$vvv}</option>\r\n";
+          	else echo "    <option value='{$kkk}'>{$vvv}</option>\r\n";
+          }
+	   	?>
+        </select>       </td>
+	   
+      <td>
+      	<select name="pay_<?php echo $k?>">
+      	  <option value="1" <?php if($row->payid==1) echo "selected='selected'";?>>人民币</option>
+		  <option value="2" <?php if($row->payid==2) echo "selected='selected'";?>>虚拟币</option>
+		  <option value="3" <?php if($row->payid==3) echo "selected='selected'";?>>美元</option>
+      	</select>       </td>
+	   <td>
+      	<input name="reccheck_<?php echo $k?>" type="checkbox" id="reccheck_<?php echo $k?>"  value="1" <?php if($row->reccheck==0) echo "checked";?> class='np' />
+        审核       </td>
+	   <td>
+      	<input name="cashcheck_<?php echo $k?>" type="checkbox" id="cashcheck_<?php echo $k?>"  value="1" <?php if($row->cashcheck==0) echo "checked";?> class='np' />
+        审核       </td>
+	   <td>
+      	<input name="coinhost_<?php echo $k?>" type="checkbox" id="coinhost_<?php echo $k?>"  value="1" <?php if($row->coinhost==1) echo "checked";?> class='np' />
+        使用       </td>
+	   <td>
+      	<input name="coinsign_<?php echo $k?>" type="checkbox" id="coinsign_<?php echo $k?>"  value="1" <?php if($row->coinsign==1) echo "checked";?> class='np' />
+        启用       </td>
+	   
+      <td>
+      	<input name="check_<?php echo $k?>" type="checkbox" id="check_<?php echo $k?>"  value="1" checked='1' class='np' />
+        保留       </td>
+    </tr>
+    <tr align="center" bgcolor="#FFFFFF">
+      
+      <td colspan="12">充值提示：
+        <textarea name="buynote_<?php echo $k?>" cols="40" id="buynote_<?php echo $k?>"><?php echo $row->buynote?></textarea>提现提示
+        <textarea name="cashnote_<?php echo $k?>" cols="40" id="cashnote_<?php echo $k?>"><?php echo $row->cashnote?></textarea>币种介绍
+        <textarea name="about_<?php echo $k?>" cols="40" id="about_<?php echo $k?>"><?php echo $row->about?></textarea></td>
+    </tr>
+	 <tr align="center" >
+      
+      <td colspan="12" height="5" ></td>
+    </tr>
+	<?php
+    }
+	?>
+    <input type="hidden" name="idend" value="<?php echo $k?>">
+    <tr bgcolor="#F9FCEF">
+      <td height="24" colspan="12" valign="top">&nbsp;<strong>新增一个币种：</strong></td>
+    </tr>
+    <tr height="24" align="center" bgcolor="#FFFFFF">
+      <td valign="top">&nbsp;</td>
+      <td valign="top"><input type="text" name="cointype_new" id="cointype_new" value="" style="width:80%" class='pubinputs' /></td>
+      <td valign="top">
+      	<input type="text" name="coinname_new" id="coinname_new" value="" style="width:80%" class='pubinputs' />      </td>
+	  <td valign="top">
+      	<input type="text" name="coinfee_new" id="coinfee_new" value="" style="width:80%" class='pubinputs' />      </td>
+	  <td valign="top">
+      	<input type="text" name="recfee_new" id="recfee_new" value="" style="width:80%" class='pubinputs' />      </td>
+      <td valign="top">
+      	<select name='feetype_new' id='feetype_new' style='width:90%'>
+          <?php
+          foreach($feetypearr as $kkk=>$vvv){
+          	if($row->feetype==$kkk) echo "    <option value='{$kkk}' selected>{$vvv}</option>\r\n";
+          	else echo "    <option value='{$kkk}'>{$vvv}</option>\r\n";
+          }
+	   	?>
+        </select>      </td>
+      <td align="center" bgcolor="#FFFFFF">新增<input name="check_new" type="checkbox" value="" />  </td>
+	  <td align="center" bgcolor="#FFFFFF">      </td>
+	  <td align="center" bgcolor="#FFFFFF">      </td>
+	  <td align="center" bgcolor="#FFFFFF">      </td>
+	  <td align="center" bgcolor="#FFFFFF">      </td>
+	  <td align="center" bgcolor="#FFFFFF">      </td>
+    </tr>
+    <tr>
+      <td height="24" colspan="12" bgcolor="#ffffff">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="34" colspan="12" align="center" bgcolor="#F9FCEF">
+      	<input name="imageField"  type="submit" class="np coolbg" value="确定" class='np coolbg /' />      </td>
+    </tr>
+  </form>
+</table>
+</body>
+</html>

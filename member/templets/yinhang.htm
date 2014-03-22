@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>会员充值 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/style.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/scport1.js"></script>
+<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+
+<!--new add-->
+<style type="text/css">
+	body {behavior:url(style/iehoverfix.htc);}
+</style>	
+<script type="text/javascript" src="templets/js/js.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		jQuery.jqtab = function(tabtit,tab_conbox,shijian) {
+			$(tab_conbox).find("li").hide();
+			$(tabtit).find("li:first").addClass("thistab").show(); 
+			$(tab_conbox).find("li:first").show();
+		
+			$(tabtit).find("li").bind(shijian,function(){
+			  $(this).addClass("thistab").siblings("li").removeClass("thistab"); 
+				var activeindex = $(tabtit).find("li").index(this);
+				$(tab_conbox).children().eq(activeindex).show().siblings().hide();
+				return false;
+			});
+		
+		};
+		/*调用方法如下：*/
+		$.jqtab(".tabs",".tab_conbox","click");	
+	});
+	</script>
+<!--new add end-->
+</head>
+<body>
+	<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<div class="clear"></div>
+	<div id="wrapper" class="xbt-con">
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+		<div class="xbt-right-con">
+			<div class="xbt-rc-yhang1">
+				<div class="xbt-rc-yhang1-1">
+					<div class="xbt-rc-mm-same">
+						<h1>储蓄</h1>
+					</div>
+				</div>
+				<div class="xbt-rc-yhang2-1 tabbox">
+					<ul class="tabs">
+						<li>存款</li>
+						<li>取款</li>
+					</ul>
+					 <ul class="tab_conbox tab_conbox">
+						<li class="tab_con">
+							<div class="xbt-tab_con">
+								<label for="">币种：</label>
+								<select name="" id="" style="width:235px;height:34px; line-height:34px; font-size:12px;font:'微软雅黑';float:left;vertical-align:middle;">
+									<option value="">BTC</option>
+									<option value="">USD</option>
+									<option value="">CNY</option>
+								</select>
+							</div>
+							<div class="xbt-tab_con">
+								<label for="">存款额：</label>
+								<input type="text" />
+							</div>
+							<div class="xbt-tab_con xbt-tab_con1">
+								<button class="xbt-tcon_btn">存入</button>
+							</div>
+						</li>							
+						<li class="tab_con">
+							<div class="xbt-tab_con">
+								<label for="">币种：</label>
+								<select name="" id="" style="width:235px;height:34px; line-height:34px; font-size:12px;font:'微软雅黑';float:left;vertical-align:middle;">
+									<option value="">BTC</option>
+									<option value="">USD</option>
+									<option value="">CNY</option>
+								</select>
+							</div>
+							<div class="xbt-tab_con">
+								<label for="">取款额：</label>
+								<input type="text" />
+							</div>
+							<div class="xbt-tab_con xbt-tab_con1">
+								<button class="xbt-tcon_btn1">取出</button>
+							</div>
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+			<div class="xbt-rc-mm2">
+				<div class="xbt-rc-mm2-1">
+					<div class="xbt-rc-mm-same">
+						<h1>银行账户信息</h1>
+					</div>
+				</div>
+				<div class="xbt-rc-yhang2">					
+					<table>
+						<thead>
+							<tr>
+								<th><img src="<?php echo $cfg_templets_skin; ?>/images/xbt-yh_c6.jpg" alt="" />当前存款</th>
+								<th><img src="<?php echo $cfg_templets_skin; ?>/images/xbt-yh_c7.jpg" alt="" />当期收益</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>BTC：100.0000</td>
+								<td>BTC：10.0000</td>
+							</tr>
+							<tr>
+								<td>USD：100.00</td>
+								<td>USD：10.00</td>
+							</tr>
+							<tr>
+								<td>CNY：100.00</td>
+								<td>CNY：10.00</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="2"><img src="<?php echo $cfg_templets_skin; ?>/images/xbt-yh_c8.jpg" alt="" />本期利率</th>								
+							</tr>
+							<tr>
+								<th class="xbt-yh2-lilv" colspan="2">BTC：<i>10%</i>     USD：<i>10%</i>    CNY：<i>10%</i> </th>
+							</tr>
+						</tfoot>
+					</table>
+					<div class="xbt-yh2tet">
+						XBT银行存取款规则，<a href="">查看详情>></a>
+					</div>
+				</div>
+			</div>
+			<div class="xbt-rc-mm3">
+				<div class="xbt-rc-mm3-3">
+					<div class="xbt-rc-mm-same">
+						<h1>我的银行</h1>
+					</div>
+				</div>
+				<div class="xbt-rc-jilu xbt-rc-yhang3">
+					<div class="xbt-yh3-chx">
+						<label for="">币种：</label>
+						<select name="" id="" style="width:150px;height:34px; line-height:34px; font-size:12px;font:'微软雅黑';float:left;vertical-align:middle;">
+							<option value="">BTC</option>
+							<option value="">USD</option>
+							<option value="">CNY</option>
+						</select>
+						<label for="">类型：</label>
+						<select name="" id="" style="width:150px;height:34px; line-height:34px; font-size:12px;font:'微软雅黑';float:left;vertical-align:middle;">
+							<option value="">全部</option>
+							<option value="">存入记录</option>
+							<option value="">取款记录</option>
+							<option value="">收益记录</option>
+						</select>
+						<button>查询</button>
+					</div>
+					<table class="list" width="100%" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr class="row0">
+								<td align="center">存入\取款日期</td>
+								<td align="center">币种</td>								
+								<td align="center">类型</td>
+								<td align="center">存入\取款金额</td>
+								<td align="center">余额</td>
+							</tr>
+							<tr class="row1">
+								<td align="center">2013-09-26</td>
+								<td align="center">CNY</td>
+								<td align="center"><font color="#ffa200">存入</font></td>
+								<td align="center">10.00</td>
+								<td align="center">110.00</td>
+							
+							</tr>
+							<tr class="row0">
+								<td align="center">2013-09-26</td>
+								<td align="center">CNY</td>
+								<td align="center"><font color="#f60">取款</font></td>
+								<td align="center">10.00</td>
+								<td align="center">100.00</td>
+							
+							</tr>
+							<tr class="row1">
+								<td align="center">2013-09-26</td>
+								<td align="center">CNY</td>
+								<td align="center"><font color="#ffa200">存入</font></td>
+								<td align="center">10.00</td>
+								<td align="center">110.00</td>
+							
+							</tr>
+							<tr class="row0">
+								<td align="center">2013-09-26</td>
+								<td align="center">CNY</td>
+								<td align="center"><font color="#f60">取款</font></td>
+								<td align="center">10.00</td>
+								<td align="center">100.00</td>
+							
+							</tr>
+							<tr class="row1">
+								<td align="center">2013-10-16</td>
+								<td align="center">CNY</td>
+								<td align="center"><font color="#ffa200">存入</font></td>
+								<td align="center">10.00</td>
+								<td align="center">
+									110.00
+								</td>
+							
+							</tr>
+							<tr class="row0">
+								<td align="center">2013-10-16</td>
+								<td align="center">CNY</td>
+								<td align="center"><font color="#f60">取款</font></td>
+								<td align="center">10.00</td>
+								<td align="center">100.00</td>
+							
+							</tr>
+							<tr class="row1">
+								<td colspan="8"></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="8">
+									<div class="pageList">
+										<span>共 1 页/6条记录</span>
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+					</table>					
+				</div>
+			</div>
+			
+		</div>	
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+
+</body>
+</html>

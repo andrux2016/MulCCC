@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>会员充值 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/style.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/scport1.js"></script>
+<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+
+<script language='javascript'>
+$(function(){
+
+	$.getJSON("ajax_login.php?tt="+new Date(), function(data){
+			if(data){
+				
+				$("#userMoney").append("<li>用户ID：<span>"+data.username+"</span></li>");
+				
+				$.each(data.coin, function(key, val) {   
+					$("#userMoney").append("<li style=\"width:180px;float:left\">"+ val[0] +"：<span>"+val[1]+"</span></li>");
+				}); 
+			}
+	});
+	$("#amount").change( function() {
+		if($('#paytype').val()==""){
+			apprise('选择充值方式！', {
+				animate: false,
+				textOk: "确定"
+			});
+			$("#amount").val("");
+			return false;
+		}else{
+			$("#amountdiv").html((Number($("#amount").val())+Number($("#amount").val()*$('#payfee').val())).toFixed(2));
+		}
+	});
+});
+
+function getaddress(){
+	
+	$.getJSON("ajax_address.php?cointype=<?php echo $cointype;?>&tt="+new Date(), function(data){
+			if(data){
+				$("#address").val(data.address);
+				$("#uaddress").html(data.address);
+			}
+	});
+}
+function CheckBTC(){
+		if($('#txid').val()==""){
+			$('#txid').focus();
+			alert("请填写转账单号！");
+			return false;
+		}
+		if($('#vdcode').val()==""){
+			$('#vdcode').focus();
+			alert("验证码不能为空！");
+			return false;
+		}
+}
+
+function selectPay(payid,num,fee,account){
+	$('#paytype').val(payid);
+	$('#payfee').val(fee);
+	$('#account').val(account);
+	$('#_address').html(account);
+	for(var i=1;i<=num;i++){
+		$('#pay'+i).css("border","0px");
+	}
+	$('#pay'+payid).css("border","5px solid green");
+		if($('#amount').val()!=""){
+			
+			$("#amountdiv").html((Number($("#amount").val())+Number($("#amount").val()*$('#payfee').val())).toFixed(2));
+		}
+}
+
+
+function checkCard(){
+	  	
+		if($('#cardid').val()==""){
+			apprise('请填写充值卡！', {
+				animate: false,
+				textOk: "确定"
+			});
+			$('#cardid').focus();
+			return false;
+		}
+		if($('#vdcode').val()==""){
+			apprise('请填验证码！', {
+				animate: false,
+				textOk: "确定"
+			});
+			$('#vdcode').focus();
+			return false;
+		}
+		$.post("check_card.php?act="+new Date(),{vdcode:$('#vdcode').val(),cardid:$('#cardid').val()},function(msg){ 
+			
+				apprise(msg, {
+					animate: false,
+					textOk: "确定"
+					},function(r) {
+						location.reload(true);
+					});		
+
+        }); 
+	}
+
+
+function CheckCNY(){
+	if($('#paytype').val()==""){
+		apprise('选择充值方式！', {
+			animate: false,
+			textOk: "确定"
+		});
+		return false;
+	}
+	if($('#amount').val()==""){
+		apprise('充值金额不能为空！', {
+			animate: false,
+			textOk: "确定"
+		});
+		$('#amount').focus();
+		return false;
+	}
+	if($('#vdcode1').val()==""){
+		apprise('验证码不能为空！', {
+			animate: false,
+			textOk: "确定"
+		});
+		$('#vdcode1').focus();
+		return false;
+	}
+	$("#amountdiv").html((Number($("#amount").val())+Number($("#amount").val()*$('#payfee').val())).toFixed(2));
+	var recmsg='充值方式：'+ $('#payname'+$('#paytype').val()).val() +'<br>收款账户：'+ $('#account').val() +'<br>充值金额：'+ $("#amountdiv").html() +'(包含手续费)<br>转账备注：<?php echo $cfg_ml->M_LoginID;?>/'+$('#txid').val()+'<br><strong><font color=\"#FF0000\">提示：转账备注很重要，在您转账的时候务必填上备注，切记！</font></strong>'
+		
+		var json_req = {
+					action: 'do',
+					coinid: $('#coinid').val(),
+					paytype: $('#paytype').val(),
+					//vdcode1: $('#vdcode1').val(),
+					address: $('#account').val(),
+					amount: $("#amount").val(),
+					fee: Number($("#amount").val())*Number($('#payfee').val()),
+					txid: '<?php echo $cfg_ml->M_LoginID;?>/'+$('#txid').val()
+				};
+				$.ajax({
+					type: "post",
+					url: "buy_btc.php?op=" + new Date(),
+					data: json_req,
+					dataType: "json",
+					success: function(data) {
+						//alert(json_req.fee+json_req.coinid);
+						apprise(recmsg, {
+								animate: false,
+								textOk: "确定"
+								
+						},
+							function(r) {
+								window.location.href="operation_btc.php";
+							}
+						);
+					}
+				});
+		
+}
+
+</script>
+</head>
+<body>
+<div id="wrapper" >
+   <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+   <section>
+
+   <aside_left>	 
+	<div id="aside_content"> 
+		
+		
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+
+		<br>
+
+
+	</div> <!-- aside_content -->
+
+  </aside_left>
+  <div id="content_right">	
+    <div id="mcpmain">
+      <div id="appTab">
+        <ul>
+		  <?php
+          echo $coincards;
+          ?>
+
+           
+        </ul>
+      </div>
+      <div id="mainCp">
+        <div class="appMsg">
+          <ul class="tips" id="userMoney"></ul>
+        </div>
+        <!--内容消息提示 -->
+       
+		
+        <div class="postForm"><br>
+        <h3 class="meTitle"><?php echo $cointype;?>充值</h3>
+		<?php if($action=='do'){
+					if($cointype=='CNY'){
+		?><!--cny提交 -->
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+				<tbody>
+					<tr style='height:28px;background:#F9FEE9;'>
+						<td width="15%" valign="top" colspan="2"><strong>请将<?php echo $cointype;?>转入以下地址，转账成功后请填写转账单号，系统将自动确认您的转账并为您充值！</strong></td>
+					</tr>
+					<tr>
+						<td width="15%" align="right" valign="top">充值地址：
+						</td>
+						<td><?php echo $address;?></td>
+					</tr>
+					<tr>
+						<td width="15%" align="right" valign="top">转账单号：
+						</td>
+						<td><?php echo $txid;?></td>
+					</tr>
+					<tr>
+						<td align="right" valign="top" colspan="2"><?php echo $ShowMsg;?>
+                        </td>
+					</tr>
+				</tbody>
+				
+			</table>
+		<?php }else{?>
+		<!--btc提交 -->
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+				<tbody>
+					<tr style='height:28px;background:#F9FEE9;'>
+						<td width="15%" valign="top" colspan="2"><strong>请将<?php echo $cointype;?>转入以下地址，转账成功后请填写转账单号，系统将自动确认您的转账并为您充值！</strong></td>
+					</tr>
+					<tr>
+						<td width="15%" align="right" valign="top">充值地址：
+						</td>
+						<td><?php echo $address;?></td>
+					</tr>
+					<tr>
+						<td width="15%" align="right" valign="top">转账单号：
+						</td>
+						<td><?php echo $txid;?></td>
+					</tr>
+					<tr>
+						<td align="right" valign="top" colspan="2"><?php echo $ShowMsg;?>
+                        </td>
+					</tr>
+				</tbody>
+				
+			</table>
+			
+		<?php }    //?type
+		}else{    //?do
+			if($cointype=='CNY'){ ?>
+		
+		<div class="postForm"><br>
+        <h3 class="meTitle"><?php echo $cointype;?>充值卡充值</h3>
+
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+				<tbody>
+					<tr>
+						<td width="15%" align="right" valign="top">充值卡密码：</td>
+						<td><input name="cardid" type="text" id="cardid" size="38" class="intxt" style="width:200px"/></td>
+					</tr>
+					<tr>
+						<td align="right" valign="top">验证码：</td>
+						<td><input name="vdcode" type="text" id="vdcode" size="8" class="intxt" style='width:50px;text-transform:uppercase;' />
+							<img src="../include/vdimgck.php" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer" onclick="this.src=this.src+'?'" />
+                        </td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td align="right" valign="top">&nbsp;</td>
+						<td><button class="button2 mt5" onclick="checkCard()" type="submit">充值</button></td>
+					</tr>
+				</tfoot>
+			</table>
+
+      </div>
+      
+	  <div class="postForm">
+      <h3 class="meTitle"><?php echo $cointype;?>第三方充值:</h3>
+	  <form name="f1"  method="post">
+		<input type="hidden" name="action" value="do" />
+		<input type="hidden" id="coinid" name="coinid" value="<?php echo $coinid;?>" />
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+			<tr>
+					<td valign="top" colspan="2"><?php foreach($payment as $key=>$value){ ?>
+					<div id="pay<?php echo $key ?>" style="float:left; width:130px; margin-left:10px" onclick="selectPay('<?php echo $key."','".count($payment) ?>',<?php echo ($value['fee']+$recfee) ?>,'<?php echo $value['account'] ?>')">
+					<img src="templets/images/pay/<?php echo $value['code'] ?>.jpg" />
+					<input name="payname" type="hidden" id="payname<?php echo $key ?>" value="<?php echo $value['name'] ?>" />
+					<br>(手续费：<?php echo ($value['fee']+$recfee)*100 ?>%)</div>
+					
+					<?php } ?>
+					<input name="account" id="account" type="hidden" value="" />
+					<input name="paytype" id="paytype" type="hidden" value="" />
+					<input name="payfee" id="payfee" type="hidden" value="" />
+					</td>
+					</tr>
+				<tfoot id="show">
+				<tr>
+						<td width="15%" align="right" height="30" >充值地址：
+						</td>
+						<td><span id="_address" style=" font-size:16px;color: #FF0000;bold"></span></div></td>
+					</tr>
+				<tr>
+						<td width="15%" align="right" valign="top">充值金额：
+						</td>
+						<td><input name="amount" type="text" id="amount" size="38" class="intxt" style="width:100px"/>
+						<input name="txid" type="hidden" id="txid" value="<?php echo $txidcode;?>" />
+						<div id="notediv" style="color: #009933">您实际转账金额：<span id="amountdiv" style="color: #FF0000;bold"></span></div></td>
+					</tr>
+					
+		
+		
+					<tr>
+						<td align="right" valign="top">&nbsp;</td>
+						<td><button class="button2 mt5" onclick="return CheckCNY();" type="button">充值</button></td>
+					</tr>
+				</tfoot>
+				</table>
+	  </form>
+      </div>
+		
+		<?php }else{    //?type
+				
+			require_once DEDEINC.'/rpcQuery.php';
+				$username=$cfg_ml->M_LoginID;
+				$btcadress=rpcQuery ($cointype,'getaddressesbyaccount',array($username));
+
+				if(!isset($btcadress['r'][0])){
+					$btcadress=rpcQuery ($cointype,'getnewaddress',array($username));
+					$uadress=$btcadress['r'];
+				}else{
+					$uadress=$btcadress['r'][0];
+				}
+		?>
+        <form name="formrank" action="buy_btc.php" onsubmit="return CheckBTC();" method="post">
+		<input type="hidden" name="coinid" value="<?php echo $coinid;?>" />
+		<input type="hidden" name="action" value="do" />
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+				<tbody>
+					
+					<?php
+			if($cointype=='FEC') 
+			{
+		 	?> 
+				<tr>
+						<td height="30" colspan="2" align="center"><font color="#FF0000">单笔充值请不要超过5万个FEC货币单位!</font></td>
+					</tr>
+				<tr>
+				<?php
+			}
+		 	?> 
+					
+					<tr style='height:28px;background:#F9FEE9;'>
+						<td width="15%" valign="top" colspan="2"><strong>请将<?php echo $cointype;?>转入以下地址，转账成功后请填写转账单号，系统将自动确认您的转账并为您充值！</strong></td>
+					</tr>
+					<tr>
+						<td width="15%" align="right" valign="top">充值地址：</td>
+						<td><span id="uaddress" style="margin-left:10px;margin-right:20px"><?php echo $uadress;?></span><input type="hidden" name="address" id="address" value="<?php echo $uadress;?>" /><button id="getadr" style=" width:80px; height:30px;" onclick="getaddress();" type="button">获取新地址</button></td>
+					</tr>
+					<tr>
+						<td width="15%" align="right" valign="top">充值交易ID：<br>
+						</td>
+						<td><input name="txid" type="text" id="txid" size="38" class="intxt" style="width:400px"/><input type="hidden" name="fee" value="<?php echo $recfee;?>" /><?php if($recfee>0) echo "手续费：".$recfee;?><?php
+			if($cointype=='FEC') 
+			{
+		 	?> 
+						<font color="#FF0000">发送FEC的交易ID号</font><?php
+			}
+		 	?> </td>
+					</tr>
+					
+					<tr>
+						<td align="right" valign="top">验证码：</td>
+						<td><input name="vdcode" type="text" id="vdcode" size="8" class="intxt" style='width:50px;text-transform:uppercase;' />
+							<img src="../include/vdimgck.php" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer" onclick="this.src=this.src+'?'" />
+                        </td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td align="right" valign="top">&nbsp;</td>
+						<td><button class="button2 mt5" type="submit">提交</button></td>
+					</tr>
+				</tfoot>
+			</table>
+      </form>
+	  <?php }//?type
+	  }//?do
+	  ?>
+      </div>
+      
+        
+ </div>
+<!--主操作区域 -->
+    </div>
+  </div>
+  </section></div>
+<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+
+</body>
+</html>

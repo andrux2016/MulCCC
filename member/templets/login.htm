@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+    <title><?php echo $cfg_webname; ?>- 会员登录</title>
+    <link href="templets/style/common.css" rel="stylesheet" type="text/css">
+    <link href="templets/style/nav-top.css" rel="stylesheet" type="text/css">
+    <link href="templets/style/footer.css" rel="stylesheet" type="text/css">
+    <link href="templets/style/user-login-box-page.css" rel="stylesheet" type="text/css">
+    <script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+    <script src="templets/js/j.js" language="javascript" type="text/javascript"></script>
+    <script src="templets/js/load.js" language="javascript" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript" src="templets/js/apprise-1.5.min.js"></script>
+
+    <script type="text/javascript">
+        document.onkeydown=function(e){
+         e = e || event;
+         var key=e.keyCode || e.charCode;
+         if(key==13) User_Login();
+         }
+
+        function changeAuthCode() {
+            var num = 	new Date().getTime();
+            var rand = Math.round(Math.random() * 10000);
+            num = num + rand;
+            $('#ver_code').css('visibility','visible');
+            if ($("#vdimgck")[0]) {
+                $("#vdimgck")[0].src = "../include/vdimgck.php?tag=" + num;
+            }
+            return false;
+        }
+
+        function User_Login(){
+
+            if($('#user_id').val()==""){
+                apprise('请填写Email！', {
+                    animate: false,
+                    textOk: "确定"
+                });
+                alert("请填写Email！");
+                //$('#showdiv').html("请填写Email！");
+                $('#user_id').focus();
+                return false;
+            }
+            var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+
+            if(!reg.test($('#user_id').val())){
+                apprise('Email格式不正确！', {
+                    animate: false,
+                    textOk: "确定"
+                });
+                alert("Email格式不正确！");
+                /*$('#showdiv').html("Email格式不正确！");*/
+                $('#user_id').focus();
+                return false;
+            }
+            if($('#pass_word').val()==""){
+                apprise('请填写密码！', {
+                    animate: false,
+                    textOk: "确定"
+                });
+                alert("请填写密码！");
+                /*$('#showdiv').html("请填写密码！");*/
+                $('#pass_word').focus();
+                return false;
+            }
+            $.post("checkcode.php?act="+new Date(),{vdcode:$('#vdcode').val(),fmdo:'login',dopost:'login',keeptime:'604800',gourl:'json',userid:$('#user_id').val(),pwd:$('#pass_word').val(),googlecode:$('#googlecode').val()},function(msg){
+                if(msg=="1"){
+                    apprise("登陆成功！", {
+                        animate: false,
+                        textOk: "确定"
+                    },function(r) {
+                        location.reload(true);
+                    });
+                    alert("登陆成功！");
+                    location.reload(true);
+                }else{
+                    apprise(msg, {
+                        animate: false,
+                        textOk: "确定"
+                    },function(r) {
+                        vdimgck.src=vdimgck.src+"?";
+                    });
+                    alert(msg);
+                    $('#gourl').focus();
+
+                }
+
+
+            });
+            return false;
+        }
+
+    </script>
+    <style type="text/css">
+        <!--
+        .vermenu{
+            background:#FFFFFF none repeat scroll 0 0;
+            border:1px solid #EEEEEE;
+            position:absolute;
+            top: 208px;
+        }
+        -->
+    </style>
+</head>
+<body>
+<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+<div class="wrapper">
+    <div style="clear: both;width:100%;"> </div>
+    <section>
+        <div class="login bor" style="width:99.8%;">
+            
+                <!--id="user-login-box-page" 会员登录-->
+                <div id="user-login-box-page" class="user-login-box-page">
+                    <div class="l">
+                        <div class="login">
+                           <form onSubmit="return User_Login();" >
+                                <div class="row-txt">会员登录</div>
+                                <div class="row-un">
+                                    <div class="u-box user_name_bd"><input type="text" name="user_name" id="user_id" class="inp_user_name" value="用户名或邮箱"  onfocus="if (value=='用户名或邮箱') {value=''}"
+                                                                           onblur="if (value=='') {value='用户名或邮箱'}" title="用户名或邮箱"/></div>
+
+                                </div>
+                                <div class="row-up">
+                                    <div class="set-pwd">密码</div>
+                                    <div class="u-box user_pwd_bd"><input type="password" name="user_pwd" id="pass_word" class="inp_user_pwd" placeholder='密码' title="密码"/></div>
+
+                                </div>
+								<div class="field">
+									<label class="lg">验证码：</label>	
+									<input id="vdcode" class="input input-vdcode" type="text"  name="vdcode"/>
+									<img id="vdimgck" align="absmiddle" onclick="this.src=this.src+'?'" style="cursor: pointer;" alt="看不清？换一张" src="../include/vdimgck.php"/>
+									<span><a  href="#" onclick="changeAuthCode();">看不清？换一张</a></span>
+									
+								</div>
+                                <div class="row-cf">
+                                    <label for="chk_remember"><a href="resetpassword.php"> 忘记密码？</a></label>
+                                    | <a class="forget" href="#">联系客服？</a>
+                                </div>
+                                <div class="row-bs"><input class="btn-signin" type="submit" name="button" id="button" value="登录" /></div>
+                            </form>
+                        </div>
+                        <div class="other">
+                            <div class="t">使用合作网站帐号登录有网：</div>
+                            <div class="link">
+                                <a class="qq" href="#">QQ</a> |
+                                <a class="sina" href="#">新浪微博</a><!-- |
+                                <a class="douban" href="#">豆瓣</a> |
+
+                                <a class="alipay" href="#">支付宝</a> |
+                                <a class="renren" href="#">人人网</a>-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="r">
+                        <div class="box">
+                            <div class="t">还不是 BTC 会员？</div>
+                            <div class="c">
+                                <a href="index_do.php?fmdo=user&dopost=regnew" class="btn-reg">10秒快速注册</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="h-bottom"></div>
+                </div>
+        </div>
+    </section>
+</div>
+<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

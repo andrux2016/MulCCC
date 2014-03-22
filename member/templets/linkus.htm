@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title><?php echo $cfg_webname; ?>- 关于我们</title>
+<link href="templets/style/login.css" rel="stylesheet" type="text/css" />
+<link href="../templets/default/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templets/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+
+<style type="text/css">
+<!--
+.vermenu{
+	background:#FFFFFF none repeat scroll 0 0;
+	border:1px solid #EEEEEE;
+	position:absolute;
+	top: 208px;
+}
+-->
+</style>
+</head>
+<body>
+
+
+<div class="wrapper"> 
+  <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+
+<div style="clear: both;"> </div> 
+<section>
+<div class="login bor" style=" border:20px solid #FFFFFF">
+  <?php 
+		echo $cfg_aboutus;
+		echo "<br><br>";
+		echo $cfg_linkus;
+		?>
+</div>
+
+</section>
+</div>
+<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

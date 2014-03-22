@@ -1,0 +1,43 @@
+<div class="clear"></div>
+
+<!--底部id="footer" -->
+<div id="footer" class="footer">
+    	<div class="footer-con">
+        	<div class="con-l"><img src="{dede:global.cfg_templets_skin/}/img/btb-yhgl-20.jpg" border="0" /></div>
+            <div class="con-con1">
+            	<ul>
+                	<li class="top">ABOUT</li>
+                    {dede:arclist row='5' titlelen='24' orderby='pubdate' typeid='2' idlist=''}
+					<li><a href='http://btc3.shlanhui.cn/member/news.php?num=[field:id/]&pageno=1&typeid=[field:typeid/]'>[field:title/]</a></li>
+                    {/dede:arclist}
+                </ul>
+            </div>
+            <div class="con-con1">
+            	<ul>
+                	<li class="top">HELP</li>
+                    {dede:arclist row='5' titlelen='24' orderby='pubdate' typeid='3' idlist=''}
+                    <li><a href='http://btc3.shlanhui.cn/member/news.php?num=[field:id/]&pageno=1&typeid=[field:typeid/]'>[field:title/]</a></li>
+                    {/dede:arclist}
+
+                </ul>
+            </div>
+            <div class="con-con1">
+            	<ul>
+                	<li class="top">DATA</li>
+                    {dede:arclist row='5' titlelen='24' orderby='pubdate' typeid='4' idlist=''}
+                    <li><a href='http://btc3.shlanhui.cn/member/news.php?num=[field:id/]&pageno=1&typeid=[field:typeid/]'>[field:title/]</a></li>
+                    {/dede:arclist}
+
+                </ul>
+            </div>
+            <div class="con-r">
+            	<div>关注我们</div>
+                <a href="#" target="_blank"><img src="{dede:global.cfg_templets_skin/}/img/btb-yhgl-21.jpg" border="0" /></a>
+                <a href="#" target="_blank"><img src="{dede:global.cfg_templets_skin/}/img/btb-yhgl-22.jpg" border="0" /></a>
+                <a href="#" target="_blank"><img src="{dede:global.cfg_templets_skin/}/img/btb-yhgl-23.jpg" border="0" /></a>
+                <a href="#" target="_blank"><img src="{dede:global.cfg_templets_skin/}/img/btb-yhgl-24.jpg" border="0" /></a>
+                <a href="#" target="_blank"><img src="{dede:global.cfg_templets_skin/}/img/btb-yhgl-25.jpg" border="0" /></a>
+            </div>
+            <div style="clear:both"></div> 
+        </div>
+    </div>

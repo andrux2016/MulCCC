@@ -1,0 +1,32 @@
+<div id="_userlogin" >
+        <input type="hidden" id="fmdo" name="fmdo" value="login" />
+        <input type="hidden" id="dopost" name="dopost" value="login" />
+        <input type="hidden" id="keeptime" name="keeptime" value="604800" />
+		<input type="hidden" id="gourl" name="gourl" value="<?php $cfg_weburl; ?>">	
+						<dl>
+							<dt>
+							<label for="email">用户名:</label>
+							<bb><input type="text" name="userid" id="userid" size="20" class="ipt-txt" /></bb>
+							</dt>
+							<dt>
+							<label for="password">密&nbsp;&nbsp; 码:</label>
+							<bb><input type="password" name="pwd" id="pwd" size="20" class="ipt-txt" /></bb>
+							</dt><dt>
+							<?php
+							if(preg_match("#2#", $safe_gdopen))
+							{
+							echo '<label for="captcha">验证码:</label><input type="text" name="vdcode" id="vdcode" size="8" class="ipt-txt" />
+							 <span id="vdimg"><img id="vdimgck" align="absmiddle" onClick="vdimgck.src=vdimgck.src+\'?\'" style="cursor:pointer;margin-left:0px;text-transform:uppercase;" alt="看不清？点击更换" src="'.$cfg_cmspath.'/include/vdimgck.php"/></span>
+							';
+							}
+							?>
+							</dt>
+							<dt>
+							 <button type="button" onClick="UserLogin()" class="btn-1">登录</button>
+							&nbsp;&nbsp; <a href="<?php $cfg_memberurl; ?>/index_do.php?fmdo=user&dopost=regnew" >注册帐号</a> 
+							&nbsp;&nbsp; <a href="<?php $cfg_memberurl; ?>/resetpassword.php">忘记密码?</a>
+							</dt>
+							<dt><font color="red">提醒：谨防骗子，切勿泄露密码给任何人</font></dt>
+						</dl>
+					
+					</div> <!-- login -->

@@ -1,0 +1,56 @@
+<div class="xbt-headers">
+		<div class="xbt-header xbt-head">
+			<div class="xbt-head-1">
+				<a href=""><img src="{dede:global.cfg_templets_skin/}/images/u5.png" alt="" /></a>
+				<a href=""><img src="{dede:global.cfg_templets_skin/}/images/u7.png" alt="" /></a>
+			</div>
+			<div class="xbt-head-2">
+				最新成交价 :<b id="pb_close" class="number" style="padding-right:5px;">{dede:php}echo $tikarr['last_rate'];{/dede:php}</b>
+				买一 :<b style="padding-right:5px;">{dede:php}echo $tikarr['bid'];{/dede:php}</b>
+				卖一 :<b style="padding-right:5px;">{dede:php}echo $tikarr['ask'];{/dede:php}</b>
+				最高 :<b id="pb_high" class="number" style="padding-right:5px;">{dede:php}echo $tikarr['high'];{/dede:php}</b> 
+				最低 :<b id="pb_low" class="number" style="padding-right:5px;">{dede:php}echo $tikarr['low'];{/dede:php}</b>
+				成交量 :<b id="pb_vol" class="number" style="padding-right:5px;">{dede:php}echo $tikarr['vol'];{/dede:php}</b>
+			</div>
+			<div class="xbt-head-3">
+				<div class="xbt-head-login" style="display:none;">
+					<ul class="xbt-head-log">
+						<li><a href="">注册</a></li>
+						<li>|</li>
+						<li><a href="">登录</a></li>
+					</ul>
+				</div>
+				<div class="xbt-head-login-in" >
+					<a class="xbt-ugif" href="">loosangles</a>   <a class="xbt-vip" href="" >[VIP1]</a>  <a href="member/">个人中心</a> |  <a href="#" onClick="UserQuit()">退出</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="xbt-navs">
+		<div class="xbt-nav xbt-nav1">
+			<div class="xbt-logo">
+				<a href="">
+					<img src="{dede:global.cfg_templets_skin/}/images/xbt-logo.png" alt="" />
+				</a>
+			</div>
+			<div class="xbt-menu">
+				<ul class="xbt-menu-ul">
+					<li><a href="">首     页</a></li>
+					<li class="xbt-hq">
+						<a href="">行情中心</a>
+						<ul>
+							<li><a href="/trade.php">人民币行情中心</a></li>
+							<li><a href="">美元行情中心</a></li>
+						</ul>
+					</li>
+					<li><a href="">行情交易</a></li>
+					<li><a href="">期货交易</a></li>
+					<li><a href="">融资融券</a></li>
+					<li><a href="">BTC银行</a></li>
+					<li><a href="">BTC讨论区</a></li>
+				</ul>
+			</div>		
+		</div>
+	</div>
+	

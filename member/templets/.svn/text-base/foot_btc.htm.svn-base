@@ -1,0 +1,46 @@
+<div style="clear:both;"></div>
+<!--底部 id="footer" -->
+<div id="footer" class="footer">
+    	<div class="footer-con">
+        	<div class="con-l"><img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-20.jpg" border="0" /></div>
+            <div class="con-con1">
+            	<ul>
+                	<li class="top">ABOUT</li>
+                    <li><a href="##" target="_blank">关于我们</a></li>
+                    <li><a href="##" target="_blank">新闻</a></li>
+                    <li><a href="##" target="_blank">费用表</a></li>
+                    <li><a href="##" target="_blank">使用条款</a></li>
+                    <li><a href="##" target="_blank">隐私政策</a></li>
+                    <div style="clear:both"></div> 
+                </ul>
+            </div>
+            <div class="con-con1">
+            	<ul>
+                	<li class="top">HELP</li>
+                    <li><a href="##" target="_blank">比特币是什么？</a></li>
+                    <li><a href="##" target="_blank">如何购买比特币？</a></li>
+                    <li><a href="##" target="_blank">比特币怎么卖呀？</a></li>
+                    <li><a href="##" target="_blank">常见问题解答</a></li>
+                    <div style="clear:both"></div> 
+                </ul>
+            </div>
+            <div class="con-con1">
+            	<ul>
+                	<li class="top">DATA</li>
+                    <li><a href="##" target="_blank">概述</a></li>
+                    <li><a href="##" target="_blank">订单</a></li>
+                    <li><a href="##" target="_blank">api</a></li>
+                    <div style="clear:both"></div> 
+                 </ul>
+            </div>
+            <div class="con-r">
+            	<div>关注我们</div>
+                <a href="#" target="_blank"><img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-21.jpg" border="0" /></a>
+                <a href="#" target="_blank"><img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-22.jpg" border="0" /></a>
+                <a href="#" target="_blank"><img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-23.jpg" border="0" /></a>
+                <a href="#" target="_blank"><img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-24.jpg" border="0" /></a>
+                <a href="#" target="_blank"><img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-25.jpg" border="0" /></a>
+            </div>
+            <div style="clear:both"></div> 
+        </div>
+    </div>

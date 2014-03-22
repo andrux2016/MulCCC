@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document 
+用处：id="nav-top" 顶部
+*/
+.nav-top{height:143px;width:100%;background-image:url(../img/top-nav-bg-1.jpg);background-repeat:repeat-x;background-position:left top;display:block;overflow:hidden;
+-moz-box-shadow: -1px  5px  4px  #888;
+-webkit-box-shadow: -1px  5px  4px  #888;
+box-shadow: -1px  5px  4px  #888;
+}
+.nav-top .row-1{height:30px;width:980px;display:block;margin:0 auto; font-family:'microsoft yahei';}
+.nav-top .row-1 .l{width:627px;color:#fff;text-align:left;height:30px;line-height:30px;display:block;float:left;padding-left:13px; font-size:12px;}
+
+.nav-top .row-1 .r{width:288px; height:30px; display:block; float:right;}
+.nav-top .row-1 .r .login-no{width:288px; height:30px; display:block;}
+.nav-top .row-1 .r .login-no .col{width:50px;height:30px; display:block; float:right;}
+.nav-top .row-1 .r .login-no .col a{color:#ff4e00;line-height:30px; text-decoration:none;font-size:14px;}
+
+.nav-top .row-1 .r .login-no{width:288px; height:30px; display:block;}
+.nav-top .row-1 .r .login-no .hi{height:30px;line-height:30px;color:#fff;width:30px;display:block;float:right;font-size:14px; text-align:right;}
+.nav-top .row-1 .r .login-no .name{height:30px;line-height:30px;color:#ffc103;width:97px; display:block; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;float:right;font-size:14px; text-align:left;}
+.nav-top .row-1 .r .login-no .out{height:30px;line-height:30px;width:50px; display:block; float:right;}
+.nav-top .row-1 .r .login-no .out a{height:30px;line-height:30px;color:#fff; text-decoration:none;font-size:14px;}
+
+.nav-top .row-1 .r .login-yes{width:288px; height:30px; display:block;}
+.nav-top .row-1 .r .login-yes .hi{height:30px;line-height:30px;color:#fff;width:30px;display:block;float:right;font-size:14px; text-align:right;}
+.nav-top .row-1 .r .login-yes .name{height:30px;line-height:30px;color:#ffc103;width:97px; display:block; overflow:hidden; white-space:nowrap;text-overflow:ellipsis;float:right;font-size:14px; text-align:left;}
+.nav-top .row-1 .r .login-yes .out{height:30px;line-height:30px;width:50px; display:block; float:right;}
+.nav-top .row-1 .r .login-yes .out a{height:30px;line-height:30px;color:#fff; text-decoration:none;font-size:14px;}
+
+.nav-top .row-2{height:113px;width:980px;display:block;margin:0 auto;font-family:'microsoft yahei';}
+.nav-top .row-2 .a-row{height:29px;width:949px;line-height:29px; display:block; text-align:right;padding-right:31px;font-size:12px;color:#000;}
+.nav-top .row-2 .b-row{height:76px;}
+.nav-top .row-2 .b-row .logo{height:76px;width:142px;display:block;float:left;}
+.nav-top .row-2 .b-row .logo img{border:0px;display:block;}
+.nav-top .row-2 .b-row .nav{height:39px;width:590px; display:block; float:right; text-align:left;padding-top:37px;}
+.nav-top .row-2 .b-row .nav .col{width:auto;height:30px; display:block; float:right;padding-right:10px;}
+.nav-top .row-2 .b-row .nav .col a{padding-left:13px;padding-right:15px;height:30px;line-height:30px;display:block;outline:none;color:#000; text-decoration:none;font-size:14px;-webkit-border-radius: 3px;
+border-radius: 3px;-moz-border-radius : 3px;float:left;}
+.nav-top .row-2 .b-row .nav .col a:hover{background-color:#ff4e00;color:#fff;}
+.nav-top .row-2 .b-row .nav .col a.cur{background-color:#ff4e00;color:#fff;}
+
+
+
+
+
+
+
+

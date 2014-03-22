@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document 
+
+底部
+id="footer" 
+*/
+.footer {
+	width:100%;
+	height:208px;
+	background:#f4f4f4; 
+	border-top:2px solid #00b8e2;
+	font-family:'microsoft yahei';
+}
+.footer .footer_container  {
+	width:1120px;
+	margin:0 auto;
+	color:#333;
+	font-size:12px;
+	padding-top:20px;
+}
+.footer .footer_container .prompt {
+	float:left;
+	width:366px;
+}
+.footer .footer_container .prompt p {
+	line-height:20px;
+	width:300px;
+}
+
+.footer .footer_container .contact {
+	float:left;
+	margin-left:20px;
+	width:326px;
+}
+.footer .footer_container .contact p {
+	line-height:20px;
+}
+.footer .footer_container .weibo {
+	float:left;
+	margin-left:20px;
+}
+.footer .footer_container .weibo p {
+	line-height:20px;
+}
+.footer .footer_container .weibo .xl_weibo {
+	float:left;
+	width:120px;
+}
+.footer .footer_container .weibo .tx_weibo {
+	float:left;
+	width:120px;
+	margin-left:10px;
+}
+.footer .footer_container .line1 {
+	background:url(../img/now_line.jpg);
+	width:1px;
+	height:100px;
+	float:left;
+	margin-left:8px;
+}
+.footer .footer_container .line2 {
+	border-bottom:1px solid #336a74;
+	height:10px;_height:0;
+	width:100%;
+}
+.footer .footer_container .footer_copyright {
+	line-height:40px;
+	height:40px;
+	text-align:center;
+}
+.font18 { font-size:18px; font-weight:bold; margin-bottom:14px;}
+.clear {clear:both;}
+
+
+
+
+
+
+
+

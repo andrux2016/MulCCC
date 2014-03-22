@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>	
+<title>{dede:global.cfg_webname/}-公告</title>
+<meta name="description" content="{dede:global.cfg_description/}" />
+<meta name="keywords" content="{dede:global.cfg_keywords/}" />
+	<!--we css-->
+	<link rel="shortcut icon" href="{dede:global.cfg_basehost/}/favicon.ico">	
+	<!--we css end-->
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+	<title><?php echo $cfg_webname; ?>- 公告</title>
+	<link href="<?php echo $cfg_templets_skin ?>/style/style.css" rel="stylesheet" type="text/css" />	
+	<style type="text/css">
+		body {behavior:url(style/iehoverfix.htc);}
+	</style>
+	<script type="text/javascript" src="templets/js/jquery_1_7_2.js"></script>
+	<script type="text/javascript" src="templets/js/j.js"></script>
+								
+	
+</head>
+<body>
+
+	 <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<!--content  -->
+	<div class="btc8-contents">
+		<div class="btc8-content btc8-gonggao">
+			<div class="gongaoh">
+				<h1>公告栏</h1>
+			</div>
+			<div class="btc8-gonggaoleft" style="min-height:300px">
+				<ul>
+					
+			{dede:datalist}
+					
+					<li>
+						<span><?php echo date("Y-m-d",$fields["senddate"]);?></span><a href='?num=<?php echo $fields["id"];?>' ><?php echo $fields["title"];?></a>
+					</li>
+          	
+            {/dede:datalist}
+					
+				</ul>
+				<div class="btc8-ggleft-fenye">
+					<!--{dede:pagelist listitem="info,index,end,pre,next,pageno,option" listsize="3"/}-->
+					<a href="">首页</a>
+					<a href="">上一页</a>
+					<a class="btc8-fy-avist" href="">1</a>
+					<!--<a href="">2</a>
+					<a href="">3</a>-->
+					<a href="">下一页</a>
+					<a href="">尾页</a>
+				</div>
+			</div>
+			<div id="arcdiv" class="btc8-gonggaoright" style="min-height:300px">
+				<div class='btc8-ggr-h'><h1 style='text-align:center;line-height:30px;'><?php echo $rtil["title"];?> </h1><h4 style='text-align:center; line-height:20px;font-weight:normal;font-size:12px;color:#666;'>作者：<?php echo $rtil["write"];?>    <?php echo date("Y-m-d",$rtil["senddate"]);?></h4></div><div class='btc8-ggr-b'><?php echo $rbody["body"];?></div>
+				<!--<div class="btc8-ggr-f">
+					<div class="btc8-ggr-f1">
+						上一篇：<a href="">比特吧正式启动</a>
+					</div>
+					<div class="btc8-ggr-f2">
+						下一篇：<a href="">比特吧正式启动</a>
+					</div>
+				</div>-->
+			
+			</div>
+		</div>
+	</div>
+	<!--content end  -->
+	<div id="xxx"></div>
+	<script type="text/javascript">
+	function archives(title,arcdate,arcwrite,senddate,content){
+		var arctext="<div class='btc8-ggr-h'><h1 style='text-align:center;line-height:30px;'>"+title+"</h1><h4 style='text-align:center; line-height:20px;font-weight:normal;font-size:12px;color:#666;'>作者："+arcwrite+"    "+senddate+"</h4></div><div class='btc8-ggr-b'>"+content+"</div>";
+		$("#arcdiv").html(arctext);
+	}
+	<?php echo $oneshow;?>
+	
+	</script>
+	
+	
+	<!--footer  -->
+	<div class="clear"></div>
+	 <?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>	
+	<!--footer end  -->
+	
+</body>
+</html>

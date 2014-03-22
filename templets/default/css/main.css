@@ -1,0 +1,336 @@
+* { margin:0; padding:0; font-family: Microsoft Yahei;}
+a{text-decoration:none;color:#0078B6;}
+img{border:0px;}
+.content {
+	width:100%;
+	height:!important;
+}
+.content .content_all {
+	width:1120px;
+	margin:0 auto;
+	height:1380px;
+}
+.content .content_left {
+	float:left;
+	width:740px;
+	margin-top:4px;
+}
+.content .content_left .chart {
+	margin-bottom:16px;
+	margin-top:20px;
+}
+.content .content_left .chart .chart_container {
+	min-height:370px;
+}
+.content .content_left .content_left_top {
+	width:740px;
+	height:8px;
+	overflow:hidden;
+}
+.content .content_left .content_left_middle {
+	width:740px;
+}
+.content .content_left .content_left_middle img {
+	margin-left:10px;
+	margin-bottom:10px;
+}
+.content .content_left .content_left_bottom {
+	width:740px;
+	height:8px;
+}
+.content .content_left .queue {
+	width:360px;
+	float:left;
+}
+.content .content_left .queue1 {
+	width:342px;
+	float:left;
+	margin-left:15px;
+}
+.content .content_left .content_left_queuetop {
+	width:365px;
+	height:8px;
+	overflow:hidden;
+}
+.content .content_left .content_left_queuemiddle {
+	width:365px;
+}
+.content .content_left .content_left_queuemiddle img {
+	margin-left:10px;_margin-left:0;
+	margin-bottom:10px;
+}
+.content .content_left .content_left_queuebottom {
+	width:365px;
+	height:8px;
+}
+.content .content_right {
+	float:left;
+	width:360px;
+	margin-top:20px;
+	margin-left:14px;
+}
+.content .content_right .content_right_top {
+	width:360px;
+	height:8px;
+	overflow:hidden;
+}
+.content .content_right .content_right_middle {
+	width:360px;
+}
+.content .content_right .content_right_middle ul {
+	font-size:12px;
+	margin-left:5px;
+	padding-top:4px;_padding-top:8px;
+	padding-bottom:4px;_padding-bottom:8px;
+	min-height:147px;
+}
+.content .content_right .content_right_middle ul li {
+	margin-left:10px;
+	list-style:none;
+}
+.content .content_right .content_right_middle ul li a {
+	margin-left:16px;
+	text-decoration:none;
+	color:#000033;
+	line-height:20px;
+}
+.content .content_right .content_right_middle img {
+	margin-left:1px;
+}
+.content .content_right .content_right_bottom {
+	width:360px;
+	height:8px;
+}
+.content_right_container {
+	margin-bottom:16px;
+}
+
+#tags {
+    height: 23px;
+    margin: 0 0 0 10px;
+    padding: 0;
+    width: 700px;
+} #tags LI.selectTag {
+    background-position: left top;
+    height: 34px;
+    margin-bottom: -2px;
+    position: relative;
+}
+#tags LI {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFFFFF;
+    border-color: #E8E8E8;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    height: 34px;
+    list-style-type: none;
+    margin-right: 4px;
+}
+#tags LI.selectTag A {
+    background-color: #E86740;
+    background-position: right top;
+    border: medium none;
+    color: #FFFFFF;
+    height: 34px;
+    line-height: 34px;
+}
+#tags LI A {
+    color: #333333;
+    float: left;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 30px;
+    text-decoration: none;
+}
+
+.coin_operations_div{font-size:13px;}
+
+.btc_title {
+	height:30px;
+	border-bottom:1px solid #dddddd;
+	width:99%;
+}
+.btc_title .title_list {
+	background:url(/img/btc.png) no-repeat 0 -243px;
+	height:23px;
+	width:4px;
+	padding-left:14px;
+	margin-left:16px;
+	line-height:28px;
+	font-weight:bold;
+}
+
+.btc_pag {
+	background:url(/img/pag.gif) repeat-x;
+	height:30px;
+	line-height:33px;_line-height:30px;
+	font-size:12px;
+	width:360px;
+	margin-left:1px;
+	border-bottom:1px solid #dddddd;
+}
+.btc_pag b {
+	margin-left:40px;
+	margin-right:30px;
+}.btc_pag div,.btc_pag1 div,.btc_pag2 div {
+	float:left;
+	text-align:center;
+	font-weight: bold;
+	line-height:30px;
+}
+.btc_pag1 {
+	background:url(/img/pag.gif) repeat-x;
+	height:30px;
+	line-height:33px;_line-height:30px;
+	font-size:12px;
+	width:356px;
+	margin-left:1px;
+	border-bottom:1px solid #dddddd;
+}
+.btc_pag1 b {
+	margin-left:35px;
+	margin-right:20px;
+}
+.btc_pag2 {
+	background:url(/img/pag.gif) repeat-x;
+	height:30px;
+	line-height:33px;_line-height:30px;
+	font-size:12px;
+	width:356px;
+	margin-left:1px;
+	border-bottom:1px solid #dddddd;
+}
+.btc_pag2 b {
+	margin-left:35px;
+	margin-right:10px;
+}
+.btc_pag3 {
+	background:url(/img/pag.gif) repeat-x;
+	height:30px;
+	line-height:33px;_line-height:30px;
+	font-size:12px;
+	width:735px;
+	margin-left:1px;
+	border-bottom:1px solid #dddddd;
+}
+.btc_pag3 b {
+	margin-left:50px;
+	margin-right:40px;
+}
+.btc_my {
+	background-color:#f4f4f4;
+	border-bottom:1px solid #d9d9d9;
+	height:50px;
+	width:354px;
+	margin-left:2px;
+	font-size:13px;
+}
+.btc_my .btc_myleft,.btc_myright {
+	
+	margin:10px 8px 0 10px;_margin:10px 4px 0 8px;
+}
+.btc_my .btc_myleft{float:left}
+.btc_my .btc_myright{float:right}
+.btc_my .my_title {
+	background:url(/img/btc.png) no-repeat 0 -126px;
+	width:126px;
+	height:17px;
+	font-size:12px;
+	color:#fff;
+	line-height:17px;
+	text-align:center;
+}
+.btc_my .my_text {
+	text-align:center;
+	font-weight:bold;
+}
+.btc_input {
+	width:240px;
+	margin:0 auto;
+	font-size:13px;
+}
+.btc_input input { 
+	vertical-align:middle;
+}
+.btn_input label{ 
+	vertical-align:middle;
+}
+.btc_in {
+	height:30px;
+	margin-top:20px;_margin-top:10px;
+	font-weight:bold
+}
+.btc_in input {
+	width:140px;
+	height:30px;
+	border:1px solid #d3d3d3;
+	border-radius:5px;
+}
+.btc_kk {
+	font-size:12px;
+	text-align:center;
+	margin-top:20px;
+}
+.btc_mm {
+	width:138px;
+	margin:10px auto;
+}
+.btc_mm a {
+	background:url(/img/btc.png) no-repeat 0 -155px;
+	width:148px;
+	height:36px;
+	display:block;
+}
+.btc_mm1 {
+	width:138px;
+	margin:16px auto;
+}
+.btc_mm1 a {
+	background:url(/img/btc.png) no-repeat 0 -200px;
+	width:148px;
+	height:36px;
+	display:block;
+}
+
+.div_table{border-bottom: 1px dotted #C6C6C6;height: 30px;}
+
+.div_table div {
+    float: left;
+    line-height: 30px;
+	text-align:center;
+	font-size:13px;
+	color:#000033;
+	overflow: hidden;
+}
+
+.buyclick{
+	background: url("/img/btc.png") no-repeat scroll 0 -155px;
+    border:0 none;
+    height: 36px;
+    width: 148px;
+	cursor: pointer;
+}
+.sellclick {
+    background: url("/img/btc.png") no-repeat scroll 0 -200px ;
+     border:0 none;
+    height: 36px;
+    width: 148px;
+	cursor: pointer;
+}
+
+#my_table ,#my_history_table td{
+    color: #000000;   padding-bottom: 5px;
+    padding-top: 5px;padding-left:6px;
+	font-size:12px;
+	color:#4d4a4b;
+	text-align:center;
+}
+
+/**********************************top end***************************/

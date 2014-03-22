@@ -1,0 +1,179 @@
+@charset "utf-8";
+/* CSS Document 
+id="news-list" 新闻
+*/
+
+.news-list{width:980px; height:auto; display:block; margin:0 auto;padding-bottom:30px;padding-top:20px;}
+
+.news-list .btc8-gonggao{
+	background:#fff;
+	border:none;
+}
+.news-list .gongaoh{
+	width:100%;
+	max-width:978px;
+	_width:978px;
+	height:30px;
+	float:left;
+	background:url(../img/gg_r2_c3.jpg) repeat-x;
+	border:1px solid #dcd9cd;
+	border-radius:5px;
+}
+.news-list .gongaoh h1{
+	width:100%;
+	max-width:978px;
+	_width:978px;
+	height:30px;
+	background:url(../img/gg_r2_c2.jpg)  no-repeat;
+	font:12px/30px 微软雅黑;
+	text-indent:40px;
+}
+
+
+.news-list .btc8-gonggaoleft{
+	float:left;
+	width:100%;
+	max-width:280px;
+	_width:280px;
+	height:auto;
+	border:1px solid #ccc;
+	padding:10px;
+	margin-top:5px;
+}
+.news-list .btc8-gonggaoleft ul{
+	float:left;
+	width:100%;	
+	height:auto;
+}
+.news-list .btc8-gonggaoleft ul li{
+	float:left;
+	width:100%;	
+	height:30px;
+	font:12px/30px 微软雅黑;
+	color:#333;
+	background:url(../img/btc8-w_r8_c4.jpg) center left no-repeat;
+	text-indent:20px;
+}
+.news-list .btc8-gonggaoleft ul li a{	
+	font:12px/30px 微软雅黑;
+	color:#333;	
+	display:block;
+	float:left;
+	max-width:193px;
+	_width:190px;
+	height:30px;
+	overflow:hidden;
+	text-decoration:none;
+	white-space: nowrap;/* 不显示的地方用省略号...代替 */  
+    text-overflow: ellipsis;/* 支持 IE */  
+    -o-text-overflow: ellipsis;/* 支持 Opera */  	
+}
+.news-list .btc8-gonggaoleft ul li a:hover{	
+	font:12px/30px 微软雅黑;
+	color:#ff3500;
+	display:block;
+	float:left;	
+	max-width:193px;
+	_width:190px;
+	height:30px;
+	overflow:hidden;
+	white-space: nowrap;/* 不显示的地方用省略号...代替 */  
+    text-overflow: ellipsis;/* 支持 IE */  
+    -o-text-overflow: ellipsis;/* 支持 Opera */  
+}
+.news-list .btc8-gonggaoleft ul li span{
+	display:inline-block;
+	float:right;
+}
+
+.news-list .btc8-ggleft-fenye{
+	float:left;
+	width:100%;
+	height:30px;
+	margin:20px 0;
+	text-align:center;
+}
+.news-list .btc8-ggleft-fenye a{
+	display:inline-block;
+	width:auto;
+	height:30px;
+	padding:0 5px;
+	border:1px solid #A7A7A7;
+	font:12px/30px 微软雅黑;
+	color:#333;
+	text-decoration:none;
+}
+.news-list .btc8-ggleft-fenye a:HOVER,.btc8-ggleft-fenye a.btc8-fy-avist{
+	display:inline-block;
+	width:auto;
+	height:30px;
+	padding:0 5px;
+	border:1px solid #f90;
+	font:12px/30px 微软雅黑;
+	color:#fff;
+	background:#f60;
+}
+.btc8-ggleft-fenye strong,.btc8-ggleft-fenye span{
+	display:inline-block;
+	width:auto;
+	height:30px;
+	padding:0 5px;
+	border:1px solid #f90;
+	font:12px/30px 微软雅黑;
+	color:#fff;
+	background:#f60;
+	margin-left:5px;
+}
+
+
+.news-list .btc8-gonggaoright{
+	float:left;
+	width:100%;
+	max-width:646px;
+	_width:646px;
+	height:auto;
+	border:1px solid #ccc;
+	padding:10px;
+	margin:5px 0 0 10px;
+	
+}
+.news-list .btc8-ggr-h{
+	float:left;
+	width:100%;
+	height:50px;	
+	border-bottom:1px dashed #ccc;
+	
+}
+.news-list .btc8-ggr-b{
+	float:left;	
+	padding:10px 0;
+	}
+.news-list .btc8-ggr-f{
+	float:left;
+	width:100%;
+	height:30px;
+	margin:10px 0;
+	font:12px/30px 微软雅黑;
+}
+.news-list .btc8-ggr-f a{	
+	font:12px/30px 微软雅黑;
+	color:#F30;
+}
+.news-list .btc8-ggr-f a:HOVER{	
+	font:12px/30px 微软雅黑;
+	color:#333;
+}
+.news-list .btc8-ggr-f1{
+	width:50%;
+	float:left;
+}
+.news-list .btc8-ggr-f2{
+	width:50%;
+	float:right;
+}
+
+
+
+
+
+

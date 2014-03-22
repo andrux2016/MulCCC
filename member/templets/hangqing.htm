@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>	
+<title><?php echo $cfg_webname;?>-行情</title>
+<meta name="description" content="<?php echo $cfg_description;?>" />
+<meta name="keywords" content="<?php echo $cfg_keywords;?>" />
+	<!--we css-->
+	<link rel="shortcut icon" href="{dede:global.cfg_basehost/}/favicon.ico">	
+	<!--we css end-->
+	<link href="<?php echo $cfg_templets_skin ?>/style/style.css" rel="stylesheet" type="text/css" />	
+	<style type="text/css">
+		body {behavior:url(style/iehoverfix.htc);}
+	</style>
+	<script type="text/javascript" src="<?php echo $cfg_templets_skin;?>/js/jquery_1_7_2.js"></script>
+	<script type="text/javascript">
+
+
+$(function(){
+	readhq();
+	 setInterval(readhq, 12000);  
+});
+function readhq(){
+	var data={url:"https://data.mtgox.com/api/2/BTCUSD/money/ticker"};
+	
+	$.ajax({
+	
+		type: "POST",
+	
+		url: "https://www.btc-8.com/member/apipost.php",
+	
+		data: data,
+	
+		dataType:'json',
+	
+		success: function(result){
+	
+	//$("#images").html("MTGOX        当前成交价: "+result.data.last.display + "    最新买入价：" +result.data.buy.display + "    最新卖出价："+result.data.sell.display + "    最低成交价："+result.data.low.display + "    最高成交价价："+result.data.high.display + "    成交量：" +result.data.vol.display);
+	$("#MTGOXBTC").html("<td >MTGOX  的报价</td> <td > "+result.data.last.display + "</td> <td >" +result.data.buy.display + "   </td> <td >"+result.data.sell.display + "   </td> <td >"+result.data.low.display + "  </td> <td >"+result.data.high.display + "   </td> <td >" +result.data.vol.display+"</td>");
+		}
+	
+	});
+	
+	
+	/*var data={url:"https://www.bitstamp.net/api/ticker/"}
+	
+	$.ajax({
+	
+		type: "POST",
+	
+		url: "https://www.btc-8.com/member/apipost.php",
+	
+		data: data,
+	
+		dataType:'json',
+	
+		success: function(result){
+	
+	 //$("#images1").html("BITSTAMP        当前成交价: $"+result.last + "    最新买入价：$" +result.bid + "    最新卖出价：$"+result.ask + "    最低成交价：$"+result.low + "    最高成交价价：$"+result.high + "    成交量：" +result.volume);
+	$("#images1").html("<td >BITSTAMP 的报价</td> <td > ￥"++result.ticker.last + "</td> <td >￥" +result.ticker.buy + "   </td> <td >￥"+result.ticker.sell + "   </td> <td >￥"+result.ticker.low + "  </td> <td >￥"+result.ticker.high + "   </td> <td >" +result.ticker.vol+"</td>");
+		}
+	
+	});*/
+	
+	
+	var data={url:"https://btc-e.com/api/2/btc_usd/ticker"};
+	
+	$.ajax({
+	
+		type: "POST",
+	
+		url: "https://www.btc-8.com/member/apipost.php",
+	
+		data: data,
+	
+		dataType:'json',
+	
+		success: function(result){
+	
+	// $("#images2").html("BTC-E        当前成交价: $"+result.ticker.last + "    最新买入价：$" +result.ticker.buy + "    最新卖出价：$"+result.ticker.sell + "    最低成交价：$"+result.ticker.low + "    最高成交价价：$"+result.ticker.high + "    成交量：" +result.ticker.vol_cur);
+	$("#BTC-EBTC").html("<td >BTC-E 的报价</td> <td > $"+result.ticker.last + "</td> <td >$" +result.ticker.buy + "   </td> <td >$"+result.ticker.sell + "   </td> <td >$"+result.ticker.low + "  </td> <td >$"+result.ticker.high + "   </td> <td >" +result.ticker.vol_cur+"</td>");
+		}
+	
+	});
+	
+	
+	var data={url:"https://www.btc-8.com/API.php?type=ticker&symbol=BTC_CNY"};
+	
+	$.ajax({
+	
+		type: "POST",
+	
+		url: "https://www.btc-8.com/member/apipost.php",
+	
+		data: data,
+	
+		dataType:'json',
+	
+		success: function(result){
+	
+	 //$("#images3").html("BTC-8        当前成交价: ￥"+result.ticker.last + "    最新买入价：￥" +result.ticker.buy + "    最新卖出价：￥"+result.ticker.sell + "    最低成交价：￥"+result.ticker.low + "    最高成交价价：￥"+result.ticker.high + "    成交量：" +result.ticker.vol);
+	$("#BTC-8BTC").html("<td >本站BTC的报价</td> <td > ￥"+result.ticker.last + "</td> <td >￥" +result.ticker.buy + "   </td> <td >￥"+result.ticker.sell + "   </td> <td >￥"+result.ticker.low + "  </td> <td >￥"+result.ticker.high + "   </td> <td >" +result.ticker.vol+"</td>");
+	
+	
+		}
+	
+	});
+
+	var data={url:"https://data.btcchina.com/data/ticker"};
+	
+	$.ajax({
+	
+		type: "POST",
+	
+		url: "https://www.btc-8.com/member/apipost.php",
+	
+		data: data,
+	
+		dataType:'json',
+	
+		success: function(result){
+	
+	 //$("#images4").html("BTCCHINA        当前成交价: ￥"+result.ticker.last + "    最新买入价：￥" +result.ticker.buy + "    最新卖出价：￥"+result.ticker.sell + "    最低成交价：￥"+result.ticker.low + "    最高成交价价：￥"+result.ticker.high + "    成交量：" +result.ticker.vol);
+	$("#BTCCHINABTC").html("<td >BTCCHINA 的报价</td> <td > ￥"+result.ticker.last + "</td> <td >￥" +result.ticker.buy + "   </td> <td >￥"+result.ticker.sell + "   </td> <td >￥"+result.ticker.low + "  </td> <td >￥"+result.ticker.high + "   </td> <td >" +result.ticker.vol+"</td>");
+	
+		}
+	
+	});
+	
+	
+	
+	var data={url:"https://data.fxbtc.com/api?op=query_ticker&symbol=btc_cny"};
+	
+	$.ajax({
+	
+		type: "POST",
+	
+		url: "https://www.btc-8.com/member/apipost.php",
+	
+		data: data,
+	
+		dataType:'json',
+	
+		success: function(result){
+	
+	 //$("#images5").html("FXBTC        当前成交价: ￥"+result.ticker.last_rate + "    最新买入价：￥" +result.ticker.bid + "    最新卖出价：￥"+result.ticker.ask + "    最低成交价：￥"+result.ticker.low + "    最高成交价价：￥"+result.ticker.high + "    成交量：" +result.ticker.vol);
+	
+	$("#FXBTCBTC").html("<td >FXBTC  的报价</td> <td > ￥"+result.ticker.last_ra + "</td> <td >￥" +result.ticker.bid + "   </td> <td >￥"+result.ticker.ask + "   </td> <td >￥"+result.ticker.low  + "  </td> <td >￥"+result.ticker.high  + "   </td> <td >" +result.ticker.vol+"</td>");
+		}
+	
+	});
+	
+	
+	
+	var data={url:"https://www.okcoin.com/api/ticker.do"};
+	
+	$.ajax({
+	
+		type: "POST",
+	
+		url: "https://www.btc-8.com/member/apipost.php",
+	
+		data: data,
+	
+		dataType:'json',
+	
+		success: function(result){
+	
+	 //$("#images6").html("OKCOIN        当前成交价: ￥"+result.ticker.last + "    最新买入价：￥" +result.ticker.buy + "    最新卖出价：￥"+result.ticker.sell + "    最低成交价：￥"+result.ticker.low + "    最高成交价价：￥"+result.ticker.high + "    成交量：" +result.ticker.vol);
+	$("#OKCOIN").html("<td >OKCOIN   的报价</td> <td > ￥"+result.ticker.last + "</td> <td >￥" +result.ticker.buy + "   </td> <td >￥"+result.ticker.sell + "   </td> <td >￥"+result.ticker.low + "  </td> <td >￥"+result.ticker.high + "   </td> <td >" +result.ticker.vol+"</td>");
+		}
+	
+	});
+
+
+
+
+
+var data={url:"https://www.btc-8.com/API.php?type=ticker&symbol=LTC_CNY"};
+	
+	$.ajax({
+	
+		type: "POST",
+	
+		url: "https://www.btc-8.com/member/apipost.php",
+	
+		data: data,
+	
+		dataType:'json',
+	
+		success: function(result){
+	
+	 //$("#images3").html("BTC-8        当前成交价: ￥"+result.ticker.last + "    最新买入价：￥" +result.ticker.buy + "    最新卖出价：￥"+result.ticker.sell + "    最低成交价：￥"+result.ticker.low + "    最高成交价价：￥"+result.ticker.high + "    成交量：" +result.ticker.vol);
+	$("#BTC-8LTC").html("<td >本站LTC的报价</td> <td > ￥"+result.ticker.last + "</td> <td >￥" +result.ticker.buy + "   </td> <td >￥"+result.ticker.sell + "   </td> <td >￥"+result.ticker.low + "  </td> <td >￥"+result.ticker.high + "   </td> <td >" +result.ticker.vol+"</td>");
+	
+	
+		}
+	
+	});
+
+
+}
+</script>
+
+	
+</head>
+<body>
+
+	 <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<!--content  -->
+	
+
+
+	
+	<div class="btc8-contents">
+		<div class="btc8-content btc8-gonggao">
+			<div class="btc8-hangqing">
+				<table>
+					<tr class="btc8-hq-tr1">								     		   		     
+						<td class="btc8-hq-td1">BTC</td>
+						<td class="btc8-hq-td2">当前成交价</td>
+						<td class="btc8-hq-td1">最新买入价</td>
+						<td class="btc8-hq-td2">最新卖出价</td>
+						<td class="btc8-hq-td1">最低成交价</td>
+						<td class="btc8-hq-td2">最高成交价</td>
+						<td class="btc8-hq-td1">成交量</td>
+					</tr>
+					<tr  style="cursor:pointer;" id="BTC-8BTC" onClick="window.open('http://info.btc123.com/btctrade.php')">																				     		   		     
+						
+					</tr>
+					<tr class="btc8-hq-tr2" id="MTGOXBTC" style="cursor:pointer;" >																				     		   		    
+					</tr>
+					<tr  style="cursor:pointer;" id="BTC-EBTC" >																				     		   		     
+						
+					</tr>
+					<tr  class="btc8-hq-tr2" id="BTCCHINABTC" style="cursor:pointer;" >																				     		   		     
+					
+					</tr>
+					<tr  style="cursor:pointer;" id="OKCOINBTC" >																				     		   		     
+						
+					</tr>
+					<tr  class="btc8-hq-tr2" id="FXBTCBTC" style="cursor:pointer;" >																				     		   		     
+						
+					</tr>
+
+				</table>
+				<hr/ style="border:1px dashed #ccc; margin:20px 0;">
+				<table>
+					<tr  class="btc8-hq-tr1">								     		   		     
+						<td class="btc8-hq-td2">LTC</td>
+						<td class="btc8-hq-td1">当前成交价</td>
+						<td class="btc8-hq-td2">最新买入价</td>
+						<td class="btc8-hq-td1">最新卖出价</td>
+						<td class="btc8-hq-td2">最高成交价</td>
+						<td class="btc8-hq-td1">最低成交价</td>
+						<td class="btc8-hq-td2">成交量</td>
+					</tr>
+				
+					<tr style="cursor:pointer;" id="BTC-8LTC" onClick="window.open('http://info.btc123.com/btctrade.php')">																				     		   		     
+						
+					</tr>
+				
+					
+
+				</table>
+			</div>
+		</div>
+	</div>
+	<!--content end  -->
+	
+	
+	
+	<!--footer  -->
+	<div class="clear"></div>
+	 <?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>	
+	<!--footer end  -->
+	
+</body>
+</html>

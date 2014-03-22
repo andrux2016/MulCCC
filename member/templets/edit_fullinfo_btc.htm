@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>更改详细资料 - 会员中心 -<?php echo $cfg_webname; ?></title>
+<link href="<?php echo $cfg_templets_skin ?>/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" language='javascript'src='templets/js/main.js'></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+
+<script language='javascript'>
+
+
+function edit_info() {
+	var json_req = {
+		dopost: 'save',
+		modid:$("#modid").val(),
+		qq:$("#qq").val(),
+		msn:$("#msn").val(),
+		tel:$("#tel").val(),
+		mobile:$("#mobile").val(),
+		dede_fields:$("#dede_fields").val(),
+		dede_fieldshash:$("#dede_fieldshash").val()
+	};
+	$.ajax({
+		type: "post",
+		url: "edit_fullinfo_btc.php?op=query" + Math.random(),
+		data: json_req,
+		dataType: "json",//返回json格式的数据
+		success: function(data, state) {
+			apprise(data.showMsg, {
+			animate: false,
+			textOk: "确定"
+			},function(r) {
+				if(data.ruslt==1){
+					location.reload(true);
+				}
+			});		
+
+		}
+	});
+ }
+ 
+
+</script>
+
+
+<link href="<?php echo $cfg_templets_skin ?>/css/common.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/nav-top.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/yonghu-content.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="<?php echo $cfg_templets_skin ?>/css/gerenziliao.css"  /> 
+
+</head>
+<body>
+	
+	<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	
+	<!--id="yonghu-content" 用户中心-->
+	<div id="yonghu-content" class="yonghu-content">
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+		<div class="yh-right">
+			<div class="right-top">
+				<div class="r-top-l">
+					<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-3.jpg" border="0"  />
+				</div>
+				<div class="r-top-c">
+					<div class="c-t"><?php echo $cfg_ml->M_LoginID; ?></div>
+					<div class="c-b">[<a href="#" onclick="UserQuit();">退出登录</a>]</div>
+				</div>
+				<div class="r-top-r">
+					<div class="r-t">
+						<ul>
+							<li>可用</li>
+							<?php echo $coinhtml;?>
+							<div style="clear:both"></div>  
+						</ul>
+					</div>
+					<div class="r-c">
+						<ul>
+							<li>冻结</li>
+							<?php echo $freehtml;?>
+							<div style="clear:both"></div>  
+						</ul>
+					</div>
+				</div>
+				<div style="clear:both"></div>  
+			</div>			  
+			<div class="btc8-guanliright">
+				<div class="btc8-guanlirighth" id="appTab">
+					<i><a href="/member">会员功能</a></i> &mdash; <a href="edit_fullinfo_btc">个人资料</a>
+				</div>
+				<input type="hidden" id="modid" value="1">
+				<div class="btc8-guanlirightb" style="display:none">
+					<div class="btc8-guanlirightb-head">
+						账户信息
+					</div>
+					<div class="btc8-guanlirightb-body">
+						<ul>
+							<li>用户名：<?php echo $cfg_ml->M_LoginID; ?></li>
+							<li>资产合计：<?php echo $coinvol; ?> CNY</li>
+							<li><?php echo $coinhtml;?></li>
+						</ul>
+					</div>				
+				</div>
+				<div class="btc8-guanlirightb">
+					<div class="btc8-guanlirightb-head">
+						联系方式
+					</div>
+					<div class="btc8-guanlirightb-body">
+						<div class="btc8-guanlirightb-bodyx">
+							<?php echo $postform; ?>		
+							<button type="submit" id="btnSignCheck" onclick="edit_info();" class="buttonGreen142 btc8-anniu-red xbt-anniu-red">更新 </button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+	
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!--footer  -->	
+	<div class="btc8-footer">
+		<div class="btc8-foot">
+			<div class="btc8-footlogo">
+				<a href=""><img src="{dede:global.cfg_templets_skin/}/images/234-60.png" alt="" /></a>
+			</div>
+			<div class="btc8-footinfo">
+				{dede:global.cfg_beian/}<br/>
+			</div>
+		</div>
+	</div>
+	<!--footer end  -->
+	
+	

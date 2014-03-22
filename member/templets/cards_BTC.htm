@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>会员提现 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $cfg_templets_skin ?>/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<link href="<?php echo $cfg_templets_skin ?>/style/style.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+<script language='javascript'>
+
+
+function selectPay(payid,num,fee,account){
+	$('#paytype').val(payid);
+	for(var i=1;i<=num;i++){
+		$('#pay'+i).css("border","0px");
+	}
+	$('#pay'+payid).css("border","5px solid green");
+		
+}
+
+
+function CheckCards(){
+	if($('#coinid').val()==""){
+			$('#showMsgDiv').html("请选择币种类型！");
+			//alert("选择提现类型！");
+			return false;
+		}
+		if($('#amount').val()=="" || $('#amount').val()<=0){
+			$('#showMsgDiv').html("生成充值码金额不能为空！");
+			$('#amount').focus();
+			return false;
+		}
+		if($('#txpwd').val()==""){
+			$('#txpwd').focus();
+			$('#showMsgDiv').html("提现密码不能为空！");
+			return false;
+		}
+		/*if($('#vdcode').val()==""){
+			$('#vdcode').focus();
+			$('#showMsgDiv').html("验证码不能为空！");
+			return false;
+		}*/
+		
+		if($('#action').val()=="do" && $('#emailcode').val()==""){
+			$('#emailcode').focus();
+			$('#showMsgDiv').html("身份验证码不能为空！");
+			return false;
+		}
+		
+		var json_req = {
+		action: $("#action").val(),
+		/*show: '<?php echo $show;?>',
+		vdcode:$("#vdcode").val(),*/
+		txid:$("#truename").val(),
+		txpwd:$("#txpwd").val(),
+		coinid:$("#coinid").val(),
+		amount:$("#amount").val(),
+		emailcode:$("#emailcode").val()
+	};
+	$.ajax({
+		type: "post",
+		url: "cards_btc.php?op=query" + Math.random(),
+		data: json_req,
+		dataType: "json",//返回json格式的数据
+		success: function(data, state) {
+			if(data.ruslt==1){
+					apprise(data.showMsg, {
+					animate: false,
+					textOk: "确定"
+					},function(r) {
+						location.reload(true);
+					});		
+				
+			}else{
+				apprise(data.showMsg, {
+				animate: false,
+				textOk: "确定"
+				},function(r) {
+					//vdimgck.src=vdimgck.src+"?";
+				});		
+			}
+          }
+		  
+	});
+}
+function ChkEcode(){
+	if($('#emailcode').val()==""){
+			$('#emailcode').focus();
+			alert("身份验证码不能为空！");
+			return false;
+		}
+}
+
+
+
+
+function CheckEmail(){
+	  	
+		$.getJSON("{dede:global.cfg_cmspath/}/member/cash_email.php?coinid="+$('#coinid').val()+"&tt="+new Date(), function(data){
+			if(data){
+				apprise("已经向您的邮箱发送验证码，请稍后登陆邮箱查收。", {
+				animate: false,
+				textOk: "确定"
+				},function(r) {
+					$('#email').hide();
+					$('#do').show();
+					$('#code').show();
+					//$("#vdcode").val("");
+					$("#action").val("do");
+				});		
+				
+			}
+		});
+}
+
+
+function checkCard(){
+	  	
+		if($('#cardid').val()==""){
+			apprise('请填写充值卡！', {
+				animate: false,
+				textOk: "确定"
+			});
+			$('#cardid').focus();
+			return false;
+		}
+		if($('#vdcode').val()==""){
+			apprise('请填验证码！', {
+				animate: false,
+				textOk: "确定"
+			});
+			$('#vdcode').focus();
+			return false;
+		}
+		$.post("check_card.php?act="+new Date(),{vdcode:$('#vdcode').val(),cardid:$('#cardid').val()},function(msg){ 
+			
+				apprise(msg, {
+					animate: false,
+					textOk: "确定"
+					},function(r) {
+						location.reload(true);
+					});		
+
+        }); 
+	}
+</script>
+</head>
+<body>
+	<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<div id="wrapper" >  
+		<section>
+			<div class="btc8-contents">
+				<div class="btc8-content btc8-guanli">
+					<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+					<div class="btc8-guanliright" style="float:right;">		
+						<div id="content_right">	
+							<div id="mcpmain">
+								<div id="appTab">
+									<ul>
+									   <li class='thisTab'><a href='cards_btc.php'>充值/提现码</a></li>
+									</ul>
+								</div>
+								<div id="mainCp">
+									<!--<div class="appMsg">
+									  <ul class="tips" id="userMoney"></ul>
+									</div>-->
+									<!--内容消息提示 -->					   
+										<div class="postForm">
+											<h3 class="meTitle"><?php echo $cointype;?>充值码充值</h3>
+											<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+												<tbody>
+													<tr>
+														<td width="15%" align="right" valign="top">充值码：</td>
+														<td><input name="cardid" type="text" id="cardid" size="38" class="intxt" style="width:200px"/></td>
+													</tr>
+													<tr>
+														<td align="right" valign="top">验证码：</td>
+														<td><input name="vdcode" type="text" id="vdcode" size="8" class="intxt" style='width:50px;text-transform:uppercase;' />
+															<img src="../include/vdimgck.php" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer" onclick="this.src=this.src+'?'" />
+														</td>
+													</tr>
+												</tbody>
+												<tfoot>
+													<tr>
+														<td align="right" valign="top">&nbsp;</td>
+														<td><button class="button2 mt5 btc8-anniu-red" onclick="checkCard()" type="submit">充值</button></td>
+													</tr>
+												</tfoot>
+											</table>
+										</div>					   
+										<div class="postForm">
+											<h3 class="meTitle"><?php echo $cointype;?>生成充值码:</h3>
+											 <!-- <form name="f1" action="cash_btc.php" method="post">-->
+												<!-- <input type="hidden" name="coinid" id="coinid" value="<?php echo $coinid;?>" />
+											  CNY do-->
+								  
+											<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+												<tbody>
+													<tr>
+														<td width="18%" height="30" align="right"><strong>说明：</strong>				  </td>
+														<td height="20" colspan="2"><strong><font color="#FF0000" style="font-size:14px">使用您的账户余额生成充值码</font></strong>					</td>
+													<tr>
+														<td width="18%" height="30" align="right">选择币种：				  </td>
+														<td height="20" colspan="2">
+														<select name="coinid">
+															<?php echo $coinselect;?>
+														</select>					</td>
+													<tr>
+															<td width="18%" height="30" align="right">生成充值码金额：						</td>
+													  <td><input name="amount" type="text" id="amount" size="38" class="intxt" style="width:100px"/></td>
+													</tr>
+														<tr>
+															<td width="18%" height="30" align="right">提现密码：						</td>
+															<td><input name="txpwd" type="password" id="txpwd" size="8" class="intxt" style='width:200px;' /></td>
+														</tr>
+														<!--<tr>
+															<td align="right" height="30">验证码：</td>
+															<td><input name="vdcode" type="text" id="vdcode" size="8" class="intxt" style='width:50px;text-transform:uppercase;' />
+																<img id="vdimgck" src="../include/vdimgck.php" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer" onclick="this.src=this.src+'?'" />                        </td>
+														</tr>-->
+												
+													<?php if($cfg_ml->M_Google==""){?>
+													<input type="hidden" id="action" value="email" />
+													<tr>
+														<td align="right" height="30">Email身份验证码：</td>
+														<td><input name="emailcode" type="text" id="emailcode" size="38" class="intxt" style="width:50px"/><button  id="email" style=" width:120px; height:30px;" onclick="return CheckEmail();" type="button">获取 Email 验证码</button>
+														
+														<a id="code" style="display:none;" onclick="CheckEmail()" href="#">重发</a>
+														
+														<div id="do" style="display:none"><button class="button2 mt5 btc8-anniu-red" onclick="return CheckCards();" type="submit">生成</button></div>				</td>
+													</tr>
+													<?php }else{ ?>
+													<input type="hidden" id="action" value="do" />
+													<tr>
+														<td align="right" height="30">google身份验证码：</td>
+														<td><input name="emailcode" type="text" id="emailcode" size="38" class="intxt" style="width:50px"/>				</td>
+													</tr>
+													<tr>
+														<td align="right" height="30"></td>
+														<td>
+														<div id="do" ><button class="button2 mt5 btc8-anniu-red" onclick="return CheckCards();" type="submit">生成</button></div>				</td>
+													</tr>
+													<?php } //google ?>
+													<tr>
+														<td align="right" height="30"></td>
+														<td>
+														<font id="showMsgDiv" color="#FF0000"></font></td>
+													</tr>					
+												</tbody>
+											</table>
+											<table width="1" border="1" cellspacing="0" cellpadding="0">
+												<tr>
+													<td colspan="6"><strong>最新的充值码</strong></td>
+												</tr>
+												<tr>
+													<td align="center" style="border-bottom:1px solid #666666;">日期</td>
+													<td align="center" style="border-bottom:1px solid #666666;">类型</td>
+													<td align="center" style="border-bottom:1px solid #666666;">金额</td>
+													<td align="center" style="border-bottom:1px solid #666666;">操作</td>
+													<td align="center" style="border-bottom:1px solid #666666;">状态</td>
+													<td align="center" style="border-bottom:1px solid #666666;">充值码</td>
+												</tr>
+												  <?php echo $cardslist;?>
+												<tr>
+													<td align="right" colspan="6" style="border-bottom:1px solid #666666;"><a href="cards_list_btc.php">查看全部记录</a></td>
+												</tr>
+											</table>				 
+											<!--</form>-->
+										</div>					
+									</div>
+							<!--主操作区域 -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

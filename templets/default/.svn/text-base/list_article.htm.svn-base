@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>	
+	<title>btc-8比特吧</title>
+	<!--we css-->
+	<link rel="shortcut icon" href="{dede:global.cfg_basehost/}/favicon.ico">	
+	<!--we css end-->
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+	<title><?php echo $cfg_webname; ?>- 公告</title>
+	<link href="{dede:global.cfg_templets_skin /}/style/style.css" rel="stylesheet" type="text/css" />	
+	<style type="text/css">
+		body {behavior:url(style/iehoverfix.htc);}
+	</style>
+	
+	
+	
+</head>
+<body>
+
+	 {dede:php} include(DEDEMEMBER."/templets/head_btc.htm");{/dede:php} 
+	<!--content  -->
+	<div class="btc8-contents">
+		<div class="btc8-content btc8-gonggao">
+			<div class="gongaoh">
+				<h1>公告栏</h1>
+			</div>
+			<div class="btc8-gonggaoleft">
+				<ul>
+					<!--<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>
+					<li>
+						<span>10-06 17:40</span><a href="">BTC期货交割时间调整通知</a>
+					</li>-->
+					{dede:list pagesize='10'}
+					<li>
+						<span>10-06 17:40</span><a href="">[field:title/]</a>
+					</li><a href="[field:arcurl/]" class="title"></a>
+					
+					{/dede:list}
+				</ul>
+				<div class="btc8-ggleft-fenye">
+					<a href="">首页</a>
+					<a href="">上一页</a>
+					<a class="btc8-fy-avist" href="">1</a>
+					<a href="">2</a>
+					<a href="">3</a>
+					<a href="">下一页</a>
+					<a href="">尾页</a>
+					{dede:pagelist listitem="info,index,end,pre,next,pageno,option" listsize="5"/}
+				</div>
+			</div>
+			<div class="btc8-gonggaoright">
+				<div class="btc8-ggr-h">
+					<h1 style="text-align:center;line-height:30px;">BTC期货交割时间调整通知</h1>
+					<h4 style="text-align:center; line-height:20px;font-weight:normal;font-size:12px;color:#666;">作者：admin    2013-10-11</h4>
+				</div>
+				<div class="btc8-ggr-b">
+					<p style="font:12px/28px 微软雅黑;color:#333;">
+						为与比特吧其它期货交割时间一致，同时也为方便投资者安排时间休息，比特吧决定将BTC期货交割时间改到每周六的上午10点。<br/>
+						比特吧BTC期货将会在每周六的9:50 - 10:10分（北京时间）停止交易与委托，期间将按Mt.Gox上10:00分时显示的平均价进行结算，所有已开仓仓位均会按此价格自动平仓。
+					</p>
+					<p style="font:12px/28px 微软雅黑;color:#333;">
+						为与比特吧其它期货交割时间一致，同时也为方便投资者安排时间休息，比特吧决定将BTC期货交割时间改到每周六的上午10点。<br/>
+						比特吧BTC期货将会在每周六的9:50 - 10:10分（北京时间）停止交易与委托，期间将按Mt.Gox上10:00分时显示的平均价进行结算，所有已开仓仓位均会按此价格自动平仓。
+					</p>
+					<p style="font:12px/28px 微软雅黑;color:#333;">						
+						比特吧BTC期货将会在每周六的9:50 - 10:10分（北京时间）停止交易与委托，期间将按Mt.Gox上10:00分时显示的平均价进行结算，所有已开仓仓位均会按此价格自动平仓。
+					</p>
+				</div>
+				<div class="btc8-ggr-f">
+					<div class="btc8-ggr-f1">
+						上一篇：<a href="">比特吧正式启动</a>
+					</div>
+					<div class="btc8-ggr-f2">
+						下一篇：<a href="">比特吧正式启动</a>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	<!--content end  -->
+	
+	
+	
+	<!--footer  -->
+	<div class="clear"></div>
+	 <?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>	
+	<!--footer end  -->
+	
+</body>
+</html>

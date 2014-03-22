@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document 
+
+底部
+id="footer" 
+*/
+.footer{ width:100%; height:398px; background:#f4f4f4; border-top:2px solid #00b8e2;font-family:'microsoft yahei';}
+.footer .footer-con{ width:988px; margin:0 auto; height:398px;}
+.footer .footer-con .con-l{ float:left; margin-top:93px; margin-right:64px;}
+.footer .footer-con .con-l img{ display:block; outline:none;}
+.footer .footer-con .con-con1{ float:left; width:130px; margin-left:40px; margin-top:53px; height:auto;}
+.footer .footer-con .con-con1 ul{ margin:0; padding:0; list-style:none;}
+.footer .footer-con .con-con1 ul li{ height:30px; line-height:30px; font-size:12px; color:#999999;}
+.footer .footer-con .con-con1 ul li a{ color:#999999; text-decoration:none;}
+.footer .footer-con .con-con1 ul .top{ height:34px; line-height:12px;font-weight:bold;font-size:14px;}
+.footer .con-r{ float:left;}
+.footer .con-r div{ margin:0; margin-top:49px; margin-bottom:20px; font-size:18px; color:#999999;font-weight:bold;}
+.footer .con-r a{ border:0; float:left; margin-right:5px;}
+
+
+
+
+
+
+
+
+

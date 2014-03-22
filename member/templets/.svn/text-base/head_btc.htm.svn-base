@@ -1,0 +1,53 @@
+<!--顶部-->
+<div id="nav-top" class="nav-top">
+	<div class="row-1">
+    	<div class="l">
+        	最新成交价&nbsp;&nbsp;
+            BTC:￥<b style="font-weight:normal;" id="pb_close"><?php echo $tikarr['last_rate']; ?></b>&nbsp;&nbsp;
+            LTC:￥70.8&nbsp;&nbsp;
+            
+            24小时成交量&nbsp;&nbsp;
+            BTC:<b style="font-weight:normal;" id="pb_vol"><?php echo $tikarr['vol']; ?>฿</b>&nbsp;&nbsp;
+            LTC:1032667.61Ł
+        </div>
+        <div class="r">
+        	<div class="login-no" id="usertop"  >            	
+               <div class="col"><a href="reg_new.php">注册</a></div>
+               <div class="col"><a href="login.php">登录</a></div>            	
+            </div>
+            <div class="login-yes" style="display:none;">
+                <div class="out"><a href="#">退出</a></div>
+                <div class="name">king258999</div>
+                <div class="hi">hi,</div>
+            </div>
+        </div>
+    </div>
+    <div class="row-2">
+    	<div class="a-row">
+        	客服电话：400-811-9898&nbsp;&nbsp;&nbsp;&nbsp;客服QQ 5888774565&nbsp;&nbsp;&nbsp;&nbsp;用户QQ群 2884656854
+        </div>
+        <div class="b-row">
+        	<div class="logo"><img src="<?php echo $cfg_templets_skin; ?>/img/logo.jpg"></div>
+            <div class="nav">
+             	<div class="col">
+                	<a href="news.php?typeid=3" <?php if($typeid=='3') echo "class='cur'";?>>帮助</a>
+                </div>
+                 <div class="col">
+                	<a href="news.php?typeid=1" <?php if($typeid=='1') echo "class='cur'";?>>新闻</a>
+                </div>
+                 <div class="col">
+                	<a href="/member" <?php if($typeid!='1' && $typeid!='3') echo "class='cur'";?>> 用户中心</a>
+                </div>
+                <div class="col">
+                	<a href="/stock.php"> 实时行情</a>
+                </div>
+                   <div class="col">
+                	<a href="/trade.php?type=buy"> Btc/Ltc交易中心</a>
+                </div>
+            	<div class="col">
+                	<a href="/" target="_blank">首页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

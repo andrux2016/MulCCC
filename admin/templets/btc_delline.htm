@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>充值卡管理</title>
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" cellpadding="1" cellspacing="1" align="center" class="tbtitle" style="background:#cfcfcf;">
+  <form name="form1" action="btc_delline.php" method="post">
+    <input type="hidden" name="dopost" value="del" />
+    <tr>
+      <td height="24" colspan="5" bgcolor="#EDF9D5" background='images/tbg.gif'>
+      	<table width="98%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="30%"  style="padding-left:10px;"><strong>走势数据删除：</strong></td>
+            <td align="right" style="padding-top:4px;">            	            </td>
+          </tr>
+        </table>      </td>
+    </tr>
+
+    <tr bgcolor="#F9FCEF">
+      <td height="24" colspan="5" valign="top">&nbsp;</td>
+    </tr>
+    <tr height="24" align="center" bgcolor="#FFFFFF">
+      <td valign="top">删除多久前的数据</td>
+      <td valign="top"><select name='exptime_new' id='exptime_new' style='width:100px'>
+          <?php
+          foreach($times as $kkk=>$vvv){
+          	echo "    <option value='{$kkk}'>{$vvv}</option>\r\n";
+          }
+	   	?>
+        </select></td>
+      <td valign="top">&nbsp;</td>
+      <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+      <td align="center" bgcolor="#FFFFFF">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="24" colspan="5" bgcolor="#ffffff">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="34" colspan="5" align="center" bgcolor="#F9FCEF">
+      	<input name="imageField"  type="submit" class="np coolbg" value="确定" class='np coolbg /' />      </td>
+    </tr>
+  </form>
+</table>
+</body>
+</html>

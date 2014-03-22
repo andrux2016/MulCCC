@@ -1,0 +1,107 @@
+<?php
+if(!isset($GLOBALS['_vars'])) $GLOBALS['_vars'] = array(); 
+$fields = array();
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="<?php echo $cfg_templets_skin ?>/css/common.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/nav-top.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/news-list.css" rel="stylesheet" type="text/css">
+    <title><?php if($typeid==2){echo 'ABOUT';}elseif($typeid==3){echo 'HELP';}elseif($typeid==4){echo 'DATA';}else{$typeid=1;echo '新闻';} ?></title>
+    <!--<title><?php echo $GLOBALS['cfg_webname']; ?>-新闻</title>-->
+</head>
+<body>
+
+	 <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<!--id="news-list" 新闻-->
+<div id="news-list" class="news-list">
+	
+    <div class="btc8-content btc8-gonggao">
+			<div class="gongaoh">
+				<h1><?php if($typeid==2){echo 'ABOUT';}elseif($typeid==3){echo 'HELP';}elseif($typeid==4){echo 'DATA';}else{$typeid=1;echo '新闻';} ?></h1>
+			</div>
+			<div style="min-height:300px" class="btc8-gonggaoleft">
+				<ul>
+					<?php
+$atts = array();
+$atts['tagname'] = 'datalist';
+$blockValue = $this->refObj->GetArcList($atts,$this->refObj,$fields); 
+if(is_array($blockValue)){
+foreach( $blockValue as $key=>$fields )
+{
+?>
+					
+					<li stype="display:none;">
+						<span><?php echo date("Y-m-d",$fields["senddate"]);?></span><a href='?typeid=<?php echo $typeid;?>&num=<?php echo $fields["id"];?>&pageno=<?php echo $pageno;?>' ><?php echo $fields["title"];?></a>
+					</li>
+          	
+            <?php
+}
+}?>			
+					
+          	
+            					
+				</ul>
+				<div class="btc8-ggleft-fenye">
+					<?php
+$atts = array();
+$atts['tagname'] = 'pagelist';
+$atts['listitem'] = 'index,end,pre,next,pageno,option';
+$atts['listsize'] = '3';
+ echo $this->refObj->GetPageList($atts,$this->refObj,$fields); 
+?>
+
+					<!--<span>共 1 页/11条记录</span>
+					<a href="">首页</a>
+					<a href="">上一页</a>
+					<a href="" class="btc8-fy-avist">1</a>-->
+					<!--<a href="">2</a>
+					<a href="">3</a>
+					<a href="">下一页</a>
+					<a href="">尾页</a>-->
+				</div>
+			</div>
+			<div style="min-height:300px" class="btc8-gonggaoright" id="arcdiv">
+				<div class='btc8-ggr-h'>
+					<h1 style='text-align:center;line-height:30px;'><?php echo $rtil["title"];?> </h1>
+					<h4 style='text-align:center; line-height:20px;font-weight:normal;font-size:12px;color:#666;'>作者：<?php echo $rtil["write"]; echo date("Y-m-d",$rtil["senddate"]);?></h4>
+				</div>
+				<div class='btc8-ggr-b'style="line-height:180%;"><?php echo $rbody["body"];?></div>
+				
+				
+				<!--<div class="btc8-ggr-f">
+					<div class="btc8-ggr-f1">
+						上一篇：<a href="">比特吧正式启动</a>
+					</div>
+					<div class="btc8-ggr-f2">
+						下一篇：<a href="">比特吧正式启动</a>
+					</div>
+				</div>-->
+			
+			</div>
+            <div style="clear:both;"></div>
+		</div>
+    
+    
+</div>
+
+	<div id="xxx"></div>
+	<script type="text/javascript">
+	function archives(title,arcdate,arcwrite,senddate,content){
+		var arctext="<div class='btc8-ggr-h'><h1 style='text-align:center;line-height:30px;'>"+title+"</h1><h4 style='text-align:center; line-height:20px;font-weight:normal;font-size:12px;color:#666;'>作者："+arcwrite+"    "+senddate+"</h4></div><div class='btc8-ggr-b'>"+content+"</div>";
+		$("#arcdiv").html(arctext);
+	}
+	<?php echo $oneshow;?>
+	
+	</script>
+	
+	
+	<!--footer  -->
+	<div class="clear"></div>
+	 <?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>	
+	<!--footer end  -->
+	
+</body>
+</html>

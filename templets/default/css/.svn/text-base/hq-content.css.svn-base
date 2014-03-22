@@ -1,0 +1,231 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:0;
+	padding:0; 
+	font-size:12px; 
+	line-height:162%;
+	color:#333333; 
+	font-family:Microsoft YaHei,Arial,Verdana,sans-serif,Segoe UI,Tahoma;
+	-webkit-text-size-adjust:none;
+	background:none repeat scroll 0 0 #ffffff;
+}
+table{
+	border-collapse:collapse;
+	border-spacing:0; 
+	border:0;
+	text-align:center;
+}
+div,form,img,ul,ol,li,dl,dt,dd,option,td,th{ 
+	margin:0;
+	padding:0;
+	border:0; 
+	list-style:none outside none;
+}
+
+h1,h2,h3,h4,h5,h6,p,span,blockquote,input,select,textarea{ 
+	margin:0;
+	padding:0;
+}
+
+
+.hq-content{ width:982px; margin:0 auto;}
+.hq-content .top{padding-top:30px;}
+.con-table1 table tr{border-left:1px solid #e1e1e1;border-right:1px solid #e1e1e1;}
+.con-table1 table thead tr{border:none;}
+.con-table1 table tr .name1{ font-size:18px; font-weight:bold; color:#2a72ce; text-align:left; text-indent:40px;}
+.con-table1 table tr .name2{ font-size:18px; font-weight:bold; color:#5dca3b; text-align:left; text-indent:40px;}
+.con-table1 table tr .name3{ font-size:18px; font-weight:bold; color:#ff986a; text-align:left; text-indent:40px;}
+.con-table1 table tr.bg1{background:#DBECF9;}
+.con-table1 table tr.bg2{background:#FEF1E6;}
+.con-table1 table tr.bg3{background:#EAFFE6;}
+.con-table1 table tr.bg4{background:#eff1ff;}
+.con-table1 table th{color:#999999; font-weight:100; border-bottom:1px solid #e1e1e1; height:35px; text-align:left;}
+.con-table1 table td{height:60px; border-bottom:1px solid #e1e1e1; color:#3A444B; text-align:left;font-size:16px;}
+
+.hq-content .title{width:100%;height:30px;padding-bottom:0px;margin-top:44px;margin-bottom:4px;}
+.hq-content .title .more{
+	color:#373737;
+	font-size:12px;
+	float:right;
+}
+
+.hq-content .title .more li a{
+	color:#666666;
+}
+
+.hq-content .title .more li a:hover{
+	color:#ff7f00;
+}
+
+.hq-content .title li{
+	float:left;
+	padding-right:5px;
+	font-size:12px;
+}
+
+
+.hq-content .title li.cur a{
+	display:inline-block;
+	color:#1487c8;
+	font-weight:700;
+	font-size:14px;
+	
+}
+
+.hq-content .title li.cur a span{
+	display:inline-block;
+	font-weight:700;
+	font-size:14px;
+	font-weight:700;
+	color:#1487c8;
+}
+
+.hq-content .title li a{
+	display:inline-block;
+	height:24px;
+	padding-left:5px;
+	margin-top:3px;
+	color:#aaaaaa;
+	text-decoration:none;
+}
+.hq-content .title li a span{
+	font-weight:700;
+	font-size:14px;
+}
+
+.hq-content .title li a:hover{
+	color:#ff7f00;
+}
+
+.hq-content .title .ttitle{
+	background: none repeat scroll 0 0 #D5D5D5;
+	border-bottom:1px solid #E4E4E4;
+	font-size:14px;
+	height:24px;
+	padding-left:15px;
+	padding-top:10px;
+}
+
+
+.lightred{
+	color:#fe0100;
+}
+
+.lightgreen4{
+	color:#76e116;
+}
+
+.lightgreen5{
+	color:#068814;
+}
+
+.hq-content .real{
+	
+	border:1px solid #D5D5D5;
+}
+
+.hq-content .real table{
+	border-collapse: collapse;
+}
+.hq-content .real table.transaction{
+	width: 100%;
+}
+.hq-content .real table.transaction td{ 
+	border-bottom: 1px solid #E4E4E4;
+	text-align: center;
+	height:35px;
+	background:#ffffff;
+}
+
+.hq-content .real table.transaction th{
+	border-bottom: 1px solid #E4E4E4;
+	text-align: center;
+	background: none repeat scroll 0 0 #F3F3F3;
+	font-weight: 300;
+	height: 35px;
+	line-height: 35px;
+	color:#373737;
+}
+
+
+/*走势图*/
+.btc8-select-a{
+	float:left;
+	width:100%;
+	height:auto;
+}
+.btc8-select-a a{
+	display:inline-block;
+	margin:3px;
+	width:92px;
+	height:40px;
+	text-align:center;
+}
+.btc8-select-a a{
+	display:inline-block;
+	margin:3px;
+	width:92px;
+	height:40px;
+	text-align:center;
+	font-family:Orbitron Medium;
+	font-size:13px;
+	line-height:20px;
+}
+.btc8-select-a a.btc8-abase{
+	background:url(../images/btc-sel_r2_c3.png) no-repeat;
+	color:#333;
+}
+.btc8-select-a a.btc8-avist{
+	background:url(../images/btc-sel_r2_c2.png) no-repeat;
+	color:#fff;
+}
+.btc8-select-a a:hover{
+	background:url(../images/btc-sel_r2_c2.png) no-repeat;
+	color:#fff;
+}
+
+
+.btn {
+	display:inline;
+	zoom:1;
+	margin-bottom:0;
+	font-size:13px;
+	line-height:15px;
+	text-align:center;
+	vertical-align:middle;
+	cursor:pointer;
+	color:#333;
+	text-shadow:0 1px 1px rgba(255,255,255,0.75);
+	background-image:linear-gradient(tobottom,#fff,#e6e6e6);
+	background-repeat:repeat-x;
+	background-color:#e6e6e6;
+	filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	border:0;
+	margin-right:5px;
+	-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
+	-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
+	box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);
+	border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) #b3b3b3;
+	padding:4px 8px
+}
+.btn-success {
+	color:#fff;
+	text-shadow:0 -1px 0 rgba(0,0,0,0.25);
+	background-image:linear-gradient(tobottom,#62c462,#51a351);
+	background-repeat:repeat-x;
+	background-color:#39c;
+	filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25)
+}
+.btn-group {
+	position:relative;
+	display:inline;
+	zoom:1;
+	font-size:0;
+	vertical-align:middle;
+	white-space:nowrap;
+	margin-left:.3em
+}
+
+/*end 走势图*/

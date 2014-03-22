@@ -1,0 +1,95 @@
+@charset "utf-8";
+/* CSS Document
+@import url("common.css?v=1");
+@import url("top-nav.css");
+@import url("bottom-nav.css");
+ */
+
+
+body.user-login-reg{ background-image:url(../img/login-reg-bg-1.jpg);}
+body.user-login-reg .top-nav-box{border-bottom:2px solid #33b5e5;}
+
+/*
+用处：id="user-login-box-page" 会员登录
+*/
+.user-login-box-page{width:980px;height:auto;display:block;background-color:#fff;margin:0 auto;margin-top:30px;}
+.user-login-box-page .l{width:610px;height:auto;display:block;float:left;}
+.user-login-box-page .l .login{ display:block;padding-top:58px;padding-left:57px;}
+.user-login-box-page .l .login form{}
+.user-login-box-page .l .login .row-txt{color:#69b3f2; width:100%; height:89px; display:block;font-family:'microsoft yahei'; font-size:28px;}
+.user-login-box-page .l .login .row-un{width:100%; height:99px; display:block;}
+.user-login-box-page .l .login .row-un .cur{ background-color:#d9eeff;}
+.user-login-box-page .l .login .row-up .cur{ background-color:#d9eeff;}
+.user-login-box-page .l .login .row-un .cur .inp_user_name{border-top:1px solid #8bc3e7 !important;
+	border-left:1px solid #96ceef !important;
+	border-bottom:1px solid #c1e3f6 !important;
+	border-right:1px solid #96ceef !important;
+}
+.user-login-box-page .l .login .row-up .cur .inp_user_pwd{border-top:1px solid #8bc3e7 !important;
+	border-left:1px solid #96ceef !important;
+	border-bottom:1px solid #c1e3f6 !important;
+	border-right:1px solid #96ceef !important;
+}
+.user-login-box-page .l .login .row-un .user_name_bd{width:392px;height:52px; display:block;padding-top:2px;padding-left:2px;}
+.user-login-box-page .l .login .row-un .user_name_bd .inp_user_name{
+	width:373px;height:48px;line-height:48px; display:block; 
+	border-top:1px solid #c2c2c2;
+	border-left:1px solid #d3d3d3;
+	border-bottom:1px solid #e6e6e6;
+	border-right:1px solid #d3d3d3;
+	color:#c1c1c1;
+	padding-left:15px;
+	font-family:'microsoft yahei';
+	font-size:22px;
+}
+.user-login-box-page .l .login .row-up{width:100%; height:78px; display:block;}
+.user-login-box-page .l .login .row-up .set-pwd{display:none;display/*\**/:block \9;color:#ccc;padding-left:5px;}
+.user-login-box-page .l .login .row-up .user_pwd_bd{width:392px;height:52px; display:block;padding-top:2px;padding-left:2px;}
+.user-login-box-page .l .login .row-up .user_pwd_bd .inp_user_pwd{
+	width:373px;height:48px;line-height:48px; display:block; 
+	border-top:1px solid #c2c2c2;
+	border-left:1px solid #d3d3d3;
+	border-bottom:1px solid #e6e6e6;
+	border-right:1px solid #d3d3d3;
+	color:#c1c1c1;
+	padding-left:15px;
+	font-family:'microsoft yahei';
+	font-size:22px;
+}
+.user-login-box-page .l .login .row-cf{color:#999;width:100%; height:47px; display:block;}
+.user-login-box-page .l .login .row-cf label{color:#999;}
+.user-login-box-page .l .login .row-cf label a{color:#999;text-decoration:none;}
+.user-login-box-page .l .login .row-cf label a:hover{color:#69B3F2;text-decoration:underline;}
+
+.user-login-box-page .l .login .row-cf .forget{color:#999;text-decoration:none;}
+.user-login-box-page .l .login .row-cf .forget:hover{color:#69B3F2;text-decoration:underline;}
+.user-login-box-page .l .login .row-bs{ height:50px; width:100%; display:block;}
+.user-login-box-page .l .login .row-bs .btn-signin{width:390px; height:50px;  line-height:50px; color:#fff; display:block; text-align:center;font-family:'microsoft yahei'; background-color:#69b3f2;-webkit-border-radius: 2px;
+border-radius: 2px;
+-moz-border-radius : 2px;border:0px; cursor:pointer;font-size:28px;letter-spacing:8px;}
+.user-login-box-page .l .login .row-bs .btn-signin:hover{ background-color:#59a4e4;}
+
+
+.user-login-box-page .l .other{display:block;padding-top:91px;padding-left:57px;}
+.user-login-box-page .l .other .t{color:#666;}
+.user-login-box-page .l .other .link{color:#666;text-decoration:none;padding-top:11px;}
+.user-login-box-page .l .other .link a{color:#666;text-decoration:none;width:auto;height:20px;line-height:20px;display:inline-block;white-space:nowrap;background-image:url(../img/ico-list-img-1.jpg);background-repeat:no-repeat;background-position:0px 0px;}
+.user-login-box-page .l .other .link a:hover{color:#666;text-decoration:underline;}
+.user-login-box-page .l .other .link .qq{padding-left:19px;background-position:-6px -9px;}
+.user-login-box-page .l .other .link .sina{padding-left:19px;background-position:-6px -40px;}
+.user-login-box-page .l .other .link .douban{padding-left:18px;background-position:-6px -73px;}
+.user-login-box-page .l .other .link .alipay{padding-left:48px;background-position:-6px -106px;}
+.user-login-box-page .l .other .link .renren{padding-left:17px;background-position:-6px -136px;}
+
+.user-login-box-page .r{width:290px;height:auto;display:block;float:left;padding-top:95px;}
+.user-login-box-page .r .box{width:100%;height:231px;display:block;background-position:left top;background-repeat:repeat-y;background-image:url(../img/right-left-bg-2.jpg);padding-top:102px;padding-left:58px;}
+
+.user-login-box-page .r .box .t{color:#000;font-size:14px;font-weight:bold;padding-left:2px;}
+.user-login-box-page .r .box .c{ width:100%;height:auto;display:block;padding-top:24px;}
+.user-login-box-page .r .box .c a.btn-reg{color:#000;text-decoration:none;background-image:url(../img/btn-reg-bg-1.jpg);background-repeat:no-repeat;background-position:0px 0px;text-align:center;width:135px;height:33px;line-height:33px;display:block;border:0px;font-size:14px;font-weight:bold;}
+
+.user-login-box-page .h-bottom{height:119px;width:100%;display:block;}
+
+
+
+

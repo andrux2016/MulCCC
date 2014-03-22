@@ -1,0 +1,847 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>会员充值 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/style.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/scport1.js"></script>
+<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+
+<!--new add-->
+<style type="text/css">
+	body {behavior:url(style/iehoverfix.htc);}
+</style>	
+<script type="text/javascript" src="templets/js/js.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		jQuery.jqtab = function(tabtit,tab_conbox,shijian) {
+			$(tab_conbox).find("li").hide();
+			$(tabtit).find("li:first").addClass("thistab").show(); 
+			$(tab_conbox).find("li:first").show();
+		
+			$(tabtit).find("li").bind(shijian,function(){
+			  $(this).addClass("thistab").siblings("li").removeClass("thistab"); 
+				var activeindex = $(tabtit).find("li").index(this);
+				$(tab_conbox).children().eq(activeindex).show().siblings().hide();
+				return false;
+			});
+		
+		};
+		/*调用方法如下：*/
+		$.jqtab(".tabs",".tab_conbox","click");	
+	});
+	</script>
+<!--new add end-->
+</head>
+<body>
+	<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<div class="clear"></div>
+	<div id="wrapper" class="xbt-con">
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+		<div class="xbt-right-con">
+			<div class="xbt-rc-yhang1">
+				<div class="xbt-rc-yhang1-1">
+					<div class="xbt-rc-mm-same">
+						<h1>融资交易</h1>
+					</div>
+				</div>
+				<div class="xbt-rc-yhang2-1 tabbox">
+					<ul class="tabs">
+						<li>借款</li>
+						<li>借币</li>
+					</ul>
+					 <ul class="tab_conbox tab_conbox">
+						<li class="tab_con">
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">当前资产：</label>
+								<label class="xbt-sec-label2" for="">10000.00</label>
+								<label class="xbt-sec-label3" for="">元</label>								
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">已借款：</label>
+								<label class="xbt-sec-label2" for="">10000.00</label>
+								<label class="xbt-sec-label3" for="">元</label>								
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">最大借款：</label>
+								<label class="xbt-sec-label2" for="">10000.00</label>
+								<label class="xbt-sec-label3" for="">元</label>								
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">借款额：</label>
+								<input type="text" />
+								<label class="xbt-sec-label3" for="">元</label>		
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">利息：</label>
+								<input type="text" />
+								<label class="xbt-sec-label3" for="">元 (<a href="" title="利息说明">？</a>)</label>		
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">总借款金额：</label>
+								<input type="text" />
+								<label class="xbt-sec-label3" for="">元</label>		
+							</div>
+							<div class="xbt-tab_con1 xbt-tab_con2 xbt-tab_con4">
+								<button class="xbt-tcon_btn">借款</button>
+							</div>
+						</li>							
+						<li class="tab_con">
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">当前资产：</label>
+								<label class="xbt-sec-label2" for="">10000.00</label>
+								<label class="xbt-sec-label3" for="">元</label>								
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">已借币：</label>
+								<label class="xbt-sec-label2" for="">10000.00</label>
+								<label class="xbt-sec-label3" for="">BTC</label>								
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">最大借币：</label>
+								<label class="xbt-sec-label2" for="">10000.00</label>
+								<label class="xbt-sec-label3" for="">BTC</label>								
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">借币数量：</label>
+								<input type="text" />
+								<label class="xbt-sec-label3" for="">BTC</label>		
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">利息：</label>
+								<input type="text" />
+								<label class="xbt-sec-label3" for="">BTC (<a href="" title="利息说明">？</a>)</label>		
+							</div>
+							<div class="xbt-tab_con3">
+								<label class="xbt-sec-label1" for="">借币总数量：</label>
+								<input type="text" />
+								<label class="xbt-sec-label3" for="">BTC</label>		
+							</div>
+							<div class="xbt-tab_con1 xbt-tab_con2 xbt-tab_con4">
+								<button class="xbt-tcon_btn1">借币</button>
+							</div>
+						</li>	
+					</ul>
+				</div>
+			
+			</div>
+			<div class="xbt-rc-mm2">
+				<div class="xbt-rc-mm2-1">
+					<div class="xbt-rc-mm-same">
+						<h1>融资说明</h1>
+					</div>
+				</div>
+				<div class="xbt-rc-sec2">					
+					<ul>
+						<li>
+							1、当您的总资产不足借贷金额的120%时，系统将按
+							照星比特网实时委托单价格对您的资产进行强制买入
+							或卖出清算并归还借款和借币。
+						</li>
+						<li>
+							2、借款或借币的额度为个人净资产的70%，即如果
+							您账户上有折合人民币1000元净资产，您最多可以
+							借入700元人民币或价值700元的比特币；
+						</li>
+						<li>
+							3、星币特网以24小时为一天来计算借贷利息（从借
+							贷开始时间算起，24小时为一天，超过24小时按照
+							新的一天算）每天收取0.2%-0.1%(借贷利率根据您
+							的vip等级确定)的借款利息； <a href="">查看费率标准>></a>
+						</li>
+						<li>
+							4、为了保护资金安全，借货未还清的用户，不能使
+							用提现功能。
+						</li>
+						<li>
+							5、借贷计息和归还均按笔处理，每笔借贷用户均可
+							随时选择全部还款或者部分还款，部分还款时先归
+							还利息。
+						</li>
+						<li>
+							<a href="">查看详细规则说明>></a>
+						</li>
+					</ul>
+					
+				</div>
+			</div>
+			<div class="xbt-rc-mm3 xbt-add-pb">
+				<div class="xbt-rc-mm3-3">
+					<div class="xbt-rc-mm-same">
+						<h1>当前借贷</h1>
+					</div>
+				</div>
+				<div class="xbt-rc-jilu xbt-rc-sec3">					
+					<div class="xbt-rc-sec3-1">
+						<table>
+							<thead>
+								<tr>
+									<th>
+										借贷时间
+									</th>
+									<th>
+										类型
+									</th>
+									<th>
+										欠款\币
+									</th>
+									<th>
+										利息
+									</th>
+									<th>
+										未还款\币
+									</th>
+									<th>
+										总欠款\币
+									</th>
+									<th>
+										截止还款日期
+									</th>
+									<th>
+										操作
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								
+							
+							</tbody>
+						</table>
+					</div>
+					<div class="xbt-rc-sec3-2">
+						<table>
+							<thead>
+								<tr>
+									<th>
+										借贷时间
+									</th>
+									<th>
+										类型
+									</th>
+									<th>
+										欠款\币
+									</th>
+									<th>
+										利息
+									</th>
+									<th>
+										未还款\币
+									</th>
+									<th>
+										总欠款\币
+									</th>
+									<th>
+										截止还款日期
+									</th>
+									<th>
+										操作
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>100.36180000</td>
+									<td>2013/12/30</td>
+									<td>
+										<button class="xbt-sec3-btn1">部分还款</button>
+										<button class="xbt-sec3-btn2">还全款</button>
+									</td>
+								</tr>
+								
+							
+							</tbody>
+						</table>
+					</div>				
+				</div>
+			</div>
+			
+			
+			<div class="xbt-rc-mm3 xbt-add-pb">
+				<div class="xbt-rc-mm3-3">
+					<div class="xbt-rc-mm-same">
+						<h1>我的借贷记录</h1>
+					</div>
+				</div>
+				<div class="xbt-rc-jilu xbt-rc-sec3">					
+					<div class="xbt-rc-sec3-1">
+						<table>
+							<thead>
+								<tr>
+									<th>
+										借贷时间
+									</th>
+									<th>
+										类型
+									</th>
+									<th>
+										欠款\币
+									</th>
+									<th>
+										利息
+									</th>
+									
+									<th>
+										总欠款\币
+									</th>
+									<th>
+										状态
+									</th>
+									<th>
+										还款日期
+									</th>
+									<th>
+										操作
+									</th>
+								</tr>
+							</thead>
+							<tbody class="hqHistoryList">
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>100.36</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>									
+									<td>100.36180000</td>
+									<td><font color="#f00">未还款</font></td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>100.36</td>
+									<td><font color="#00f">部分还款</font></td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								
+							
+							</tbody>
+						</table>
+					</div>
+					<div class="xbt-rc-sec3-2">
+						<table>
+							<thead>
+								<tr>
+									<th>
+										借贷时间
+									</th>
+									<th>
+										类型
+									</th>
+									<th>
+										欠款\币
+									</th>
+									<th>
+										利息
+									</th>
+									
+									<th>
+										总欠款\币
+									</th>
+									<th>
+										状态
+									</th>
+									<th>
+										还款日期
+									</th>
+									<th>
+										操作
+									</th>
+								</tr>
+							</thead>
+							<tbody class="hqHistoryList">
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									
+									<td>100.36</td>
+									<td><font color="#f00">未还款</font></td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									
+									<td>100.36180000</td>
+									<td><font color="#00f">部分还款</font></td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:38:07	</td>
+									<td><font color="#f60">融资</font></td>
+									<td>100.00</td>
+									<td>0.00</td>
+									<td>95.36</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								<tr>
+									<td>2013/10/30 15:35:08</td>
+									<td><font color="#ffa200">融币</font></td>
+									<td>100.00000000</td>
+									<td>0.00180000</td>
+									<td>95.36180000</td>
+									<td>已还清</td>
+									<td>2013/12/30</td>
+									<td>
+										<a href="">查看详情</a>
+									</td>
+								</tr>
+								
+							
+							</tbody>
+						</table>
+					</div>				
+				</div>
+			</div>
+		</div>	
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{dede:global.cfg_webname/}-首页</title>
+
+
+<!--we js end-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet"
+	href="{dede:global.cfg_templets_skin/}/css/main.css" />
+<link href="{dede:global.cfg_templets_skin/}/css/common.css"
+	rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/css/nav-top.css"
+	rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/css/home.css"
+	rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/css/footer.css"
+	rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/css/apprise.css"
+	rel="stylesheet" type="text/css" />
+<style type="text/css">
+.btc_title .coin_menu{
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.btc_title .coin_menu li{
+	 float: left;
+    position: relative;
+}
+.btc_title .coin_menu li a {
+    background: none repeat scroll 0 0 #3C78B5;
+    border: 0 solid #FFFFFF;
+    color: #ffffff;
+    display: block;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    width: 90px;
+}.btc_title .coin_menu li a:hover {
+    background-color: #808080 ;
+    color: #FFFFFF;
+}.btc_title .coin_menu li a.active {
+    background-color: #808080 ;
+    color: #FFFFFF;
+}
+
+.voteList{
+	margin-top: 20px;
+	color: #333;
+}
+
+.voteList li { height:25px; line-height:25px; margin-bottom:3px; float:left; width:250px; padding-left:10px; margin-right:3px; background-color:#f8f4e7; cursor:pointer;}
+.voteList li.check { background-color:#745e13; color:#FFF;}
+
+.submitBox .buyBtn:hover { background-color:#1f92cd; }
+.submitBox .buyBtn { display:inline-block; width:123px; height:30px; background-color:#05679a; border:0 none; font-size:14px; color:#FFF; font-weight:bold; text-align:center; line-height:30px; text-decoration:none;}
+
+</style>
+</head>
+<body>
+{dede:php echo $moneyid;/} {dede:include filename="head_btc.htm"/}
+<div class="content">
+<div class="chart" style='margin: 0px auto; width: 820px;'>
+<div class="content_left_top"></div>
+<div class="content_left_middle">
+<div class="btc_title" style="width: 800px;"><span
+	class="title_list">投票列表 &nbsp; &nbsp; &nbsp;</span></div>
+<div class="amaze2">
+<div>{dede:php}echo $msg;{/dede:php}</div>
+<form action="/vote.php" method="post">
+<div class="voteList">
+<ul>
+{dede:php}
+foreach($cointypelist as $tmpcoin){
+	echo '<li class="y"><input name="checklist[]" value="'.$tmpcoin['cointype'].'" type="checkbox">&nbsp;&nbsp;'.$tmpcoin['coinname'].'<b>&nbsp;&nbsp;'.$tmpcoin['cointype'].'</b></li>';
+}
+{/dede:php}
+</ul>
+<div class="clear"></div>
+</div>
+<input type="text" name="action" style="display: none;" value="vote"/>
+<div class="submitBox" style="margin-top: 20px;"><input
+	name="" class="buyBtn btn_sub" value="开始投票" type="submit"></div>
+</form>
+
+</div>
+</div>
+
+<div class="content_left_bottom"></div>
+
+
+</div>
+<div class="content_all"></div>
+</div>
+{dede:include filename="footer_btc.htm"/}
+</body>
+</html>

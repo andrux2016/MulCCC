@@ -1,0 +1,2 @@
+<li><a href="member/news.php?num=[field:id/]&pageno=1&typeid=[field:typeid/]"	target="_blank">[field:title/]<span
+		style="float: right; margin-right: 20px;"> [field:pubdate function=strftime('%Y-%m-%d',@me)/]</span></a></li>

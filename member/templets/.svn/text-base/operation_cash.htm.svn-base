@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title><?php echo $cfg_webname; ?> - 用户中心 - 提现记录 </title>
+<link href="{dede:global.cfg_templets_skin/}/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/table_function.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+<script type="text/javascript">
+	//获得选中文件的文件名
+	function GetCheckfolderItem()
+	{
+		var allSel='';
+		if(document.form1.deleteid.value) return document.form1.deleteid.value;
+		for(i=0;i<document.form1.deleteid.length;i++)
+		{
+			if(document.form1.deleteid[i].checked)
+			{
+				if(allSel=='')
+				allSel=document.form1.deleteid[i].value;
+				else
+				allSel=allSel+","+document.form1.deleteid[i].value;
+			}
+		}
+		return allSel;
+	}
+	
+	function DoSubmit()
+	{
+		var selid = GetCheckfolderItem();
+		if(selid=='') {
+			alert("你没选中任何信息！");
+			return false;
+		}
+		if(window.confirm("你确定要删除这些消息么？"))
+		{
+			location = "operation_btc.php?dopost=del&ids="+selid;
+		}
+	}
+	
+function cancelcash(delid)
+{
+	$.getJSON("{dede:global.cfg_cmspath/}?dopost=del&deleteid="+delid+"&tt="+new Date(), function(data){
+		apprise(data.showMsg, {
+					animate: false,
+					textOk: "确定"
+					},function(r) {
+						location.reload(true);
+					});
+	});
+}
+</script>
+
+
+<link href="{dede:global.cfg_templets_skin/}/css/common.css" rel="stylesheet" type="text/css">
+<link href="{dede:global.cfg_templets_skin/}/css/nav-top.css" rel="stylesheet" type="text/css">
+<link href="{dede:global.cfg_templets_skin/}/css/footer.css" rel="stylesheet" type="text/css">
+<link href="{dede:global.cfg_templets_skin/}/css/yonghu-content.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<div class="clear"></div>
+	<!--id="yonghu-content" 用户中心-->
+	<div id="yonghu-content" class="yonghu-content">
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+		<div class="yh-right">
+			<div class="right-top">
+				<div class="r-top-l">
+					<img src="{dede:global.cfg_templets_skin/}/img/btb-yhgl-3.jpg" border="0"  />
+				</div>
+				<div class="r-top-c">
+					<div class="c-t">2355323178</div>
+					<div class="c-b">[<a href="#" >退出登录</a>]</div>
+				</div>
+				<div class="r-top-r">
+				  <div class="r-t">
+						<ul>
+							<li>可用</li>
+							<li>CNY：<span>3.39</span><span class="but"><a href="#" >充值</a></span></li>
+							<li>BTC：<span>0.01</span></li>
+							<li>LTC：<span>0</span></li>
+							<li>XMP：<span>0</span></li>
+							<div style="clear:both"></div>  
+						</ul>
+					</div>
+					<div class="r-c">
+						<ul>
+							<li>冻结</li>
+							<li>CNY：<span>0</span></li>
+							<li>BTC：<span>0</span></li>
+							<li>LTC：<span>0</span></li>
+							<li>XMP：<span>0</span></li>
+							<div style="clear:both"></div>  
+						</ul>
+					</div>
+					<div class="r-b">
+						总资产<span>CNY:</span><span class="color">55.36</span>
+					</div>
+				</div>
+				<div style="clear:both"></div>  
+			</div>
+			  
+			<div class="entrustTen lasttenorder clear">
+				<div class="Tentitle">
+						<span class="lightblue4">提现记录</span>
+				</div>
+				<div class="Tenbody">
+					<div id="mcpmain" style="width:100%;float:left;padding:0; border:none;">
+						<div id="appTab" style="display:none;">
+							<ul>
+							  <li class="thisTab"><a href="operation_cash.php">提现记录</a></li>
+							</ul>
+						</div>
+						<div id="mainCp" style="width:100%;float:left;padding:0; border:none;">
+							<!--内容消息提示 -->
+							<h3 class="meTitle" style="line-height:30px; color:#f00;">提现申请提交后还未审核的，30分钟内可以取消</h3>
+							<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">          
+								<tr>
+									<th width="150">订单号</th>
+									<th width="180">账户(转账单号或姓名) </th>
+									<th width="90">币种</th>
+									<th width="80">金额</th>
+									<th width="90">手续费</th>
+									<th width="90">状态</th>
+									<th width="90">时间</th>
+									<th width="90">取消</th>
+								</tr>
+								<tbody>
+									{dede:datalist}
+									<tr>
+									  <td>{dede:field.id/}</td>
+									  <td><?php echo lenCat($fields['address'])?>  (<?php echo lenCat($fields['txid'])?>)</td>
+									  <td><?php echo $coinarr[$fields['coinid']]?></td>
+									  <td><?php echo $fields['amount']/1?></td>
+									  <td><?php echo $fields['fee']/1?></td>
+									  <td>{dede:field.checked function="GetSta(@me)" /}</td>
+									  <td><?php echo date('Y-m-d H:i:s',$fields['cashtime']);?></td>
+									  <td>
+										<?php if($fields['checked']==0&&(time()-$fields['cashtime'])<1800){;?><a style="cursor:pointer;" onclick="cancelcash({dede:field.id/});">取消</a><?php };?></td>
+									</tr>
+									{/dede:datalist}
+									<tr>
+										<td colspan="8"></td>
+									</tr>								  
+								</tbody>
+								<tfoot>
+									<tr>
+									  <td colspan="8"><div class="pageList">{dede:pagelist listitem="info,index,end,pre,next,pageno" listsize="5"/} </div></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>						
+					</div>
+					<!--主操作区域 -->
+					
+				</div>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>	
+</body>
+</html>

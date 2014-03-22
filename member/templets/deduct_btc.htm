@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>奖励分成 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/style.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/table_function.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+<script type="text/javascript">
+	//获得选中文件的文件名
+	function GetCheckfolderItem()
+	{
+		var allSel='';
+		if(document.form1.deleteid.value) return document.form1.deleteid.value;
+		for(i=0;i<document.form1.deleteid.length;i++)
+		{
+			if(document.form1.deleteid[i].checked)
+			{
+				if(allSel=='')
+				allSel=document.form1.deleteid[i].value;
+				else
+				allSel=allSel+","+document.form1.deleteid[i].value;
+			}
+		}
+		return allSel;
+	}
+	
+	function DoSubmit()
+	{
+		var selid = GetCheckfolderItem();
+		if(selid=='') {
+			alert("你没选中任何信息！");
+			return false;
+		}
+		if(window.confirm("你确定要删除这些消息么？"))
+		{
+			location = "deduct_btc.php?dopost=del&ids="+selid;
+		}
+	}
+</script>
+</head>
+<body>
+	<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<div id="wrapper"> 
+		<section>
+			<div class="btc8-contents">
+				<div class="btc8-content btc8-guanli">
+				<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?><br>
+				<div class="btc8-guanliright" style="float:right;">				
+					<div id="content_right">
+						<div id="mcpmain">
+							<div id="appTab">
+								<ul>
+								  <li class="thisTab"><a href="deduct_btc.php">奖励提成</a></li>
+								</ul>
+							</div>
+							<div id="mainCp">
+								<!--内容消息提示 -->
+								<h3 class="meTitle">奖励提成记录</h3>
+								<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">								  
+									<tr>
+									  <td align="center">编号</td>
+									  <td align="center">类型</td>
+									  <td align="center">涉及用户</td>
+									  <td align="center">手续费</td>
+									  <td align="center">奖励提成</td>
+									  <td align="center">币种</td>
+									  <td align="center">状态</td>
+									  <td align="center">时间</td>
+									</tr>
+									<tbody>
+										{dede:datalist}
+										<tr>
+										  <td align="center">{dede:field.id/}</td>
+										  <td align="center">{dede:field.dealtype function="GetSta(@me)" /}</td>
+										  <td align="center">{dede:field.userid function="GetMemberID(@me)" /}</td>
+										  <td align="center"><?php echo $fields['fee'] ?></td>
+										  <td align="center"><?php echo $fields['deduct']/1;?></td>
+										  <td align="center"><?php echo $coinarr[$fields['coinid']]?></td>
+										  <td align="center"><?php if($fields['adduser']==1){ echo "<font color='#00CC00'>已结算</font>"; }else{ echo "等待结算";} ?></td>
+										  <td align="center"><?php echo date('Y-m-d H:i:s',$fields['dealtime']);?></td>
+										</tr>
+										{/dede:datalist}
+										<tr>
+											<td colspan="8"></td>
+										</tr>							  
+									</tbody>
+									<tfoot>
+										<tr>
+										  <td colspan="8"><div class="pageList">{dede:pagelist listitem="info,index,end,pre,next,pageno" listsize="5"/} </div></td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<!--主操作区域 -->
+						</div>
+					</div>
+				</div>
+			</div>		
+		</section>
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

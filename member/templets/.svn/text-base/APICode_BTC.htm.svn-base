@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+
+
+<title><?php echo $cfg_webname; ?> - API</title>
+
+<link href="<?php echo $cfg_templets_skin ?>/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+<script language='javascript'>
+function newAPI(){
+	
+	var json_req = {
+	action: "new"
+	};
+	$.ajax({
+		type: "post",
+		url: "APICode_btc.php?op=query" + Math.random(),
+		data: json_req,
+		dataType: "json",//返回json格式的数据
+		success: function(data, state) {
+			if(data.ruslt==1){
+					apprise(data.showMsg, {
+					animate: false,
+					textOk: "确定"
+					},function(r) {
+						location.reload(true);
+					});		
+			}else{
+				apprise(data.showMsg, {
+				animate: false,
+				textOk: "确定"
+				},function(r) {
+					//vdimgck.src=vdimgck.src+"?";
+				});		
+			}
+          }
+		  
+	});
+}
+
+</script>
+<link href="<?php echo $cfg_templets_skin ?>/css/common.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/nav-top.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/yonghu-content.css" rel="stylesheet" type="text/css">
+
+<link type="text/css" rel="stylesheet" href="<?php echo $cfg_templets_skin ?>/css/c.css"  /> 
+
+
+
+</head>
+<body>
+	<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<!--id="yonghu-content" 用户中心-->
+	<div id="yonghu-content" class="yonghu-content">
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+		<div class="yh-right">
+			<div class="right-top">
+				<div class="r-top-l">
+					<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-3.jpg" border="0"  />
+				</div>
+				<div class="r-top-c">
+					<div class="c-t">2355323178</div>
+					<div class="c-b">[<a href="#" >退出登录</a>]</div>
+				</div>
+				<div class="r-top-r">
+					<div class="r-t">
+						<ul>
+							<li>可用</li>
+							<li>CNY：<span>3.39</span><span class="but"><a href="#" >充值</a></span></li>
+							<li>BTC：<span>0.01</span></li>
+							<li>LTC：<span>0</span></li>
+							<li>XMP：<span>0</span></li>
+							<div style="clear:both"></div>  
+						</ul>
+					</div>
+					<div class="r-c">
+						<ul>
+							<li>冻结</li>
+							<li>CNY：<span>0</span></li>
+							<li>BTC：<span>0</span></li>
+							<li>LTC：<span>0</span></li>
+							<li>XMP：<span>0</span></li>
+							<div style="clear:both"></div>  
+						</ul>
+					</div>
+					<div class="r-b">
+						总资产<span>CNY:</span><span class="color">55.36</span>
+					</div>
+				</div>
+				<div style="clear:both"></div>  
+			</div>			  
+			<div class="btc8-guanliright">
+				
+				<div id="mcpmain">
+					<div id="appTab">
+						<ul>
+						   <li class='thisTab'><a href='APICode_btc.php'>交易API</a></li>
+						</ul>
+					</div>
+					<div id="mainCp">
+						<!--<div class="appMsg">
+						  <ul class="tips" id="userMoney"></ul>
+						</div>-->
+						<!--内容消息提示 -->
+					   
+						<div class="postForm">
+							<h3 class="meTitle">交易API</h3>
+							<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+								<tbody>
+									<tr>
+										<td width="15%" align="right" valign="top">加密KEY：</td>
+										<td><?php if($cfg_ml->M_StrCode=="") echo "未开通"; else echo $cfg_ml->M_StrCode; ?></button></td>
+									</tr>											
+								</tbody>
+								<tfoot>
+									<tr>
+										<td align="right" valign="top">&nbsp;</td>
+										<td><button class="button2 mt5 btc8-anniu-red" onclick="newAPI();" type="submit"><?php if($cfg_ml->M_StrCode=="") echo "开通"; else echo "更换";?></button>&nbsp;&nbsp;<a href="help.php?mark=api">使用帮助</a></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

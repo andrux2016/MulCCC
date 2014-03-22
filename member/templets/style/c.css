@@ -1,0 +1,356 @@
+@charset "utf-8";
+/* CSS Document */
+
+.btc8-guanliright {
+    float: left;
+    font: 12px/24px 微软雅黑;
+    height: auto;
+    /*margin-left: 10px;*/
+    max-width: 745px;
+    width: 100%;
+	padding-top:20px;
+}
+a, abbr, acronym, address, applet, article, aside, audio, b, blockquote, big, body, center, canvas, caption, cite, code, command, datalist, dd, del, details, dfn, dl, div, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, keygen, label, legend, li, meter, nav, object, ol, output, p, pre, progress, q, s, samp, section, small, span, source, strike, strong, sub, sup, table, tbody, tfoot, thead, th, tr, tdvideo, tt, u, ul, var {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: top;
+}
+td, th, div {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+*::-moz-selection {
+    background: none repeat scroll 0 0 #008CB6;
+    color: #FFFFFF;
+}
+a, abbr, acronym, address, applet, article, aside, audio, b, blockquote, big, body, center, canvas, caption, cite, code, command, datalist, dd, del, details, dfn, dl, div, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, keygen, label, legend, li, meter, nav, object, ol, output, p, pre, progress, q, s, samp, section, small, span, source, strike, strong, sub, sup, table, tbody, tfoot, thead, th, tr, tdvideo, tt, u, ul, var {
+    font-size: 100%;
+}
+
+
+
+
+body {
+    color: #444444;
+    font: 14px/18px "Trebuchet MS",Tahoma,Arial,sans-serif;
+}
+
+
+table.list tbody .row1 td {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #FFFFFF;
+}
+.list tbody tr td {
+    height: 40px;
+    line-height: 40px;
+}
+
+
+.list tbody tr a {
+    color: #29A5C9;
+}
+.list a {
+    color: #006699;
+    font-family: 'Droid Serif',Georgia,Sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    text-decoration: none;
+}
+.list a:hover {
+    text-decoration: underline;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+}
+a {
+    color: #FF9900;
+}
+
+
+b, strong {
+    color: #4D6C2F;
+}
+
+#mcpmain #appTab {
+    position: relative;
+    z-index: 1;
+}
+
+
+#mcpmain #appTab ul {
+    border-bottom: 1px solid #DCDCDC;
+    height: 25px;
+    margin-bottom: -1px;
+    padding-left: 10px;
+}
+ol, ul {
+    list-style: none outside none;
+}
+
+#mcpmain #appTab .thisTab {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFFFFF;
+    border-color: #DCDCDC #DCDCDC -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+}
+#mcpmain #appTab ul li {
+    float: left;
+    margin: 0 3px -1px;
+    position: relative;
+    z-index: 10;
+}
+UL, ul li {
+    list-style: none outside none;
+}
+
+#mcpmain #appTab .thisTab a {
+    color: #008DB7;
+}
+#mcpmain #appTab ul li a {
+    color: #313131;
+    float: left;
+    font-weight: 700;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    text-decoration: none;
+}
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+}
+a {
+    color: #FF9900;
+}
+
+.postForm .intxt, textarea {
+    background: url("../images/input_bg.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #9E9E9E;
+    color: #666666;
+    padding: 4px 5px;
+    width: 220px;
+}
+.postForm input {
+    margin: 0;
+}
+.intxt {
+    background: url("../images/input_bg.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #9E9E9E;
+    color: #666666;
+    padding: 4px 5px;
+    width: 320px;
+}
+input, textarea {
+    border: 1px solid #CCCCCC;
+    padding: 2px;
+}
+input {
+    vertical-align: middle;
+}
+button, input, select, textarea {
+    font-size: 100%;
+}
+
+.meTitle {
+    border-bottom: 1px solid #DEDEDE;
+    color: #717171;
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 10px;
+    padding: 0 0 5px 5px;
+}
+
+#mcpmain #mainCp {
+    background-color: #FFFFFF;
+    border: 1px solid #DCDCDC;
+    padding: 10px;
+    position: relative;
+}
+
+.postForm, .contentShow {
+    line-height: 25px;
+    margin-bottom: 10px;
+    min-height: 25px;
+    padding: 10px;
+}
+
+.list {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+
+.list tbody tr td {
+    height: 40px;
+    line-height: 40px;
+}
+.list tbody tr td {
+    border-bottom: 0px;
+    height: 28px;
+    line-height: 28px;
+}
+
+
+td, th, div {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+table.list tbody .row1, .row1 {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #FFFFFF;
+}
+table.list tbody .row1, .row1 {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #FFFFFF;
+}
+
+table.list tbody .row1 td {
+    background: none repeat scroll 0 0 #fff;
+    border: 0px !important;
+}
+
+table, table td {
+    border: medium none;
+    border-collapse: collapse;
+    padding: 0;
+}
+th, td {
+    border: 0 solid #CCCCCC;
+    padding: 4px 2px;
+}
+td {
+    line-height: 1.5;
+}
+
+.listStyle3 li:hover {
+    background: none repeat scroll 0 0 #F7F7F7;
+}
+.listStyle3 li .frdInfo {
+    float: right;
+    width: 660px;
+}
+.listStyle3 .userHead img {
+    display: block;
+    height: 60px;
+    width: 60px;
+}
+
+.listStyle3 li table tr td {
+    height: 22px;
+}
+.listStyle3 .userTitle a {
+    color: #29A5C9;
+}
+.listStyle3 li {
+    border-bottom: 1px dotted #E0E0E0;
+    padding: 8px 0 5px 5px;
+}
+
+table.list tbody tr.hover td, table.list tbody tr.row0:hover td, table.list tbody tr.row1:hover td {
+    background-color: #FFFFDD;
+}
+table.list tbody .row1, .row1 {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #FFFFFF;
+}
+table.list tbody .row1 td{padding-top:8px;line-height:24px !important;}
+table.list tbody tr.row0 td{padding-top:8px;line-height:24px !important; height:30px !important;}
+table.list tbody tr.row1 td{height:30px !important;line-height:30px !important;padding-top:7px;}
+
+.postForm .intxt, textarea {
+    background: url("../images/input_bg.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #9E9E9E;
+    color: #666666;
+    padding: 4px 5px;
+    width: 220px;
+}
+.postForm input {
+    margin: 0;
+}
+.intxt {
+    background: url("../images/input_bg.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #9E9E9E;
+    color: #666666;
+    padding: 4px 5px;
+    width: 320px;
+}
+button, input, select, textarea {
+    font-size: 100%;
+}
+input {
+    vertical-align: middle;
+}
+input, textarea {
+    border: 1px solid #CCCCCC;
+    padding: 2px;
+}
+.list Button {
+    margin-top: 5px;
+}
+
+.list tbody tr td {
+    height: 40px;
+    line-height: 40px;
+}
+
+.list Button {
+    margin-top: 5px;
+}
+
+.button, button {
+    border: medium none;
+    cursor: pointer;
+    font-size: 12px;
+    margin: 0;
+    text-align: center;
+}
+.list button.btc8-anniu-red{
+display: block;
+width: 70px;
+height: 27px;
+text-align: center;
+font: 12px/27px 微软雅黑;
+color: #fff;
+background: url(../img/hove_r7_c7.jpg) no-repeat;
+}
+.list button.btc8-anniu-red:hover{
+display: block;
+width: 70px;
+height: 27px;
+text-align: center;
+font: 12px/27px 微软雅黑;
+color: #fff;
+background: url(../img/dsw_r8_c9.jpg) no-repeat;
+}
+#show.btc8-anniu-red{
+display: block;
+width: 70px;
+height: 27px;
+text-align: center;
+font: 12px/27px 微软雅黑;
+color: #fff;
+background: url(../img/hove_r7_c7.jpg) no-repeat;
+}
+#show.btc8-anniu-red:hover{
+display: block;
+width: 70px;
+height: 27px;
+text-align: center;
+font: 12px/27px 微软雅黑;
+color: #fff;
+background: url(../img/dsw_r8_c9.jpg) no-repeat;
+}

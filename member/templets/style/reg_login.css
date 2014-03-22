@@ -1,0 +1,208 @@
+@charset "utf-8";
+.reg-content{	
+	margin:0 auto;
+	width:100%;	
+	max-width:1000px;
+	min-width:320px;
+	_width:1000px;
+}
+
+.reg-body {
+	float:left;
+	margin:30px 0;
+    padding:30px 50px;
+    width:100%;	
+	max-width:900px;
+	min-width:320px;
+	_width:900px;
+	background:#F2F2F2;
+    
+}
+
+.reg-body-li {
+	float:left;
+    width:100%;
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.reg-by-ul {
+	float:left;
+    width:100%; 
+	margin: 0 -1px;
+}
+
+
+.reg-by-ul li {
+	float:left;   
+    float: left;
+    width: 300px;
+}
+.reg-by-ul  li a {
+display: block;
+padding: 15px 0;
+text-align: center;
+font-size: 0.8125em;
+font-weight: bold;
+color: #505050;
+background: url("../images/tab-gradient.gif") repeat-x  left bottom;
+border-bottom: 1px solid #CCCCCC;
+border-left: 1px solid #CCCCCC;
+}
+.reg-by-ul  li a:hover{
+display: block;
+padding: 15px 0;
+text-align: center;
+font-size: 0.8125em;
+font-weight: bold;
+color: #505050;
+background: #fff;
+border-bottom: 1px solid #ccc;
+border-left: 1px solid #CCCCCC;
+}
+.reg-by-ul  li a.reg-activity{
+display: block;
+padding: 15px 0;
+text-align: center;
+font-size: 0.8125em;
+font-weight: bold;
+color: #505050;
+background: #fff;
+border-bottom: 1px solid #FFF;
+border-left: 1px solid #CCCCCC;
+}
+
+.reg-bg{
+	float:left;
+}
+.reg-bg form {
+	float:left;  
+	padding: 30px 250px;
+	width:100%;	
+	max-width:400px;
+	min-width:320px;
+	_width:400px;
+}
+
+.field {
+	float:left;
+	margin-bottom: 20px;
+	width:100%;	
+	max-width:388px;
+	min-width:66px;
+	_width:388px;
+  
+}
+
+.field label {    
+    display: block;
+	float:left;
+	width:100%;
+    font-size: 0.8125em;
+    font-weight: bold;
+    margin-bottom: 5px;	
+	color: #AAAAAA;
+}
+.field .input{
+	 display: block;
+	float:left;
+	width:95%;
+	outline-color: #F8782A;
+	background: none repeat scroll 0 0 #F0F0F0;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px #DEDEDE inset;    
+	height: 1.125em;
+    line-height: 1;
+	color: #333333;
+    font-size: 0.8125em;
+    padding: 8px 10px;
+}
+.field .input:focus {
+  border-color: #ffa200;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 162, 0, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 162, 0, 0.6);
+}
+
+.field .input-vdcode{
+	width:30%;
+}
+.field img{
+	width:auto;
+	height:32px;
+	_width:100px;
+	_height:32px;
+}
+.field span{
+	font-size:12px;
+	line-height:32px;
+}
+.field1{
+	float:left;
+	margin-bottom: 20px;
+	margin-right: 22px;
+	width:388px;  
+}
+.field1 label{
+	font-size: 0.8125em;
+    font-weight: bold;   
+	color: #AAAAAA;
+}
+.label1{    
+    display: block;
+	float:left;
+	width:100%;
+    font-size: 0.8125em;
+    font-weight: bold;
+    margin-bottom: 5px;	
+	color: #AAAAAA;
+}
+
+
+
+.form-footer {
+	float:left;
+	margin-bottom: 20px;
+	margin-right: 22px;
+	width:388px;
+  
+}
+.form-footer {
+	float:left;
+    margin: 0 0 10px;
+    text-align: right;
+	
+}
+.button-black {
+     background: #fff;
+    border: medium none !important;
+    cursor: pointer;  
+    line-height: 1;
+    margin: 0;
+    outline: medium none;
+    overflow: visible;
+    padding: 0;
+    text-decoration: none !important;
+    vertical-align: middle;  
+    font-size: 0.75em;
+}
+
+.button-black span {   
+    border-radius: 7px;
+    color: #FFFFFF;
+    display: block;
+    height: 1em;
+    line-height: 1;
+    margin: 0;
+    opacity: 0.99;  
+    background: #F60;
+    border-radius: 4px;
+    padding: 9px 35px;
+}
+
+
+

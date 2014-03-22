@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+    <title><?php echo $cfg_webname; ?>- 会员注册</title>
+    <script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+    <script src="templets/js/j.js" language="javascript" type="text/javascript"></script>
+    <script src="templets/js/load.js" language="javascript" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript" src="templets/js/apprise-1.5.min.js"></script>
+    <script type="text/javascript" language="javascript">
+        <!--
+        var reMethod = "<?php echo ($cfg_soft_lang == 'utf-8') ? 'POST' : 'GET';?>",pwdmin = <?php echo $cfg_mb_pwdmin; ?>,idmin = <?php echo $cfg_mb_idmin; ?>;
+
+        function changeAuthCode() {
+            var num = 	new Date().getTime();
+            var rand = Math.round(Math.random() * 10000);
+            num = num + rand;
+            $('#ver_code').css('visibility','visible');
+            if ($("#vdimgck")[0]) {
+                $("#vdimgck")[0].src = "../include/vdimgck.php?tag=" + num;
+            }
+            return false;
+        }
+
+        function hideVc()
+        {
+            $('#ver_code').css('visibility','hidden');
+        }
+
+
+        $(document).ready(function(){
+            $("#passwordLevel").removeClass().addClass("rank r0");
+            $("#txpwdLevel").removeClass().addClass("rank r0");
+            $("#vdcode").focus(function(){
+                var leftpos = $("#vdcode").position().left;
+                var toppos = $("#vdcode").position().top - 42;
+                $('#ver_code').css('left', leftpos+'px');
+                $('#ver_code').css('top', toppos+'px');
+                $('#ver_code').css('visibility','visible');
+            });
+            $("input[type='password']").click(function(){
+                hideVc()
+            });
+            $("#txtUsername").click(function(){
+                hideVc()
+            });
+            $("input[type='radio']").focus(function(){
+                hideVc()
+            });
+            /*
+             $("#vdcode").blur(function(){
+             $('#ver_code').css('visibility','hidden');
+             });
+             */
+        })
+
+        -->
+    </script>
+
+
+
+<link href="<?php echo $cfg_templets_skin ?>/css/common.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/nav-top.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/footer.css" rel="stylesheet" type="text/css">
+<link href="<?php echo $cfg_templets_skin ?>/css/user-reg-box-page.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="<?php echo $cfg_templets_skin ?>/js/user-reg-box-page.js"></script>
+
+</head>
+<body>
+
+
+    <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+   
+        <div id="login" >
+
+           
+                    <!--id="user-reg-box-page" 会员注册-->
+                    <div id="user-reg-box-page" class="user-reg-box-page">
+                        <div class="l">
+                            <div class="reg">
+                                <form method="post" action="reg_new.php" id="regUser" name="form2">
+                                    <div class="row-txt">
+                                        <div class="t1">10秒快速注册</div>
+                                    </div>
+                                    <div class="row-1">
+                                        <div class="set-pwd">常用邮箱地址</div>
+                                        <div class="u-box user_email_bd"><input type="text" name="user_email" id="user_email" class="inp_user_email" placeholder='常用邮箱地址' title="常用邮箱地址"/></div>
+                                    </div>
+
+                                    <div class="row-3">
+                                        <div class="set-pwd">设置密码</div>
+                                        <div class="u-box user_pwd_bd">
+                                            <input type="password" name="user_pwd" id="user_pwd" class="inp_user_pwd" placeholder='设置密码' title="设置密码"/>
+                                        </div>
+                                    </div>
+                                    <div class="row-4">
+                                        <div class="set-pwd">确认密码</div>
+                                        <div class="u-box user_pwd_bd"><input type="password" name="user_pwd2" id="user_pwd2" class="inp_user_pwd2" placeholder='确认密码' title="确认密码"/></div>
+                                    </div>
+
+
+                                    <div class="row-6">
+                                        <input class="btn-reg" type="submit" name="button" id="button" value="立即注册" />
+                                    </div>
+                                    <div class="row-7">
+                                        点击注册表示您已阅读并同意 <a href="#">使用条款</a> 至 <a href="#">隐私声明</a>.
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </form>
+            </div>
+            
+       
+  
+<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

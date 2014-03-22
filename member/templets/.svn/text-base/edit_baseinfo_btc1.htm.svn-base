@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>更改帐号基本资料 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $cfg_templets_skin ?>/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<link href="<?php echo $cfg_templets_skin ?>/style/style.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" language='javascript'src='templets/js/main.js'></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+
+
+<script type="text/javascript">  
+
+function googleSub() {
+	var json_req = {
+		secret:$("#secret").val(),
+		userCode:$("#userCode").val()
+	};
+	$.ajax({
+		type: "post",
+		url: "googleAT.php?op=query" + Math.random(),
+		data: json_req,
+		dataType: "json",//返回json格式的数据
+		success: function(data, state) {
+			
+			if(data.ruslt==1){
+				alert("验证成功！");
+				location.reload(true);
+			}else{
+				userCode:$("#msgDiv").html("<font color=#FF0000>"+data.showMsg+"</font>")
+			}
+		}
+	});
+}
+function google() {
+
+		$.ajax({
+			type: "post",
+			url: "ajax_google.php?op=query" + Math.random(),
+			//data: json_req,
+			//dataType: "json",//返回json格式的数据
+			success: function(data, state) {
+				apprise(data,{
+					animate: false,
+					textOk : '关闭'
+				},function(r) {
+					//location.reload(true);
+				});	
+			}
+		});
+ }
+ 
+ 
+  function reg_safe() {
+	if($("#txPwd").val()=="")
+	{
+		$("txPwdok").focus();
+		alert("请填写取现密码！");
+		return false;
+	}
+	if($("#txPwd").val()!=$("#txPwdok").val())
+	{
+		$("txPwdok").focus();
+		alert("两次密码不一致！");
+		return false;
+	}
+	if($("#safequestion").val()==0)
+	{
+		$("#safequestion").focus();
+		alert("请选择密保问题！");
+		return false;
+	}
+	if($("#safeanswer").val()=="")
+	{
+		$("#safeanswer").focus();
+		alert("请填写密保答案！");
+		return false;
+	}
+	
+	var json_req = {
+		dopost: 'save',
+		show: '0',
+		vdcode:$("#vdcode").val(),
+		txPwd:$("#txPwd").val(),
+		txPwdok:$("#txPwdok").val(),
+		safequestion:$("#safequestion").val(),
+		safeanswer:$("#safeanswer").val()
+	};
+	$.ajax({
+		type: "post",
+		url: "edit_baseinfo_btc.php?op=query" + Math.random(),
+		data: json_req,
+		dataType: "json",//返回json格式的数据
+		success: function(data, state) {
+			apprise(data.showMsg, {
+			animate: false,
+			textOk: "确定"
+			},function(r) {
+				if(data.ruslt==1){
+					location.reload(true);
+				}
+			});		
+
+		}
+		/*,complete: function() {
+			vdimgck.src=vdimgck.src+"?";
+		}*/
+	});
+ }
+ 
+
+ 
+ 
+ function save_safe() {
+	if($("#oldpwd").val()=='')
+	{
+		$("#oldpwd").focus();
+		alert("旧密码必须填写！");
+		return false;
+	}
+	<?php switch ($show) {
+	case 1: 
+	?>
+	if($("#userpwdok").val()!=$("#userpwd").val())
+	{
+		$("#userpwdok").focus();
+		alert("两次密码不一致！");
+		return false;
+	}
+	<?php
+	break;
+	case 2: 
+	?>
+	if($("#safequestion").val()==0)
+	{
+		$("#safequestion").focus();
+		alert("请选择密保问题！");
+		return false;
+	}
+	if($("#safeanswer").val()=="")
+	{
+		$("#safeanswer").focus();
+		alert("请填写密保答案！");
+		return false;
+	}
+	if($("#txPwd").val()=="")
+	{
+		$("txPwdok").focus();
+		alert("请填写新取现密码！");
+		return false;
+	}
+	if($("#txPwd").val()!=$("#txPwdok").val())
+	{
+		$("txPwdok").focus();
+		alert("两次密码不一致！");
+		return false;
+	}
+	<?php
+	break;
+	case 3: 
+	?>
+	if($("#safequestion").val()==0)
+	{
+		$("#safequestion").focus();
+		alert("请选择旧的密保问题！");
+		return false;
+	}
+	if($("#safeanswer").val()=="")
+	{
+		$("#safeanswer").focus();
+		alert("请填写旧的密保答案！");
+		return false;
+	}
+	if($("#newsafequestion").val()==0)
+	{
+		$("#newsafequestion").focus();
+		alert("请选择新问题！");
+		return false;
+	}
+	if($("#newsafeanswer").val()=="")
+	{
+		$("#newsafeanswer").focus();
+		alert("请填写新答案！");
+		return false;
+	}
+	<?php
+	break;
+	default:
+	break;
+	}?>
+	
+	if($("#vdcode").val()=="")
+	{
+		$("#vdcode").focus();
+		alert("验证码不能为空！");
+		return false;
+	}
+	var json_req = {
+		dopost: 'save',
+		show: '<?php echo $show;?>',
+		vdcode:$("#vdcode").val(),
+		oldpwd:$("#oldpwd").val(),
+		userpwd:$("#userpwd").val(),
+		userpwdok:$("#userpwdok").val(),
+		txPwd:$("#txPwd").val(),
+		txPwdok:$("#txPwdok").val(),
+		safequestion:$("#safequestion").val(),
+		safeanswer:$("#safeanswer").val(),
+		newsafequestion:$("#newsafequestionr").val(),
+		newsafeanswer:$("#newsafeanswer").val()
+	};
+	$.ajax({
+		type: "post",
+		url: "edit_baseinfo_btc.php?op=query" + Math.random(),
+		data: json_req,
+		dataType: "json",//返回json格式的数据
+		success: function(data, state) {
+			apprise(data.showMsg, {
+			animate: false,
+			textOk: "确定"
+			},function(r) {
+				if(data.ruslt==1){
+					location.reload(true);
+				}
+			});		
+
+		},
+		complete: function() {
+			vdimgck.src=vdimgck.src+"?";
+		}
+	});
+ }
+ 
+
+</script>
+</head>
+<body>
+<div id="wrapper" >
+ <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+    <section>
+  <!--
+  <div id="headgal">
+    <div id="featured" style="padding-left: 14px !important;">
+    </div>
+  </div>
+  -->
+
+  <aside_left>	 
+	<div id="aside_content"> 
+		
+		
+		<?php 
+		include(DEDEMEMBER."/templets/menu_btc.php");
+		require(DEDEDATA.'/safequestions.php');
+		 ?>
+
+		<br>
+
+
+	</div> <!-- aside_content -->
+
+  </aside_left>
+  
+  <div id="content_right">	 
+	
+    <div id="mcpmain">
+      <div id="appTab">
+        <ul>
+          <li <?php if($show=="") echo 'class=\'thisTab\'';?>><a href="edit_baseinfo_btc.php">安全中心</a></li>
+		  <li <?php if($show==1) echo 'class=\'thisTab\'';?>><a href="edit_baseinfo_btc.php?show=1">修改登陆密码</a></li>
+		  <li <?php if($show==2) echo 'class=\'thisTab\'';?>><a href="edit_baseinfo_btc.php?show=2">修改提现密码</a></li>
+		  <li <?php if($show==3) echo 'class=\'thisTab\'';?>><a href="edit_baseinfo_btc.php?show=3">修改密保问题</a></li>
+
+        </ul>
+      </div>
+     <!--<form action="edit_baseinfo_btc.php" method="post" enctype="multipart/form-data" name="form2" onsubmit="return checkSubmit();">-->
+
+      <div id="mainCp">
+        <!--<h3 class="meTitle"><strong>账号安全</strong></h3>-->
+        <div class="postForm">
+		<?php 
+		if($show==""){
+			
+			if($nowtxpwd == ""){
+			
+		?>
+			
+			<p class="cellBg">请完善安全资料：</p>
+            <p>
+            <label>提现密码：</label>
+			<input name="txPwd" type="password" id="txPwd" class="intxt" /><input type="hidden" name="sex" value="保密'"  />
+			 <span style="color:red;">*</span>
+          </p>
+		  <p class="cellBg">
+            <label>确认密码：</label>
+            <input name="txPwdok" type="password" id="txPwdok" class="intxt" />
+			 <span style="color:red;">*</span>
+          </p>
+			<p>
+            <label>安全问题：</label>
+            <?php
+      			echo GetSafequestion(0,'safequestion');
+      		?>
+               <span style="color:red;">*</span><span id="_safequestionnew"></span> 
+          </p>
+          <p class="cellBg">
+            <label>问题答案：</label>
+            <input name="safeanswer" type="text" id="safeanswer" class="intxt"/>
+			 <span style="color:red;">*</span>
+          </p>
+			<p>
+            <button class="button2" onclick="reg_safe()" type="submit">更新</button>
+          </p>
+			
+		<?php }?>
+		<p class="cellBg">以下功能选择安装：</p>
+		<p class="cellBg">
+            <span style="float:left; margin-right:10px; text-align:center; width:100px"><img src="templets/images/google.png" /><br><?php if($cfg_ml->M_Google==""){ ?><input name="" type="button" value="添加设备" onclick="google();" /><?php }else{ ?><font color="#009900">已经开通</font><?php } ?></span>
+			<span>谷歌身份验证器Google Authenticator<br>
+谷歌身份验证器是谷歌推出的一款安全工具，安全成功绑定后无需网络即可自动生成验证码。<br>
+支持的操作系统   Android | IOS   </span>
+		
+
+            </p>
+		
+		<?php }else{?>
+		
+          <p class="cellBg">
+            <label>帐号类型：</label>
+            <?php echo $row['mtype']; ?></p>
+          <p>
+            <label>用户名：</label>
+            <?php echo $cfg_ml->M_LoginID; ?>
+          </p>
+          
+          <p>
+            <label>登陆密码：</label>
+            <input name="oldpwd" type="password" id="oldpwd" class="intxt" /> <span style="color:red;">*</span>
+          </p>
+          <p class="cellBg" <?php if($show!=1) echo 'style=\'display:none\''?>>
+            <label>新登陆密码：</label>
+            <input name="userpwd" type="password" id="userpwd" class="intxt" />
+            <span id="_userpwdok"></span>
+          </p>
+          <p <?php if($show!=1) echo 'style=\'display:none\''?>>
+            <label>确认新密码：</label>
+            <input name="userpwdok" type="password" id="userpwdok" value="" class="intxt" />
+            <span id="_userpwdok2"></span> </span>
+          </p>
+          <p class="cellBg" <?php if($show==1) echo 'style=\'display:none\''?>>
+            <label>安全问题：</label>
+            <?php
+      			
+      			echo GetSafequestion($row['safequestion'],'safequestion');
+     		 ?>
+                <span id="_safequestion"></span><span style="color:red;">*</span>
+          </p>
+          <p <?php if($show==1) echo 'style=\'display:none\''?>>
+            <label>问题答案：</label>
+            <input name="safeanswer" type="text" id="safeanswer" value="" class="intxt" /><span style="color:red;">*</span>
+          </p>
+
+          <p class="cellBg" <?php if($show!=3) echo 'style=\'display:none\''?>>
+            <label>新安全问题：</label>
+            <?php
+      			echo GetSafequestion(0,'newsafequestion');
+      		?>
+               <span id="_safequestionnew"></span> 
+          </p>
+          <p <?php if($show!=3) echo 'style=\'display:none\''?>>
+            <label>新问题答案：</label>
+            <input name="newsafeanswer" type="text" id="newsafeanswer" class="intxt"/>
+          </p>
+          
+          <p class="cellBg" <?php if($show!=2) echo 'style=\'display:none\''?>>
+            <label>新提现密码：</label>
+			<input name="txPwd" type="password" id="txPwd" class="intxt" /><input type="hidden" name="sex" value="保密'"  />
+          </p>
+		  <p <?php if($show!=2) echo 'style=\'display:none\''?>>
+            <label>确认新密码：</label>
+            <input name="txPwdok" type="password" id="txPwdok" class="intxt" />
+          </p>
+          <p class="cellBg">
+            <label>验证码：</label>
+			<input name="vdcode" type="text" id="vdcode" style='width:50px;text-transform:uppercase;' class="intxt" />
+           <img id="vdimgck" src="../include/vdimgck.php" align="absmiddle" alt="看不清？点击更换" style="cursor:pointer" onclick="this.src=this.src+'?'" />
+          </p>
+          <p>
+            <button class="button2" onclick="save_safe()" type="submit">更新</button>
+  
+          </p>
+		  <?php }?>
+    </div>
+      </div>
+      <!--</form>-->
+      <!--主操作区域 -->
+    </div>
+  </div>
+    </section>
+</div>
+<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+
+</body>
+</html>

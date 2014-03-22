@@ -1,0 +1,439 @@
+@charset "utf-8";
+/* CSS Document 
+@import url("common.css");
+@import url("top-nav.css");
+@import url("bottom-nav.css");
+*/
+
+
+
+/*id="shishihangq" 实时行情*/
+.shishihangq{
+	width:1000px;
+	padding-top:10px;
+	padding-bottom:20px;
+	margin:0 auto;
+}
+/*datalist*/
+.shishihangq .datalist{
+	width:1000px;
+	height:60px;
+}
+
+.shishihangq .datalist .quotelist{
+	width:670px;
+	float:left;
+	height:60px;
+}
+
+.shishihangq .datalist .quotelist .list{
+	border:1px solid #D5D5D5;
+}
+
+.shishihangq .datalist .quotelist .list .list-box{
+	height:60px;
+	padding-left:25px;
+	padding-top:10px;
+	background:#ffffff;
+}
+.shishihangq .datalist .quotelist .list .list-box .DataDl{
+	float:left;
+	font-weight:bold;
+}
+
+.shishihangq .datalist .quotelist .list .list-box .DataDl dt{
+	font-size:14px;
+	height:26px;
+	line-height:26px;
+	color:#747474;
+}
+
+.shishihangq .datalist .quotelist .list .list-box .DataDl dd{
+	color:#ff0000;
+	height:23px;
+	line-height:23px;
+}
+
+.shishihangq .datalist .quotelist .list .list-box .firstDl{
+	width:105px;
+}
+
+.shishihangq .newvalue{
+	width:310px;
+	height:60px;
+	float:right;
+}
+
+.shishihangq .newvalue .solid{
+	border:1px solid #D5D5D5;
+}
+
+
+.shishihangq .newvalue .solid .value-box{
+	height:45px;
+	padding-left:25px;
+	padding-top:25px;
+	background:#ffffff;
+	text-align:left;
+}
+
+
+.shishihangq .newvalue .value-box span{
+	font-weight:700;
+	font-size:22px;
+	/*font-family:"微软雅黑";*/
+}
+
+
+/*realtime*/
+.shishihangq .realtimebox{
+	margin-bottom:15px;
+	width:100%;
+}
+
+.shishihangq .realtimebox .realtimeleft{
+	float:left;
+	width:670px;
+	/*background:#ffffff;*/
+}
+
+.shishihangq .realtimebox .realtimeleft .solid{
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .title{
+	width:100%;
+	height:35px;
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .title .ttitle{
+	font-size:14px;
+	height:24px;
+	padding-left:5px;
+	padding-top:10px;
+	color:#1487c8;
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .real-left{
+	width:330px;
+	float:left;
+	background:#ffffff;
+	border:1px solid #e1e1e1;
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .real-left table{
+	border-collapse: collapse;
+}
+.shishihangq .realtimebox .realtimeleft .solid .box .real-left table.transaction{
+	width: 100%;
+}
+.shishihangq .realtimebox .realtimeleft .solid .box .real-left table.transaction td{ 
+	border-bottom: 1px solid #D5D5D5;
+	text-align: left;
+	height:30px;
+	padding-left:8px;
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .real-left table.transaction tbody td span.buyspan{ 
+	background: none repeat scroll 0 0 #689700;
+	display: inline;
+	float: left;
+	height: 20px;
+	margin-left: -1px;
+	width: 13px;
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .real-left table.transaction th{
+	border-bottom: 1px solid #D5D5D5;
+	text-align: left;
+	background: none repeat scroll 0 0 #f1f1f1;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	color:#333333;padding-left:8px;
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .real-right{
+	width:330px;
+	float:right;
+	background:#ffffff;
+	border:1px solid #e1e1e1;
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .real-right table{
+	border-collapse: collapse;
+}
+.shishihangq .realtimebox .realtimeleft .solid .box .real-right table.transaction{
+	width: 100%;
+}
+.shishihangq .realtimebox .realtimeleft .solid .box .real-right table.transaction td{ 
+	border-bottom: 1px solid #D5D5D5;
+	text-align: left;
+	height:30px;padding-left:8px;
+}
+
+.shishihangq .realtimebox .realtimeleft .solid .box .real-right table.transaction tbody td span.sellspan{
+	background: none repeat scroll 0 0 #E61F51;
+	display: inline;
+	float: left;
+	height: 20px;
+	margin-left: -1px;
+	width: 13px;
+}
+
+
+.shishihangq .realtimebox .realtimeleft .solid .box .real-right table.transaction th{
+	border-bottom: 1px solid #D5D5D5;
+	text-align: left;
+	background: none repeat scroll 0 0 #f1f1f1;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	color:#333333;padding-left:8px;
+}
+
+.shishihangq .realtimebox .realtimeright{
+	float:right;
+	width:310px;
+}
+
+.shishihangq .realtimebox .realtimeright .solid{
+}
+
+.shishihangq .realtimebox .realtimeright .solid .box .title{
+	width:100%;
+	height:35px;
+}
+
+.shishihangq .realtimebox .realtimeright .solid .box .title .ttitle{
+	font-size:14px;
+	height:24px;
+	padding-left:5px;
+	padding-top:10px;
+	color:#1487c8;
+}
+
+.shishihangq .realtimebox .realtimeright .solid .box .real{
+	width:310px;
+	float:left;
+	background:#ffffff;
+	border:1px solid #e1e1e1;
+}
+
+.shishihangq .realtimebox .realtimeright .solid .box .real table{
+	border-collapse: collapse;
+}
+.shishihangq .realtimebox .realtimeright .solid .box .real table.transaction{
+	width: 100%;
+}
+.shishihangq .realtimebox .realtimeright .solid .box .real table.transaction td{ 
+	border-bottom: 1px solid #D5D5D5;
+	text-align: center;
+	height:30px;
+}
+
+.shishihangq .realtimebox .realtimeright .solid .box .real table.transaction th{
+	border-bottom: 1px solid #e1e1e1;
+	text-align: center;
+	background: none repeat scroll 0 0 #f1f1f1;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	color:#333333;
+}
+
+
+
+.shishihangq .marketSelect{
+	margin-top:15px;
+}
+
+.shishihangq .marketSelect .selectDate{
+	float:right;
+	margin-right:30px;
+}
+
+.shishihangq .marketSelect .selectDate li{
+	background:url("/image/coin.png") no-repeat  left -510px transparent;
+	float:left;
+	width:65px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	border-top:1px solid #c1c3c4;
+	border-left:1px solid #c1c3c4;
+	border-right:1px solid #c1c3c4;
+	margin-right:6px;
+	cursor:pointer;
+
+}
+.shishihangq .marketSelect .selectDate li a{
+	display:inline-block;
+	width:100%;
+	text-decoration:none;
+}
+
+
+.shishihangq .marketSelect .selectDate li.cur{
+	background:none repeat scroll 0 0 #ffffff;
+	float:left;
+	width:65px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	border-top:1px solid #003366;
+	border-left:1px solid #003366;
+	border-right:1px solid #003366;
+	margin-right:6px;
+}
+
+.shishihangq .marketSelect .selectDate li:hover{
+	background:none repeat scroll 0 0 #ffffff;
+	float:left;
+	width:65px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	border-top:1px solid #003366;
+	border-left:1px solid #003366;
+	border-right:1px solid #003366;
+	margin-right:6px;
+}
+
+/****table*****/
+.shishihangq .buysellTitle{
+	border-bottom: 1px solid #C3C1C1;
+    font-size: 14px;
+    margin-bottom:15px;
+}
+
+.shishihangq .selecttab-box1 .cur a.otherBoxTitle{
+	background:none repeat scroll 0 0 #ffffff;
+	_background:none repeat scroll 0 0 #ffffff;
+	color:#1478c8;
+	outline:none;
+	text-decoration:none;
+	float:left;
+	border-top:1px solid #C3C1C1;
+	border-left:1px solid #C3C1C1;
+	border-right:1px solid #C3C1C1;	
+	padding:6px 10px 5px 10px;
+	_padding:6px 10px 5px 10px;
+}
+
+
+.shishihangq .selecttab-box1 li a:hover{
+	color:#ff7f00;
+	outline:none;
+	text-decoration:none;
+	float:left;
+	padding:6px 10px 5px 10px;
+	_padding:6px 10px 5px 10px;
+}
+
+
+.shishihangq .selecttab1{
+	height:31px;
+	position:relative;
+	background:#f7f7f7;
+}
+.shishihangq .selecttab-box1{
+	float:left;
+	/*margin-top:1px;*/
+	/*padding-left:6px;
+	*padding-left:18px;*/
+	position:sbsolute;
+	height:31px;
+}
+
+.shishihangq .selecttab-box1 li {
+	height:31px;
+	display:inline-block;
+	line-height:20px;
+	font-size:14px;
+	margin:0px;
+	float:left;
+	*font-size:14px;
+	*margin:0 6px 0 0;
+	padding-right:10px;
+}
+ 
+.shishihangq .selecttab-box1 li span{
+	padding-top:5px;
+	float:left;
+	color:#909090;
+	font-weight:600;
+}
+ 
+.shishihangq .selecttab-box1 li a{
+	position:relative;
+	_position:relative;
+	display:inline-block;
+	padding:6px 10px 4px 10px;
+	float:left;
+	border-top:1px solid #f7f7f7;
+	border-left:1px solid #f7f7f7;
+	border-right:1px solid #f7f7f7;	
+	color:#666666;
+	_padding:6px 10px 4px 10px;
+}
+
+.shishihangq .selecttab-box1 .cur a.buyBtcLtc{
+	background:none repeat scroll 0 0 #ffffff;
+	_background:none repeat scroll 0 0 #ffffff;
+	color:#068814;
+	outline:none;
+	text-decoration:none;
+	float:left;
+	border-top:1px solid #C3C1C1;
+	border-left:1px solid #C3C1C1;
+	border-right:1px solid #C3C1C1;	
+	padding:6px 10px 5px 10px;
+	_padding:6px 10px 5px 10px;
+	
+}
+
+.shishihangq .selecttab-box1 .cur a.sellBtcLtc{
+	background:none repeat scroll 0 0 #ffffff;
+	_background:none repeat scroll 0 0 #ffffff;
+	color:#e31f26;
+	outline:none;
+	text-decoration:none;
+	float:left;
+	border-top:1px solid #C3C1C1;
+	border-left:1px solid #C3C1C1;
+	border-right:1px solid #C3C1C1;	
+	padding:6px 10px 5px 10px;
+	_padding:6px 10px 5px 10px;
+}
+
+.shishihangq .selecttab-box1 .cur a.otherBoxTitle{
+	background:none repeat scroll 0 0 #ffffff;
+	_background:none repeat scroll 0 0 #ffffff;
+	color:#1478c8;
+	outline:none;
+	text-decoration:none;
+	float:left;
+	border-top:1px solid #C3C1C1;
+	border-left:1px solid #C3C1C1;
+	border-right:1px solid #C3C1C1;	
+	padding:6px 10px 5px 10px;
+	_padding:6px 10px 5px 10px;
+}
+
+.shishihangq .selecttab-box1 li a:hover{
+	color:#ff7f00;
+	outline:none;
+	text-decoration:none;
+	float:left;
+	padding:6px 10px 5px 10px;
+	_padding:6px 10px 5px 10px;
+}
+
+
+
+
+
+
+
+
+

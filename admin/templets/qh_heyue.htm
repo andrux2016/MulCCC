@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>币种管理</title>
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" cellpadding="1" cellspacing="1" align="center" class="tbtitle" style="background:#cfcfcf;">
+  <form name="form1" action="qh_heyue.php" method="post">
+    <input type="hidden" name="dopost" value="save" />
+    <tr>
+      <td height="24" colspan="11" bgcolor="#EDF9D5" background='images/tbg.gif'>
+      	<table width="98%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="30%"  style="padding-left:10px;"><strong>期货合约管理：</strong></td>
+            <td align="right" style="padding-top:4px;">
+            	<input type="button" name="ss1" value="市场管理" style="width:90px;margin-right:6px" onClick="location='qh_market.php';" class='np coolbg' />
+              
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr bgcolor="#FBFCE2">
+      <td height="24" align="center">编号</td>
+      <td align="center">开始时间</td>
+      <td align="center">结束时间</td>
+	  <td align="center">买多杠杆</td>
+      <td align="center">卖空杠杆</td>
+	  <td align="center">行情币种</td>
+	  <td align="center">交易币种</td>
+	  <td align="center">手续费比例</td>
+	  <td align="center">说明</td>
+      <td align="center">启用</td>
+	  <td align="center">保留删除</td>
+    </tr>
+    <?php
+    $dsql->SetQuery("Select * From #@__qhheyue Order By id Desc Limit 10");
+    $dsql->Execute();
+    $k=0;
+    while($row = $dsql->GetObject())
+    {
+    	$k++;
+	?>
+    <input type="hidden" name="ID_<?php echo $k?>" value="<?php echo $row->id?>" />
+    <tr align="center" bgcolor="#FFFFFF">
+      <td height="24" valign="top">
+      	<?php echo $row->id; ?>
+
+      </td>
+	  <td height="24" valign="top">
+      	<?php echo date("Y-m-d H:i:s",$row->stime);?>
+      </td>
+	  <td height="24" valign="top">
+      	<?php echo date("Y-m-d H:i:s",$row->etime);?>
+      </td>
+	  <td height="24" valign="top">
+      	
+		<input name="mdggper_<?php echo $k?>" value="<?php echo $row->mdggper/1;?>" type="text" id="mdggper_<?php echo $k?>" style="width:90%"  class='pubinputs' />
+      </td>
+	   <td height="24" valign="top">
+      	
+		<input name="mkggper_<?php echo $k?>" value="<?php echo $row->mkggper/1;?>" type="text" id="mkggper_<?php echo $k?>" style="width:90%"  class='pubinputs' />
+      </td>
+	  
+	  
+      <td height="24" valign="top">
+      	<select name='coin_<?php echo $k?>' id='coin_<?php echo $k?>' style='width:90%' />
+          <?php
+          foreach($arcranks as $kkk=>$vvv){
+          	if($row->coinid==$kkk) echo "    <option value='{$kkk}' selected>{$vvv['coinname']}</option>";
+          
+          }
+	   	?>
+       </select>
+      </td>
+      <td valign="top">
+		 <select name='money_<?php echo $k?>' id='money_<?php echo $k?>' style='width:90%' />
+		  <?php 
+          foreach($arcranks as $kkk=>$vvv){
+          	if($row->moneyid==$kkk) echo "    <option value='{$kkk}' selected>{$vvv['coinname']}</option>";
+          }
+	   	?>
+       </select>
+       </td>
+      <td valign="top">
+      	<input name="fee_<?php echo $k?>" value="<?php echo $row->fee*10/10?>"
+      	 type="text" id="fee_<?php echo $k?>" style="width:90%"  class='pubinputs' />
+       </td>
+	   <td height="24" valign="top">
+	   <textarea name="explain_<?php echo $k?>" id="explain_<?php echo $k?>" cols="20" rows=""><?php echo $row->explain;?></textarea>
+      	
+      </td>
+      <td>
+      	<input name="enabled_<?php echo $k?>" type="checkbox" id="enabled_<?php echo $k?>"  value="1" <?php if($row->enabled==1) echo "checked"?> class='np' />
+        启用
+		</td>
+		<td>
+		<input name="check_<?php echo $k?>" type="checkbox" id="check_<?php echo $k?>"  value="1" checked='1' class='np' />
+        保留
+       </td>
+    </tr>
+    <?php
+    }
+	?>
+    <input type="hidden" name="idend" value="<?php echo $k?>">
+    <tr bgcolor="#F9FCEF">
+      <td height="24" colspan="11" valign="top">&nbsp;<strong>新增一个交易类型：</strong></td>
+    </tr>
+    <tr height="24" align="center" bgcolor="#FFFFFF">
+      <td valign="top">
+      	
+      </td>
+	  <td valign="top">
+      	<input name="stime_new" value='<?php echo date("Y-m-d",time())." 10:10:00";?>' type="text" id="stime_new" style="width:90%"  class='pubinputs' />
+      </td>
+	  <td valign="top">
+      	<input name="etime_new" value='<?php echo date("Y-m-d",strtotime("+1 week"))." 10:10:00";?>' type="text" id="etime_new" style="width:90%"  class='pubinputs' />
+      </td>
+	  <td valign="top">
+      	<input name="mdggper_new" value="1.25" type="text" id="mdggper_new" style="width:90%"  class='pubinputs' />
+      </td>
+	  <td valign="top">
+      	<input name="mkggper_new" value="1.5" type="text" id="mkggper_new" style="width:90%"  class='pubinputs' />
+      </td>
+      <td valign="top">
+      	<select name='coin_new' id='coin_new' style='width:90%'>
+          <option value=''>请选择</option>
+		  <?php
+          foreach($arcranks as $kkk=>$vvv){
+          	echo "    <option value='{$kkk}'>{$vvv['coinname']}</option>\r\n";
+          }
+	   	?>
+       </select>
+       </td>
+      <td valign="top">
+        <select name='money_new' id='money_new' style='width:90%'>
+          <option value=''>请选择</option>
+		  <?php
+          foreach($arcranks as $kkk=>$vvv){
+          	echo "    <option value='{$kkk}'>{$vvv['coinname']}</option>\r\n";
+          }
+	   	?>
+       </select>
+       </td>
+      <td valign="top">
+      	<input name="fee_new" value="0.002" type="text" id="fee_new" style="width:90%"  class='pubinputs' />
+        </td>
+		<td height="24" valign="top">
+	   <textarea name="explain_new" id="explain_new" cols="20" rows=""></textarea>
+      	
+      </td>
+      <td align="center" bgcolor="#FFFFFF">
+      	<input name="check_new" type="checkbox"  id="check_new" value="1" class='np' />
+        新增 
+       </td>
+	   <td align="center" bgcolor="#FFFFFF">
+      	
+       </td>
+    </tr>
+    <tr>
+      <td height="24" colspan="11" bgcolor="#ffffff">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="34" colspan="11" align="center" bgcolor="#F9FCEF">
+      	<input name="imageField"  type="submit" class="np coolbg" value="确定" class='np coolbg /' />
+      </td>
+    </tr>
+  </form>
+</table>
+</body>
+</html>

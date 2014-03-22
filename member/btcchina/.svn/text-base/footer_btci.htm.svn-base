@@ -1,0 +1,58 @@
+<!-- BEGIN FOOTER -->
+<div style="clear: both;padding:0px 0 15px;"></div>
+<div class="front-footer">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span4 space-mobile">
+                <!-- BEGIN ABOUT -->
+                <h2>关于公司</h2>
+                <p class="margin-bottom-30">比特币中国成立于2011年7月，运营着中国最大的比特币交易平台。我们致力于为我们的客户提供最安全、值得信赖的交易体验。</p>
+                <div class="clearfix"></div>
+                <!-- END ABOUT -->
+            </div>
+            <div class="span4 space-mobile">
+                <!-- BEGIN CONTACTS -->
+                <h2>联系我们</h2>
+                <address class="margin-bottom-40">
+	                
+上海萨图西网络有限公司<br>
+上海市浦东新区高翔路526号2幢349室<br>
+电话: (86) 21-54896951 <br>
+商务合作: <a href="mailto:business@btcchina.com">business@btcchina.com</a><br>
+客户服务: <a href="mailto:support@btcchina.com">support@btcchina.com</a><br>
+企业QQ: <a target="_blank" href="#"><img border="0" src="{dede:global.cfg_templets_skin/}/images/qq.png" alt="点击这里联系我们" title="点击这里联系我们"></a>
+	                </address>
+                <!-- END CONTACTS -->
+            </div>
+            <div class="span4">
+                <!-- BEGIN RISK DISCLAIMER BLOCK -->
+                <h2>风险提示</h2>
+                <p><span class="label label-important">重要</span> 比特币的交易有极高的风险，它没有像中国股市那样的涨跌停限制，同时交易是24小时开放的。比特币由于筹码较少，价格易受到庄家控制，有可能出现一天价格涨几倍的情况，同时也可能出现一天内价格跌去一半的情况！入市须谨慎，一定注意控制好风险！</p>
+                <!-- END RISK DISCLAIMER BLOCK -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END FOOTER -->
+
+<!-- BEGIN COPYRIGHT -->
+<div class="front-copyright">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span12">
+                <p>
+                    <span class="margin-right-10">Copyright © 2013 上海萨图西网络有限公司。保留所有权利。</span>
+                    <a href="https:////#">隐私政策</a>
+	                | <a href="https:////#">服务条款</a>
+	                | <a href="https:////#">费率说明</a>
+	                | <a href="https:///">联系我们</a>
+	                | <a href="https:///">返回旧版首页</a>
+	                | <a href="#" target="_blank">沪ICP备13026899号-3</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END COPYRIGHT -->
+<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/hover-dropdown.js"></script>

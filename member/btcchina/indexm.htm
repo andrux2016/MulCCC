@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/style.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+<script language='javascript'>
+
+function CheckEmail(){
+		$.getJSON("{dede:global.cfg_cmspath/}/member/cash_email.php?coinid="+$('#coinid').val()+"&tt="+new Date(), function(data){
+			if(data){
+				alert("已经向您的邮箱发送验证码，请稍后登陆邮箱查收。");
+				$('#email').hide();
+				$('#do').show();
+				$('#code').show();
+			}
+		});
+}
+
+
+</script>
+</head>
+<body>
+<div id="wrapper" >
+
+
+   <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+   <section>
+
+   <aside_left>	 
+	<div id="aside_content"> 
+		
+		
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+
+		<br>
+
+
+	</div> <!-- aside_content -->
+
+  </aside_left>
+  <div id="content_right">	
+
+
+<div id="mcpmain">
+
+    <div id="mcpmain">
+      <div id="appTab">
+        <ul>
+          <li class="thisTab"><a href="#">会员中心</a></li>
+        </ul>
+      </div>
+	  
+	  <br>
+      <div class="postForm">
+      <?php 
+	  if($cfg_ml->M_Spacesta==-10){?>
+			<div id="appTab">
+        <ul>
+          <li class="thisTab"><a href="operation_cash.php">验证邮箱</a></li>
+        </ul>
+      </div>
+	  <div id="mainCp">
+        <!--内容消息提示 -->
+        <h3 class="meTitle">&nbsp;</h3>
+        	  <div align="center" style=" height:150px;">
+                <br />
+                您尚未进行邮件验证，请到邮箱查阅...<br />
+        重新发送邮件验证 <a href="index_do.php?fmdo=sendMail">点击此处</a> </div>
+
+		<?php }else{ ?>
+			<?php if(preg_replace("#[^.0-9-]#", "", $cfg_rec_reward)>0){ ?>
+			<h3 class="meTitle">邀请任务:</h3>
+			复制以下文字和您的推广链接，并通过QQ、微博、邮件发送给您的朋友<br>
+			每成功邀请一位好友注册并完成新手任务您将获得<font color="#FF0000"><?php echo $cfg_rec_reward; ?></font>的奖励！<br>
+			奖励的比特币只能提现到自己的比特币钱包，不可以赠送给邀请人!<br>
+			（威客任务、威客软件、注册机、僵尸用户、自己推荐自己注册一律按作弊处理，扣除全部作弊所得）<br>
+			<textarea style="width:80%" rows="">  <?php echo $cfg_aboutus; ?><?php echo $cfg_basehost; ?>/index_do.php?fmdo=user&dopost=regnew&invite=<?php echo $cfg_ml->M_ID; ?></textarea>
+			<br><br>
+			<?php 
+			}
+			if($cfg_deduct>0){ ?>
+			<h3 class="meTitle">终身分成:</h3>
+			我们希望把<?php echo $cfg_webname; ?>建设成为属于大家的交易平台，凡是您邀请的注册用户每完成<br>
+			一笔交易，您都将获得最高<font color="#FF0000"><?php echo $cfg_deduct*100; ?>%的手续费分成</font>，并且终身可以享受分成！所有的分成明细<br>
+			都可以透明地在账单明细中查看。交易越多奖励越多！<br>
+			<a href="deduct_btc.php">查看我的邀请与分成</a>		<br>
+			<br>
+			<?php 
+			}
+			?>
+			<h3 class="meTitle">联系我们:</h3>
+		<?php 
+		echo $cfg_linkus;
+		}?>
+	  </div>
+<!--主操作区域 -->
+    </div>
+  </div>
+  </section>
+  </div>
+<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!-- BEGIN HEADER -->
+<div class="front-header">
+	<div class="container">
+		<div class="navbar">
+			<div class="navbar-inner">
+
+				<!-- BEGIN LOGO (you can use logo image instead of text)-->
+				<a class="brand logo-v1" href="index.htm">
+					<img src="{dede:global.cfg_templets_skin/}/images/logo.png" id="logoimg" alt="BTC588行情">
+				</a>
+				<!-- END LOGO -->
+
+				
+
+				<!-- BEGIN TOP NAVIGATION MENU -->
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li>
+							<a {dede:php} if($showmune==1) echo "class='show'";{/dede:php} href="/">首页</a>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-hover="dropdown" data-delay="0" data-close-others="false" {dede:php} if($showmune==2) echo "class='show'";{/dede:php} href="trade.php">
+								交易中心<i><img src="{dede:global.cfg_templets_skin/}/images/btc_r2_c2.png" alt="" /></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="icon-fire"></i> 从这里开始</a></li>
+																	<li><a href="#"><i class="icon-plus"></i> 注册</a></li>
+									<li><a href="#"><i class="icon-signin"></i> 登录										</a></li>
+															</ul>
+						</li>
+												<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="https://btcchina.com/#">
+								关于我们<i><img src="{dede:global.cfg_templets_skin/}/images/btc_r2_c2.png" alt="" /></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">我们是谁?</a>
+								</li>
+								<li>
+									<a href="#">我们提供什么?</a>
+								</li>
+								<li>
+									<a href="#">为什么选择我们?</a>
+								</li>
+								<li>
+									<a href="#">联系我们</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="https://btcchina.com/#">
+								比特币<i><img src="{dede:global.cfg_templets_skin/}/images/btc_r2_c2.png" alt="" /></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a target="_blank" href="#">什么是比特币?</a>
+								</li>
+								<li>
+									<a target="_blank" href="#">如何获取比特币?</a>
+								</li>
+								<li>
+									<a target="_blank" href="#">谁在使用比特币?</a>
+								</li>
+								<li>
+									<a target="_blank" href="#">更多...</a>
+								</li>
+							</ul>
+						</li>
+						<li class="language dropdown" style="display:none;">
+							<span class="sep"></span>
+															<a href="https://btcchina.com/#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+									<img alt="" src="{dede:global.cfg_templets_skin/}/images/cn.png">
+									<span class="username">简体中文</span>
+									<i class="icon-angle-down"></i>
+								</a>
+														<ul class="dropdown-menu" id="langswitcher">
+																	<li><a href="https://btcchina.com/#" data-lang="en"><img alt="" src="{dede:global.cfg_templets_skin/}/images/us.png">
+											English</a></li>
+															</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- BEGIN TOP NAVIGATION MENU -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END HEADER -->
+  
+

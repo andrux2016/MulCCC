@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title><?php echo $cfg_webname; ?>- 会员登录</title>
+<link href="templets/style/login.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $cfg_templets_skin ?>/style/style.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<style type="text/css">
+<!--
+.vermenu{
+	background:#FFFFFF none repeat scroll 0 0;
+	border:1px solid #EEEEEE;
+	position:absolute;
+	top: 208px;
+}
+-->
+</style>
+</head>
+<body>
+
+
+<div class="wrapper"> 
+  <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+
+<div style="clear: both;"> </div> 
+<section>
+<div id="contentwrapper" class="contentwrapper">
+        
+            <div id="updates" class="subcontent">
+                   
+                    <iframe src="http://bitcoinity.org/markets" width="100%" height="740" scrolling="no"></iframe>
+                    
+
+            </div>
+
+
+        
+        </div><!--contentwrapper-->
+</section>
+</div>
+<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

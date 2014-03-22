@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>会员提现 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $cfg_templets_skin ?>/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<link href="<?php echo $cfg_templets_skin ?>/style/style.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+<script language='javascript'>
+
+
+function selectPay(payid,num,fee,account){
+	$('#paytype').val(payid);
+	for(var i=1;i<=num;i++){
+		$('#pay'+i).css("border","0px");
+	}
+	$('#pay'+payid).css("border","5px solid green");
+		
+}
+
+
+function CheckCards(){
+	if($('#coinid').val()==""){
+			$('#showMsgDiv').html("请选择币种类型！");
+			//alert("选择提现类型！");
+			return false;
+		}
+		if($('#amount').val()=="" || $('#amount').val()<=0){
+			$('#showMsgDiv').html("生成充值码金额不能为空！");
+			$('#amount').focus();
+			return false;
+		}
+		if($('#txpwd').val()==""){
+			$('#txpwd').focus();
+			$('#showMsgDiv').html("提现密码不能为空！");
+			return false;
+		}
+		/*if($('#vdcode').val()==""){
+			$('#vdcode').focus();
+			$('#showMsgDiv').html("验证码不能为空！");
+			return false;
+		}*/
+		
+		if($('#action').val()=="do" && $('#emailcode').val()==""){
+			$('#emailcode').focus();
+			$('#showMsgDiv').html("身份验证码不能为空！");
+			return false;
+		}
+		
+		var json_req = {
+		action: $("#action").val(),
+		/*show: '<?php echo $show;?>',
+		vdcode:$("#vdcode").val(),*/
+		txid:$("#truename").val(),
+		txpwd:$("#txpwd").val(),
+		coinid:$("#coinid").val(),
+		amount:$("#amount").val(),
+		emailcode:$("#emailcode").val()
+	};
+	$.ajax({
+		type: "post",
+		url: "cards_list_btc.php?op=query" + Math.random(),
+		data: json_req,
+		dataType: "json",//返回json格式的数据
+		success: function(data, state) {
+			if(data.ruslt==1){
+					apprise(data.showMsg, {
+					animate: false,
+					textOk: "确定"
+					},function(r) {
+						location.reload(true);
+					});		
+				
+			}else{
+				apprise(data.showMsg, {
+				animate: false,
+				textOk: "确定"
+				},function(r) {
+					//vdimgck.src=vdimgck.src+"?";
+				});		
+			}
+          }
+		  
+	});
+}
+function ChkEcode(){
+	if($('#emailcode').val()==""){
+			$('#emailcode').focus();
+			alert("身份验证码不能为空！");
+			return false;
+		}
+}
+
+
+
+
+function CheckEmail(){
+	  	
+		$.getJSON("{dede:global.cfg_cmspath/}/member/cash_email.php?coinid="+$('#coinid').val()+"&tt="+new Date(), function(data){
+			if(data){
+				apprise("已经向您的邮箱发送验证码，请稍后登陆邮箱查收。", {
+				animate: false,
+				textOk: "确定"
+				},function(r) {
+					$('#email').hide();
+					$('#do').show();
+					$('#code').show();
+					//$("#vdcode").val("");
+					$("#action").val("do");
+				});		
+				
+			}
+		});
+}
+
+
+function checkCard(){
+	  	
+		if($('#cardid').val()==""){
+			apprise('请填写充值卡！', {
+				animate: false,
+				textOk: "确定"
+			});
+			$('#cardid').focus();
+			return false;
+		}
+		if($('#vdcode').val()==""){
+			apprise('请填验证码！', {
+				animate: false,
+				textOk: "确定"
+			});
+			$('#vdcode').focus();
+			return false;
+		}
+		$.post("check_card.php?act="+new Date(),{vdcode:$('#vdcode').val(),cardid:$('#cardid').val()},function(msg){ 
+			
+				apprise(msg, {
+					animate: false,
+					textOk: "确定"
+					},function(r) {
+						location.reload(true);
+					});		
+
+        }); 
+	}
+</script>
+</head>
+<body>
+<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<div id="wrapper">   
+		<section>
+			<div class="btc8-contents">
+				<div class="btc8-content btc8-guanli">
+					<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?><br>
+					<div class="btc8-guanliright" style="float:right;">
+						<div id="content_right">	
+							<div id="mcpmain">
+								<div id="appTab">
+									<ul>
+									   <li class='thisTab'><a href='cards_btc.php'>充值码记录</a></li>
+									</ul>
+								</div>
+								<div id="mainCp">
+									<!--<div class="appMsg">
+									  <ul class="tips" id="userMoney"></ul>
+									</div>-->
+									<!--内容消息提示 -->
+									<div class="postForm"><br>
+										<h3 class="meTitle"><?php echo $cointype;?>充值码记录</h3>
+										<!-- <form name="f1" action="cash_btc.php" method="post">-->
+										<!-- <input type="hidden" name="coinid" id="coinid" value="<?php echo $coinid;?>" />
+										CNY do-->								  
+										<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+											<tbody>
+												<tr>
+													<td align="center" style="border-bottom:1px solid #666666;">日期</td>
+													<td align="center" style="border-bottom:1px solid #666666;">类型</td>
+													<td align="center" style="border-bottom:1px solid #666666;">金额</td>
+													<td align="center" style="border-bottom:1px solid #666666;">操作</td>
+													<td align="center" style="border-bottom:1px solid #666666;">状态</td>
+													<td align="center" style="border-bottom:1px solid #666666;">充值码</td>
+												</tr>
+												{dede:datalist}
+												<?php
+													if($fields['mid'] == $cfg_ml->M_ID){
+														$ctype = "生成";
+														$ctime = date("Y-m-d ",$fields['stime']);
+													}
+													if($fields['mid'] == $cfg_ml->M_ID){
+														$ctype .= "使用";
+														$ctime = date("Y-m-d",$fields['stime']);
+													}
+													if($fields['isexp'] ==-1){
+													$isexp="已使用";
+													}elseif($fields['mtime']<time()){ 
+													$isexp="<font color=#FF0000>过期</font>";
+													}else{
+													$isexp="<font color=#00CC00>有效</font>";
+													}
+													$CardStr=$cfg_web_mark."-".$coinTypeArr[$fields['coinid']]."-".substr($fields['ctid'],0,5)."-".substr($fields['cardid'],5,10)."-".substr($fields['cardid'],0,5)."-".substr($fields['ctid'],5,10);
+											   ?>
+												<tr>
+												  <td align="center"><?php echo $ctime;?></td>
+												  <td align="center"><?php echo $coinTypeArr[$fields['coinid']];?></td>
+												  <td align="center"><?php echo $fields['money']/1 ?></td>
+												  <td align="center"><?php echo $ctype;?></td>
+												  <td align="center"><?php echo $isexp;?></td>
+												  <td align="center"><?php echo $CardStr;?></td>
+
+												</tr>
+												{/dede:datalist}
+												<tr>
+													<td colspan="8"></td>
+												</tr>								  
+											</tbody>
+											<tfoot>
+												<tr>
+												  <td colspan="8"><div class="pageList">{dede:pagelist listitem="info,index,end,pre,next,pageno" listsize="5"/} </div></td>
+												</tr>
+											</tfoot>
+										</table>									 
+									   <!--</form>-->
+									</div>									
+								</div>
+							<!--主操作区域 -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

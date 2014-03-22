@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>帮助 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/style.css" rel="stylesheet" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/scport.css" rel="stylesheet" media="screen" type="text/css" />
+<script language="javascript" type="text/javascript" src="<?php echo $cfg_templets_skin ?>/js/scport1.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/table_function.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+<script type="text/javascript">
+	//获得选中文件的文件名
+	function GetCheckfolderItem()
+	{
+		var allSel='';
+		if(document.form1.deleteid.value) return document.form1.deleteid.value;
+		for(i=0;i<document.form1.deleteid.length;i++)
+		{
+			if(document.form1.deleteid[i].checked)
+			{
+				if(allSel=='')
+				allSel=document.form1.deleteid[i].value;
+				else
+				allSel=allSel+","+document.form1.deleteid[i].value;
+			}
+		}
+		return allSel;
+	}
+	
+	function DoSubmit()
+	{
+		var selid = GetCheckfolderItem();
+		if(selid=='') {
+			alert("你没选中任何信息！");
+			return false;
+		}
+		if(window.confirm("你确定要删除这些消息么？"))
+		{
+			location = "deduct_btc.php?dopost=del&ids="+selid;
+		}
+	}
+</script>
+<!--new add-->
+<style type="text/css">
+	body {behavior:url(style/iehoverfix.htc);}
+</style>	
+<script type="text/javascript" src="templets/js/js.js"></script>
+<!--new add end-->
+
+</head>
+<body>
+	<?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+	<div class="clear"></div>
+	<div class="xbt-con">
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+		<div class="xbt-right-con">
+			<div class="xbt-rc-mm0">			
+				<div class="xbt-rc-mm0-3">
+					<div class="xbt-rc-mm-same">
+						<h1><a href="deduct_btc.php">会员帮助</a></h1>
+					</div>
+				</div>
+				<div class="xbt-rc-jilu0">
+					<div id="mcpmain">
+						<div id="mainCp" style="padding:10px;">
+							<!--内容消息提示 -->
+							<h3 class="meTitle">
+								VIP计划
+							</h3>
+							<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+								<tbody>
+								<tr>
+								  <td align="center">等级</td>
+								  <td align="center">累计交易</td>
+								  <td align="center">交易手续费折扣</td>
+								  <td align="center">提现手续费折扣</td>
+								</tr>
+								{dede:datalist}
+								<tr>
+								  <td align="center">{dede:field.membername/}</td>
+								  <td align="center">{dede:field.scores /}</td>
+								  <td align="center"><?php echo $fields['dlfeeper']; ?>折</td>
+								  <td align="center"><?php echo $fields['txfeeper']; ?>折</td>
+								</tr>
+								{/dede:datalist}
+								<tr>
+									<td colspan="4"></td>
+								</tr>
+								</tbody>
+							</table>
+							<h3 class="meTitle">
+								API接口说明
+							</h3>
+							参数说明：
+							<table width="100%" >
+								<tr>
+									<td valign="top" style="border:1px solid  #000000;padding-left:10px;">名称</td>
+									<td valign="top" style="border:1px solid  #000000;padding-left:10px;">说明</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">值</td>
+								</tr>
+								<tr>
+									<td width="17%" valign="top" style="border:1px solid  #000000;padding-left:10px;">type </td>
+									<td width="19%" valign="top" style="border:1px solid  #000000;padding-left:10px;">操作类型</td>
+									<td width="64%" style="border:1px solid  #000000;padding-left:10px;">
+										ticker 最新价格 <br />
+										rate_list 当前挂单 <br />
+										ex_rec 最新成交 <br />
+										my_order 我的挂单 <br />
+										my_deal 我的成交记录 <br />
+										cancel 撤单<br />
+										bid 买 <br />
+										bid 卖 
+									</td>
+								</tr>
+								<tr>
+									<td style="border:1px solid  #000000;padding-left:10px;">tid</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">成交单编号</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">如：tid=3000，即获取tid为3000后的成交单，留空为最新 成交</td>
+								</tr>
+								<tr>
+									<td style="border:1px solid  #000000;padding-left:10px;">symbol</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">币种类型</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">如：BTC_CNY</td>
+								</tr>
+								<tr>
+									<td style="border:1px solid  #000000;padding-left:10px;">count</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">返回数据条数</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">如：80</td>
+								</tr>
+								<tr>
+									<td valign="top" style="border:1px solid  #000000;padding-left:10px;">tspan</td>
+									<td valign="top" style="border:1px solid  #000000;padding-left:10px;">走势图类型</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">
+										300=5分钟线<br />
+										900=15分钟线<br />
+										3600=一小时<br />
+									</td>
+								</tr>
+								<tr>
+									<td style="border:1px solid  #000000;padding-left:10px;">userid</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">加密的用户名</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">&nbsp;</td>
+								</tr>
+								<tr>
+									<td style="border:1px solid  #000000;padding-left:10px;">password</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">加密的密码</td>
+									<td style="border:1px solid  #000000;padding-left:10px;">&nbsp;</td>
+								</tr>
+							</table>
+							一、获取最新价格<br>
+							<?php echo $cfg_basehost;?>/API.php?type=ticker&symbol=BTC_CNY<br>
+							返回格式：<br>{"ticker":{"high":600,"low":544,"vol":152.798,"last":570,"sell":1020,"buy":1010}}<br><br>
+
+							二、获取当前挂单<br>
+							<?php echo $cfg_basehost;?>/API.php?type=rate_list&symbol=BTC_CNY&count=1<br>
+							返回格式：<br>{"asks":[[1020,2]],"bids":[[1019,2]]}<br><br>
+
+							三、获取最新成交<br>
+							<?php echo $cfg_basehost;?>/API.php?type=ex_rec&symbol=BTC_CNY&tid=3000&amp;count=80<br>
+							返回格式：<br>{"result":"true","history":[{"date":"1380811703","rate":576,"vol":1,"order":"0","ticket":"162"},{"date":"1380791905","rate":575,"vol":0.698,"order":"0","ticket":"161"}]}<br><br>
+
+							四、用户名密码加密方法<br>
+							1、在“会员中心”-“<a href="APICode_btc.php">交易API</a>”得到加密KEY<br>
+							2、使用加密函数进行加密，php示例:<br>
+							<textarea rows="6" style="width:400px">
+							$key="加密KEY";
+							$userid= MdString($key,"用户名");
+							$password= MdString($key,"密码");
+							function MdString($key,$string){
+								$len  = strlen($key);
+								for($i=0; $i<strlen($string); $i++)
+								{
+									$k = $i % $len;
+									$code  .= $string[$i] ^ $key[$k];
+								}
+								base64_encode($code);
+							}
+							</textarea>
+							<br><br>
+							五、我的成交单<br>
+							<?php echo $cfg_basehost;?>/API.php?type=my_deal&symbol=BTC_CNY&count=1&userid={加密的用户名}&password={加密的密码}<br>
+							返回格式：<br>{"result":"true","order":[{"date":"1380811703","rate":576,"vol":1,"order":"0","ticket":"162"}]}<br><br>
+
+
+							六、我的挂单<br>
+							<?php echo $cfg_basehost;?>/API.php?type=my_order&symbol=BTC_CNY&userid={加密的用户名}&password={加密的密码}<br>
+							返回格式：<br>{"result":"true","order":[{"id":"AA039190519359d","dealtype":"0","uprice":575,"btccount":0.302},{"id":"A9305175995989d","dealtype":"1","uprice":576,"btccount":1},{"id":"A9301517173232d","dealtype":"1","uprice":577,"btccount":1}]}<br><br>
+
+							七、撤销挂单<br>
+							<?php echo $cfg_basehost;?>/API.php?type=cancel&tid=AA039190519359d&userid={加密的用户名}&password={加密的密码}<br>
+							返回格式：<br>{"result":"true","tid":"AA039190519359d"}<br><br>
+
+							八、提交买单<br>
+							<?php echo $cfg_basehost;?>/API.php?type=bid&symbol=BTC_CNY&rate=500&vol=1&userid={加密的用户名}&password={加密的密码}<br>
+							返回格式：<br>{"result":"true","pending":null,"records":[{"id":"163","vol":1,"rate":572,"fee":"0.00000000","type":"ask"}]}<br><br>
+
+							九、提交卖单<br>
+							<?php echo $cfg_basehost;?>/API.php?type=ask&symbol=BTC_CNY&rate=600&vol=1&userid={加密的用户名}&password={加密的密码}<br>
+							返回格式：<br>{"result":"true","pending":null,"records":[{"id":"164","vol":1,"rate":576,"fee":"1.09232458","type":"bid"},{"id":"165","vol":0.00190362,"rate":577,"fee":"0.00208298","type":"bid"}]}<br><br>
+									
+						</div>
+						<!--主操作区域 -->
+					</div>
+				</div>
+			</div>		
+		</div>	
+	</div>
+	<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+</body>
+</html>

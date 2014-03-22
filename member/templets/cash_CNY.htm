@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>" />
+<title>会员提现 - 会员中心 - <?php echo $cfg_webname; ?></title>
+<link href="templets/style/base.css" rel="stylesheet" type="text/css" />
+<link href="../templets/default/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="templets/js/jquery_1_7_2.js"></script>
+<script type="text/javascript" src="templets/js/j.js"></script>
+<script type="text/javascript" src="templets/js/load.js"></script>
+<script type="text/javascript" src="templets/js/leftmenu.js"></script>
+<script language='javascript'>
+$(function(){
+	$.getJSON("ajax_login.php?tt="+new Date(), function(data){
+			if(data){
+				$("#userMoney").append("<li>用户ID：<span>"+data.username+"</span></li>");
+
+				$.each(data.coin, function(key, val) {   
+					$("#userMoney").append("<li style=\"width:180px;float:left\">"+ val[0] +"：<span>"+val[1]+"</span></li>");
+				}); 
+				
+			}
+	});
+});
+function CheckUser(){
+	if($('#paytype1').attr("checked")==false && $('#paytype2').attr("checked")==false){
+			//$('#address').focus();
+			alert("选择提现类型！");
+			return false;
+		}
+		if($('#address').val()==""){
+			$('#address').focus();
+			alert("账户名不能为空！");
+			return false;
+		}
+		if($('#address').val()!=$('#caddress').val()){
+			$('#caddress').focus();
+			alert("两次输入的账户名不同！");
+			return false;
+		}
+		if($('#amount').val()==""){
+			$('#amount').focus();
+			alert("转账地址不能为空！");
+			return false;
+		}
+		if($('#txpwd').val()==""){
+			$('#txpwd').focus();
+			alert("提现密码不能为空！");
+			return false;
+		}
+}
+function CheckEmail(){
+
+		$.getJSON("{dede:global.cfg_cmspath/}/member/cash_email.php?coinid="+$('#coinid').val()+"&tt="+new Date(), function(data){
+			if(data){
+				alert("已经向您的邮箱发送验证码，请稍后登陆邮箱查收。");
+				$('#email').hide();
+				$('#do').show();
+				$('#code').show();
+			}
+		});
+}
+</script>
+</head>
+<body>
+<div id="wrapper" >
+   <?php include(DEDEMEMBER."/templets/head_btc.htm"); ?>
+   <section>
+
+   <aside_left>	 
+	<div id="aside_content"> 
+		
+		
+		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
+
+		<br>
+
+
+	</div> <!-- aside_content -->
+
+  </aside_left>
+  <div id="content_right">	
+
+    <div id="mcpmain">
+      <div id="appTab">
+        <ul>
+           <?php
+          echo $coincards;
+          ?>
+
+        </ul>
+      </div>
+      <div id="mainCp">
+        <div class="appMsg">
+          <ul class="tips" id="userMoney"></ul>
+        </div>
+        <!--内容消息提示 -->
+       
+      <div class="postForm"><br>
+      <h3 class="meTitle"><?php echo $cointype;?>提现:</h3>
+	  <form name="f1" onsubmit="return CheckUser();" action="cash_btc.php" method="post">
+		 <?php
+         if($action=='email') {
+		 ?> 
+		 <input type="hidden" name="coinid" id="coinid" value="<?php echo $coinid;?>" />
+		 <input type="hidden" name="action" value="do" />
+		 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+			<tbody>
+				
+				<tr>
+					<td width="15%" align="right" valign="top">账户名：
+					</td>
+					<td><?php echo $address; ?><input name="address" type="hidden" id="address" value="<?php echo $address; ?>" size="80" class="intxt" style="width:260px"/><input name="caddress" type="hidden" id="caddress" value="<?php echo $caddress; ?>" size="80" class="intxt" style="width:260px"/></td>
+					</tr>
+				<tr>
+					<td width="15%" align="right" valign="top">提现金额：
+					</td>
+					<td><?php echo $txamount; ?> <input name="amount" type="hidden" id="amount" size="38" class="intxt" style="width:100px" value="<?php echo $amount; ?>" />(手续费：<?php echo $fees;?>)</td>
+				</tr>
+				
+				
+				<tr>
+						<td align="right" valign="top">Email 验证码：</td>
+						<td><input name="emailcode" type="text" id="emailcode" size="38" class="intxt" style="width:50px"/><button id="code" style="display:none" style=" width:60px; height:25px;" onclick="CheckEmail()" type="button">重发</button><div id="email"><button  style=" width:120px; height:30px;" onclick="CheckEmail()" type="button">获取 Email 验证码</button></div><div id="do" style="display:none"><button class="button2 mt5" type="submit">提现</button></div>
+                        </td>
+					</tr>
+			</tbody>
+		</table>
+		
+		
+		
+		 <?php
+		 }elseif($action=='do') {
+          ?> 
+		  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+			<tbody>
+		  <tr>
+					<td width="15%" align="center" valign="top" colspan="2"><strong><?php echo $ShowMsg; ?> </strong>
+					</td>
+				</tr>
+				</tbody>
+		</table>
+		<?php
+		 }else{
+          ?> 
+		<input type="hidden" name="coinid" id="coinid" value="<?php echo $coinid;?>" />
+		 <input type="hidden" name="action" value="email" />
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" class="list">
+			<tbody>
+				<tr>
+					<td valign="top" colspan="2">&nbsp;&nbsp;<input name="paytype" id="paytype1" type="radio" value="1" /><img src="templets/images/pay/alipay.jpg" />&nbsp;&nbsp;<input name="paytype" id="paytype2" type="radio" value="2" /><img src="templets/images/pay/tenpay.jpg" />
+					</td>
+					
+				<tr>
+				<tr>
+						<td width="15%" align="right" valign="top">账户名：
+						</td>
+						<td><input name="address" type="text" id="address" size="80" class="intxt" style="width:260px"/></td>
+				  </tr>
+				<tr>
+				<tr>
+						<td width="15%" align="right" valign="top">重复账户名：
+						</td>
+						<td><input name="caddress" type="text" id="caddress" size="80" class="intxt" style="width:260px"/></td>
+					</tr>
+				<tr>
+						<td width="15%" align="right" valign="top">提现金额：
+						</td>
+						<td><input name="amount" type="text" id="amount" size="38" class="intxt" style="width:100px"/>手续费：<?php echo $feeshow;?></td>
+					</tr>
+					<tr>
+						<td width="15%" align="right" valign="top">提现密码：
+						</td>
+						<td><input name="txpwd" type="password" id="txpwd" size="8" class="intxt" style='width:200px;' /></td>
+					</tr>
+					<tr>
+						<td align="right" valign="top">验证码：</td>
+						<td><input name="vdcode" type="text" id="vdcode" size="8" class="intxt" style='width:50px;text-transform:uppercase;' />
+							<img src="../include/vdimgck.php" alt="看不清？点击更换" align="absmiddle" style="cursor:pointer" onclick="this.src=this.src+'?'" />
+                        </td>
+					</tr>
+			</tbody>
+		</table>
+		<div id="do" ><button class="button2 mt5" type="submit">提现</button></div>
+		 <?php } ?> 
+	  </form>
+	 
+      </div>
+        
+ </div>
+<!--主操作区域 -->
+    </div>
+  </div>
+  </section>
+  </div>
+<?php include(DEDEMEMBER."/templets/foot_btc.htm"); ?>
+
+</body>
+</html>
