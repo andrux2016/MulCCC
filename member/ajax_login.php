@@ -34,6 +34,8 @@ $moneyid=preg_replace("#[^0-9-]#", "", $moneyid);
 
 
 $uid  = $cfg_ml->M_LoginID;
+//$cfg_arrcoin=Getdeposit("",$uid);
+//var_dump($cfg_arrcoin);
 
 //echo $cfg_mb_rank;
 

@@ -1,5 +1,6 @@
 <?php
 /*
+ * 暂时不用此接口
 @version        $Id: API_deal.php 1 8:38 2013年8月8日Z 
  */
 

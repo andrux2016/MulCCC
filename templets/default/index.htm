@@ -17,166 +17,181 @@
 	src="{dede:global.cfg_templets_skin/}/js/jquery.flot.js"></script>
 <script type="text/javascript">
 
-		
-		$(function(){
-		LoadFlot();
-		CheckLogin();
+trade_global = {};
+trade_global.moneyid = '{dede:php} echo $moneyid;{/dede:php}';
+trade_global.coinid = '{dede:php} echo $coinid;{/dede:php}';
+trade_global.money = '{dede:php} echo $moneytype;{/dede:php}';
+trade_global.coin = '{dede:php} echo $cointype;{/dede:php}';
+trade_global.symbol = '{dede:php} echo $cointype;{/dede:php}_{dede:php} echo $moneytype;{/dede:php}';
+trade_global.symbol_view = '{dede:php} echo $cointype;{/dede:php}/{dede:php} echo $moneytype;{/dede:php}';
+trade_global.fee = '{dede:php} echo $fee;{/dede:php}';
+trade_global.ask = 1.2;
+server_time = Date.parse(new Date())/1000;	
 
+
+
+$(function(){
+LoadFlot();
+CheckLogin();
+
+});
+
+function LoadFlot(){
+
+{dede:php}
+foreach($dtypearr as $tmpdtypearr){
+	echo '$.plot("#'.$tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'", [{';
+	echo 'data:[[0,'.$tmpdtypearr['flot'][6].'],[1,'.$tmpdtypearr['flot'][5].'],[2,'.$tmpdtypearr['flot'][4].'],[3,'.$tmpdtypearr['flot'][3].'],[4,'.$tmpdtypearr['flot'][2].'],[5,'.$tmpdtypearr['flot'][1].'],[6,'.$tmpdtypearr['flot'][0].']]';
+	echo '}],{  series: { lines: { show: true,lineWidth: 1},points: { show: false,radius: 1}, shadowSize:0 }, ';
+	echo "grid:{show:false,aboveData: false,color: '#000',borderColor:'#000',borderWidth:1}});";
+}
+{/dede:php}
+
+}
+
+function CheckLogin(){
+  	$.getJSON("{dede:global.cfg_cmspath/}/member/ajax_login.php?coinid="+trade_global.coinid+"&moneyid="+trade_global.moneyid+"&tt="+new Date(), function(data){
+  		$('#_loaduser').hide();
+		if(data.userid){
+			$('#_userlogin').hide();
+			$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");
+		}
 	});
 	
-	function LoadFlot(){
-		
-		{dede:php}
-		foreach($dtypearr as $tmpdtypearr){
-			echo '$.plot("#'.$tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'", [{';
-			echo 'data:[[0,'.$tmpdtypearr['flot'][6].'],[1,'.$tmpdtypearr['flot'][5].'],[2,'.$tmpdtypearr['flot'][4].'],[3,'.$tmpdtypearr['flot'][3].'],[4,'.$tmpdtypearr['flot'][2].'],[5,'.$tmpdtypearr['flot'][1].'],[6,'.$tmpdtypearr['flot'][0].']]';
-			echo '}],{  series: { lines: { show: true,lineWidth: 1},points: { show: false,radius: 1}, shadowSize:0 }, ';
-			echo "grid:{show:false,aboveData: false,color: '#000',borderColor:'#000',borderWidth:1}});";
-		}
-		{/dede:php}
+}
 
-	}
-		
-	
-	function gotourl(url){
-		location.href=url;
-	}
-	
-	function UserLogin(){
-	  	
-		if($('#userid').val()==""){
-			$('#showdiv').html("请填写Email！");
-			$('#userid').focus();
-			return false;
-		}
-		var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-		if(!reg.test($('#userid').val())){
-			$('#showdiv').html("Email格式不正确！");
-			$('#userid').focus();
-			return false;
-		}
-		if($('#pwd').val()==""){
-			$('#showdiv').html("请填写密码！");
-			$('#pwd').focus();
-			return false;
-		}
-		$.post("/member/checkcode.php?act="+new Date(),{vdcode:$('#vdcode').val(),fmdo:'login',dopost:'login',keeptime:'604800',gourl:'json',userid:$('#userid').val(),pwd:$('#pwd').val()},function(msg){ 
-			if(msg=="1"){
-				apprise("登陆成功！", {
-					animate: false,
-					textOk: "确定"
-					},function(r) {
-						location.reload(true);
-					});
-			}else{
-				apprise(msg, {
-					animate: false,
-					textOk: "确定"
-					},function(r) {
-						vdimgck.src=vdimgck.src+"?";
-					});
-			}
-					
+function gotourl(url){
+location.href=url;
+}
 
-        }); 
-	}
+function UserLogin(){
 	
-	function UserQuit(){
+if($('#userid').val()==""){
+	$('#showdiv').html("请填写Email！");
+	$('#userid').focus();
+	return false;
+}
+var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+if(!reg.test($('#userid').val())){
+	$('#showdiv').html("Email格式不正确！");
+	$('#userid').focus();
+	return false;
+}
+if($('#pwd').val()==""){
+	$('#showdiv').html("请填写密码！");
+	$('#pwd').focus();
+	return false;
+}
+$.post("/member/checkcode.php?act="+new Date(),{vdcode:$('#vdcode').val(),fmdo:'login',dopost:'login',keeptime:'604800',gourl:'json',userid:$('#userid').val(),pwd:$('#pwd').val()},function(msg){ 
+	if(msg=="1"){
+		apprise("登陆成功！", {
+			animate: false,
+			textOk: "确定"
+			},function(r) {
+				location.reload(true);
+			});
+	}else{
+		apprise(msg, {
+			animate: false,
+			textOk: "确定"
+			},function(r) {
+				vdimgck.src=vdimgck.src+"?";
+			});
+	}
+			
 
-		$.post("/member/checkcode.php?act="+new Date(),{code:$('#vdcode').val(),fmdo:'login',dopost:'exit'},function(msg){ 
-					apprise(msg, {
-					animate: false,
-					textOk: "确定"
-					},function(r) {
-						location.reload(true);
-					});
-        }); 	
-	}
-	
-	function CheckLogin(){
-	  	$.getJSON("{dede:global.cfg_cmspath/}/member/ajax_login.php?coinid="+trade_global.coinid+"&moneyid="+trade_global.moneyid+"&tt="+new Date(), function(data){
-			$('#_loaduser').hide();
-			if(data.userid){
-				$('#_userlogin').hide();
-				$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");
-			}
-		});
-		
-	}
+}); 
+}
+
+function UserQuit(){
+
+$.post("/member/checkcode.php?act="+new Date(),{code:$('#vdcode').val(),fmdo:'login',dopost:'exit'},function(msg){ 
+			apprise(msg, {
+			animate: false,
+			textOk: "确定"
+			},function(r) {
+				location.reload(true);
+			});
+}); 	
+}
 
 
 function sendMsg(){
-	if($('#usermsg').val()==""){
-		apprise("请填写留言！", {
-			animate: true,
-			textOk: "确定"
+if($('#usermsg').val()==""){
+apprise("请填写留言！", {
+	animate: true,
+	textOk: "确定"
+});
+}else{
+$.post("{dede:global.cfg_cmspath/}/member/ajax_snsmsg.php?tt="+new Date(),{msg:$('#usermsg').val(),dopost:'send'},function(msg){ 
+		apprise(msg, {
+		animate: false,
+		textOk: "确定"
+		},function(r) {
+			//location.reload(true);
 		});
-	}else{
-		$.post("{dede:global.cfg_cmspath/}/member/ajax_snsmsg.php?tt="+new Date(),{msg:$('#usermsg').val(),dopost:'send'},function(msg){ 
-				apprise(msg, {
-				animate: false,
-				textOk: "确定"
-				},function(r) {
-					//location.reload(true);
-				});
-        }); 	
-	}
+}); 	
+}
 }
 $.getJSON("{dede:global.cfg_cmspath/}/member/ajax_snsmsg.php?dopost=read&tt="+new Date(), function(data){
-			if(data){
-				$.each(data.showMsg, function(key, val) {   
-					$("#msgDiv").append("<li style=\"width:180px;float:left\"><span>"+val['userid']+"</span>：<span>"+val['msg']+"</span></li>");
-				}); 
-				
-			}
-	});
+	if(data){
+		$.each(data.showMsg, function(key, val) {   
+			$("#msgDiv").append("<li style=\"width:180px;float:left\"><span>"+val['userid']+"</span>：<span>"+val['msg']+"</span></li>");
+		}); 
+		
+	}
+});
 
 function loginwindow() {
 
-		$.ajax({
-			type: "post",
-			url: "{dede:global.cfg_cmspath/}/member/ajax_log.php?op=" + Math.random(),
+$.ajax({
+	type: "post",
+	url: "{dede:global.cfg_cmspath/}/member/ajax_log.php?op=" + Math.random(),
 
-			success: function(data, state) {
-				apprise(data,{
-					animate: false,
-					textOk : '关闭'
-				},function(r) {
-					//location.reload(true);
-				});	
-			}
-		});
- }
- function list_deal() {
-	$("#li2").hide();
-	$("#li4").show();
-	$("#li1").show();
-	$("#li3").hide();
-	$("#divOrderList").hide();
-	$("#divDealList").show();
- }
- function list_order() {
- 	$("#li1").hide();
-	$("#li3").show();
-	$("#li2").show();
-	$("#li4").hide();
-	$("#divOrderList").show();
-	$("#divDealList").hide();
- }
- 
- 
- function showtext() {  
-    if($("#pwd").val()=="") {  
-    $("#pwd_warpper").html("<input type=\"text\" value=\"请输入密码\" id=\"_pwd\" onfocus=\"showpassword();\" class=\"ipt-txt\"/>");  
-    }  
-}  
-  
-function showpassword() {  
-    $("#pwd_warpper").html("<input type=\"password\" value=\"\" id=\"pwd\" onblur=\"showtext();\" class=\"ipt-txt\"/>");  
-    setTimeout(function(){  
-    $("#pwd").focus();  
-    },20);  
+	success: function(data, state) {
+		apprise(data,{
+			animate: false,
+			textOk : '关闭'
+		},function(r) {
+			//location.reload(true);
+		});	
+	}
+});
 }
+function list_deal() {
+$("#li2").hide();
+$("#li4").show();
+$("#li1").show();
+$("#li3").hide();
+$("#divOrderList").hide();
+$("#divDealList").show();
+}
+function list_order() {
+$("#li1").hide();
+$("#li3").show();
+$("#li2").show();
+$("#li4").hide();
+$("#divOrderList").show();
+$("#divDealList").hide();
+}
+
+
+function showtext() {  
+if($("#pwd").val()=="") {  
+$("#pwd_warpper").html("<input type=\"text\" value=\"请输入密码\" id=\"_pwd\" onfocus=\"showpassword();\" class=\"ipt-txt\"/>");  
+}  
+}  
+
+function showpassword() {  
+$("#pwd_warpper").html("<input type=\"password\" value=\"\" id=\"pwd\" onblur=\"showtext();\" class=\"ipt-txt\"/>");  
+setTimeout(function(){  
+$("#pwd").focus();  
+},20);  
+}
+
+	
+
+	
 
     </script>
 <!--we js end-->
