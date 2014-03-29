@@ -321,7 +321,7 @@ function showpassword() {
 								<input type="text" id="ask_vol" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_ask_vol();_page.obj.recalc_fee(&#39;ask&#39;);" value="0">
 							</div>
 							<div class="l3-con2">
-								总金额：<span>{dede:php} echo $moneytype;{/dede:php}<input type="text" id="ask_amount" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_ask_amount();_page.obj.recalc_fee(&#39;ask&#39;);" value="0" style="width:100px ;height:24px ;margin:0px;"></span>
+								总金额：<span>{dede:php} echo $moneytype;{/dede:php}<input type="text" id="ask_amount" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_ask_amount();_page.obj.recalc_fee(&#39;ask&#39;);" value="0" style="width:100px ;margin:0px;"></span>
 							</div>
 							<div class="13-con2" style="display:none">
 								手续费:<span id="ask_fee">0</span>{dede:php} echo $moneytype;{/dede:php} (<span style="color: #008c00;font-size: 12px;" id="moneyfee"></span>)
@@ -401,7 +401,7 @@ function showpassword() {
 								<input type="text" id="bid_vol" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_bid_vol();_page.obj.recalc_fee(&#39;bid&#39;);" value="0">
 							</div>
 							<div class="l3-con2">
-								总金额：<span>{dede:php} echo $moneytype;{/dede:php}<input type="text" id="bid_amount" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_bid_amount();_page.obj.recalc_fee(&#39;bid&#39;);" value="0"style="width:100px ;height:24px ;margin:0px;"></span>
+								总金额：<span>{dede:php} echo $moneytype;{/dede:php}<input type="text" id="bid_amount" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_bid_amount();_page.obj.recalc_fee(&#39;bid&#39;);" value="0"style="width:100px ;margin:0px;"></span>
 							</div>
 							<div class="13-con2" style="display:none">
 								手续费:<span id="bid_fee">0</span>{dede:php} echo $cointype;{/dede:php} (<span style="color: #008c00;font-size: 12px;" id="coinfee"></span>)
