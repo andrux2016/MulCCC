@@ -9,20 +9,49 @@ $nowtime = time();
 	CheckRank(0,0);
     require_once DEDEINC."/arc.partview.class.php";
 	$showmune=2;
-	$cvid = $cvid?$cvid:1;
+	$cvid = $cvid?$cvid:0;
 	//$dtype=explode("_",$_SERVER['QUERY_STRING']);
-	$symbol=$symbol?$symbol:"BTC_CNY";//"BTC_LTC";
+	$symbol=$symbol?$symbol:"LTC_BTC";
 	$dtype=explode("_",$symbol);
 	$dtype1=$password=preg_replace("#[^A-Za-z-]#", "", $dtype[0]);
 	$dtype2=$password=preg_replace("#[^A-Za-z-]#", "", $dtype[1]);
 	$type=$type?$type:"buy";
 	//$rcvid = $dsql->GetOne("Select id From `#@__btcconvert` Where coinid=$dtype1 AND moneyid=$dtype2");
 	
-	$dsql->SetQuery("Select * From `#@__btcconvert` Where enabled=1");
+	if($type=="buy") $showtype="买入";
+			else $showtype="卖出";
+	
+	$dsql->SetQuery("Select id, cointype, coinname, coinhost From `#@__btctype` Where coinsign = 1");
 	$dsql->Execute();
+	$count = 0;
+	while ($rcv = $dsql->GetObject()){
+		if($rcv->coinhost == 1){
+			$cointypelist[$count] = array(
+				'id' => $rcv->id,
+				'cointype' => $rcv->cointype,
+				'coinname' => $rcv->coinname
+			);
+		}
+		$count ++;
+	}
+	if(!isset($dtype2) || empty($dtype2)){
+		$typeAAA = $dtype1;
+	}else{
+		$typeAAA = $dtype2;
+	}
+	foreach($cointypelist as $key => $typemune){
+		if($typeAAA == $typemune['cointype']) $coinconvertName .= "<li class='li1 cur'><a href='?type=".$type."&symbol=".$typemune['cointype']."'><span>".$typemune['cointype']."</span></a></li>";
+		else $coinconvertName .= "<li><a href='?type=".$type."&symbol=".$typemune['cointype']."'><span>".$typemune['cointype']."</span></a></li>";
+		
+	}
+	
+	
+	$dsql->SetQuery("Select * From `#@__btcconvert` Where enabled=1 and moneytype = '". $typeAAA ."'");
+	$dsql->Execute();
+	$count = 0;
 	while($rcv = $dsql->GetObject())
 	{
-		$dtypearr[$rcv->id]=array(
+		$dtypearr[$count]=array(
 			'coinid'=>$rcv->coinid,
 			'cointype'=>$rcv->cointype,
 			'coinname'=>$rcv->coinname,
@@ -32,11 +61,13 @@ $nowtime = time();
 			'fee'=>$rcv->fee,
 			'digits'=>$rcv->digits
 		);
+		
 		if($rcv->cointype==$dtype1 && $rcv->moneytype==$dtype2){
-			$cvid=$rcv->id;
+			$cvid=$count;
 		}
+		$count++;
 	}
-	if($cvid=="") $cvid=1;
+	if($cvid=="") $cvid=0;
 			$coinid=$dtypearr[$cvid]['coinid'];
 			$cointype=$dtypearr[$cvid]['cointype'];
 			$coinname=$dtypearr[$cvid]['coinname'];
@@ -46,8 +77,6 @@ $nowtime = time();
 			$fee=$dtypearr[$cvid]['fee'];
 			$digits=$dtypearr[$cvid]['digits'];
 			
-			if($type=="buy") $showtype="买入";
-			else $showtype="买出";
 	foreach($dtypearr as $key => $typemune){
 		/*if($key==$cvid) $convertName .= "<li><a class='show' href='".$cfg_cmsurl."/?".$typemune['cointype']."_".$typemune['moneytype']."'><span>".$typemune['cointype']."/".$typemune['moneytype']."</span></a></li>";
 		else $convertName .= "<li><a class='hide' href='".$cfg_cmsurl."/?".$typemune['cointype']."_".$typemune['moneytype']."'><span>".$typemune['cointype']."/".$typemune['moneytype']."</span></a></li>";*/
