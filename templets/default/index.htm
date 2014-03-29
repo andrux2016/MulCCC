@@ -261,36 +261,29 @@ $("#pwd").focus();
 </div>
 <div class="amaze2">
 <table id="top_table" class="top_table">
-	<thead>
+
+<thead>
 		<tr class="btc_pag3" style="line-height: 30px;">
 			<th class="sort-title" align="left" width="130">货币</th>
-			<th class="sort-title" datatype="float" align="left" width="90">现价</th>
-			<th class="sort-title" datatype="float" align="left" width="90">买一价</th>
-			<th class="sort-title" datatype="float" align="left" width="90">卖一价</th>
-			<th class="sort-title" datatype="float" align="left" width="90">成交量</th>
-			<th class="sort-title" datatype="float" align="left" width="90">成交额</th>
-			<th align="left">7天走势</th>
+			<th class="sort-title" datatype="float" align="left" width="120">现价</th>
+			<th class="sort-title" datatype="float" align="left" width="120">24h成交价</th>
+			<th class="sort-title" datatype="float" align="left" width="120">24h成交量</th>
+			<th class="sort-title" datatype="float" align="left" width="120">24h成交额</th>
+			<th class="sort-title" datatype="float" align="left" width="200">最后成交时间</th>
 		</tr>
 	</thead>
 	<tbody>
 
 {dede:php}
 foreach($dtypearr as $tmpdtypearr){
-		echo '<tr style=""><td style="cursor: pointer;"	onclick="window.location=\'/oldindex.php?';
-		echo $tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'\'"align="left">'.$tmpdtypearr['coinname'].'&nbsp;&nbsp;';
+		echo '<tr style=""><td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left">&nbsp;&nbsp;';
 		echo $tmpdtypearr['cointype'].'/'.$tmpdtypearr['moneytype'].'</td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\'/oldindex.php?';
-		echo $tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'\'"align="left"><span id="history_price_wcccny">'.$tmpdtypearr['newrate']['last_rate'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\'/oldindex.php?';
-		echo $tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'\'"align="left"><span id="buy1_wcccny">'.$tmpdtypearr['newrate']['bid'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\'/oldindex.php?';
-		echo $tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'\'"align="left"><span id="sell1_wcccny">'.$tmpdtypearr['newrate']['ask'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\'/oldindex.php?';
-		echo $tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'\'"align="left"><span id="vol_wcccny">'.$tmpdtypearr['count'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\'/oldindex.php?';
-		echo $tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'\'"align="left"><span id="trade_wcccny">'.$tmpdtypearr['total'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\'/oldindex.php?';
-		echo $tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'\'"align="left"><div id="'.$tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'" style="width: 80px; height: 26px; padding: 0px; position: relative;"></div></td></tr>';
+		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="history_price_wcccny">'.$tmpdtypearr['price_btc'].'</span></td>';
+		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="buy1_wcccny">'.$tmpdtypearr['price_before_24h'].'</span></td>';
+		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="sell1_wcccny">'.$tmpdtypearr['volume_btc'].'</span></td>';
+		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="vol_wcccny">'.$tmpdtypearr['total'].'</span></td>';
+		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="trade_wcccny">'.$tmpdtypearr['latest_trade'].'</span></td>';
+		echo '</tr>';
 }
 {/dede:php}
 	</tbody>
@@ -303,7 +296,6 @@ foreach($dtypearr as $tmpdtypearr){
 
 
 </div>
-<div class="content_all"></div>
 </div>
 {dede:include filename="footer_btc.htm"/}
 </body>

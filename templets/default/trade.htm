@@ -20,7 +20,7 @@
 	<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/misc.js"></script>
     <script type="text/javascript">
         trade_global = {};
-		trade_global.digits = {dede:php} echo $digits;{/dede:php};
+		trade_global.digits = '{dede:php} echo $digits;{/dede:php}';
 		trade_global.moneyid = '{dede:php} echo $moneyid;{/dede:php}';
 		trade_global.coinid = '{dede:php} echo $coinid;{/dede:php}';
 		trade_global.money = '{dede:php} echo $moneytype;{/dede:php}';
@@ -296,6 +296,12 @@ function showpassword() {
 			<div id="xbt_yincmm1" style="float:left; ">
 				<div class="con-nav">
 					<ul>
+						{dede:php} echo $coinconvertName;{/dede:php}
+						
+					</ul>
+				</div>
+				<div class="con-nav">
+					<ul>
 						{dede:php} echo $convertName;{/dede:php}
 						
 					</ul>
@@ -368,6 +374,12 @@ function showpassword() {
 			
 			
 			<div id="xbt_yincmm2" style="float:left; display:none;">
+				<div class="con-nav">
+					<ul>
+						{dede:php} echo $coinconvertName;{/dede:php}
+						
+					</ul>
+				</div>
 				<div class="con-nav">
 					<ul>
 						{dede:php} echo $convertName;{/dede:php}

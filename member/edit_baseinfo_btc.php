@@ -41,9 +41,8 @@ $row=$dsql->GetOne("SELECT  * FROM `#@__member` WHERE mid='".$cfg_ml->M_ID."'");
 $face = $row['face'];
 $nowtxpwd = $row['txpwd'];
 $nowpwd = $row['pwd'];
-
 $show=$show?$show:"1" ;
-if($nowtxpwd=="") $show="1";
+if($nowtxpwd=="") $show="2";
 
 if($dopost=='save')
 {
@@ -140,12 +139,11 @@ if($dopost=='save')
     }
     $addupquery = '';
     
-
     
     //修改安全问题
     if($show==3)
     {
-        if($row['safequestion'] != $safequestion || $row['safeanswer'] != $safeanswer)
+        if(($row['safequestion'] != 0 && $row['safequestion'] != $safequestion) || (!empty($row['safeanswer']) && $row['safeanswer'] != $safeanswer))
         {
             showJson('你的旧安全问题及答案不正确，不能修改安全问题！','-1');
             exit();
@@ -168,7 +166,7 @@ if($dopost=='save')
 	//修改提现密码
     if($show==2 && $txpwdok != $row['txpwd'])
     {
-        if($row['safequestion'] != $safequestion || $row['safeanswer'] != $safeanswer)
+        if(($row['safequestion'] != 0 && $row['safequestion'] != $safequestion) || (!empty($row['safeanswer']) && $row['safeanswer'] != $safeanswer))
         {
             showJson('你的旧安全问题及答案不正确，不能修改提现密码！','-1');
             exit();
@@ -181,7 +179,6 @@ if($dopost=='save')
         }   
 			$addupquery .= ",txpwd='$txpwdok'";
     }
-    
     
     $query1 = "UPDATE `#@__member` SET pwd='$pwd'{$addupquery} where mid='".$cfg_ml->M_ID."' ";
     $dsql->ExecuteNoneQuery($query1);
