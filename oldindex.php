@@ -215,7 +215,7 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 		$listbuy[] = array(  
 			'symbol_l' => $v['vol'], 
 			'rate' => $v['rate'], 
-			'symbol_r' => $v['rate']*$v['vol'], 
+			'symbol_r' => number_format($v['rate']*$v['vol'],'','',''), 
 			'count' => $v['count']
 		);
 	}
@@ -235,7 +235,7 @@ $tikarr = FunNewRate($coinid,$moneyid);
 			'date' => $rod->dealtime, 
 			'rate' => $rod->uprice/1, 
 			'amount_l' => $rod->btccount/1, 
-			'amount_r' => $rod->uprice*$rod->btccount/1, 
+			'amount_r' => number_format($rod->uprice*$rod->btccount/1 ,'','',''), 
 			'order' => $orderT, 
 			'ticket' => $rod->id 
 		);
@@ -255,7 +255,7 @@ $tikarr = FunNewRate($coinid,$moneyid);
 			'date' => $rod->dealtime, 
 			'rate' => del0($rod->uprice), 
 			'amount_l' => del0($rod->btccount), 
-			'amount_r' => del0($rod->uprice*$rod->btccount), 
+			'amount_r' => number_format(del0($rod->uprice*$rod->btccount) ,'','',''), 
 			'order' => $orderT, 
 			'ticket' => $rod->id 
 		);
@@ -273,7 +273,7 @@ $dsql->SetQuery("SELECT id,btccount,uprice,dealtype,dealtime FROM #@__btcdeal WH
 			'date' => $rod->dealtime, 
 			'rate' => del0($rod->uprice), 
 			'amount_l' => del0($rod->btccount), 
-			'amount_r' => del0($rod->uprice*$rod->btccount), 
+			'amount_r' => number_format(del0($rod->uprice*$rod->btccount) ,'','',''), 
 			'order' => $orderT, 
 			'ticket' => $rod->id 
 		);
