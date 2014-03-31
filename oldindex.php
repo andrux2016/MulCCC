@@ -182,7 +182,7 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 	$time_line = str_replace("\"","",json_encode(array_reverse($tlinearr)));  
 	
 	//读取挂单
-	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 ORDER BY uprice LIMIT 100");
+	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 ORDER BY uprice desc LIMIT 100");
 	$dsql->Execute();
 	while($rod = $dsql->GetObject())
 	{
@@ -201,7 +201,7 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 		);
 	}
 	//读取挂单
-	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=0 ORDER BY uprice DESC LIMIT 100");
+	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=0 ORDER BY uprice asc LIMIT 100");
 	$dsql->Execute();
 	while($rod = $dsql->GetObject())
 	{
