@@ -93,15 +93,12 @@ function CheckCNY(){
 		dataType: "json",//返回json格式的数据
 		success: function(data, state) {
 			if(data.ruslt==1){
-				if($("#action").val()=="email") {CheckEmail();}
-				else{
-					apprise(data.showMsg, {
-					animate: false,
-					textOk: "确定"
-					},function(r) {
-						location.href="operation_cash.php";
-					});		
-				}
+				apprise(data.showMsg, {
+				animate: false,
+				textOk: "确定"
+				},function(r) {
+					location.href="operation_cash.php";
+				});		
 			}else{
 				apprise(data.showMsg, {
 				animate: false,
@@ -170,15 +167,12 @@ function CheckBTC(){
 		dataType: "json",//返回json格式的数据
 		success: function(data, state) {
 			if(data.ruslt==1){
-				if($("#action").val()=="email") {CheckEmail();}
-				else{
-					apprise(data.showMsg, {
-					animate: false,
-					textOk: "确定"
-					},function(r) {
-						location.href="operation_cash.php";
-					});		
-				}
+				apprise(data.showMsg, {
+				animate: false,
+				textOk: "确定"
+				},function(r) {
+					location.href="operation_cash.php";
+				});		
 			}else{
 				apprise(data.showMsg, {
 				animate: false,
@@ -193,24 +187,6 @@ function CheckBTC(){
 }
 
 
-function CheckEmail(){
-	  	
-		$.getJSON("{dede:global.cfg_cmspath/}/member/cash_email.php?coinid="+$('#coinid').val()+"&tt="+new Date(), function(data){
-			if(data){
-				apprise("已经向您的邮箱发送验证码，请稍后登陆邮箱查收。", {
-				animate: false,
-				textOk: "确定"
-				},function(r) {
-					$('#email').hide();
-					$('#do').show();
-					$('#code').show();
-					//$("#vdcode").val("");
-					$("#action").val("do");
-				});		
-				
-			}
-		});
-}
 </script>
 
 

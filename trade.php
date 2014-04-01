@@ -55,14 +55,14 @@ $nowtime = time();
 	
 	
 	$cfg_arrcoin=Getdeposit("",$cfg_ml->M_ID);
+	
 
 foreach ($cfg_arrcoin as $value){
-
-	$coinhtml.="<li>".$value['0']."：<span>".(floor($value['1']*100)/100)."</span></li>";
-	$freehtml.="<li>冻结：<span>".($value['2']/1)."</span></li>";
-	$coinvol+=$value['4'];
+	$trhtml .= '<tr><td class="gray">'.$value['0'].'</td><td>'.(floor($value['1']*100)/100).'</td><td>'.($value['2']/1).'</td><td>';
+	$trhtml .= '&nbsp;&nbsp;<a href="/member/buy_btc.php?coinid='.$value['3'].'">充值</a> &nbsp;&nbsp;<a href="/member/cash_btc.php?coinid='.$value['3'].'">提现</a> &nbsp;&nbsp;<a href="/member/operation_btc.php">充值记录</a> &nbsp;&nbsp;<a href="/member/operation_cash.php">提现记录</a> &nbsp;&nbsp;<a href="/oldindex.php?'.$value['0'].'">交易</a> &nbsp;&nbsp; </td></tr>';
 }
-	
+
+
 /*
 走势图数据
 */
