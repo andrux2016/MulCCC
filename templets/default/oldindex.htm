@@ -724,8 +724,8 @@ foreach($dealarr as $deal){
 <div class="btc_title"><span class="title_list">{dede:php} echo $cointype."/".$moneytype; {/dede:php}卖单队列</span></div>
 <div class="btc_pag">
 <div style="width: 33%">卖出价</div>
-<div style="width: 33%">卖出量</div>
-<div style="width: 33%">兑换额</div>
+<div style="width: 33%">卖出量({dede:php} echo $cointype; {/dede:php})</div>
+<div style="width: 33%">兑换额({dede:php} echo $moneytype; {/dede:php})</div>
 </div>
 <div class="amaze1">
 <div id="sell_table"
@@ -750,8 +750,8 @@ foreach($listsell as $sellinfo){
 <div class="btc_title"><span class="title_list">{dede:php} echo $cointype."/".$moneytype; {/dede:php}买单队列</span></div>
 <div class="btc_pag">
 <div style="width: 33%">买入价</div>
-<div style="width: 33%">买入量</div>
-<div style="width: 33%">兑换额</div>
+<div style="width: 33%">买入量({dede:php} echo $cointype; {/dede:php})</div>
+<div style="width: 33%">兑换额({dede:php} echo $moneytype; {/dede:php})</div>
 </div>
 <div class="amaze1">
 <div id="buy_table"
