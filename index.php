@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 
 /**
@@ -66,7 +66,7 @@ if(isset($_GET['upcache']) || !file_exists('index.html'))
 				'price_before_24h'=>number_format($row->price_btc,'','',''),
 				'volume_btc'=>$row->volume_btc,
 //				'total'=>$row->volume_btc*$data2->price_before_24h,
-				'total'=>$row->number_format(volume_btc*$row->price_btc,'','',''),
+				'total'=>number_format($row->volume_btc*$row->price_btc,'','',''),
 //				'latest_trade'=>$data2->latest_trade
 				'latest_trade'=>date('Y-m-d H:i:s'),
 			);
