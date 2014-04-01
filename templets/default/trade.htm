@@ -112,7 +112,7 @@
 				//$('#userName').html(data.username);
 				//$('#usertop').html("<li class=\"userlink\"><a href=\"{dede:global.cfg_cmspath/}/member/\" >"+data.username+"</a></li><li>[<a href=\"{dede:global.cfg_cmspath/}/member/help.php?mark=vip\" >"+data.mvip+"</a>][<a href=\"{dede:global.cfg_cmspath/}/member/\" >会员中心</a>][<a href=\"#\" onclick=\"UserQuit()\">退出</a>]</li> ");
 				//$('#usertop').html("<span class=\"userlink\"><a class='ugif xbt-ugif' href=\"\" >"+data.username+"</a></span> <span>[<a  class='ugif xbt-vip'href=\"help.php?mark=vip/\" >"+data.mvip+"</a>][<a href=\"#\" onclick=\"UserQuit()\">退出</a>]</span>");
-					$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");
+					$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='out' style='width:80px;'><a href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >我的账户</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");
 			
 				uid=data.userid;
 				var coinval,moneyval;

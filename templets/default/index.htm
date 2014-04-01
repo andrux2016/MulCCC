@@ -54,7 +54,7 @@ function CheckLogin(){
   		$('#_loaduser').hide();
 		if(data.userid){
 			$('#_userlogin').hide();
-			$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");
+			$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='out' style='width:80px;'><a href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >我的账户</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");
 		}
 	});
 	

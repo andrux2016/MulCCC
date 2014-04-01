@@ -115,7 +115,7 @@ function showpassword() {
 				$('#headrate').hide();
 				$('#userName').html(data.username);
 				//$('#usertop').html("<li class=\"userlink\"><a class='ugif' href=\"\" >"+data.username+"</a></li><li>[<a href=\"help.php?mark=vip/\" >"+data.mvip+"</a>][<a href=\"\" >会员中心</a>][<a href=\"#\" onclick=\"UserQuit()\">退出</a>]</li><li></li>");
-				//$('#usertop').html("<li><span class=\"userlink\"><a class='ugif' href=\"\" >"+data.username+"</a></span> <span>[<a href=\"help.php?mark=vip/\" >"+data.mvip+"</a>][<a href=\"\" >会员中心</a>][<a href=\"#\" onclick=\"UserQuit()\">退出</a>]</span></li>");					$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");			
+				//$('#usertop').html("<li><span class=\"userlink\"><a class='ugif' href=\"\" >"+data.username+"</a></span> <span>[<a href=\"help.php?mark=vip/\" >"+data.mvip+"</a>][<a href=\"\" >会员中心</a>][<a href=\"#\" onclick=\"UserQuit()\">退出</a>]</span></li>");					$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='out' style='width:80px;'><a href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >我的账户</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");			
 				uid=data.userid;
 				/*$.each(data.coin, function(key, val) {   
 					if(val[1] && val[1]!=0) var valshow=val[1];
