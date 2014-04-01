@@ -61,12 +61,12 @@ if(isset($_GET['upcache']) || !file_exists('index.html'))
 				'moneyname'=>'BTC',
 				'moneytype'=>'BTC',
 				'website'=>$row->website,
-				'price_btc'=> number_format($row->price_btc,'','',''),
+				'price_btc'=> number_format($row->price_btc,5 ,'.',''),
 //				'price_before_24h'=>$data2->price_before_24h,
-				'price_before_24h'=>number_format($row->price_btc,'','',''),
+				'price_before_24h'=>number_format($row->price_btc,5 ,'.',''),
 				'volume_btc'=>$row->volume_btc,
 //				'total'=>$row->volume_btc*$data2->price_before_24h,
-				'total'=>number_format($row->volume_btc*$row->price_btc,'','',''),
+				'total'=>number_format($row->volume_btc*$row->price_btc,5, '.',''),
 //				'latest_trade'=>$data2->latest_trade
 				'latest_trade'=>date('Y-m-d H:i:s'),
 			);
