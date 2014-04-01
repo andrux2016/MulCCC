@@ -538,7 +538,11 @@ on_input_ask_rate: function() {
 	var element_rate = get_element('ask_rate');
 	var fixed_num = num_need_fix(element_rate.value, Number(trade_global.digits));
 	if (fixed_num) {
-		element_rate.value = fixed_num
+		if(fixed_num == 0){
+			element_rate.value = 0;
+		}else{
+			element_rate.value = fixed_num;
+		}
 	};
 	var balance_ask_able = get_element('balance_ask_able');
 	var amount_ask_able = get_element('amount_ask_able');
@@ -551,7 +555,11 @@ on_input_bid_rate: function() {
 	var element_rate = get_element('bid_rate');
 	var fixed_num = num_need_fix(element_rate.value, Number(trade_global.digits));
 	if (fixed_num) {
-		element_rate.value = fixed_num
+		if(fixed_num == 0){
+			element_rate.value = 0;
+		}else{
+			element_rate.value = fixed_num;
+		}
 	};
 	page_obj.on_input_bid_vol()
 },
@@ -672,8 +680,8 @@ update_new_rate: function() {
 	})
 },
 update_best_rate: function() {
-	if(get_element('rate_best_ask').innerHTML=="0") get_element('ask_rate').value = num_fix(Number(Number(main_ask_bid_list_obj.best_bid_rate) + 0.00000004).toFixed(10), Number(trade_global.digits));
-	if(get_element('rate_best_bid').innerHTML=="0") get_element('bid_rate').value = num_fix(Number(Number(main_ask_bid_list_obj.best_ask_rate) + 0.00000004).toFixed(10), Number(trade_global.digits));
+	if(get_element('rate_best_ask').innerHTML=="0") get_element('ask_rate').value = main_ask_bid_list_obj.best_bid_rate;
+	if(get_element('rate_best_bid').innerHTML=="0") get_element('bid_rate').value = main_ask_bid_list_obj.best_ask_rate;
 	get_element('rate_best_ask').innerHTML = num_fix(Number(Number(main_ask_bid_list_obj.best_bid_rate) + 0.00000004).toFixed(10), Number(trade_global.digits));
 	get_element('rate_best_bid').innerHTML = num_fix(Number(Number(main_ask_bid_list_obj.best_ask_rate) + 0.00000004).toFixed(10), Number(trade_global.digits));
 	
