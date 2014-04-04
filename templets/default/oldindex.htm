@@ -107,10 +107,10 @@
 				if(data.myorderlist){
 					$.each(data.myorderlist, function(key, val){
 						if(val.dealtype == 0 || val.dealtype == 1){
-							if(val.dealtype == 0){$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;<font color="#009900">买</font></div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol=<?php echo $coinid;?>_<?php echo $moneyid;?>&tid='+val.id+'">撤单</a></div></div>');}
-							else if(val.dealtype == 1){$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;<font color="#FF0000">卖</font></div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol=<?php echo $coinid;?>_<?php echo $moneyid;?>&tid='+val.id+'">撤单</a></div></div>');}
+							if(val.dealtype == 0){$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;<font color="#009900">买</font></div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&tid='+val.id+'">撤单</a></div></div>');}
+							else if(val.dealtype == 1){$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;<font color="#FF0000">卖</font></div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&tid='+val.id+'">撤单</a></div></div>');}
 						}else {
-							$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;&nbsp;</div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol=<?php echo $coinid;?>_<?php echo $moneyid;?>&tid='+val.id+'">撤单</a></div></div>');
+							$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;&nbsp;</div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&tid='+val.id+'">撤单</a></div></div>');
 						}
 					});
 				}
