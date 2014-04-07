@@ -3,6 +3,7 @@ require_once(dirname(__FILE__)."/member/config.php");
 AjaxHead();
 $market=preg_replace("#[^0-9-]#", "", $market)?preg_replace("#[^0-9-]#", "", $market):"1";//sz
 $type=preg_replace("#[^_A-Za-z-]#", "", $type)?preg_replace("#[^_A-Za-z-]#", "", $type):exit();
+$trade=preg_replace("#[^_A-Za-z-]#", "", $trade)?preg_replace("#[^_A-Za-z-]#", "", $trade):"false";
 
 /*
 取消挂单
@@ -13,7 +14,11 @@ if($type=="cancel"){
 	$cancelrul = FunCancle($cfg_ml->M_ID,$tid,$market);
 	
 	if(empty($op) && $cancelrul == "true"){
-		ShowMsg("成功撤单！","member/btc_orderlist.php");
+		if($trade == "true"){
+			ShowMsg("成功撤单！","oldindex.php");
+		}else{
+			ShowMsg("成功撤单！","member/btc_orderlist.php");
+		}
 		exit();
 	}elseif(empty($op) &&  $cancelrul != "true"){
 		ShowMsg("撤单不成功！","-1");

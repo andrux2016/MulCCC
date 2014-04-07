@@ -17,6 +17,7 @@
         trade_global.symbol = '{dede:php} echo $cointype;{/dede:php}_{dede:php} echo $moneytype;{/dede:php}';
         trade_global.symbol_view = '{dede:php} echo $cointype;{/dede:php}/{dede:php} echo $moneytype;{/dede:php}';
 		trade_global.fee = '{dede:php} echo $fee;{/dede:php}';
+		trade_global.moneyfee = '{dede:php} echo $moneyfee;{/dede:php}';
         trade_global.ask = 1.2;
 		server_time = Date.parse(new Date())/1000;
 		var uid;
@@ -107,10 +108,10 @@
 				if(data.myorderlist){
 					$.each(data.myorderlist, function(key, val){
 						if(val.dealtype == 0 || val.dealtype == 1){
-							if(val.dealtype == 0){$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;<font color="#009900">买</font></div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&tid='+val.id+'">撤单</a></div></div>');}
-							else if(val.dealtype == 1){$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;<font color="#FF0000">卖</font></div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&tid='+val.id+'">撤单</a></div></div>');}
+							if(val.dealtype == 0){$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;<font color="#009900">买</font></div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&trade=true&tid='+val.id+'">撤单</a></div></div>');}
+							else if(val.dealtype == 1){$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;<font color="#FF0000">卖</font></div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&trade=true&tid='+val.id+'">撤单</a></div></div>');}
 						}else {
-							$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;&nbsp;</div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&tid='+val.id+'">撤单</a></div></div>');
+							$('#my_table').append('<div class="div_table"><div style="width: 25%;" class="td_left">&nbsp;&nbsp;</div><div style="width: 25%;">' + val.uprice + '</div><div style="width: 25%;">' + val.btccount + '</div><div style="width: 25%;"><a href="/data.php?type=cancel&symbol={dede:php echo $coinid;/}_{dede:php echo $moneyid;/}&trade=true&tid='+val.id+'">撤单</a></div></div>');
 						}
 					});
 				}
@@ -142,9 +143,10 @@
 						$("#userMoney").append("<div style='width:100%'>"+ val[0] +":<font color='#FF0000'>"+valshow+"</font>&nbsp;&nbsp;冻结："+freshow+"</div>");
 					}
 				}); 
-				$('#coinfee').html(Number("{dede:php} echo $fee*100;{/dede:php}")*data.FeePer+"%");
-				$('#moneyfee').html(Number("{dede:php} echo $fee*100;{/dede:php}")*data.FeePer+"%");
+				$('#coinfee').html(Number("{dede:php} echo $coinfee*100;{/dede:php}")*data.FeePer+"%");
+				$('#moneyfee').html(Number("{dede:php} echo $moneyfee*100;{/dede:php}")*data.FeePer+"%");
 				trade_global.fee=(Number("{dede:php} echo $fee;{/dede:php}")*data.FeePer).toFixed(4);
+				trade_global.moneyfee=(Number("{dede:php} echo $moneyfee;{/dede:php}")*data.FeePer).toFixed(4);
 				$('#zzc').html((Number(coinval)+Number(moneyval)).toFixed(4))
 				//alert("{dede:php} echo $orderjson;{/dede:php}");
 				/*if(eval('"{dede:php} echo $orderjson;{/dede:php}"')){
@@ -721,7 +723,7 @@ foreach($dealarr as $deal){
 <div class="content_right_container">
 <div class="content_right_top"></div>
 <div class="content_right_middle">
-<div class="btc_title"><span class="title_list">{dede:php} echo $cointype."/".$moneytype; {/dede:php}卖单队列</span></div>
+<div class="btc_title"><span class="title_list">{dede:php} echo $cointype."/".$moneytype; {/dede:php}卖单队列</span><a style='float:right;' href='/tradetypes.php?type=sell&symbol={dede:php} echo $cointype."_".$moneytype; {/dede:php}'>更多</a></div>
 <div class="btc_pag">
 <div style="width: 33%">卖出价</div>
 <div style="width: 33%">卖出量({dede:php} echo $cointype; {/dede:php})</div>
@@ -747,7 +749,7 @@ foreach($listsell as $sellinfo){
 <div class="content_right_container">
 <div class="content_right_top"></div>
 <div class="content_right_middle">
-<div class="btc_title"><span class="title_list">{dede:php} echo $cointype."/".$moneytype; {/dede:php}买单队列</span></div>
+<div class="btc_title"><span class="title_list">{dede:php} echo $cointype."/".$moneytype; {/dede:php}买单队列</span><a style='float:right;' href='/tradetypes.php?type=buy&symbol={dede:php} echo $cointype."_".$moneytype; {/dede:php}'>更多</a></div>
 <div class="btc_pag">
 <div style="width: 33%">买入价</div>
 <div style="width: 33%">买入量({dede:php} echo $cointype; {/dede:php})</div>

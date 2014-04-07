@@ -43,8 +43,8 @@ if(isset($_GET['upcache']) || !file_exists('oldindex.html'))
 			'moneyid'=>$rcv->moneyid,
 			'moneyname'=>$rcv->moneyname,
 			'moneytype'=>$rcv->moneytype,
-			'fee'=>$rcv->fee,
-			'digits'=>$rcv->digits
+			'fee'=>rtrimandformat($rcv->fee, 10),
+			'digits'=>rtrimandformat($rcv->digits, 10)
 		);
 		if($rcv->cointype==$dtype1 && $rcv->moneytype==$dtype2 && $status == 0){
 			$cvid=$rcv->id;
@@ -111,8 +111,8 @@ if(isset($_GET['upcache']) || !file_exists('oldindex.html'))
 		$rateAllArr = FunNewRate($typemune['coinid'],$typemune['moneyid']);
 		/*if($key==$cvid) $convertName .= "<li class='coinshow'><a href='".$cfg_cmsurl."/?".$typemune['cointype']."_".$typemune['moneytype']."'><span>".$typemune['cointype']."/".$typemune['moneytype']."</span></a><br>".$rateAllArr['last_rate']."</li>";
 		else $convertName .= "<li class='coinhide'><a href='".$cfg_cmsurl."/?".$typemune['cointype']."_".$typemune['moneytype']."'><span>".$typemune['cointype']."/".$typemune['moneytype']."</span></a><br>".$rateAllArr['last_rate']."</li>";*/
-		if($typemune['cointype'] == $cointype) $convertName .= "<a class='btc8-abase btc8-avist' href='".$cfg_cmsurl."/oldindex.php?".$typemune['cointype']."_".$typemune['moneytype']."'>".$typemune['cointype']."/".$typemune['moneytype']."<br>".$rateAllArr['last_rate']."</a>";
-		else $convertName .= "<a class='btc8-abase' href='".$cfg_cmsurl."/oldindex.php?".$typemune['cointype']."_".$typemune['moneytype']."'>".$typemune['cointype']."/".$typemune['moneytype']."<br>".$rateAllArr['last_rate']."</a>";
+		if($typemune['cointype'] == $cointype) $convertName .= "<a class='btc8-abase btc8-avist' href='".$cfg_cmsurl."/oldindex.php?".$typemune['cointype']."_".$typemune['moneytype']."'>".$typemune['cointype']."/".$typemune['moneytype']."<br>".rtrimandformat($rateAllArr['last_rate'])."</a>";
+		else $convertName .= "<a class='btc8-abase' href='".$cfg_cmsurl."/oldindex.php?".$typemune['cointype']."_".$typemune['moneytype']."'>".$typemune['cointype']."/".$typemune['moneytype']."<br>".rtrimandformat($rateAllArr['last_rate'])."</a>";
 	}
 	//echo $coinid;
 	$rty = $dsql->GetOne("Select about From `#@__btctype` Where id='".$coinid."'");
@@ -135,8 +135,8 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 				
 		else $coinhtml.="<div class='row-btc'>".$value['0'].":".(floor($value['1']*$dignum)/$dignum)."</div>";
 		//$coinhtml.="<div><label class='fleft'>".$value['0']."余额：</label><span class='coininfo'>".($value['1']/1)."</span><span>冻结：".($value['2']/1)."</span></div>";
-		if($value['0']==$cointype) $coindeposit=(floor($value['1']*$dignum)/$dignum);
-		if($value['0']==$moneytype) $moneydeposit=(floor($value['1']*$dignum)/$dignum);
+		if($value['0']==$cointype) $coindeposit=rtrimandformat(floor($value['1']*$dignum)/$dignum, 10);
+		if($value['0']==$moneytype) $moneydeposit=rtrimandformat(floor($value['1']*$dignum)/$dignum, 10);
 		$coinvol+=$value['4'];
 	}
 	
@@ -184,39 +184,43 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 	//读取挂单
 	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 ORDER BY uprice desc LIMIT 10");
 	$dsql->Execute();
+	$status = 0;
 	while($rod = $dsql->GetObject())
 	{
-		$ordersell[$rod->uprice] = array(  
+		$ordersell[$status] = array(  
 			'vol' => $ordersell[$rod->uprice]['vol']+$rod->btccount*1, 
 			'rate' => $rod->uprice/1,  
 			'count' => $ordersell[$rod->uprice]['count']+1
 		);
+		$status++;
 	}
 	foreach($ordersell as $k=>$v){
 		$listsell[] = array(  
-			'symbol_l' => $v['vol'], 
-			'rate' => number_format($v['rate'],10 ,'.',''), 
-			'symbol_r' => number_format($v['rate']*$v['vol'],10 ,'.',''),
-			'count' => $v['count']
+			'symbol_l' => rtrimandformat($v['vol'], 10), 
+			'rate' => rtrimandformat($v['rate'],10), 
+			'symbol_r' => rtrimandformat($v['rate']*$v['vol'],10),
+			'count' => rtrimandformat($v['count'],10)
 		);
 	}
 	//读取挂单
 	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=0 ORDER BY uprice desc LIMIT 10");
 	$dsql->Execute();
+	$status = 0;
 	while($rod = $dsql->GetObject())
 	{
-		$orderbuy[$rod->uprice] = array(  
+		$orderbuy[$status] = array(  
 			'vol' => $orderbuy[$rod->uprice]['vol']+$rod->btccount/1, 
 			'rate' => $rod->uprice/1,  
 			'count' => $orderbuy[$rod->uprice]['count']+1
 		);
+		$status++;
 	}
 	foreach($orderbuy as $k=>$v){
 		$listbuy[] = array(  
-			'symbol_l' => $v['vol'], 
-			'rate' => number_format($v['rate'],10 ,'.',''), 
-			'symbol_r' => number_format($v['rate']*$v['vol'],10 ,'.',''), 
-			'count' => $v['count']
+			'symbol_l' => rtrimandformat($v['vol'], 10), 
+			'rate' => rtrimandformat($v['rate'],10), 
+			'symbol_r' => rtrimandformat($v['rate']*$v['vol'],10), 
+			'count' => rtrimandformat($v['count'], 10)
 		);
 	}
 	
@@ -235,7 +239,7 @@ $tikarr = FunNewRate($coinid,$moneyid);
 			'date' => $rod->dealtime, 
 			'rate' => $rod->uprice/1, 
 			'amount_l' => $rod->btccount/1, 
-			'amount_r' => number_format($rod->uprice*$rod->btccount/1 ,10 ,'.',''),
+			'amount_r' => rtrimandformat($rod->uprice*$rod->btccount/1 ,10),
 			'order' => $orderT, 
 			'ticket' => $rod->id 
 		);
@@ -243,43 +247,6 @@ $tikarr = FunNewRate($coinid,$moneyid);
 	}
 
 	$history_list = json_encode($dealarr);  
-	
-	
-	$dsql->SetQuery("SELECT id,btccount,uprice,dealtype,dealtime FROM #@__btcdeal WHERE coinid='3' AND moneyid='".$moneyid."' AND market='1' ORDER BY id DESC LIMIT 20");
-	$dsql->Execute();
-	while($rod = $dsql->GetObject())
-	{
-		if($rod->dealtype==0) $orderT="<font color='#009900'>买入</font>";
-		else  $orderT="<font color='#FF0000'>卖出</font>";
-		$dealarrLTB[]=array(  
-			'date' => $rod->dealtime, 
-			'rate' => del0($rod->uprice), 
-			'amount_l' => del0($rod->btccount), 
-			'amount_r' => number_format(del0($rod->uprice*$rod->btccount) ,10 ,'.',''),
-			'order' => $orderT, 
-			'ticket' => $rod->id 
-		);
-		$ltchtml.="<tr><td>".$rod->dealtime."</td><td>".$orderT."</td><td>￥".del0($rod->uprice)."</td><td>฿".del0($rod->btccount)."</td><td>￥".del0($rod->uprice*$rod->btccount)."</td></tr>";
-	}
-$history_listLTB = json_encode($dealarrLTB); 
- 
-$dsql->SetQuery("SELECT id,btccount,uprice,dealtype,dealtime FROM #@__btcdeal WHERE coinid='4' AND moneyid='".$moneyid."' AND market='1' ORDER BY id DESC LIMIT 20");
-	$dsql->Execute();
-	while($rod = $dsql->GetObject())
-	{
-		if($rod->dealtype==0) $orderT="<font color='#009900'>买入</font>";
-		else  $orderT="<font color='#FF0000'>卖出</font>";
-		$dealarrXPM[]=array(  
-			'date' => $rod->dealtime, 
-			'rate' => del0($rod->uprice), 
-			'amount_l' => del0($rod->btccount), 
-			'amount_r' => number_format(del0($rod->uprice*$rod->btccount) ,10 ,'.',''),
-			'order' => $orderT, 
-			'ticket' => $rod->id 
-		);
-		$xpmhtml.="<tr><td>".$rod->dealtime."</td><td>".$orderT."</td><td>￥".del0($rod->uprice)."</td><td>฿".del0($rod->btccount)."</td><td>￥".del0($rod->uprice*$rod->btccount)."</td></tr>";
-	}
-$history_listXPM = json_encode($dealarrXPM);
 
 
 $row = $dsql->GetOne("Select * From `#@__homepageset`");
@@ -296,9 +263,6 @@ else
 	header('HTTP/1.1 301 Moved Permanently');
     header('Location:oldindex.html');
 }
-
-
-
 
 
 ?>

@@ -24,8 +24,8 @@ $cfg_arrcoin=Getdeposit("",$cfg_ml->M_ID);
 
 foreach ($cfg_arrcoin as $value){
 
-	$coinhtml.="<li>".$value['0']."：<span>".(floor($value['1']*100)/100)."</span></li>";
-	$freehtml.="<li>冻结：<span>".($value['2']/1)."</span></li>";
+	$coinhtml.="<li>".$value['0']."：<span>".rtrimandformat(floor($value['1']*100)/100)."</span></li>";
+	$freehtml.="<li>冻结：<span>".rtrimandformat($value['2']/1)."</span></li>";
 	$coinvol+=$value['4'];
 }
 	

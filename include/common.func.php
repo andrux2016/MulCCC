@@ -870,7 +870,12 @@ function del0($s)
         return preg_replace('#^(-?\d+\.[0-9]+?)0+$#','$1',$s);  
     }  
     return $s;  
-}  
+} 
+
+//取长度，去除0
+function rtrimandformat($val, $length=10){
+	return rtrim(rtrim(number_format($val, $length, '.', ''), '0'), '.');
+}
 
 /**
  *  记录提成

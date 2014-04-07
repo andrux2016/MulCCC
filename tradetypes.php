@@ -10,43 +10,84 @@ $nowtime = time();
     require_once DEDEINC."/arc.partview.class.php";
 	$showmune=2;
 	$cvid = $cvid?$cvid:0;
+	//$dtype=explode("_",$_SERVER['QUERY_STRING']);
+	$dtype=$symbol?explode("_",$symbol): "";
+	$dtype1=$password=preg_replace("#[^A-Za-z-]#", "", $dtype[0]);
+	$dtype2=$password=preg_replace("#[^A-Za-z-]#", "", $dtype[1]);
+	$type=$type?$type:"buy";
+	//$rcvid = $dsql->GetOne("Select id From `#@__btcconvert` Where coinid=$dtype1 AND moneyid=$dtype2");
 	
-	$dsql->SetQuery("Select id, cointype, coinname, coinhost From `#@__btctype` Where coinsign = 1");
+	$dsql->SetQuery("select * from `#@__btctype` where coinsign = 1");
 	$dsql->Execute();
-	$count = 0;
-	while ($rcv = $dsql->GetObject()){
-		if($rcv->coinhost == 1){
-			$cointypelist[$count] = array(
-				'id' => $rcv->id,
-				'cointype' => $rcv->cointype,
-				'coinname' => $rcv->coinname
-			);
+	$status = 0;
+	while($rcv = $dsql->GetObject()){
+		$coinarr[$status] = array(
+			'cointype'=>$rcv->cointype,
+			'coinname'=>$rcv->coinname
+		);
+		$status ++;
+	}
+	$convertTypeNum = $status/6 + (($status % 6) == 0?  0 : 1);
+	
+	if(!isset($symbol) || empty($symbol)){
+		$symbol = $coinarr[0]['cointype'];
+	}else{
+		$symbol = explode("_",$symbol);
+		if(count($symbol) == 1){
+			$symbol = preg_replace("#[^A-Za-z-]#", "", $symbol[0]);
+		}else{
+			$symbol = preg_replace("#[^A-Za-z-]#", "", $symbol[1]);
 		}
-		$count ++;
 	}
 	
-	$dsql->SetQuery("Select * From `#@__btcconvert` Where enabled=1");
+	foreach($coinarr as $key => $coinelement){
+		if($coinarr[$key]['cointype'] == $symbol) $convertType .= "<li class='li1 cur'><a href='?type=".$type."&symbol=".$symbol."'>".$symbol."</a></li>";
+		else $convertType .= "<li><a href='?type=".$type."&symbol=".$coinelement['cointype']."'>".$coinelement['cointype']."</a></li>";
+	}
+	
+	$dsql->SetQuery("Select * From `#@__btcconvert` Where enabled=1 and moneytype = '" . $symbol . "'");
 	$dsql->Execute();
-	$count = 0;
+	$status = 0;
 	while($rcv = $dsql->GetObject())
 	{
-		$dtypearr[$count]=array(
+		$dtypearr[$status]=array(
 			'coinid'=>$rcv->coinid,
 			'cointype'=>$rcv->cointype,
 			'coinname'=>$rcv->coinname,
 			'moneyid'=>$rcv->moneyid,
 			'moneyname'=>$rcv->moneyname,
 			'moneytype'=>$rcv->moneytype,
-			'fee'=>rtrimandformat($rcv->fee, 10),
-			'digits'=>rtrimandformat($rcv->digits, 10)
+			'fee'=>$rcv->fee,
+			'digits'=>$rcv->digits
 		);
-		
 		if($rcv->cointype==$dtype1 && $rcv->moneytype==$dtype2){
-			$cvid=$count;
+			$cvid=$status;
 		}
-		$count++;
+		$status++;
 	}
+	$convertNameNum = $status/6 + (($status % 6) == 0?  0 : 1);
 	
+	if($cvid=="") $cvid=0;
+			$coinid=$dtypearr[$cvid]['coinid'];
+			$cointype=$dtypearr[$cvid]['cointype'];
+			$coinname=$dtypearr[$cvid]['coinname'];
+			$moneyid=$dtypearr[$cvid]['moneyid'];
+			$moneyname=$dtypearr[$cvid]['moneyname'];
+			$moneytype=$dtypearr[$cvid]['moneytype'];
+			$fee=$dtypearr[$cvid]['fee'];
+			$digits=$dtypearr[$cvid]['digits'];
+			
+			if($type=="buy") $showtype="买入";
+			else $showtype="卖出";
+	foreach($dtypearr as $key => $typemune){
+		/*if($key==$cvid) $convertName .= "<li><a class='show' href='".$cfg_cmsurl."/?".$typemune['cointype']."_".$typemune['moneytype']."'><span>".$typemune['cointype']."/".$typemune['moneytype']."</span></a></li>";
+		else $convertName .= "<li><a class='hide' href='".$cfg_cmsurl."/?".$typemune['cointype']."_".$typemune['moneytype']."'><span>".$typemune['cointype']."/".$typemune['moneytype']."</span></a></li>";*/
+
+		$rateAllArr = FunNewRate($typemune['coinid'],$typemune['moneyid']);
+		if($key==$cvid) $convertName .= "<li class='li1 cur'><a href='?type=".$type."&symbol=".$typemune['cointype']."_".$typemune['moneytype']."'>".$showtype.$typemune['cointype']."<span>(".$typemune['moneytype'].")</span></a></li>";
+		else $convertName .= "<li><a href='?type=".$type."&symbol=".$typemune['cointype']."_".$typemune['moneytype']."'>".$showtype.$typemune['cointype']."<span>(".$typemune['moneytype'].")</span></a></li>";
+		
+	}
 	//echo $coinid;
 	$rty = $dsql->GetOne("Select about From `#@__btctype` Where id='".$coinid."'");
 	$about=$rty['about'];
@@ -55,14 +96,19 @@ $nowtime = time();
 	
 	
 	$cfg_arrcoin=Getdeposit("",$cfg_ml->M_ID);
-	
 
 foreach ($cfg_arrcoin as $value){
-	$trhtml .= '<tr><td class="gray">'.$value['0'].'</td><td>'.rtrimandformat(floor($value['1']*100)/100, 10).'</td><td>'.rtrimandformat($value['2']/1, 10).'</td><td>';
-	$trhtml .= '&nbsp;&nbsp;<a href="/member/buy_btc.php?coinid='.$value['3'].'">充值</a> &nbsp;&nbsp;<a href="/member/cash_btc.php?coinid='.$value['3'].'">提现</a> &nbsp;&nbsp;<a href="/member/operation_btc.php">充值记录</a> &nbsp;&nbsp;<a href="/member/operation_cash.php">提现记录</a> &nbsp;&nbsp;<a href="/oldindex.php?'.$value['0'].'">交易</a> &nbsp;&nbsp; </td></tr>';
+
+	if($value['0']=="CNY"){
+		$coinhtml.="<li>".$value['0']."：<span>".(floor($value['1']*100)/100)."</span><span class='but'><a href='buy_btc.php' >充值</a></span></li>";
+		$freehtml.="<li>冻结：<span>".($value['2']/1)."</span></li>";
+	}else{
+		$coinhtml.="<li>".$value['0']."：<span>".(floor($value['1']*100)/100)."</span></li>";
+		$freehtml.="<li>冻结：<span>".($value['2']/1)."</span></li>";
+	}
+	$coinvol+=$value['4'];
 }
-
-
+	
 /*
 走势图数据
 */
@@ -109,7 +155,7 @@ while($rord = $dsql->GetObject())
 	//$dtype = $rord->dealtype == 1 ?  "<font color='#FF0000'>卖</font>" : "<font color='#009900'>买</font>";
 	$dtype = $rord->dealtype == 1 ?  "<td width=\"134\" class='red'>卖出</td>" : "<td width=\"134\" class='lightgreen5'>买入</td>";
 	//$ordershow .= "<ul><span style=\"width:27%;\">".date('Y-m-d H:i:s',$rord->ordertime)."</span><span style=\"width:13%;\">". $dtype ."</span><span style=\"width:20%;\">".($rord->uprice/1)."</span><span style=\"width:20%;\">".($rord->btccount/1)."</span><span style=\"width:12%;\"><a class='trash' href='#' title='撤单' onclick='_page.obj.cancel_order(\"".$dtypearr[$rcv->coinid]['cointype']."_".$dtypearr[$rcv->moneyid]['moneytype']."\",\"".$rord->oid."\");'>撤单</a></span></ul>";
-	$ordershow .= "<tr><td width=\"204\">".date('Y-m-d H:i:s',$rord->ordertime)."</td>". $dtype ."<td width=\"144\">".$cointype.($rord->btccount/1)."</td><td width=\"134\">".$moneytype.($rord->uprice/1)."</td><td width=\"154\" class=\"blue\"><a class='trash' href='#' title='撤单' onclick='_page.obj.cancel_order(\"".$dtypearr[$rcv->coinid]['cointype']."_".$dtypearr[$rcv->moneyid]['moneytype']."\",\"".$rord->oid."\");'>撤单</a></td></tr>";
+	$ordershow .= "<tr><td width=\"204\">".date('Y-m-d H:i:s',$rord->ordertime)."</td>". $dtype ."<td width=\"144\">฿".($rord->btccount/1)."</td><td width=\"134\">￥".($rord->uprice/1)."</td><td width=\"154\" class=\"blue\"><a class='trash' href='#' title='撤单' onclick='_page.obj.cancel_order(\"".$dtypearr[$rcv->coinid]['cointype']."_".$dtypearr[$rcv->moneyid]['moneytype']."\",\"".$rord->oid."\");'>撤单</a></td></tr>";
 }
 	//读取我的成交记录
 $dsql->SetQuery("SELECT uprice,tprice,btccount,coinid,moneyid,dealtime FROM #@__btcdeal WHERE (buserid=".$cfg_ml->M_ID." OR suserid=".$cfg_ml->M_ID.") AND coinid='".$coinid."' AND moneyid='".$moneyid."' ORDER BY dealtime DESC");
@@ -136,9 +182,9 @@ while($rord = $dsql->GetObject())
 	}
 	foreach($ordersell as $k=>$v){
 		$listsell[] = array(  
-			'symbol_l' => $v['vol'], 
-			'rate' => $v['rate'], 
-			'symbol_r' => $v['rate']*$v['vol'], 
+			'symbol_l' => rtrimandformat($v['vol']), 
+			'rate' => rtrimandformat($v['rate']), 
+			'symbol_r' => rtrimandformat($v['rate']*$v['vol']), 
 			'count' => $v['count']
 		);
 	}
@@ -155,13 +201,21 @@ while($rord = $dsql->GetObject())
 	}
 	foreach($orderbuy as $k=>$v){
 		$listbuy[] = array(  
-			'symbol_l' => $v['vol'], 
-			'rate' => $v['rate'], 
-			'symbol_r' => $v['rate']*$v['vol'], 
+			'symbol_l' => rtrimandformat($v['vol']), 
+			'rate' => rtrimandformat($v['rate']), 
+			'symbol_r' => rtrimandformat($v['rate']*$v['vol']), 
 			'count' => $v['count']
 		);
 	}
-	$ask_bid_list= json_encode($listsell).",".json_encode($listbuy);  
+	if($type == "buy"){
+		foreach($listbuy as $listval){
+			$contenthtml.= "<tr><td style='color:#068814'>" . $listval['symbol_l'] . "</td><td style='color:#068814'> "  . $listval['rate'] . "</td><td style='color:#068814'> " .$listval['symbol_r'] . "</td></tr>";
+		}
+	}else {
+		foreach($listsell as $listval){
+			$contenthtml.= "<tr><td style='color:#ff0000'>" . $listval['symbol_l'] . "</td><td style='color:#ff0000'> "  . $listval['rate'] . "</td><td style='color:#ff0000'> " .$listval['symbol_r'] . "</td></tr>";
+		}
+	}
 	
 
 /*
@@ -195,7 +249,7 @@ $tikarr = FunNewRate($coinid,$moneyid);
     $row = $dsql->GetOne("Select * From `#@__homepageset`");
     $row['templet'] = MfTemplet($row['templet']);
     $pv = new PartView();
-    $pv->SetTemplet($cfg_basedir . $cfg_templets_dir . "/default/trade.htm");
+    $pv->SetTemplet($cfg_basedir . $cfg_templets_dir . "/default/tradetypes.htm");
     //$row['showmod'] = isset($row['showmod'])? $row['showmod'] : 0;
     
         $pv->Display();

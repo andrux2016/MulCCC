@@ -99,8 +99,8 @@ function cancelcash(delid)
 									  <td>{dede:field.id/}</td>
 									  <td><?php echo lenCat($fields['address'])?>  (<?php echo lenCat($fields['txid'])?>)</td>
 									  <td><?php echo $coinarr[$fields['coinid']]?></td>
-									  <td><?php echo $fields['amount']/1?></td>
-									  <td><?php echo $fields['fee']/1?></td>
+									  <td><?php echo rtrimandformat($fields['amount']/1)?></td>
+									  <td><?php echo rtrimandformat($fields['fee']/1)?></td>
 									  <td>{dede:field.checked function="GetSta(@me)" /}</td>
 									  <td><?php echo date('Y-m-d H:i:s',$fields['cashtime']);?></td>
 									  <td>

@@ -335,6 +335,7 @@ function mpage_operator(server_time, cur_symbol, uid) {
 	};
 	var page_obj = {
 		fee: trade_global.fee,
+		moneyfee : trade_global.moneyfee,
 		on_request_ask_bid: function(type, rate, vol) {
 			if (!uid) {
 				apprise('请先登录', {
@@ -495,7 +496,8 @@ recalc_fee: function(type) {
 		var bid_vol = get_element("bid_vol").value;
 		var bid_rate = get_element("bid_rate").value;
 		var bid_amount = get_element("bid_amount").value;
-		get_element("bid_fee").innerHTML = dformat(Number(bid_vol) / (1 + Number(this.fee)) * Number(this.fee), 8, 11, true)
+//		get_element("bid_fee").innerHTML = dformat(Number(bid_vol) / (1 + Number(this.fee)) * Number(this.fee), 8, 11, true)
+		get_element("bid_fee").innerHTML = dformat(Number(bid_vol) * Number(bid_rate) * Number(this.moneyfee), 8, 11, true)
 	};
 	return true
 },
@@ -526,7 +528,8 @@ on_input_bid_vol: function() {
 	if (fixed_num) {
 		element_vol.value = fixed_num
 	};
-	var amount = element_rate.value * element_vol.value / (1 + Number(page_obj.fee));
+	var amount = element_rate.value * element_vol.value;
+	amount = accSub(amount , amount * Number(page_obj.moneyfee) );
 	element_amount.value = amount;
 	var fixed_num = num_need_fix(amount, Number(trade_global.digits));
 	if (fixed_num) {
@@ -561,6 +564,9 @@ on_input_bid_rate: function() {
 			element_rate.value = fixed_num;
 		}
 	};
+	var balance_bid_able = get_element('balance_bid_able');
+	var amount_bid_able = get_element('amount_bid_able');
+	amount_bid_able.innerHTML = num_fix(balance_bid_able.innerHTML / element_rate.value / (1 + Number(page_obj.moneyfee)), Number(trade_global.digits));
 	page_obj.on_input_bid_vol()
 },
 on_input_ask_amount: function() {
@@ -591,7 +597,7 @@ on_input_bid_amount: function() {
 	if (fixed_num) {
 		element_amount.value = fixed_num
 	};
-	var vol = element_amount.value * 10000 * (1 + Number(page_obj.fee)) / element_rate.value;
+	var vol = element_amount.value * 10000 * (1 + Number(page_obj.moneyfee)) / element_rate.value;
 	if (vol < 0.01) {
 		vol = 0
 	};
@@ -682,8 +688,8 @@ update_new_rate: function() {
 update_best_rate: function() {
 	if(get_element('rate_best_ask').innerHTML=="0") get_element('ask_rate').value = main_ask_bid_list_obj.best_bid_rate;
 	if(get_element('rate_best_bid').innerHTML=="0") get_element('bid_rate').value = main_ask_bid_list_obj.best_ask_rate;
-	get_element('rate_best_ask').innerHTML = num_fix(Number(Number(main_ask_bid_list_obj.best_bid_rate) + 0.00000004).toFixed(10), Number(trade_global.digits));
-	get_element('rate_best_bid').innerHTML = num_fix(Number(Number(main_ask_bid_list_obj.best_ask_rate) + 0.00000004).toFixed(10), Number(trade_global.digits));
+	get_element('rate_best_ask').innerHTML = num_fix(Number(Number(main_ask_bid_list_obj.best_bid_rate)).toFixed(10), Number(trade_global.digits));
+	get_element('rate_best_bid').innerHTML = num_fix(Number(Number(main_ask_bid_list_obj.best_ask_rate)).toFixed(10), Number(trade_global.digits));
 	
 	this.update_able_amount()
 },
@@ -695,7 +701,7 @@ update_able_amount: function() {
 	//if(rate_best_bid==0) amount_ask_able=1;
 	//alert();
 	var amount_ask_able = balance_ask_able / rate_best_bid / (1 + Number(page_obj.fee));
-	var amount_bid_able = balance_bid_able * rate_best_ask / (1 + Number(page_obj.fee));
+	var amount_bid_able = balance_bid_able * rate_best_ask / (1 + Number(page_obj.moneyfee));
 	get_element('amount_ask_able').innerHTML = num_fix(Number(amount_ask_able).toFixed(10), Number(trade_global.digits));
 	get_element('amount_bid_able').innerHTML = num_fix(Number(amount_bid_able).toFixed(10), Number(trade_global.digits))
 }
@@ -734,3 +740,89 @@ return {
 	}
 }
 };
+
+//以下四个函数是算术运算得到精确方法
+
+//除法函数，用来得到精确的除法结果 
+
+//说明：javascript的除法结果会有误差，在两个浮点数相除的时候会比较明显。这个函数返回较为精确的除法结果。 
+
+//调用：accDiv(arg1,arg2) 
+
+//返回值：arg1除以arg2的精确结果
+
+function accDiv(arg1,arg2)
+
+{ 
+
+  return accMul(arg1,1/arg2);
+
+}
+
+
+
+//乘法函数，用来得到精确的乘法结果
+
+//说明：javascript的乘法结果会有误差，在两个浮点数相乘的时候会比较明显。这个函数返回较为精确的乘法结果。 
+
+//调用：accMul(arg1,arg2) 
+
+//返回值：arg1乘以arg2的精确结果
+
+function accMul(arg1,arg2)
+
+{ 
+
+  var m=0,s1=arg1.toString(),s2=arg2.toString(); 
+
+  try{m+=s1.split(".")[1].length}catch(e){} 
+
+  try{m+=s2.split(".")[1].length}catch(e){} 
+
+  return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m) 
+
+}
+
+
+
+//加法函数，用来得到精确的加法结果 
+
+//说明：javascript的加法结果会有误差，在两个浮点数相加的时候会比较明显。这个函数返回较为精确的加法结果。 
+
+//调用：accAdd(arg1,arg2) 
+
+//返回值：arg1加上arg2的精确结果 
+
+function accAdd(arg1,arg2)
+
+{ 
+
+  var r1,r2,m;
+
+  try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}
+
+  try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}
+
+  m=Math.pow(10,Math.max(r1,r2));
+
+  return (accMul(arg1,m)+accMul(arg2,m))/m; 
+
+}
+
+
+
+//减法函数，用来得到精确的减法结果 
+
+//说明：javascript的减法结果会有误差，在两个浮点数减法的时候会比较明显。这个函数返回较为精确的减法结果。 
+
+//调用：accSub(arg1,arg2) 
+
+//返回值：arg1减法arg2的精确结果 
+
+function accSub(arg1,arg2)
+
+{
+
+  return accAdd(arg1,-arg2);
+
+}

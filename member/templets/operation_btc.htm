@@ -85,8 +85,8 @@
 									<tr>
 									  <td>{dede:field.id/}</td>
 									  <td><?php echo $coinarr[$fields['coinid']]?></td>
-									  <td><?php if($fields['amount']==0){ echo "未到账"; }else{ echo $fields['amount']/1;} ?></td>
-									  <td><?php echo $fields['fee'] ?></td>
+									  <td><?php if($fields['amount']==0){ echo "未到账"; }else{ echo rtrimandformat($fields['amount']/1);} ?></td>
+									  <td><?php echo rtrimandformat($fields['fee']) ?></td>
 									  <td><?php echo lenCat($fields['txid'])?></td>
 									  <td>{dede:field.adduser function="GetSta(@me)" /}</td>
 									  <td><?php echo date('Y-m-d H:i:s',$fields['rcgtime']);?></td>

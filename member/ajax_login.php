@@ -34,28 +34,6 @@ $moneyid=preg_replace("#[^0-9-]#", "", $moneyid);
 
 
 $uid  = $cfg_ml->M_LoginID;
-//$cfg_arrcoin=Getdeposit("",$uid);
-//var_dump($cfg_arrcoin);
-
-//echo $cfg_mb_rank;
-
-
-/*if($coinid!="" && moneyid!=""){
-	$addsql="AND coinid='".$coinid."' AND moneyid='".$moneyid."'";
-}
-
-//读取挂单
-$dsql->SetQuery("SELECT oid,uprice,btccount,dealtype FROM #@__btcorder WHERE userid=".$cfg_ml->M_ID." $addsql ORDER BY ordertime DESC");
-$dsql->Execute();
-while($rord = $dsql->GetObject())
-{
-	$orderarr[] = array(  
-    'id' => $rord->oid,
-	'dealtype' => $rord->dealtype, 
-	'uprice' => $rord->uprice/1, 
-	'btccount' => $rord->btccount/1
-    );
-}*/
 
 
 //读取币种
@@ -64,34 +42,8 @@ $dsql->Execute();
 while($rcoint = $dsql->GetObject())
 {
 	$coinarr[$rcoint->id] =  $rcoint->cointype ;
-	//$coinarr[$rcoint->id."host"] =  $rcoint->coinhost ;
-	//$coinarr[$rcoint->id."block"] =  $rcoint->lastblock ;
 }
 
-//判断是否到账
-/*$dsql->SetQuery("SELECT id,coinid,txid FROM #@__btcrecharge WHERE userid='".$cfg_ml->M_ID."' AND dealmark=0 AND rcgtime>".strtotime("-1 day")." AND adduser=0 AND coinid!=1 ORDER BY id");//checked=1 
-$dsql->Execute();
-while($rcg = $dsql->GetObject())
-{
-	if($rcg->coinid!=1 && $coinarr[$rcg->coinid."block"]==""){ //币种不为人民币，没有开通定时检测到账
-			require_once DEDEINC.'/rpcQuery.php';
-			$method="gettransaction";
-			$params=array($rcg->txid);
-			$trans=coinQuery ($coinarr[$rcg->coinid],$method,$params,$cfgcoinip);
-		
-		if(isset($trans['r'])){
-			$btctrans=get_object_vars($trans['r']);
-			$details=get_object_vars($btctrans['details'][0]);
-			if($details['account']==$cfg_ml->M_LoginID){
-				if($btctrans['confirmations']>5){
-					$rsup = $dsql->ExecuteNoneQuery("Update #@__btcrecharge Set dealmark=1,amount='".$btctrans['amount']."' where id = '".$rcg->id."'"); 
-				}
-			}else{
-				$rsup = $dsql->ExecuteNoneQuery("Update #@__btcrecharge Set dealmark=-1 where id = '".$rcg->id."'"); 
-			}
-		}
-	}
-}*/
 
 
 //读取入账订单
@@ -108,28 +60,20 @@ while($rcg = $dsql->GetObject())
 }
 
 
-//读取余额
-/*foreach($coinarr as $key=>$coinlist){
-	$sql="Select c_deposit,c_freeze From #@__btccoin where coinid = ".$key." AND userid='".$cfg_ml->M_ID."' ;";
-	$rcoin = $dsql->GetOne($sql);
-	$coinshow = $rcoin['c_deposit']?floor($rcoin['c_deposit']*10000)/10000:"0";
-	//if($coinshow>0) $htmlcoin .= "".$coinlist['coin']."：<span id='".$coinlist['coin']."'>".$coinshow."</span><br>";
-	$arrcoin[] = array($coinlist , $coinshow , $rcoin['c_freeze']);
-}*/
 $arrcoin = $cfg_arrcoin;
 
 //分母交易币余额
 if(moneyid!=""){
 	$sql = "Select c_deposit,c_freeze From #@__btccoin where coinid = ".$moneyid." AND userid='".$cfg_ml->M_ID."' ;";
 	$rcoin = $dsql->GetOne($sql);
-	$denobalance = $rcoin['c_deposit']?floor($rcoin['c_deposit']*10000)/10000:"0";
+	$denobalance = $rcoin['c_deposit']?rtrimandformat(floor($rcoin['c_deposit']*10000)/10000, 10):"0";
 }
 
 //分子交易币余额
 if($coinid!=""){
 	$sql = "Select c_deposit,c_freeze From #@__btccoin where coinid = ".$coinid." AND userid='".$cfg_ml->M_ID."' ;";
 	$rcoin = $dsql->GetOne($sql);
-	$numbalance = $rcoin['c_deposit']?floor($rcoin['c_deposit']*10000)/10000:"0";
+	$numbalance = $rcoin['c_deposit']?rtrimandformat(floor($rcoin['c_deposit']*10000)/10000, 10):"0";
 }
 
 
@@ -143,8 +87,8 @@ if($coinid!="" && moneyid!=""){
 		$orderarr[] = array(  
 	    'id' => $rord->oid,
 		'dealtype' => $rord->dealtype, 
-		'uprice' => $rord->uprice/1, 
-		'btccount' => $rord->btccount/1
+		'uprice' => rtrimandformat($rord->uprice/1), 
+		'btccount' => rtrimandformat($rord->btccount/1)
 	    );
 	}
 }
@@ -156,9 +100,9 @@ if($coinid!="" && $moneyid!=""){
 	while($rord = $dsql->GetObject()){
 		$dealarr[] = array(
 		'dealtype' => $rord->dealtype,
-		'btccount' => $rord->btccount/1,
-		'uprice' => $rord->uprice/1,
-		'tprice' => $rord->tprice/1
+		'btccount' => rtrimandformat($rord->btccount/1),
+		'uprice' => rtrimandformat($rord->uprice/1),
+		'tprice' => rtrimandformat($rord->tprice/1)
 		);
 	}
 }

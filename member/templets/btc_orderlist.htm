@@ -26,32 +26,6 @@
 	<div id="yonghu-content" class="yonghu-content">
 		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
 		<div class="yh-right">
-			<div class="right-top">
-				<div class="r-top-l">
-					<img src="{dede:global.cfg_templets_skin/}/img/btb-yhgl-3.jpg" border="0"  />
-				</div>
-				<div class="r-top-c">
-					<div class="c-t"><?php echo $cfg_ml->M_LoginID; ?></div>
-					<div class="c-b">[<a href="#" onclick="UserQuit();">退出登录</a>]</div>
-				</div>
-				<div class="r-top-r">
-				  <div class="r-t">
-						<ul>
-							<li>可用</li>
-							<?php echo $coinhtml;?>
-							<div style="clear:both"></div>  
-						</ul>
-					</div>
-					<div class="r-c">
-						<ul>
-							<li>冻结</li>
-							<?php echo $freehtml;?>
-							<div style="clear:both"></div>  
-						</ul>
-					</div>
-				</div>
-				<div style="clear:both"></div>  
-			</div>
 			  
 			<div class="entrustTen lasttenorder clear">
 				<div class="Tentitle">
@@ -89,10 +63,10 @@
 										<tr>
 											<td class="gray">{dede:field.oid/}</td>
 											<td><?php echo $coinarr[$fields["coinid"]]."/".$coinarr[$fields["moneyid"]].$dealtype;?></td>
-											<td><?php echo ($fields["btccount"]/1)." ".$coinarr[$fields["coinid"]];?></td>
-											<td><?php echo ($fields["uprice"]/1)." ".$coinarr[$fields["moneyid"]];?></td>
-											<td><?php echo ($fields["tprice"]/1)." ".$coinarr[$fields["moneyid"]];?></td>
-											<td><?php echo $fields["bkage"]*100;?>%</td>
+											<td><?php echo rtrimandformat($fields["btccount"]/1)." ".$coinarr[$fields["coinid"]];?></td>
+											<td><?php echo rtrimandformat($fields["uprice"]/1)." ".$coinarr[$fields["moneyid"]];?></td>
+											<td><?php echo rtrimandformat($fields["tprice"]/1)." ".$coinarr[$fields["moneyid"]];?></td>
+											<td><?php echo rtrimandformat($fields["bkage"]*100);?>%</td>
 											<td><a href='/data.php?type=cancel&symbol=<?php echo $coinarr[$fields["coinid"]];?>_<?php echo $coinarr[$fields["moneyid"]];?>&tid=<?php echo $fields["oid"];?>'>撤单</a></td>
 										</tr>
 										{/dede:datalist}

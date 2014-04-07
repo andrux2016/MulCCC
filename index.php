@@ -61,12 +61,12 @@ if(isset($_GET['upcache']) || !file_exists('index.html'))
 				'moneyname'=>'BTC',
 				'moneytype'=>'BTC',
 				'website'=>$row->website,
-				'price_btc'=> number_format($row->price_btc,5 ,'.',''),
+				'price_btc'=> rtrimandformat($row->price_btc, 10),
 //				'price_before_24h'=>$data2->price_before_24h,
-				'price_before_24h'=>number_format($row->price_btc,5 ,'.',''),
-				'volume_btc'=>$row->volume_btc,
+				'price_before_24h'=>rtrimandformat($row->price_btc, 10),
+				'volume_btc'=>rtrimandformat($row->volume_btc, 10),
 //				'total'=>$row->volume_btc*$data2->price_before_24h,
-				'total'=>number_format($row->volume_btc*$row->price_btc,5, '.',''),
+				'total'=>rtrimandformat($row->volume_btc*$row->price_btc, 10),
 //				'latest_trade'=>$data2->latest_trade
 				'latest_trade'=>date('Y-m-d H:i:s'),
 			);
@@ -96,15 +96,15 @@ if(isset($_GET['upcache']) || !file_exists('index.html'))
 		foreach($dtypearr as $key=>$tmpdtypearr){
 			
 			$rcv = $dsql->GetOne("SELECT sum(btccount) as count, sum(tprice) as total FROM #@__btcdeal where market='1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime>".strtotime("-1 day"));
-			$dtypearr[$key]['count'] = $rcv->count? $rcv->count : 0;
-			$dtypearr[$key]['total'] = $rcv->total? $rcv->total : 0;
+			$dtypearr[$key]['count'] = $rcv->count? rtrimandformat($rcv->count, 10) : 0;
+			$dtypearr[$key]['total'] = $rcv->total? rtrimandformat($rcv->total, 10) : 0;
 		}
 		
 		foreach ($dtypearr as $key=> $tmpdtypearr){
 			$coinid = $tmpdtypearr['coinid'];
 			$moneyid = $tmpdtypearr['moneyid'];
 			$tikarr = FunNewRate($coinid,$moneyid);
-			$dtypearr[$key]['newrate'] = $tikarr? $tikarr : 0;
+			$dtypearr[$key]['newrate'] = $tikarr? rtrimandformat($tikarr, 10) : 0;
 		}
 		
 		foreach ($dtypearr as $key=>$tmpdtypearr){
@@ -138,9 +138,6 @@ else
 	header('HTTP/1.1 301 Moved Permanently');
     header('Location:index.html');
 }
-
-
-
 
 
 ?>
