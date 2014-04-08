@@ -28,7 +28,16 @@
 		<?php include(DEDEMEMBER."/templets/menu_btc.php"); ?>
 		<div class="yh-right">
 				
-			  
+			  <div class="con-nav" style="height: {dede:php}echo $convertTypeNum * 45;{/dede:php}px;">
+					<ul style="height: {dede:php}echo $convertTypeNum * 45;{/dede:php}px;">
+						{dede:php} echo $convertType;{/dede:php}
+					</ul>
+				</div>
+				<div class="con-nav" style="height: {dede:php}echo $convertNameNum * 45;{/dede:php}px;">
+					<ul style="height: {dede:php}echo $convertNameNum * 45;{/dede:php}px;">
+						{dede:php} echo $convertName;{/dede:php}
+					</ul>
+				</div>
 			<div class="entrustTen lasttenorder clear">
 				<div class="Tentitle">
 						<span class="lightblue4">最近交易记录</span>
@@ -45,13 +54,13 @@
 							<div class="postForm" style="width:100%;float:left;padding:0;border:none;">
 								<table>
 									<tr>
-										<th width="150">定单号</th>
 										<th width="80">交易类型</th>
-										<th width="90">交易量</th>
-										<th width="80">单价</th>
-										<th width="90">合计</th>
+										<th width="120">价格</th>
+										<th width="120">数量</th>
+										<th width="120">合计</th>
 										<th width="90">手续费</th>
 										<th width="156">时间</th>
+										<th width="150">定单号</th>
 									</tr>
 									<tbody>
 										{dede:datalist}
@@ -65,13 +74,13 @@
 											$dealtype="<font color='#FF0000'>[卖]</font>";
 										}?>
 										<tr>
-											<td  class="gray"><?php echo $oid;?></td>
 											<td><?php echo $coinarr[$fields["coinid"]]."/".$coinarr[$fields["moneyid"]].$dealtype ;?></td>
-											<td><?php echo rtrimandformat($fields["btccount"]/1)." ".$coinarr[$fields["coinid"]];?></td>
 											<td><?php echo rtrimandformat($fields["uprice"]/1)." ".$coinarr[$fields["moneyid"]];?></td>
+											<td><?php echo rtrimandformat($fields["btccount"]/1)." ".$coinarr[$fields["coinid"]];?></td>
 											<td><?php echo rtrimandformat($fields["tprice"]/1)." ".$coinarr[$fields["moneyid"]];?></td>
 											<td><?php echo rtrimandformat($bkage/1)." ".$coinarr[$fields["moneyid"]];?></td>
 											<td><?php echo date('Y-m-d H:i:s',$fields['dealtime']);?></td>
+											<td  class="gray"><?php echo $oid;?></td>
 										</tr>
 										{/dede:datalist}
 									</tbody>

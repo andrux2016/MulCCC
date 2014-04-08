@@ -45,7 +45,7 @@
 display: block;
 padding: 15px 0;
 text-align: center;
-font-size: 0.8125em;
+font-size: 1em;
 font-weight: bold;
 color: #505050;
 background: url("../images/tab-gradient.gif") repeat-x  left bottom;
@@ -56,7 +56,7 @@ border-left: 1px solid #CCCCCC;
 display: block;
 padding: 15px 0;
 text-align: center;
-font-size: 0.8125em;
+font-size: 1em;
 font-weight: bold;
 color: #505050;
 background: #fff;
@@ -67,7 +67,7 @@ border-left: 1px solid #CCCCCC;
 display: block;
 padding: 15px 0;
 text-align: center;
-font-size: 0.8125em;
+font-size: 1em;
 font-weight: bold;
 color: #505050;
 background: #fff;
@@ -101,7 +101,7 @@ border-left: 1px solid #CCCCCC;
     display: block;
 	float:left;
 	width:100%;
-    font-size: 0.8125em;
+    font-size: 1em;
     font-weight: bold;
     margin-bottom: 5px;	
 	color: #AAAAAA;
@@ -118,7 +118,7 @@ border-left: 1px solid #CCCCCC;
 	height: 1.125em;
     line-height: 1;
 	color: #333333;
-    font-size: 0.8125em;
+    font-size: 1em;
     padding: 8px 10px;
 }
 .field .input:focus {
@@ -148,7 +148,7 @@ border-left: 1px solid #CCCCCC;
 	width:388px;  
 }
 .field1 label{
-	font-size: 0.8125em;
+	1em: 1em;
     font-weight: bold;   
 	color: #AAAAAA;
 }
@@ -156,7 +156,7 @@ border-left: 1px solid #CCCCCC;
     display: block;
 	float:left;
 	width:100%;
-    font-size: 0.8125em;
+    font-size: 1em;
     font-weight: bold;
     margin-bottom: 5px;	
 	color: #AAAAAA;

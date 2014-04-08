@@ -22,6 +22,8 @@ if(is_array($rtil)) $rbody=$dsql->GetOne("SELECT body FROM `#@__addonarticle` WH
 
 $showmune = 3;
 
+$typeid = 1;
+
 $sql = "SELECT * FROM #@__archives  WHERE arcrank>=0 AND typeid=$typeid ORDER BY senddate DESC";
 $dl = new DataListCP();
 $dl->pageSize = 20;

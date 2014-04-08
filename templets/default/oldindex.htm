@@ -686,7 +686,7 @@ function showpassword() {
 {dede:php}
 foreach($dealarr as $deal){
 	echo '<div class="div_table">';
-	echo '<div style="width: 168px;">&nbsp;&nbsp;'.date('m-d H:i:s', $deal['date']).'</div>';
+	echo '<div style="width: 168px;">&nbsp;&nbsp;'.date('Y-m-d H:i:s', $deal['date']).'</div>';
 	echo '<div style="width: 74px; text-align: left;">&nbsp;&nbsp;&nbsp;'.$deal['order'].'</div>';
 	echo '<div style="width: 146px;">&nbsp;&nbsp;&nbsp;&nbsp;'.$deal['rate'].'</div>';
 	echo '<div style="width: 129px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$deal['amount_l'].'</div>';
