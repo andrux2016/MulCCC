@@ -27,6 +27,7 @@ foreach ($cfg_arrcoin as $value){
 $oldpwd=safe_string($oldpwd);
 $userpwd=safe_string($userpwd);
 $userpwdok=safe_string($userpwdok);
+$oldtxPwd=safe_string($oldtxPwd);
 $txPwd=safe_string($txPwd);
 $txPwdok=safe_string($txPwdok);
 $safequestion=preg_replace("#[^0-9-]#", "", $safequestion);
@@ -102,6 +103,11 @@ if($dopost=='save')
     {
         showJson('你输入的旧密码错误或没填写，不允许修改资料！','-1');
         exit();
+    }
+    
+    if($show==2 && $nowtxpwd != md5($oldtxPwd)){
+    	showJson('你输入的旧提现密码错误或没填写，不允许修改资料', '-1');
+    	exit();
     }
 	
 	if($show==1 && (strlen($userpwd) < $cfg_mb_pwdmin || strlen($userpwd) > 20))

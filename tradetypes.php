@@ -209,11 +209,11 @@ while($rord = $dsql->GetObject())
 	}
 	if($type == "buy"){
 		foreach($listbuy as $listval){
-			$contenthtml.= "<tr><td style='color:#068814'>" . $listval['symbol_l'] . "</td><td style='color:#068814'> "  . $listval['rate'] . "</td><td style='color:#068814'> " .$listval['symbol_r'] . "</td></tr>";
+			$contenthtml.= "<tr><td style='color:#068814'> "  . $listval['rate'] . "</td><td style='color:#068814'>" . $listval['symbol_l'] . "</td><td style='color:#068814'> " .$listval['symbol_r'] . "</td></tr>";
 		}
 	}else {
 		foreach($listsell as $listval){
-			$contenthtml.= "<tr><td style='color:#ff0000'>" . $listval['symbol_l'] . "</td><td style='color:#ff0000'> "  . $listval['rate'] . "</td><td style='color:#ff0000'> " .$listval['symbol_r'] . "</td></tr>";
+			$contenthtml.= "<tr><td style='color:#ff0000'> "  . $listval['rate'] . "</td><td style='color:#ff0000'>" . $listval['symbol_l'] . "</td><td style='color:#ff0000'> " .$listval['symbol_r'] . "</td></tr>";
 		}
 	}
 	

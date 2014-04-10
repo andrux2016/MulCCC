@@ -106,7 +106,7 @@ if($action == "email") {
 		showJson("验证码错误！","-1");
 		exit();
 	}
-	if($cointype=="FEC" && $amount>50000)
+	if($amount>50000)
 	{
 		showJson("提现超出限额！","-1");
 		exit();

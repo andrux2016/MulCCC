@@ -146,6 +146,11 @@ function google() {
 		alert("请填写密保答案！");
 		return false;
 	}
+	if($("#oldtxPwd").val() == ""){
+		$("#oldtxPwd").focus();
+		alert("请填写旧提现密码！");
+		return false;
+	}
 	if($("#txPwd").val()=="")
 	{
 		$("txPwdok").focus();
@@ -203,6 +208,7 @@ function google() {
 		show: '<?php echo $show;?>',
 		vdcode:$("#vdcode").val(),
 		oldpwd:$("#oldpwd").val(),
+		oldtxPwd:$("#oldtxPwd").val(),
 		userpwd:$("#userpwd").val(),
 		userpwdok:$("#userpwdok").val(),
 		txPwd:$("#txPwd").val(),
@@ -326,6 +332,10 @@ function google() {
 							<p>
 								<label>登陆密码：</label>
 								<input name="oldpwd" type="password" id="oldpwd" class="intxt" /> <span style="color:red;">*</span>
+							</p>
+							<p <?php if($show!=2) echo 'style=\'display:none\''?>>
+								<label>提现密码：</label>
+								<input name="oldtxPwd" type="password" id="oldtxPwd" class="intxt" /> <span style="color:red;">*</span>
 							</p>
 							<p class="cellBg" <?php if($show!=1) echo 'style=\'display:none\''?>>
 								<label>新登陆密码：</label>
