@@ -93,20 +93,6 @@
 						</a>
 					</li>
 					<li>
-						<a href="/tradetypes.php?type=buy" >
-							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-2-a.jpg" border="0" class="c-no"/>
-							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-2.jpg" border="0" class="c" />                    
-							买入队列
-						</a>
-					</li>
-					<li>
-						<a href="/tradetypes.php?type=sell" >
-							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-6.jpg" border="0" class="c-no"/>
-							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-6-a.jpg" border="0" class="c" />                    
-							卖出队列
-						</a>
-					</li>
-					<li>
 						<a href="btc_orderlist.php" >
 							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-7.jpg" border="0" class="c-no"/>
 							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-7-a.jpg" border="0" class="c"/>

@@ -5,6 +5,8 @@ $market=preg_replace("#[^0-9-]#", "", $market)?preg_replace("#[^0-9-]#", "", $ma
 $type=preg_replace("#[^_A-Za-z-]#", "", $type)?preg_replace("#[^_A-Za-z-]#", "", $type):exit();
 $trade=preg_replace("#[^_A-Za-z-]#", "", $trade)?preg_replace("#[^_A-Za-z-]#", "", $trade):"false";
 
+$symbol=preg_replace("#[^_A-Za-z-]#", "", $symbol)?preg_replace("#[^_A-Za-z-]#", "", $symbol):"";//"BTC_CNY";showJson("类型有误！",'false');
+
 /*
 取消挂单
 */
@@ -15,9 +17,9 @@ if($type=="cancel"){
 	
 	if(empty($op) && $cancelrul == "true"){
 		if($trade == "true"){
-			ShowMsg("成功撤单！","oldindex.php");
+			ShowMsg("成功撤单！","oldindex.php".($symbol == ""? "": "?".$symbol));
 		}else{
-			ShowMsg("成功撤单！","member/btc_orderlist.php");
+			ShowMsg("成功撤单！","member/btc_orderlist.php".($symbol == ""? "": "?symbol=".$symbol));
 		}
 		exit();
 	}elseif(empty($op) &&  $cancelrul != "true"){
@@ -32,7 +34,9 @@ if($type=="cancel"){
 		echo $json_string;
 }
 
-$symbol=preg_replace("#[^_A-Za-z-]#", "", $symbol)?preg_replace("#[^_A-Za-z-]#", "", $symbol):exit();//"BTC_CNY";showJson("类型有误！",'false');
+if(!isset($symbol) || empty($symbol) || $symbol == ""){
+	exit();
+}
 
 $coinarr=explode('_',$symbol);
 	$rcoin = $dsql->GetOne("Select * From #@__btctype where cointype = '".$coinarr[0]."' ");

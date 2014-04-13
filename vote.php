@@ -21,7 +21,7 @@ if(isset($_GET['upcache']) || !file_exists('vote.html'))
 		$msg = "投票成功";
 	}
 	//交易类型$cointypelist
-	$dsql->SetQuery("Select cointype, coinname From `#@__btctype` Where coinsign = 1 and coinhost = 0");
+	$dsql->SetQuery("Select cointype, coinname From `#@__btctype` Where coinsign = 1");
 	$dsql->Execute();
 	$count = 0;
 	while ($rcv = $dsql->GetObject()){

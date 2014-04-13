@@ -263,7 +263,7 @@ function showpassword() {
 	<div class="clear"></div>
 	<!--id="yonghu-content" 用户中心-->
 	<div id="yonghu-content" class="yonghu-content">
-		{dede:php}  include(dirname(dirname(dirname(__FILE__)))."/member/templets/menu_btc-1.php");{/dede:php}
+		<div><span style="font-size:20px; margin-left:20px;">{dede:php}if($type == "buy")echo "买单队列";else if($type == "sell") echo "卖单队列";{/dede:php}</span></div>
 		<div class="yh-right">
 			<div id="xbt_yincmm1" style="float:left; ">
 			<div class="con-nav" style="height: {dede:php}echo $convertTypeNum * 45;{/dede:php}px;">

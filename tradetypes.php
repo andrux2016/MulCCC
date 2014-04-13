@@ -8,7 +8,7 @@ $nowtime = time();
 	require_once (dirname(__FILE__) . "/member/config.php");
 	CheckRank(0,0);
     require_once DEDEINC."/arc.partview.class.php";
-	$showmune=2;
+	$showmune=1;
 	$cvid = $cvid?$cvid:0;
 	//$dtype=explode("_",$_SERVER['QUERY_STRING']);
 	$dtype=$symbol?explode("_",$symbol): "";

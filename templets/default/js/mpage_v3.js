@@ -110,7 +110,7 @@ function mpage_operator(server_time, cur_symbol, uid) {
 			};
 			
 			if (ask_length> 0) {
-				this.best_bid_rate = this.ask_list[0].rate
+				this.best_bid_rate = this.ask_list[ask_length-1].rate
 			};
 			page_obj.update_best_rate()
 		},
@@ -491,13 +491,13 @@ recalc_fee: function(type) {
 		var ask_vol = get_element("ask_vol").value;
 		var ask_rate = get_element("ask_rate").value;
 		var ask_amount = get_element("ask_amount").value;
-		get_element("ask_fee").innerHTML = dformat(Number(ask_vol) * Number(ask_rate) * Number(this.fee), 8, 11, true)
+		get_element("ask_fee").innerHTML = dformat(accMul(accMul(Number(ask_vol) , Number(ask_rate)) , Number(this.fee)), 8, 11, true)
 	} else {
 		var bid_vol = get_element("bid_vol").value;
 		var bid_rate = get_element("bid_rate").value;
 		var bid_amount = get_element("bid_amount").value;
 //		get_element("bid_fee").innerHTML = dformat(Number(bid_vol) / (1 + Number(this.fee)) * Number(this.fee), 8, 11, true)
-		get_element("bid_fee").innerHTML = dformat(Number(bid_vol) * Number(bid_rate) * Number(this.moneyfee), 8, 11, true)
+		get_element("bid_fee").innerHTML = dformat(accMul(accMul(Number(bid_vol) , Number(bid_rate)) , Number(this.moneyfee)), 8, 11, true)
 	};
 	return true
 },
@@ -509,7 +509,7 @@ on_input_ask_vol: function() {
 	if (fixed_num) {
 		element_vol.value = fixed_num
 	};
-	var amount = element_rate.value * element_vol.value * (1 + Number(page_obj.fee));
+	var amount = accMul(accMul(element_rate.value , element_vol.value) , (1 + Number(page_obj.fee)));
 	element_amount.value = amount;
 	if (element_amount.value < 0.0001) {
 		element_amount.value = 0.0000
@@ -528,8 +528,8 @@ on_input_bid_vol: function() {
 	if (fixed_num) {
 		element_vol.value = fixed_num
 	};
-	var amount = element_rate.value * element_vol.value;
-	amount = accSub(amount , amount * Number(page_obj.moneyfee) );
+	var amount = accMul(element_rate.value , element_vol.value);
+	amount = accSub(amount , accMul(amount , Number(page_obj.moneyfee)) );
 	element_amount.value = amount;
 	var fixed_num = num_need_fix(amount, Number(trade_global.digits));
 	if (fixed_num) {
@@ -551,7 +551,7 @@ on_input_ask_rate: function() {
 	var amount_ask_able = get_element('amount_ask_able');
 	//if(element_rate.value==0) element_rate.value=1;
 	//alert(num_fix(balance_ask_able.innerHTML / element_rate.value / (1 + Number(page_obj.fee)), 4));
-	amount_ask_able.innerHTML = num_fix(balance_ask_able.innerHTML / element_rate.value / (1 + Number(page_obj.fee)), Number(trade_global.digits));
+	amount_ask_able.innerHTML = num_fix(accDiv(accDiv(balance_ask_able.innerHTML , element_rate.value) , (1 + Number(page_obj.fee))), Number(trade_global.digits));
 	page_obj.on_input_ask_vol()
 },
 on_input_bid_rate: function() {
@@ -566,7 +566,7 @@ on_input_bid_rate: function() {
 	};
 	var balance_bid_able = get_element('balance_bid_able');
 	var amount_bid_able = get_element('amount_bid_able');
-	amount_bid_able.innerHTML = num_fix(balance_bid_able.innerHTML / element_rate.value / (1 + Number(page_obj.moneyfee)), Number(trade_global.digits));
+	amount_bid_able.innerHTML = num_fix(accDiv(accDiv(balance_bid_able.innerHTML , element_rate.value) , (1 + Number(page_obj.moneyfee))), Number(trade_global.digits));
 	page_obj.on_input_bid_vol()
 },
 on_input_ask_amount: function() {
@@ -578,11 +578,11 @@ on_input_ask_amount: function() {
 	if (fixed_num) {
 		element_amount.value = fixed_num
 	};
-	var vol = element_amount.value * 10000 / (1 + Number(page_obj.fee)) / element_rate.value;
+	var vol = accDiv(accDiv(accMul(element_amount.value , 10000) , (1 + Number(page_obj.fee))) , element_rate.value);
 	if (vol < 0.01) {
 		vol = 0
 	};
-	vol /= 10000;
+	vol = accDiv(vol, 10000);
 	element_vol.value = vol;
 	var fixed_num = num_need_fix(vol, Number(trade_global.digits));
 	if (fixed_num) {
@@ -597,11 +597,11 @@ on_input_bid_amount: function() {
 	if (fixed_num) {
 		element_amount.value = fixed_num
 	};
-	var vol = element_amount.value * 10000 * (1 + Number(page_obj.moneyfee)) / element_rate.value;
+	var vol = accDiv(accMul(accMul(element_amount.value , 10000) , (1 + Number(page_obj.moneyfee))) , element_rate.value);
 	if (vol < 0.01) {
 		vol = 0
 	};
-	vol /= 10000;
+	vol = accDiv(vol, 10000)
 	element_vol.value = vol;
 	var fixed_num = num_need_fix(vol, Number(trade_global.digits));
 	if (fixed_num) {
