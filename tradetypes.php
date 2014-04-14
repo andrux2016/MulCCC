@@ -17,7 +17,7 @@ $nowtime = time();
 	$type=$type?$type:"buy";
 	//$rcvid = $dsql->GetOne("Select id From `#@__btcconvert` Where coinid=$dtype1 AND moneyid=$dtype2");
 	
-	$dsql->SetQuery("select * from `#@__btctype` where coinsign = 1");
+	$dsql->SetQuery("select * from `#@__btctype` where coinsign = 1 and coinhost = 1");
 	$dsql->Execute();
 	$status = 0;
 	while($rcv = $dsql->GetObject()){

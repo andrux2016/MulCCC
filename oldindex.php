@@ -184,15 +184,13 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 	//读取挂单
 	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 ORDER BY uprice desc LIMIT 10");
 	$dsql->Execute();
-	$status = 0;
 	while($rod = $dsql->GetObject())
 	{
-		$ordersell[$status] = array(  
+		$ordersell[$rod->uprice] = array(  
 			'vol' => $ordersell[$rod->uprice]['vol']+$rod->btccount*1, 
 			'rate' => $rod->uprice/1,  
 			'count' => $ordersell[$rod->uprice]['count']+1
 		);
-		$status++;
 	}
 	foreach($ordersell as $k=>$v){
 		$listsell[] = array(  
@@ -205,15 +203,13 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 	//读取挂单
 	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=0 ORDER BY uprice desc LIMIT 10");
 	$dsql->Execute();
-	$status = 0;
 	while($rod = $dsql->GetObject())
 	{
-		$orderbuy[$status] = array(  
+		$orderbuy[$rod->uprice] = array(  
 			'vol' => $orderbuy[$rod->uprice]['vol']+$rod->btccount/1, 
 			'rate' => $rod->uprice/1,  
 			'count' => $orderbuy[$rod->uprice]['count']+1
 		);
-		$status++;
 	}
 	foreach($orderbuy as $k=>$v){
 		$listbuy[] = array(  
