@@ -621,7 +621,7 @@ function showpassword() {
 </div>
 <div class="btc_myright">
 <div class="my_title">当前买一价</div>
-<div class="my_text"><span id="sell1">{dede:php}echo $tikarr['last_rate'];{/dede:php}</span> {dede:php} echo $moneytype; {/dede:php}</div>
+<div class="my_text"><span id="sell1"></span> {dede:php} echo $moneytype; {/dede:php}</div>
 </div>
 </div>
 <div class="clear"></div>
@@ -654,7 +654,7 @@ function showpassword() {
 </div>
 <div class="btc_myright">
 <div class="my_title">当前卖一价</div>
-<div class="my_text"><span id="buy1">{dede:php}echo $tikarr['last_rate'];{/dede:php}</span> {dede:php} echo $moneytype; {/dede:php}</div>
+<div class="my_text"><span id="buy1"></span> {dede:php} echo $moneytype; {/dede:php}</div>
 </div>
 </div>
 <div class="clear"></div>
@@ -732,7 +732,7 @@ foreach($dealarr as $deal){
 </div>
 <div class="amaze1">
 <div id="sell_table"
-	style="height: 249px; overflow-y: auto; overflow-x: hidden; width: 100%">
+	style="height: 320px; overflow-y: auto; overflow-x: hidden; width: 100%">
 {dede:php}
 foreach($listsell as $sellinfo){
 	echo '<div class="div_table">';
@@ -758,7 +758,7 @@ foreach($listsell as $sellinfo){
 </div>
 <div class="amaze1">
 <div id="buy_table"
-	style="height: 249px; overflow-y: auto; overflow-x: hidden; width: 100%">
+	style="height: 320px; overflow-y: auto; overflow-x: hidden; width: 100%">
 {dede:php}
 foreach($listbuy as $buyinfo){
 	echo '<div class="div_table">';

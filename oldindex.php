@@ -182,16 +182,28 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 	$time_line = str_replace("\"","",json_encode(array_reverse($tlinearr)));  
 	
 	//读取挂单
-	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 ORDER BY uprice desc LIMIT 10");
+	$dsql->SetQuery("SELECT sum(btccount) sumbtccount,uprice FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 group by uprice ORDER BY uprice desc LIMIT 9");
 	$dsql->Execute();
 	while($rod = $dsql->GetObject())
 	{
 		$ordersell[$rod->uprice] = array(  
-			'vol' => $ordersell[$rod->uprice]['vol']+$rod->btccount*1, 
+			'vol' => $ordersell[$rod->uprice]['vol']+$rod->sumbtccount*1, 
 			'rate' => $rod->uprice/1,  
 			'count' => $ordersell[$rod->uprice]['count']+1
 		);
 	}
+	
+	$dsql->SetQuery("SELECT sum(btccount) sumbtccount,uprice FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 group by uprice ORDER BY uprice asc LIMIT 1");
+	$dsql->Execute();
+	if($rod = $dsql->GetObject())
+	{
+		$ordersell[$rod->uprice] = array(  
+			'vol' => $ordersell[$rod->uprice]['vol']+$rod->sumbtccount*1, 
+			'rate' => $rod->uprice/1,  
+			'count' => $ordersell[$rod->uprice]['count']+1
+		);
+	}
+	
 	foreach($ordersell as $k=>$v){
 		$listsell[] = array(  
 			'symbol_l' => rtrimandformat($v['vol'], 10), 
@@ -201,16 +213,18 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 		);
 	}
 	//读取挂单
-	$dsql->SetQuery("SELECT btccount,uprice,tprice,dealtype,ordertime FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=0 ORDER BY uprice desc LIMIT 10");
+	$dsql->SetQuery("SELECT sum(btccount) sumbtccount,uprice FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=0 group by uprice ORDER BY uprice desc LIMIT 10");
 	$dsql->Execute();
 	while($rod = $dsql->GetObject())
 	{
 		$orderbuy[$rod->uprice] = array(  
-			'vol' => $orderbuy[$rod->uprice]['vol']+$rod->btccount/1, 
+			'vol' => $orderbuy[$rod->uprice]['vol']+$rod->sumbtccount/1, 
 			'rate' => $rod->uprice/1,  
 			'count' => $orderbuy[$rod->uprice]['count']+1
 		);
 	}
+	
+	
 	foreach($orderbuy as $k=>$v){
 		$listbuy[] = array(  
 			'symbol_l' => rtrimandformat($v['vol'], 10), 

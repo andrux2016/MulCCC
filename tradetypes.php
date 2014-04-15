@@ -77,8 +77,8 @@ $nowtime = time();
 			$fee=$dtypearr[$cvid]['fee'];
 			$digits=$dtypearr[$cvid]['digits'];
 			
-			if($type=="buy") $showtype="买入";
-			else $showtype="卖出";
+			if($type=="buy") $showtype="";//买入";
+			else $showtype="";//卖出";
 	foreach($dtypearr as $key => $typemune){
 		/*if($key==$cvid) $convertName .= "<li><a class='show' href='".$cfg_cmsurl."/?".$typemune['cointype']."_".$typemune['moneytype']."'><span>".$typemune['cointype']."/".$typemune['moneytype']."</span></a></li>";
 		else $convertName .= "<li><a class='hide' href='".$cfg_cmsurl."/?".$typemune['cointype']."_".$typemune['moneytype']."'><span>".$typemune['cointype']."/".$typemune['moneytype']."</span></a></li>";*/
@@ -207,15 +207,15 @@ while($rord = $dsql->GetObject())
 			'count' => $v['count']
 		);
 	}
-	if($type == "buy"){
+//	if($type == "buy"){
 		foreach($listbuy as $listval){
-			$contenthtml.= "<tr><td style='color:#068814'> "  . $listval['rate'] . "</td><td style='color:#068814'>" . $listval['symbol_l'] . "</td><td style='color:#068814'> " .$listval['symbol_r'] . "</td></tr>";
+			$buycontenthtml.= "<tr style='height:40px;'><td style='color:#068814; height:40px;'> "  . $listval['rate'] . "</td><td style='color:#068814'>" . $listval['symbol_l'] . "</td><td style='color:#068814'> " .$listval['symbol_r'] . "</td></tr>";
 		}
-	}else {
+//	}else {
 		foreach($listsell as $listval){
-			$contenthtml.= "<tr><td style='color:#ff0000'> "  . $listval['rate'] . "</td><td style='color:#ff0000'>" . $listval['symbol_l'] . "</td><td style='color:#ff0000'> " .$listval['symbol_r'] . "</td></tr>";
+			$sellcontenthtml.= "<tr style='height:40px;'><td style='color:#ff0000; height:40px;'> "  . $listval['rate'] . "</td><td style='color:#ff0000'>" . $listval['symbol_l'] . "</td><td style='color:#ff0000'> " .$listval['symbol_r'] . "</td></tr>";
 		}
-	}
+//	}
 	
 
 /*

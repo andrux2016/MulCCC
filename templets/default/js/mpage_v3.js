@@ -106,12 +106,17 @@ function mpage_operator(server_time, cur_symbol, uid) {
 			else  var ask_length = 0;
 			if (bid_length > 0) {
 				this.best_ask_rate = this.bid_list[0].rate
-				
-			};
+				$("#sell1").html(this.bid_list[0].rate);
+			}else{
+				$("#sell1").html("0");
+			}
 			
 			if (ask_length> 0) {
 				this.best_bid_rate = this.ask_list[ask_length-1].rate
-			};
+				$("#buy1").html(this.ask_list[ask_length-1].rate);
+			}else{
+				$("#buy1").html("0");
+			}
 			page_obj.update_best_rate()
 		},
 		reload_ask_bid_grid: function() {

@@ -263,7 +263,7 @@ function showpassword() {
 	<div class="clear"></div>
 	<!--id="yonghu-content" 用户中心-->
 	<div id="yonghu-content" class="yonghu-content">
-		<div><span style="font-size:20px; margin-left:20px;">{dede:php}if($type == "buy")echo "买单队列";else if($type == "sell") echo "卖单队列";{/dede:php}</span></div>
+		<div><span style="font-size:20px; margin-left:20px;">{dede:php}if($type == "buy")echo "买卖队列";else if($type == "sell") echo "买卖队列";{/dede:php}</span></div>
 		<div class="yh-right">
 			<div id="xbt_yincmm1" style="float:left; ">
 			<div class="con-nav" style="height: {dede:php}echo $convertTypeNum * 45;{/dede:php}px;">
@@ -281,49 +281,30 @@ function showpassword() {
 				<div class="right-bot">
 					<div class="bot-right">
 						<table width="334" height="378" cellpadding="1" cellspacing="0" border="0" bordercolor="#e4e4e4">
-							<tr bgcolor="#f1f1f1" class="str">
+							<tr style="height:40px;" bgcolor="#f1f1f1" class="str">
 								<td>买入价</td>
 								<td>买入量({dede:php}echo $cointype;{/dede:php})</td>
 								<td>兑换额({dede:php}echo $moneytype;{/dede:php})</td>
 							</tr>
 							<tbody id="l_divbuyList" class="l2_divAskList">
-								{dede:php} echo $contenthtml; {/dede:php}
+								{dede:php} echo $buycontenthtml; {/dede:php}
 							</tbody>
 						</table>
 					</div>
-					<div style="clear:both"></div>
-				</div>
-			</div>
-			
-			<div id="xbt_yincmm2" style="float:left; display:none;">
-				<div class="con-nav" style="height: {dede:php}echo $convertTypeNum * 45;{/dede:php}px;">
-					<ul style="height: {dede:php}echo $convertTypeNum * 45;{/dede:php}px;">
-						{dede:php} echo $convertType;{/dede:php}
-						
-					</ul>
-				</div>
-				<div class="con-nav" style="height: {dede:php}echo $convertNameNum * 45;{/dede:php}px;">
-					<ul style="height: {dede:php}echo $convertNameNum * 45;{/dede:php}px;">
-						{dede:php} echo $convertName;{/dede:php}
-						
-					</ul>
-				</div>	
-				<div class="right-bot">
 					<div class="bot-right">
 						<table width="334" height="378" cellpadding="1" cellspacing="0" border="0" bordercolor="#e4e4e4">
-							<tr bgcolor="#f1f1f1" class="str">
+							<tr style="height:40px;" bgcolor="#f1f1f1" class="str">
 								<td>卖出价</td>
 								<td>卖出量({dede:php}echo $cointype;{/dede:php})</td>
 								<td>兑换额({dede:php}echo $moneytype;{/dede:php})</td>
 							</tr>
 							<tbody id="l_divsellList" class="l1_divAskList">
-								{dede:php} echo $contenthtml; {/dede:php}
+								{dede:php} echo $sellcontenthtml; {/dede:php}
 							</tbody>
 						</table>
 					</div>
 					<div style="clear:both"></div>
 				</div>
-			
 			</div>
 		</div>
 		<div style="clear:both"></div>
