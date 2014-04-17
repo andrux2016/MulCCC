@@ -37,7 +37,7 @@ class JsonRpcClient {
             )
         ));
 //        print_r($jsonRequest);
-		$jsonResponse = file_get_contents($this->uri, false, $ctx);
+		$jsonResponse = @file_get_contents($this->uri, false, $ctx);
 
         if ($jsonResponse == false) exit("false");
             //throw new JsonRpcFault('file_get_contents failed', -32603);

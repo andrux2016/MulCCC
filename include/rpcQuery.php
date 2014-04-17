@@ -4,16 +4,18 @@ function coinQuery ($cointype,$method,$params)
 {
 	$coinhost=$cointype?GetCoinHost($cointype):exit();
 	if($coinhost==1){
-		$params=mchStrCode(json_encode($params),'ENCODE');//encode
+//		$params=mchStrCode(json_encode($params),'ENCODE');//encode
+		$params=json_encode($params);
 		$coinip=GetPayIP();
 		$handle = fopen("http://".$coinip."/payAddress.php?params=".$params."&method=".$method."&cointype=".$cointype, "rb");
 		$contents = stream_get_contents($handle);
 		fclose($handle);
-		$obj = json_decode(mchStrCode($contents,'DECODE'));
+//		$obj = json_decode(mchStrCode($contents,'DECODE'));
+		$obj = json_decode($contents);
 		$trans=(array)$obj;
 		return $trans;
 	}elseif($coinhost==0){
-		return rpcQuery($cointype,$method,$params);
+//		return rpcQuery($cointype,$method,$params);
 	}
 }
 /**
