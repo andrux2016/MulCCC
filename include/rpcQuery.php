@@ -2,8 +2,8 @@
 require_once(dirname(__FILE__)."/../member/config.php");
 function coinQuery ($cointype,$method,$params)
 {
-	$coinhost=$cointype?GetCoinHost($cointype):exit();
-	if($coinhost==1){
+	$coinsign=$cointype?GetCoinSign($cointype):exit();
+	if($coinsign==1){
 //		$params=mchStrCode(json_encode($params),'ENCODE');//encode
 		$params=json_encode($params);
 		$coinip=GetPayIP();
@@ -14,8 +14,6 @@ function coinQuery ($cointype,$method,$params)
 		$obj = json_decode($contents);
 		$trans=(array)$obj;
 		return $trans;
-	}elseif($coinhost==0){
-//		return rpcQuery($cointype,$method,$params);
 	}
 }
 /**
@@ -42,6 +40,21 @@ function GetCoinHost($cointype)
 	if(is_array($row))
 	{
 		return $row['coinhost'];
+	}
+	else
+	{
+		return '0';
+	}
+}
+
+function GetCoinSign($cointype)
+{
+	global $dsql;
+	if($cointype=="") return '0';
+	$row = $dsql->GetOne("SELECT coinsign FROM #@__btctype WHERE cointype='$cointype' ");
+	if(is_array($row))
+	{
+		return $row['coinsign'];
 	}
 	else
 	{
