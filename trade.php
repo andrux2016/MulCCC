@@ -14,6 +14,7 @@ $nowtime = time();
 	$dsql->SetQuery("Select id, cointype, coinname, coinhost From `#@__btctype` Where coinsign = 1");
 	$dsql->Execute();
 	$count = 0;
+	$counta = 0;
 	while ($rcv = $dsql->GetObject()){
 		if($rcv->coinhost == 1){
 			$cointypelist[$count] = array(
@@ -22,7 +23,13 @@ $nowtime = time();
 				'coinname' => $rcv->coinname
 			);
 		}
+		$cointypelista[$counta] = array(
+			'id' => $rcv->id,
+			'cointype' => $rcv->cointype,
+			'coinname' => $rcv->coinname
+		);
 		$count ++;
+		$counta ++;
 	}
 	
 	$dsql->SetQuery("Select * From `#@__btcconvert` Where enabled=1");
@@ -56,10 +63,20 @@ $nowtime = time();
 	
 	$cfg_arrcoin=Getdeposit("",$cfg_ml->M_ID);
 	
-
-foreach ($cfg_arrcoin as $value){
-	$trhtml .= '<tr><td class="gray">'.$value['0'].'</td><td>'.rtrimandformat(floor($value['1']*100)/100, 10).'</td><td>'.rtrimandformat($value['2']/1, 10).'</td><td>';
-	$trhtml .= '&nbsp;&nbsp;<a href="/member/buy_btc.php?coinid='.$value['3'].'">充值</a> &nbsp;&nbsp;<a href="/member/cash_btc.php?coinid='.$value['3'].'">提现</a> &nbsp;&nbsp;<a href="/member/operation_btc.php">充值记录</a> &nbsp;&nbsp;<a href="/member/operation_cash.php">提现记录</a> &nbsp;&nbsp;<a href="/oldindex.php?'.$value['0'].'">交易</a> &nbsp;&nbsp; </td></tr>';
+foreach($cointypelista as $xxx){
+	$tmpvalue = null;
+	foreach ($cfg_arrcoin as $value){
+		if($xxx['cointype'] == $value['0']){
+			$tmpvalue = $value;
+		}
+	}
+	if($tmpvalue != null){
+		$trhtml .= '<tr><td class="gray">'.$tmpvalue['0'].'</td><td>'.rtrimandformat(floor($tmpvalue['1']*100)/100, 10).'</td><td>'.rtrimandformat($tmpvalue['2']/1, 10).'</td><td>';
+		$trhtml .= '&nbsp;&nbsp;<a href="/member/buy_btc.php?coinid='.$tmpvalue['3'].'">充值</a> &nbsp;&nbsp;<a href="/member/cash_btc.php?coinid='.$tmpvalue['3'].'">提现</a> &nbsp;&nbsp;<a href="/member/operation_btc.php">充值记录</a> &nbsp;&nbsp;<a href="/member/operation_cash.php">提现记录</a> &nbsp;&nbsp;<a href="/oldindex.php?'.$tmpvalue['0'].'">交易</a> &nbsp;&nbsp; </td></tr>';
+	}else{
+		$trhtml .= '<tr><td class="gray">'.$xxx['cointype'].'</td><td>0</td><td>0</td><td>';
+		$trhtml .= '&nbsp;&nbsp;<a href="/member/buy_btc.php?coinid='.$xxx['id'].'">充值</a> &nbsp;&nbsp;<a href="/member/cash_btc.php?coinid='.$xxx['id'].'">提现</a> &nbsp;&nbsp;<a href="/member/operation_btc.php">充值记录</a> &nbsp;&nbsp;<a href="/member/operation_cash.php">提现记录</a> &nbsp;&nbsp;<a href="/oldindex.php?'.$xxx['cointype'].'">交易</a> &nbsp;&nbsp; </td></tr>';
+	}
 }
 
 
