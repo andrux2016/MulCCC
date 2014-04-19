@@ -20,7 +20,7 @@ id="footer"
 }
 .footer .footer_container .prompt {
 	float:left;
-	width:366px;
+	width:326px;
 }
 .footer .footer_container .prompt p {
 	line-height:20px;
@@ -30,7 +30,7 @@ id="footer"
 .footer .footer_container .contact {
 	float:left;
 	margin-left:20px;
-	width:326px;
+	width:366px;
 }
 .footer .footer_container .contact p {
 	line-height:20px;
@@ -54,7 +54,7 @@ id="footer"
 .footer .footer_container .line1 {
 	background:url(../img/now_line.jpg);
 	width:1px;
-	height:100px;
+	height:170px;
 	float:left;
 	margin-left:8px;
 }
