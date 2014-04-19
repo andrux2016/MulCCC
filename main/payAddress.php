@@ -38,7 +38,7 @@ if(isset($row) && !empty($row)){
 //$params = json_decode(mchStrCode($params, 'DECODE'), true);
 $params = json_decode($params);
 
-if($cointype == "BTC"){
+if(isset($cointype) && !empty($cointype)){
 	$bitcoin = new jsonRPCClient('http://'.$rpcname.':'.$rpcpasswd.'@'.$ipandport.'/');
 
 	if($method == 'getnewaddress'){

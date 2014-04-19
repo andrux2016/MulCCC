@@ -333,9 +333,14 @@ function google() {
 								<label>登陆密码：</label>
 								<input name="oldpwd" type="password" id="oldpwd" class="intxt" /> <span style="color:red;">*</span>
 							</p>
-							<p <?php if($show!=2) echo 'style=\'display:none\''?>>
+							<p <?php if($show!=2 && $show!= 0) echo 'style=\'display:none\''?>>
 								<label>提现密码：</label>
 								<input name="oldtxPwd" type="password" id="oldtxPwd" class="intxt" /> <span style="color:red;">*</span>
+							</p>
+							<p <?php if($show!= 0) echo 'style=\'display:none\''?>>
+								<label>确认密码：</label>
+								<input name="txPwdok" type="password" id="txPwdok" class="intxt" />
+								<span style="color:red;">*</span>
 							</p>
 							<p class="cellBg" <?php if($show!=1) echo 'style=\'display:none\''?>>
 								<label>新登陆密码：</label>

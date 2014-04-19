@@ -43,20 +43,20 @@ $face = $row['face'];
 $nowtxpwd = $row['txpwd'];
 $nowpwd = $row['pwd'];
 $show=$show?$show:"1" ;
-if($nowtxpwd=="") $show="2";
+if($nowtxpwd=="") $show="0";
 
 if($dopost=='save')
 {
     $svali = GetCkVdValue();
 	if($show==0)//新用户添加密码
     {
-       	if(strlen($txPwd) < $cfg_mb_pwdmin || strlen($txPwd) > 20)
+       	if(strlen($oldtxPwd) < $cfg_mb_pwdmin || strlen($oldtxPwd) > 20)
 		{
 			showJson("你的提现密码长度应该不少于".$cfg_mb_pwdmin."个字符，不大于20个字符！","-1");
 			exit();
 		}   
 		
-		if($txPwd != $txPwdok)
+		if($oldtxPwd != $txPwdok)
 		{
 			showJson("两次输入的密码不一致！","-1");
 			exit();
@@ -78,13 +78,13 @@ if($dopost=='save')
             exit();
 		}
 		if($nowtxpwd ==""){
-			$txpwd = md5($txPwd);
+			$oldtxPwd = md5($oldtxPwd);
 			//$txpwd = substr(md5($txPwd),5,20);
-			if($txpwd==$nowpwd){
+			if($oldtxPwd==$nowpwd){
 				showJson('请不要使用登录密码作为提现密码！','-1');
             	exit();
 			}
-			$query1 = "UPDATE `#@__member` SET txpwd='$txpwd',safequestion='$safequestion',safeanswer='$safeanswer' where mid='".$cfg_ml->M_ID."' ";
+			$query1 = "UPDATE `#@__member` SET txpwd='$oldtxPwd',safequestion='$safequestion',safeanswer='$safeanswer' where mid='".$cfg_ml->M_ID."' ";
     		$dsql->ExecuteNoneQuery($query1);
 			showJson('提交安全资料成功！','1');
             exit();
