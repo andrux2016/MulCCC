@@ -1,302 +1,241 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{dede:global.cfg_webname/}-首页</title>
-<script language="javascript" type="text/javascript"
-	src="{dede:global.cfg_templets_skin/}/js/jquery_1_7_2.js"></script>
-<script language="javascript" type="text/javascript"
-	src="{dede:global.cfg_templets_skin/}/js/hstock.encode_v1.js"></script>
-<script language="javascript" type="text/javascript"
-	src="{dede:global.cfg_templets_skin/}/js/mpage_v3.js"></script>
-<script language="javascript" type="text/javascript"
-	src="{dede:global.cfg_templets_skin/}/js/misc.js"></script>
-<script language="javascript" type="text/javascript"
-	src="{dede:global.cfg_templets_skin/}/js/apprise-1.5.full.js"></script>
-<script language="javascript" type="text/javascript"
-	src="{dede:global.cfg_templets_skin/}/js/jquery.flot.js"></script>
-<script type="text/javascript">
-
-trade_global = {};
-trade_global.moneyid = '{dede:php} echo $moneyid;{/dede:php}';
-trade_global.coinid = '{dede:php} echo $coinid;{/dede:php}';
-trade_global.money = '{dede:php} echo $moneytype;{/dede:php}';
-trade_global.coin = '{dede:php} echo $cointype;{/dede:php}';
-trade_global.symbol = '{dede:php} echo $cointype;{/dede:php}_{dede:php} echo $moneytype;{/dede:php}';
-trade_global.symbol_view = '{dede:php} echo $cointype;{/dede:php}/{dede:php} echo $moneytype;{/dede:php}';
-trade_global.fee = '{dede:php} echo $fee;{/dede:php}';
-trade_global.ask = 1.2;
-server_time = Date.parse(new Date())/1000;	
-
-
-
-$(function(){
-LoadFlot();
-CheckLogin();
-
-});
-
-function LoadFlot(){
-
-{dede:php}
-foreach($dtypearr as $tmpdtypearr){
-	echo '$.plot("#'.$tmpdtypearr['cointype'].'_'.$tmpdtypearr['moneytype'].'", [{';
-	echo 'data:[[0,'.$tmpdtypearr['flot'][6].'],[1,'.$tmpdtypearr['flot'][5].'],[2,'.$tmpdtypearr['flot'][4].'],[3,'.$tmpdtypearr['flot'][3].'],[4,'.$tmpdtypearr['flot'][2].'],[5,'.$tmpdtypearr['flot'][1].'],[6,'.$tmpdtypearr['flot'][0].']]';
-	echo '}],{  series: { lines: { show: true,lineWidth: 1},points: { show: false,radius: 1}, shadowSize:0 }, ';
-	echo "grid:{show:false,aboveData: false,color: '#000',borderColor:'#000',borderWidth:1}});";
-}
-{/dede:php}
-
-}
-
-function CheckLogin(){
-  	$.getJSON("{dede:global.cfg_cmspath/}/member/ajax_login.php?coinid="+trade_global.coinid+"&moneyid="+trade_global.moneyid+"&tt="+new Date(), function(data){
-  		$('#_loaduser').hide();
-		if(data.userid){
-			$('#_userlogin').hide();
-			$('#usertop').html("<div class='login-yes'><span class=\"userlink\"><div class='out'><a href=\"#\" onclick=\"UserQuit()\">退出</a></div><div class='out' style='width:80px;'><a href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >我的账户</a></div><div class='name'><a class='ugif name' href=\"{dede:global.cfg_cmspath/}/member/\"title="+data.username+"  >"+data.username+"</a></div></span> <div class='hi'>hi,</div></div>");
-		}
-	});
-	
-}
-
-function gotourl(url){
-location.href=url;
-}
-
-function UserLogin(){
-	
-if($('#userid').val()==""){
-	$('#showdiv').html("请填写Email！");
-	$('#userid').focus();
-	return false;
-}
-var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-if(!reg.test($('#userid').val())){
-	$('#showdiv').html("Email格式不正确！");
-	$('#userid').focus();
-	return false;
-}
-if($('#pwd').val()==""){
-	$('#showdiv').html("请填写密码！");
-	$('#pwd').focus();
-	return false;
-}
-$.post("/member/checkcode.php?act="+new Date(),{vdcode:$('#vdcode').val(),fmdo:'login',dopost:'login',keeptime:'604800',gourl:'json',userid:$('#userid').val(),pwd:$('#pwd').val()},function(msg){ 
-	if(msg=="1"){
-		apprise("登陆成功！", {
-			animate: false,
-			textOk: "确定"
-			},function(r) {
-				location.reload(true);
+<!DOCTYPE html>
+<html>	
+	<head>
+		<meta charset="utf-8" />
+		<meta name="description" content="多币交易平台,比特币,狗狗币,莱特币," />
+		<title>多币交易平台</title>
+		<!-- BEGIN SCRIPT INCLUDE -->
+		<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/jquery.js"></script>
+		<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/nivoSlider.js"></script>
+		<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/lightBox.js"></script>
+		<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/fancyCaption.js"></script>
+		<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/jqueryui.js"></script>
+		<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/general.js"></script>
+		<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/twitterFeed.js"></script>
+		<script>
+			$(function() {	
+				//Main Sliders
+				$('#slider').nivoSlider({
+					effect:'fade',
+					pauseOnHover:true,
+					captionOpacity:0,
+					pauseTime:17000
+				});
+				$( "#tabs" ).tabs();
 			});
-	}else{
-		apprise(msg, {
-			animate: false,
-			textOk: "确定"
-			},function(r) {
-				vdimgck.src=vdimgck.src+"?";
-			});
-	}
-			
+		</script>
+		<!-- END SCRIPT INCLUDE -->
+		<!-- BEGIN STYLE INCLUDE -->
+		<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templets_skin/}/css/nivo-slider.css" />
+		<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templets_skin/}/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templets_skin/}/css/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templets_skin/}/css/jquery.lightbox-0.5.css" />
+		<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templets_skin/}/css/fancy-caption.css" />
+		<link rel="stylesheet" type="text/css" href="{dede:global.cfg_templets_skin/}/css/jquery.tweet.html" />
+		<!-- END STYLE INCLUDE -->
+		<!-- Google web font include -->
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow|Oleo+Script|Droid+Sans' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<!-- BEGIN HEADER -->
+		<header id="scrolltop">
+			<div id="header" class="header-main">
+				<div id="header-content">
+					<div id="header-telephone">
+						<img src="{dede:global.cfg_templets_skin/}/images/phone.png" alt="Phone image" />
+						<span><a href="/member/">登录</a>&nbsp;<a href="/member/index_do.php?fmdo=user&dopost=regnew">注册</a></span>
+					</div>
+					<div id="social-button">
+						<a href="#"><img src="{dede:global.cfg_templets_skin/}/images/facebook.png" alt="Facebook icon" /></a>
+						<a href="#"><img src="{dede:global.cfg_templets_skin/}/images/twitter.png" alt="Twitter icon" /></a>
+						<a href="#"><img src="{dede:global.cfg_templets_skin/}/images/rss.png" alt="RSS icon" /></a>
+						<a href="#"><img src="{dede:global.cfg_templets_skin/}/images/linkedin.png" alt="Linkedin icon" /></a>
+						<a href="#"><img src="{dede:global.cfg_templets_skin/}/images/google.png" alt="Google icon" /></a>
+					</div>
+					<div id="menu">
+						<ul id="menu-item">
+							<li id="item-home"><a href="/"><span class="menu-item-text1">首 页</span>
+							<span class="menu-item-text3">Home</span></a></li>
+							<li id="item-globex"><a href="/oldindex.php"><span class="menu-item-text1">交易平台</span>
+							<span class="menu-item-text3">Globex</span></a></li>
+							<li id="item-user"><a href="/trade.php"><span class="menu-item-text1">用户中心</span>
+							<span class="menu-item-text3">User</span></a>
+								<!-- <div id="drop-down-blog">
+									<img src="images/triangle.png" class="drop-triangle" alt="Triangle icon" />
+									<ul class="drop-down">
+										<li><a href="blog.html">用户登录</a></li>
+										<li><a href="blogpost.html">用户注册</a></li>
+									</ul>
+								</div> -->
+							</li>
+							<li id="item-news"><a href="/member/news.php?typeid=1"><span class="menu-item-text1">新 闻</span>
+							<span class="menu-item-text3">News</span></a></li>
+							<li id="item-vote">
+								<a href="/vote.php"><span class="menu-item-text1">投票上币</span>
+								<span class="menu-item-text3">Vote</span></a></li>
+							<li id="item-help"><a href="/member/btc-help.php"><span class="menu-item-text1">帮 助</span>
+							<span class="menu-item-text3">Help</span></a></li>	
+						</ul>
+					</div>					
+				</div>
+			</div>	
+		</header>
+		<!-- END HEADER -->
+		<!-- BEGIN MAIN SLIDER -->
+		<div id="slider-bg">
+			<div id="slider-align">
+				<div class="slider-wrapper theme-pascal">
+					<div id="slider" class="nivoSlider">
+						<!-- Place there a picture that will be displayed in main slider -->
+						<img src="{dede:global.cfg_templets_skin/}/images/slider1.jpg" alt="" title="#main1" />
+						<img src="{dede:global.cfg_templets_skin/}/images/slider2.jpg" alt="" title="#main2" />
+						<img src="{dede:global.cfg_templets_skin/}/images/slider3.jpg" alt="" title="#main3" />
+					</div>
+					<!-- Place there a caption text that will be displayed with a slider picture (id of div should been equal to the value of image's title attribute) -->
+					<!-- <div id="main1" class="nivo-html-caption">
+						<div class="slider-caption-wrap">比特币的优势</div>	
+					</div>
+					<div id="main2" class="nivo-html-caption">
+						<div class="slider-caption-wrap">比特币的优势</div>	
+					</div>
+					<div id="main3" class="nivo-html-caption">
+						<div class="slider-caption-wrap">比特币的优势</div>	
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<!-- END MAIN SLIDER -->
+		<div id="main-content" class="main-page-content">
+			<!-- BEGIN MAIN CONTENT -->
+			<div id="content-left" class="full-content">
+				<div class="divider"></div>
+				<!-- BEGIN SITE SECTION -->
+				<div id="site-section-wrap">
+					<div class="three-column">
+						<img src="{dede:global.cfg_templets_skin/}/images/menu_section.png" class="site-section-img" alt="Read menu" />
+					</div>
+					<div class="three-column">
+						<img src="{dede:global.cfg_templets_skin/}/images/blog_section.png" class="site-section-img" alt="Visit blog" />
+					</div>
+					<div class="three-column last-column">
+						<img src="{dede:global.cfg_templets_skin/}/images/contact_section.png" class="site-section-img" alt="Get in touch" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<!-- END SITE SECTION -->
+				<div class="divider"></div>
+				<!-- BEGIN OUR STORY -->
+				<div id="story-wrap">
+					<h1 id="story-header">交易列表</h1>
+					<div id="header-after-story">最新的主流虚拟币实时交易价格</div>
+					<div id="story-content">
+						<div id="tabs">
+							<ul>
+							<li><a href="#tabs-1">比特币</a></li>
+							<li><a href="#tabs-2">莱特币</a></li>
+							<li><a href="#tabs-3">狗狗币</a></li>
+							<li><a href="#tabs-4">测试币</a></li>
+							</ul>
+							<div id="tabs-1">
+								<p>比特币</p>
+							</div>
+							<div id="tabs-2">
+								<p>莱特币</p>
+							</div>
+							<div id="tabs-3">
+								<p>狗狗币</p>
+							</div>
+							<div id="tabs-4">
+								<p>测试币</p>
+							</div>
+						</div>
+					</div>
+					<div id="story-illustration">
+						<h4>虚拟币介绍</h4>
+								<span>比特币BTC</span>：发布于2008年11月基于Scrypt算法设计而成.<br><br>
+								<span>莱特币LTC</span>：发布于2011年10月7日,是目前市值最高的山寨币tc速度更快，
+								平均2.5分钟一个块，15分钟就可以完成6次确认。<br><br>
+								<span>狗狗币DOGE</span>：诞生于2013年12月12日，基于Scrypt算法设计而成，
+								缘起流行度不亚于国内“土豪”的欧美年度流行语“Doge”。60秒每块，1000亿总量<br><br>
+								<span>Moon币</span>：发布于2013年12月28日，Scrypt算法，90秒每块, 524288个每块，
+								共计3844亿。<br><br>
+								<span>TIPS币</span>：发布于2014年2月17日，Scrypt算法，显卡挖矿，1分钟每块，
+								每10分钟调整难度，总量5000亿个。采用独创的转账混淆办法来保证转账来源的匿名性。<br><br>
+								<span>QQC币</span>：发布于2013年12月29日，Scrypt算法，20秒每块，共计3000万个，
+								5次交易确认。<br><br>
+								<span>IFC币</span>：发布于2013年6月5日。scrypt算法。30秒每块，每块524288个，共计906亿个。
+								3个交易确认，交易确认速度快。每小时调整一次难度。<br><br>
+								<span>XRP币</span>：发布于2013年12月 ，基于Scrypt算法。<br><br>
+								<span>MEOW币</span>：发布于2013年12月24日，Scrypt算法，30秒每块，1小时调整难度，
+								共计1000亿，6次交易确认
+					</div>
+					<div class="clear"></div>
+					<div class="divider"></div>
+				</div>	
+				<!-- END OUR STORY -->
+				<!-- BEGIN DEALTIPS -->
+				<div id="dealtips">
+					<h1>多币网买卖流程</h1>
+					<div id="buytips">
+						<h5>买入流程：</h5>
+						1、充值BTC/LTC/GOGE至您的多币网账户<br>
+						2、选择虚拟币与BTC/LTC/DOGE中任一币种兑换价格，提交虚拟币的买单<br>
+						3、系统匹配价格，生成交易<br>
+						4、系统自动将兑换的的虚拟币汇入您的多币网账户<br>
+					</div>
+					<div id="saletips">
+						<h5>卖出流程：</h5>
+						1、充值虚拟币至您的多币网账户<br>
+						2、选择虚拟币与BTC/LTC/DOGE中任一币种兑换价格，提交虚拟币卖单<br>
+						3、系统匹配价格，生成交易<br>
+						4、系统自动将兑换的BTC/LTC/DOGE汇入您的多币网账户<br>
+					</div>
+					<div class="clear"></div>
+					<div class="divider"></div>
+				</div>
+				 <!-- END DEALTIPS  -->
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<div class="clear"></div>
+		<!-- BEGIN PREFOOTER -->
+		<div id="prefooter-main-wrap">
+			<div id="prefooter-content">
+				<a href="#scrolltop" class="scroll"><img src="{dede:global.cfg_templets_skin/}/images/top.png" id="scrolltop-img" alt="Scroll to top" /></a>
+				<div id="findus">
+					<h1>风险提示</h1>
+					<div id="adress-wrap">
+						虚拟币币的交易都存在风险，作为全球的虚拟数字货币，它们都是全天24小时交易，没有涨跌限制，价格容易因为庄家、全球政府的政策影响而大幅波动，我们强烈建议您在自身能承受的风险范围内，参与虚拟货币交易。
+					</div>
+				</div>
+				<div id="hours">
+					<h1>联系我们</h1>
+					<div class="meal-wrap">
+						网站：www.mulcoin.com<br>
+						企业邮箱：admin@mulcoin.com
+					</div>
+				</div>
+				<div id="events">
+					<h1>在线客服</h1>
+					<div class="event-wrap">
+						客服QQ：1561149734<br>
+						多币交易网官方群1：239183521<br>
+						多币交易网官方群2：339169803<br>
+						多币交易网官方群3：346167736
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END PREFOOTER -->
+		<!-- BEGIN FOOTER -->
+		<div id="footer">
+			<div id="footer-content-main">
+				<div id="footer-copyright">&copy; Copyright &copy; 2014 mulcoin.com  
+				版权所有 &copy;环球汇付科技集团股份有限公司</div>
+				<div id="footer-misc"></div>
+			</div> 
+		</div>
+		<!-- END FOOTER -->
 
-}); 
-}
-
-function UserQuit(){
-
-$.post("/member/checkcode.php?act="+new Date(),{code:$('#vdcode').val(),fmdo:'login',dopost:'exit'},function(msg){ 
-			apprise(msg, {
-			animate: false,
-			textOk: "确定"
-			},function(r) {
-				location.reload(true);
-			});
-}); 	
-}
-
-
-function sendMsg(){
-if($('#usermsg').val()==""){
-apprise("请填写留言！", {
-	animate: true,
-	textOk: "确定"
-});
-}else{
-$.post("{dede:global.cfg_cmspath/}/member/ajax_snsmsg.php?tt="+new Date(),{msg:$('#usermsg').val(),dopost:'send'},function(msg){ 
-		apprise(msg, {
-		animate: false,
-		textOk: "确定"
-		},function(r) {
-			//location.reload(true);
-		});
-}); 	
-}
-}
-$.getJSON("{dede:global.cfg_cmspath/}/member/ajax_snsmsg.php?dopost=read&tt="+new Date(), function(data){
-	if(data){
-		$.each(data.showMsg, function(key, val) {   
-			$("#msgDiv").append("<li style=\"width:180px;float:left\"><span>"+val['userid']+"</span>：<span>"+val['msg']+"</span></li>");
-		}); 
-		
-	}
-});
-
-function loginwindow() {
-
-$.ajax({
-	type: "post",
-	url: "{dede:global.cfg_cmspath/}/member/ajax_log.php?op=" + Math.random(),
-
-	success: function(data, state) {
-		apprise(data,{
-			animate: false,
-			textOk : '关闭'
-		},function(r) {
-			//location.reload(true);
-		});	
-	}
-});
-}
-function list_deal() {
-$("#li2").hide();
-$("#li4").show();
-$("#li1").show();
-$("#li3").hide();
-$("#divOrderList").hide();
-$("#divDealList").show();
-}
-function list_order() {
-$("#li1").hide();
-$("#li3").show();
-$("#li2").show();
-$("#li4").hide();
-$("#divOrderList").show();
-$("#divDealList").hide();
-}
-
-
-function showtext() {  
-if($("#pwd").val()=="") {  
-$("#pwd_warpper").html("<input type=\"text\" value=\"请输入密码\" id=\"_pwd\" onfocus=\"showpassword();\" class=\"ipt-txt\"/>");  
-}  
-}  
-
-function showpassword() {  
-$("#pwd_warpper").html("<input type=\"password\" value=\"\" id=\"pwd\" onblur=\"showtext();\" class=\"ipt-txt\"/>");  
-setTimeout(function(){  
-$("#pwd").focus();  
-},20);  
-}
-
-	
-
-	
-
-    </script>
-<!--we js end-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link type="text/css" rel="stylesheet"
-	href="{dede:global.cfg_templets_skin/}/css/main.css" />
-<link href="{dede:global.cfg_templets_skin/}/css/common.css"
-	rel="stylesheet" type="text/css" />
-<link href="{dede:global.cfg_templets_skin/}/css/nav-top.css"
-	rel="stylesheet" type="text/css" />
-<link href="{dede:global.cfg_templets_skin/}/css/home.css"
-	rel="stylesheet" type="text/css" />
-<link href="{dede:global.cfg_templets_skin/}/css/footer.css"
-	rel="stylesheet" type="text/css" />
-<link href="{dede:global.cfg_templets_skin/}/css/apprise.css"
-	rel="stylesheet" type="text/css" />
-<style type="text/css">
-.btc_title .coin_menu{
-	list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.btc_title .coin_menu li{
-	 float: left;
-    position: relative;
-}
-.btc_title .coin_menu li a {
-    background: none repeat scroll 0 0 #3C78B5;
-    border: 0 solid #FFFFFF;
-    color: #ffffff;
-    display: block;
-    font-size: 15px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    text-decoration: none;
-    width: 90px;
-}.btc_title .coin_menu li a:hover {
-    background-color: #808080 ;
-    color: #FFFFFF;
-}.btc_title .coin_menu li a.active {
-    background-color: #808080 ;
-    color: #FFFFFF;
-}
-</style>
-</head>
-<body>
-{dede:php echo $moneyid;/} {dede:include filename="head_btc.htm"/}
-<div class="content">
-<div class="chart" style='margin: 0px auto; width: 820px;'>
-<div class="content_left_top"></div>
-<div class="content_left_middle">
-<div class="btc_title" style="width: 800px;"><span
-	class="title_list">交易列表 &nbsp; &nbsp; &nbsp;</span></div>
-<div class="btc_title" style="width: 800px; background-color: #eeeeee">
-<ul class="coin_menu">
-{dede:php}
-	foreach ($cointypelist as $tmpcointype){
-			if($tmpcointype['cointype'] == $dtype){
-				echo '<li><a class="active" href="/index.php?'.$tmpcointype['cointype'].'">'.$tmpcointype['coinname'].'交易</a></li>';
-			}else{
-				echo '<li><a href="/index.php?'.$tmpcointype['cointype'].'">'.$tmpcointype['coinname'].'</a></li>';
-			}
-		}
-	{/dede:php}
-</ul>
-</div>
-<div class="amaze2">
-<table id="top_table" class="top_table">
-
-<thead>
-		<tr class="btc_pag3" style="line-height: 30px;">
-			<th class="sort-title" align="left" width="130">货币</th>
-			<th class="sort-title" datatype="float" align="left" width="120">现价</th>
-			<th class="sort-title" datatype="float" align="left" width="120">24h成交价</th>
-			<th class="sort-title" datatype="float" align="left" width="120">24h成交量</th>
-			<th class="sort-title" datatype="float" align="left" width="120">24h成交额</th>
-			<th class="sort-title" datatype="float" align="left" width="200">最后成交时间</th>
-		</tr>
-	</thead>
-	<tbody>
-
-{dede:php}
-foreach($dtypearr as $tmpdtypearr){
-		echo '<tr style=""><td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left">&nbsp;&nbsp;';
-		echo $tmpdtypearr['cointype'].'/'.$tmpdtypearr['moneytype'].'</td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="history_price_wcccny">'.$tmpdtypearr['price_btc'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="buy1_wcccny">'.$tmpdtypearr['price_before_24h'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="sell1_wcccny">'.$tmpdtypearr['volume_btc'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="vol_wcccny">'.$tmpdtypearr['total'].'</span></td>';
-		echo '<td style="cursor: pointer;"	onclick="window.location=\''.$tmpdtypearr['website'].'\'"align="left"><span id="trade_wcccny">'.$tmpdtypearr['latest_trade'].'</span></td>';
-		echo '</tr>';
-}
-{/dede:php}
-	</tbody>
-</table>
-
-</div>
-</div>
-
-<div class="content_left_bottom"></div>
-
-
-</div>
-</div>
-{dede:include filename="footer_btc.htm"/}
 </body>
 </html>
