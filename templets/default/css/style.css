@@ -477,6 +477,11 @@ input:focus, textarea:focus {
 	line-height:30px;
 }
 
+#header-telephone a{
+	text-decoration: none;
+	color: #633;
+}
+
 /* Navigation */
 
 #header-content {
@@ -1863,3 +1868,16 @@ input:focus, textarea:focus {
 #footer-misc a:hover {
 	text-decoration:underline;
 }
+
+#tabs table{
+	border-top: 1px solid #6CF;
+	border-left: 1px solid #6CF;
+}
+#tabs td{
+	border-right: 1px solid #6CF;
+	border-bottom: 1px solid #6CF;
+	padding: 5px 16px;
+	text-align: center;
+	font: 14px "Î¢ÈíÑÅºÚ";
+}
+#tabs .thead{background-color: #CEF;padding: 15px 16px;}

@@ -311,11 +311,9 @@ class DedeSql
         {
             CheckSql($this->queryString);
         }
-		
         $t1 = ExecTime();
-        
+        print_r($this->queryString);
         $this->result[$id] = mysql_query($this->queryString,$this->linkID);
-        
         if($this->recordLog) {
 			$queryTime = ExecTime() - $t1;
             $this->RecordLog($queryTime);
@@ -326,7 +324,7 @@ class DedeSql
             $this->DisplayError(mysql_error()." <br />Error sql: <font color='red'>".$this->queryString."</font>");
         }
     }
-
+    
     function Query($id="me",$sql='')
     {
         $this->Execute($id,$sql);

@@ -195,7 +195,7 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 	
 	$dsql->SetQuery("SELECT sum(btccount) sumbtccount,uprice FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 group by uprice ORDER BY uprice asc LIMIT 1");
 	$dsql->Execute();
-	if($rod = $dsql->GetObject())
+	if($rod = $dsql->GetObject() && (!isset($ordersell[$rod->uprice]) || empty($ordersell[$rod->uprice])))
 	{
 		$ordersell[$rod->uprice] = array(  
 			'vol' => $ordersell[$rod->uprice]['vol']+$rod->sumbtccount*1, 

@@ -32,7 +32,7 @@ box-shadow: -1px  5px  4px  #888;
 .nav-top .row-2 .b-row{height:76px;}
 .nav-top .row-2 .b-row .logo{height:76px;width:142px;display:block;float:left;}
 .nav-top .row-2 .b-row .logo img{border:0px;display:block;}
-.nav-top .row-2 .b-row .nav{height:39px;width:480px; display:block; float:left; text-align:left;padding-top:37px;}
+.nav-top .row-2 .b-row .nav{height:39px;width:480px; display:block; float:left; text-align:left;}
 .nav-top .row-2 .b-row .nav .col{width:auto;height:30px; display:block; float:right;padding-right:10px;}
 .nav-top .row-2 .b-row .nav .col a{padding-left:13px;padding-right:15px;height:30px;line-height:30px;display:block;outline:none;color:#000; text-decoration:none;font-size:14px;-webkit-border-radius: 3px;
 border-radius: 3px;-moz-border-radius : 3px;float:left;}
