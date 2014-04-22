@@ -195,13 +195,21 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 	
 	$dsql->SetQuery("SELECT sum(btccount) sumbtccount,uprice FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=1 group by uprice ORDER BY uprice asc LIMIT 1");
 	$dsql->Execute();
-	if($rod = $dsql->GetObject() && (!isset($ordersell[$rod->uprice]) || empty($ordersell[$rod->uprice])))
+	if($rod = $dsql->GetObject())
 	{
-		$ordersell[$rod->uprice] = array(  
-			'vol' => $ordersell[$rod->uprice]['vol']+$rod->sumbtccount*1, 
-			'rate' => $rod->uprice/1,  
-			'count' => $ordersell[$rod->uprice]['count']+1
-		);
+		$valid = true;
+		foreach($ordersell as $k=>$v){
+			if($v['rate'] == $rod->uprice){
+				$valid = false;
+			}
+		}
+		if($valid){
+			$ordersell[$rod->uprice] = array(  
+				'vol' => $ordersell[$rod->uprice]['vol']+$rod->sumbtccount*1, 
+				'rate' => $rod->uprice/1,  
+				'count' => $ordersell[$rod->uprice]['count']+1
+			);
+		}
 	}
 	
 	foreach($ordersell as $k=>$v){
@@ -212,6 +220,7 @@ if($_COOKIE["DedeUserID"]!="" || !isset($_COOKIE["DedeUserID"])){
 			'count' => rtrimandformat($v['count'],10)
 		);
 	}
+	
 	//读取挂单
 	$dsql->SetQuery("SELECT sum(btccount) sumbtccount,uprice FROM #@__btcorder WHERE coinid='".$coinid."' AND moneyid='".$moneyid."' AND market='1' AND dealtype=0 group by uprice ORDER BY uprice desc LIMIT 10");
 	$dsql->Execute();

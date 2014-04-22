@@ -71,7 +71,7 @@ foreach($cointypelista as $xxx){
 		}
 	}
 	if($tmpvalue != null){
-		$trhtml .= '<tr><td class="gray">'.$tmpvalue['0'].'</td><td>'.rtrimandformat(floor($tmpvalue['1']*100)/100, 10).'</td><td>'.rtrimandformat($tmpvalue['2']/1, 10).'</td><td>';
+		$trhtml .= '<tr><td class="gray">'.$tmpvalue['0'].'</td><td>'.rtrimandformat($tmpvalue['1']/1, 10).'</td><td>'.rtrimandformat($tmpvalue['2']/1, 10).'</td><td>';
 		$trhtml .= '&nbsp;&nbsp;<a href="/member/buy_btc.php?coinid='.$tmpvalue['3'].'">充值</a> &nbsp;&nbsp;<a href="/member/cash_btc.php?coinid='.$tmpvalue['3'].'">提现</a> &nbsp;&nbsp;<a href="/member/operation_btc.php">充值记录</a> &nbsp;&nbsp;<a href="/member/operation_cash.php">提现记录</a> &nbsp;&nbsp;<a href="/oldindex.php?'.$tmpvalue['0'].'">交易</a> &nbsp;&nbsp; </td></tr>';
 	}else{
 		$trhtml .= '<tr><td class="gray">'.$xxx['cointype'].'</td><td>0</td><td>0</td><td>';
