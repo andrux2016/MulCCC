@@ -1,4 +1,4 @@
-/*  Copyright Mihai Bazon, 2002-2005  |  www.bazon.net/mishoo
+﻿/*  Copyright Mihai Bazon, 2002-2005  |  www.bazon.net/mishoo
  * The DHTML Calendar, version 1.0 "It is happening again"
  * Details and latest version at:
  * www.dynarch.com/projects/calendar
@@ -178,7 +178,7 @@ text += cal.showsTime ? Calendar._TT["ABOUT_TIME"] : "";
 } else {text = "Help and about box text is not translated into this language.\n" +
 "If you know this language and you feel generous please update\n" +
 "the corresponding file in \"lang\" subdir to match calendar-en.js\n" +
-"and send it back to <mihai_bazon@yahoo.com> to get it into the distribution  ;-)\n\n" +
+"and send it back to someone to get it into the distribution  ;-)\n\n" +
 "Thank you!\n" +
 "http://dynarch.com/mishoo/calendar.epl\n";
 }
