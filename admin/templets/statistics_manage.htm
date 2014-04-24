@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
+<title>对账管理</title>
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+</head>
+<body background='images/allbg.gif' leftmargin='8' topmargin='8'>
+<table width="98%" border="0" cellpadding="1" cellspacing="1" align="center" class="tbtitle" style="background:#cfcfcf;">
+    <tr>
+      <td height="24" colspan="11" bgcolor="#EDF9D5" background='images/tbg.gif'>
+      	<table width="98%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="30%"  style="padding-left:10px;"><strong>对账管理：</strong></td>
+            <td align="right" style="padding-top:4px;">            	            </td>
+          </tr>
+        </table>      </td>
+    </tr>
+    <tr bgcolor="#FBFCE2">
+	  <td width="5%" align="center">币种</td>
+      <td width="12%" align="center">用户余额</td>
+	  <td width="12%" align="center">冻结金额</td>
+	  <td width="12%" align="center">总金额</td>
+      <td width="5%" align="center">手续费率</td>
+    </tr>
+    <?php foreach($cointypelist as $coininfo){ ?>
+    <tr bgcolor="#FFFFFF" height="26" align="center" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';">
+		<td align="center"><?php echo $coininfo['cointype'];?></td>
+		<td align="center"><?php echo $coininfo['deposit'];?></td>
+		<td align="center"><?php echo $coininfo['freeze'];?></td>
+		<td align="center"><?php echo ($coininfo['deposit'] + $coininfo['freeze']);?></td>
+		<td align="center"><?php echo $coininfo['coinfee'];?></td>
+		    </tr>
+	<?php } ?>
+		
+
+    <tr>
+      <td height="34" colspan="11" align="center" bgcolor="#F9FCEF">
+      </td>
+    </tr>
+</table>
+</body>
+</html>

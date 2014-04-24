@@ -4,8 +4,8 @@ require_once 'JsonRpcClient.php';
 //数据库配置
 $mysql_servername = "localhost";
 $mysql_username = "root";
-$mysql_password = "";
-$mysql_database = "data";
+$mysql_password = "qwer4321";
+$mysql_database = "mulcoin";
 $mysql_table = "pay_address";
 
 $method = $_GET['method'];
