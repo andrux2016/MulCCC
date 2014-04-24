@@ -312,7 +312,7 @@ class DedeSql
             CheckSql($this->queryString);
         }
         $t1 = ExecTime();
-        print_r($this->queryString);
+//        print_r($this->queryString);
         $this->result[$id] = mysql_query($this->queryString,$this->linkID);
         if($this->recordLog) {
 			$queryTime = ExecTime() - $t1;

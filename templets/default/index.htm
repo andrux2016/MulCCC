@@ -131,98 +131,23 @@
 					<div id="story-content">
 						<div id="tabs">
 							<ul>
-							<li><a href="#tabs-1">比特币</a></li>
-							<li><a href="#tabs-1">莱特币</a></li>
-							<li><a href="#tabs-1">狗狗币</a></li>
+							{dede:php}
+								foreach ($cointypelist as $tmpcointype){
+									echo '<li><a href="#tabs-'.$tmpcointype['id'].'">'.$tmpcointype['cointype'].'币</a></li>';
+								}
+							{/dede:php}
 							</ul>
-							<div id="tabs-1">
-								<table>
-									<tr class="thead">
-										<td>币种</td>
-										<td>最新价</td>
-										<td>24小时交易额</td>
-										<td>24小时成交量</td>
-										<td>24小时跌涨幅</td>
-									</tr>
-									<tr>
-										<td>DOGE</td>
-										<td>0.00254</td>
-										<td>754126</td>
-										<td>14265</td>
-										<td>0.68%</td>
-									</tr>
-									<tr>
-										<td>MOON</td>
-										<td>0.245</td>
-										<td>654211</td>
-										<td>45254</td>
-										<td>0.43%</td>
-									</tr>
-									<tr>
-										<td>TIPS</td>
-										<td>0.004215</td>
-										<td>51454</td>
-										<td>11064</td>
-										<td>0.57%</td>
-									</tr>
-									<tr>
-										<td>QQC</td>
-										<td>0.0025</td>
-										<td>32454</td>
-										<td>53234</td>
-										<td>3.22%</td>
-									</tr>
-									<tr>
-										<td>IFC</td>
-										<td>0.0022</td>
-										<td>13342</td>
-										<td>34564</td>
-										<td>1.22%</td>
-									</tr>
-									<tr>
-										<td>XRP</td>
-										<td>0.044</td>
-										<td>13342</td>
-										<td>34564</td>
-										<td>-2.22%</td>
-									</tr>
-									<tr>
-										<td>MEOW</td>
-										<td>0.001</td>
-										<td>23534</td>
-										<td>2314</td>
-										<td>0.23%</td>
-									</tr>
-									<tr>
-										<td>QRK</td>
-										<td>0.001</td>
-										<td>23534</td>
-										<td>2314</td>
-										<td>0.23%</td>
-									</tr>
-									<tr>
-										<td>XPM</td>
-										<td>0.001</td>
-										<td>23534</td>
-										<td>2314</td>
-										<td>0.23%</td>
-									</tr>
-									<tr>
-										<td>TIX</td>
-										<td>0.001</td>
-										<td>23534</td>
-										<td>2314</td>
-										<td>0.23%</td>
-									</tr>
-									<tr>
-										<td>RED</td>
-										<td>0.001</td>
-										<td>23534</td>
-										<td>2314</td>
-										<td>0.23%</td>
-									</tr>
-								</table>
-							</div>
+							{dede:php}
+								foreach($cointypelist as $tmpcointype){
+									echo '<div id="tabs-'.$tmpcointype['id'].'">';
+									echo '<table>';
+									echo '<tr class="thead"><td>币种</td><td>最新价</td><td>24小时成交量</td><td>24小时成交额</td><td>24小时涨跌幅</td></tr>';
+									foreach($tmpcointype["status"] as $tmpdtypearr)
+										echo '<tr><td>'.$tmpdtypearr['cointype'].'</td><td>'.$tmpdtypearr['newrate'].'</td><td>'.$tmpdtypearr['count'].'</td><td>'.$tmpdtypearr['total'].'</td><td>'.$tmpdtypearr['updown'].'</td></tr>';
+									echo '</table>';
+									echo '</div>';
+								}
+							{/dede:php}
 						</div>
 					</div>
 					<div id="story-illustration">

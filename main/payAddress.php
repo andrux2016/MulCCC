@@ -54,7 +54,11 @@ if(isset($cointype) && !empty($cointype)){
 		);
 //		echo mchStrCode(json_encode($returncont), 'ENCODE');
 	}elseif($method == 'listsinceblock'){
-		$content = $bitcoin->listsinceblock($params[0]);
+		if(!isset($params) || empty($params) || count($params) == 0 || $params[0] == null){
+			$content = $bitcoin->listsinceblock();
+		}else{
+			$content = $bitcoin->listsinceblock($params[0]);
+		}
 		$returncont = array(
 			'r' => $content
 		);
@@ -70,7 +74,7 @@ if(isset($cointype) && !empty($cointype)){
 		$returncont = array(
 			'r' => $content
 		);
-		echo mchStrCode(json_encode($returncont), 'ENCODE');
+//		echo mchStrCode(json_encode($returncont), 'ENCODE');
 	}elseif ($method == 'sendtoaddress') {
 		$content = $bitcoin->sendtoaddress($params[0], $params[1], $params[2], $params[3]);
 		$returncont = array(
