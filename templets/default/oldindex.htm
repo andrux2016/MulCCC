@@ -811,7 +811,391 @@ foreach($listbuy as $buyinfo){
 </div>
 <div class="content_right_bottom"></div>
 </div>
+<div style="display:none;">
+	<div  class="xbt-hqzhx-1-1">
+		<div class="btc8-select-a" style="display:none;">
+			{dede:php} echo $convertName; {/dede:php}				
+		</div>				 
+		<div style="width:100%;height:auto; float:left;">						  
+			<div id="chart-control" class="btn-group" style="width: 90%;min-width:320px;height: 30px;line-height: 10px; float:left">										   
+				<button data-time="5m" class="btn btn-success">5分钟线</button>
+				<button data-time="15m" class="btn">15分钟线</button>
+				<button data-time="30m" class="btn">30分钟线</button>
+				<button data-time="60m" class="btn">1小时线</button>
+				<button data-time="8h" class="btn">8小时线</button>
+				<button data-time="1d" class="btn">日线</button>
+			</div>								
+			<div style="clear: both;padding:0px 0 1px;"></div>
+			<div id="graphbox" style="width:100%;_width:668px; max-width:668px; margin: 0px 0px 10px 0px; float:left; _clear:both;" data-highcharts-chart="0">
+				<div id="rates" style="width:98%;height: 265px; min-width: 370px;overflow:hidden;position:relative;">
+					<div align="center" ><br><br><br><br><br><br><br><img src="{dede:global.cfg_templets_skin/}/img/loading.gif"></div>
+				</div>
+			</div>  
+		</div>
+		
+		<!--走势图JS代码开始-->
+		<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/scport.js"></script>
+		<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/scport1.js"></script>
+		<script type="text/javascript">
+			trade_global.time_line = {
+				5 : {
+					datas: [],
+					last_update: server_time
+				},
+				15 : {
+					datas: [],
+					last_update: 0
+				},
+				30 : {
+					datas: [],
+					last_update: 0
+				},
+				60 : {
+					datas: [],
+					last_update: 0
+				},
+				480 : {
+					datas: [],
+					last_update: 0
+				},
+				1440 : {
+					datas: [],
+					last_update: 0
+				}
+			};
+		</script>
+		<script type="text/javascript">							  
+			server_time = {dede:php} echo time();{/dede:php};
+			trade_global.time_line['5'].datas ={dede:php} echo $time_line;{/dede:php};
+			trade_global.time_line['5'].last_update = {dede:php} echo time();{/dede:php};
+			var datas = trade_global.time_line['5'].datas;
+			var rates = []; 
+			var vols = []; 
+			/*var datas = trade_global.time_line['5'].datas;
+			var rates = [];
+			var vols = [];*/
+			for (i = 0; i < datas.length; i++) {
+				rates.push([datas[i][0], // the date
+				datas[i][1], // open
+				datas[i][2], // high
+				datas[i][3], // low
+				datas[i][4] // close
+				]);
 
+				vols.push([datas[i][0], // the date
+				datas[i][5] // the volume
+				])
+			}
+			Highcharts.setOptions({
+				colors: ['#DD1111', '#FF0000', '#DDDF0D', '#7798BF', '#55BF3B', '#DF5353', '#aaeeee', '#ff0066', '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+				lang: {
+					loading: 'Loading...',
+					months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+					shortMonths: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+					weekdays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+					decimalPoint: '.',
+					numericSymbols: ['k', 'M', 'G', 'T', 'P', 'E'],
+					// SI prefixes used in axis labels
+					resetZoom: 'Reset zoom',
+					resetZoomTitle: 'Reset zoom level 1:1',
+					thousandsSep: ','
+				},
+				credits: {
+					enabled: true,
+					text: '{dede:global.cfg_webname/}',
+					href: '{dede:global.cfg_basehost/}',
+					position: {
+						align: 'right',
+						x: -20,
+						verticalAlign: 'bottom',
+						y: -310
+					},
+					style: {
+						cursor: 'pointer',
+						color: '#909090',
+						fontSize: '10px'
+					}
+				}
+
+			});
+
+			Highcharts.myOpt = {
+				symbolColor: '#058dc7'
+			};
+
+			// set the allowed units for data grouping
+			var groupingUnits = [["week", // unit name
+			[1] // allowed multiples
+			], ["month", [1, 2, 3, 4, 6]]]; // create the chart
+			trade_global.main_chart = new Highcharts.StockChart({
+					chart: {
+						renderTo: 'rates',
+						alignTicks: false
+					},
+					plotOptions: {
+						candlestick: {
+							color: '#d33',
+							upColor: '#9e4',
+							ohlc: {
+								//color: 'green',
+								tooltip: {
+									// 日期时间格式化
+									xDateFormat: '%Y-%m-%d %H:%M %A',
+									color: '#f0f',
+									changeDecimals: 4
+								}
+							}
+						},
+						column: {
+							color: '#1080BB'
+						}
+					},
+
+					rangeSelector: {
+						selected: 1
+					},
+					colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+					tooltip: {
+						// 日期时间格式化
+						xDateFormat: '%Y-%m-%d %H:%M %A',
+						color: '#f0f',
+						changeDecimals: 4,
+						borderColor: '#058dc7'
+					},
+					rangeSelector: {
+						// 缩放选择按钮，是一个数组。
+						// 其中type可以是： 'millisecond', 'second', 'minute', 'day', 'week', 'month', 'ytd' (year to date), 'year' 和 'all'。
+						// 其中count是指多少个单位type。
+						// 其中text是配置显示在按钮上的文字
+						buttons: [{
+							type: 'minute',
+							count: 60,
+							text: '1h'
+						},
+						{
+							type: 'minute',
+							count: 120,
+							text: '2h'
+						},
+						{
+							type: 'minute',
+							count: 360,
+							text: '6h'
+						},
+						{
+							type: 'minute',
+							count: 720,
+							text: '12h'
+						},
+						{
+							type: 'day',
+							count: 1,
+							text: '1d'
+						},
+						{
+							type: 'all',
+							text: '所有'
+						}],
+						// 默认选择域：0（缩放按钮中的第一个）、1（缩放按钮中的第二个）……
+						selected: 5,
+						// 是否允许input标签选框
+						inputEnabled: false
+					},
+					exporting: {
+						// 是否允许导出
+						enabled: false,
+						// 按钮配置
+						buttons: {
+							// 导出按钮配置
+							exportButton: {
+								enabled: false
+							},
+							// 打印按钮配置
+							printButton: {
+								enabled: true
+							}
+						}
+					},
+					title: {
+						text: trade_global.symbol_view
+					},
+					
+					yAxis: [{
+					  top: 70,
+					  height: 200,
+					  minPadding: 0.3,
+					  labels: { style: { color: '#CC3300' } },
+					  title: { text: '价格 [{dede:php} echo $moneytype;{/dede:php}]', style: { color: '#CC3300' }
+					  
+					  }
+					}, {
+					  top: 170,
+					  height: 100,
+					  minPadding: 0.3,
+					  title: { text: '成交量 [{dede:php} echo $cointype;{/dede:php}]', style: { color: '#4572A7' } },
+					  labels: { style: { color: '#4572A7' } },
+					  opposite: true
+				  }],
+
+					series: [{
+						type: 'candlestick',
+						name: trade_global.symbol_view,
+						data: rates,
+						yAxis: 0,
+						dataGrouping: {
+							units: groupingUnits,
+							enabled: false
+						}
+					},
+					{
+						type: 'column',
+						name: 'Volume',
+						data: vols,
+						yAxis: 1,
+						dataGrouping: {
+							units: groupingUnits,
+							enabled: false
+						}
+					}]
+			});
+		</script>
+		<script>
+			$(function() {
+				$("#chart-control button").click(function() {
+					$(this).addClass("btn-success").siblings().removeClass("btn-success");
+					var bde30a = $(this).attr('data-time');
+					if (bde30a == '5m') {
+						_page.main_rate.switch_line_type(0x5)
+					} else if (bde30a == '15m') {
+						_page.main_rate.switch_line_type(0xf)
+					} else if (bde30a == '30m') {
+						_page.main_rate.switch_line_type(0x1e)
+					} else if (bde30a == '60m') {
+						_page.main_rate.switch_line_type(0x3c)
+					} else if (bde30a == '8h') {
+						_page.main_rate.switch_line_type(0x1e0)
+					} else if (bde30a == '1d') {
+						_page.main_rate.switch_line_type(0x5a0)
+					};
+					return false
+				})
+			})
+		</script>
+		<!--走势图JS代码结束-->				
+	</div>
+
+	<div  class="asklist">
+		<div id="sidebartitlewrapper" class="list"><h6>卖出 {dede:php} echo $cointype;{/dede:php}</h6></div>
+		<div class="sectioncont">
+			<table>
+				<tbody><tr class="tableOrderTr" t="static">
+					<td>最佳卖价</td>
+					<td id="rate_best_bid">0</td>
+					<td>{dede:php} echo $moneytype;{/dede:php}/{dede:php} echo $cointype;{/dede:php}</td>
+				</tr>
+				<tr class="tableOrderTr" t="static">
+					<td>当前余额</td>
+					<td id="balance_bid_able"> 0.0000 </td>
+					<td>{dede:php} echo $cointype;{/dede:php}</td>
+				</tr>
+				<tr class="tableOrderTr" t="static">
+					<td>可兑换额</td>
+					<td id="amount_bid_able">0.00</td>
+					<td>{dede:php} echo $moneytype;{/dede:php}</td>
+				</tr>
+
+				<tr>
+					<td>卖出价</td>
+					<td>
+					  <input type="text" id="bid_rate" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_bid_rate();_page.obj.recalc_fee(&#39;bid&#39;);" value="0">
+			
+					</td>
+					<td>{dede:php} echo $moneytype;{/dede:php}/{dede:php} echo $cointype;{/dede:php}</td>
+				</tr>
+				<tr>
+					<td>卖出量</td>
+					<td>
+			   <input type="text" id="bid_vol" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_bid_vol();_page.obj.recalc_fee(&#39;bid&#39;);" value="0">
+		   
+					</td>
+					<td>{dede:php} echo $cointype;{/dede:php}</td>
+				</tr>
+				<tr>
+					<td>兑换额</td>
+					<td>
+						
+			   <input type="text" id="bid_amount" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_bid_amount();_page.obj.recalc_fee(&#39;bid&#39;);" value="0">
+					</td>
+					<td>{dede:php} echo $moneytype;{/dede:php}</td>
+				</tr>
+				<tr>
+					<td>手续费</td>
+					<td><div id="bid_fee">0</div></td>
+					<td>{dede:php} echo $cointype;{/dede:php} (<span style="color: #008c00;font-size: 12px;" id="coinfee"></span>)</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<input name="button" type="button" class="btnAskBid" t="bid" onClick="_page.obj.on_request_ask_bid( &#39;bid&#39;,  get_element(&#39;bid_rate&#39;).value, get_element(&#39;bid_vol&#39;).value );" value="卖出 ({dede:php} echo $cointype;{/dede:php}→{dede:php} echo $moneytype;{/dede:php})">
+					</td>
+				</tr>
+			</tbody></table>
+
+		</div> 
+	</div> <!-- bid -->
+		
+	<div  class="bidlist">
+		<div id="sidebartitlewrapper" class="list"><h5>买入 {dede:php} echo $cointype;{/dede:php}</h5></div>
+		<div class="sectioncont">
+			<table>
+				<tbody><tr class="tableOrderTr" t="static">
+					<td>最佳买价</td>
+					<td id="rate_best_ask">0</td>
+					<td>{dede:php} echo $moneytype;{/dede:php}/{dede:php} echo $cointype;{/dede:php}</td>
+				</tr>
+				<tr class="tableOrderTr" t="static">
+					<td>当前余额</td>
+					<td id="balance_ask_able"><span class="s2" id="balance_ask_able">0.0000</span>                    </td>
+					<td> {dede:php} echo $moneytype;{/dede:php}</td>
+				</tr>
+				<tr class="tableOrderTr" t="static">
+					<td>可买入量</td>
+					<td id="amount_ask_able"><span class="s2" id="amount_ask_able">0.0000</span> </td>
+					<td>{dede:php} echo $cointype;{/dede:php}</td>
+				</tr>
+
+				<tr>
+					<td>买入价</td>
+					<td><input type="text" id="ask_rate" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_ask_rate();_page.obj.recalc_fee(&#39;ask&#39;);" value="0"></td>
+					<td>{dede:php} echo $moneytype;{/dede:php}/{dede:php} echo $cointype;{/dede:php}</td>
+				</tr>
+				<tr>
+					<td>买入量</td>
+					<td>
+						
+			   <input type="text" id="ask_vol" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_ask_vol();_page.obj.recalc_fee(&#39;ask&#39;);" value="0">                    </td>
+					<td>{dede:php} echo $cointype;{/dede:php}</td>
+				</tr>
+				<tr>
+					<td>兑换额</td>
+					<td>
+					   
+			   <input type="text" id="ask_amount" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_ask_amount();_page.obj.recalc_fee(&#39;ask&#39;);" value="0">                     </td>
+					<td>{dede:php} echo $moneytype;{/dede:php}</td>
+				</tr>
+				<tr>
+					<td>手续费</td>
+					<td><div class="s2" id="ask_fee">0</div>  </td>
+					<td>{dede:php} echo $moneytype;{/dede:php} (<span style="color: #008c00;font-size: 12px;" id="moneyfee"></span>)</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						
+						<input name="button" type="button" class="btnAskBid" onClick="_page.obj.on_request_ask_bid( &#39;ask&#39;,  get_element(&#39;ask_rate&#39;).value, get_element(&#39;ask_vol&#39;).value );" value="买入 ({dede:php} echo $moneytype;{/dede:php}→{dede:php} echo $cointype;{/dede:php})" t="ask">                        </td>
+				</tr>
+			</tbody></table>
+		</div>
+	</div> <!-- ask -->
+	</div>
 </div>
 </div>
 </div>
