@@ -516,13 +516,6 @@ on_input_ask_vol: function() {
 	};
 	var amount = accMul(accMul(element_rate.value , element_vol.value) , (1 + Number(page_obj.fee)));
 	element_amount.value = amount;
-	if (element_amount.value < 0.0001) {
-		element_amount.value = 0.0000
-	};
-	var fixed_num = num_need_fix(element_amount.value, Number(trade_global.digits));
-	if (fixed_num) {
-		element_amount.value = fixed_num
-	};
 	return true
 },
 on_input_bid_vol: function() {
@@ -536,10 +529,6 @@ on_input_bid_vol: function() {
 	var amount = accMul(element_rate.value , element_vol.value);
 	amount = accSub(amount , accMul(amount , Number(page_obj.moneyfee)) );
 	element_amount.value = amount;
-	var fixed_num = num_need_fix(amount, Number(trade_global.digits));
-	if (fixed_num) {
-		element_amount.value = fixed_num
-	};
 	return true
 },
 on_input_ask_rate: function() {
@@ -578,11 +567,6 @@ on_input_ask_amount: function() {
 	var element_amount = get_element('ask_amount');
 	var element_rate = get_element('ask_rate');
 	var element_vol = get_element('ask_vol');
-	var fixed_num = num_need_fix(element_amount.value, Number(trade_global.digits));
-
-	if (fixed_num) {
-		element_amount.value = fixed_num
-	};
 	var vol = accDiv(accDiv(accMul(element_amount.value , 10000) , (1 + Number(page_obj.fee))) , element_rate.value);
 	if (vol < 0.01) {
 		vol = 0
@@ -598,10 +582,6 @@ on_input_bid_amount: function() {
 	var element_amount = get_element('bid_amount');
 	var element_rate = get_element('bid_rate');
 	var element_vol = get_element('bid_vol');
-	var fixed_num = num_need_fix(element_amount.value, Number(trade_global.digits));
-	if (fixed_num) {
-		element_amount.value = fixed_num
-	};
 	var vol = accDiv(accMul(accMul(element_amount.value , 10000) , (1 + Number(page_obj.moneyfee))) , element_rate.value);
 	if (vol < 0.01) {
 		vol = 0

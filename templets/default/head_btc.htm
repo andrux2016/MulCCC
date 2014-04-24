@@ -8,13 +8,13 @@
         	<div class="logo"><img style='width:85px;height:76px;' src="{dede:global.cfg_templets_skin/}/img/logo.jpg"></div>
             <div class="nav" style='padding-top: 10px;'>
              	<div class="col">
-                	<a href="/member/btc-help.php" >帮助</a>
+                	<a href="/member/btc-help.php" {dede:php} if($showmune==5) echo "class='cur'"; {/dede:php}>帮助</a>
                 </div>
                 <div class="col">
-                	<a href="/vote.php">投票上币</a>
+                	<a href="/vote.php" {dede:php} if($showmune==4) echo "class='cur'"; {/dede:php}>投票上币</a>
                 </div>
                 <div class="col">
-                	<a href="/member/news.php?typeid=1" >新闻</a>
+                	<a href="/member/news.php?typeid=1" {dede:php} if($showmune==3) echo "class='cur'"; {/dede:php}>新闻</a>
                 </div>
                    <div class="col">
                 	<a href="/trade.php" {dede:php} if($showmune==2) echo "class='cur'"; {/dede:php}>用户中心</a>

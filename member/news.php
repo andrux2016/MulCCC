@@ -6,7 +6,7 @@
 
 require_once(dirname(__FILE__).'/config.php');
 require_once(DEDEINC.'/datalistcp.class.php');
-$showmune=1;
+$showmune=3;
 
 if($num!=""){
 

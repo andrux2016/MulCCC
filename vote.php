@@ -5,7 +5,7 @@
  */
 $nowtime = time();
 //自动生成HTML版
-
+$showmune = 4;
 if(isset($_GET['upcache']) || !file_exists('vote.html'))
 {
 	require_once (dirname(__FILE__) . "/include/common.inc.php");

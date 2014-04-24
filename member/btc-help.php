@@ -6,7 +6,6 @@
  
 require_once(dirname(__FILE__).'/config.php');
 require_once(DEDEINC.'/datalistcp.class.php');
-$showmune=1;
 $typeid = 3;
 
 if($num!=""){			
@@ -16,7 +15,7 @@ if($num!=""){
 $rtil=$dsql->GetOne("SELECT * FROM `#@__archives` WHERE arcrank>=0 $addsql and typeid = $typeid ORDER BY id DESC");
 if(is_array($rtil)) $rbody=$dsql->GetOne("SELECT body FROM `#@__addonarticle` WHERE aid='".$rtil['id']."' ORDER BY aid DESC");
 
-$showmune = 4;
+$showmune = 5;
 
   $sql = "SELECT * FROM #@__archives  WHERE arcrank>=0 and typeid = ".$typeid." ORDER BY senddate DESC";
   $dl = new DataListCP();
