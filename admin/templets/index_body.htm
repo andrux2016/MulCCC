@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $cfg_soft_lang; ?>">
@@ -63,7 +63,7 @@ $(function()
                             echo "<div class='updatedvt'><b>您系统版本最后更新时间为：{$oktime} </b><br/>";
                             echo " <a href='javascript:LoadUpdateInfos();' class='np coolbg'>进行在线更新</a> &nbsp; \r\n";
                             echo " <a href='sys_repair.php' class='np coolbg'>系统错误修复</a></div>\r\n";
-                            echo "<iframe name='stafrm' src='{$offUrl}&uptime={$oktime}' frameborder='0' id='stafrm' width='98%' height='50'></iframe>";
+                            echo "<iframe src='{$offUrl}&uptime={$oktime}' frameborder='0' id='stafrm' width='98%' height='50'></iframe>";
                         ?>
                     </div>
                  </div>
