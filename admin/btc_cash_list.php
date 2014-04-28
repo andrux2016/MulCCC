@@ -50,7 +50,7 @@ if(isset($dopost))
 					$method="sendtoaddress";
 					
 					//转账参数
-					$params=array($row['address'],floatval($row['amount']),GetMemberID($row['userid']),$cfg_webname);
+					$params=array($row['address'],floatval($row['amount']),GetMemberIDwithoutA($row['userid']),$cfg_webname);
 					$balance=coinQuery ($coinarr[$row['coinid']],$method,$params);
 					if(isset($balance['r'])){
 						$rsup = $dsql->ExecuteNoneQuery("Update #@__btccash Set dealmark=1,adduser=1,txid='".$balance['r']."' where id = '".$n."'"); 
@@ -206,6 +206,22 @@ function GetMemberID($mid)
         return '0';
     }
 }
+
+function GetMemberIDwithoutA($mid)
+{
+    global $dsql;
+    if($mid==0) return '0';
+    $row = $dsql->GetOne("SELECT userid FROM #@__member WHERE mid='$mid' ");
+    if(is_array($row))
+    {
+        return $row['userid'];
+    }
+    else
+    {
+        return '0';
+    }
+}
+
 function GetUserID($name)
 {
     global $dsql;
