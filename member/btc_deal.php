@@ -260,7 +260,7 @@ if($dealtype==0){//买入**************************************************
 			}
 			
 			//扣除买入人的费 用同时扣出手续费
-			$upBmoney = $dsql->ExecuteNoneQuery("Update #@__btccoin Set c_freeze=c_freeze-$dealTprice-$bbkage Where userid='".$Buserid."' And coinid='".$applist['moneyid']."'"); 
+			$upBmoney = $dsql->ExecuteNoneQuery("Update #@__btccoin Set c_freeze=c_freeze-$dealTprice-$bbkage Where userid='".$Buserid."' And coinid='".$applist['moneyid']."'"); //现在扣的都是moneyid
 			//给买入人充btc
 			$rBfreeze = $dsql->GetOne("Select * From #@__btccoin  Where userid='".$Buserid."' And coinid='".$applist['coinid']."'");
 			if(is_array($rBfreeze)){

@@ -115,6 +115,8 @@ function GetMAtt($m)
     else if($m==10) return "&nbsp;<font color='red'>[管理员]</font>";
     else return "&nbsp;<img src='images/adminuserico.gif' wmidth='16' height='15'><font color='red'>[荐]</font>";
 }
+
+//添加审核
 function GetMoney($uid)
 {
 	global $dsql;
@@ -130,8 +132,55 @@ function GetMoney($uid)
 			$vol = $rcoin['c_deposit']*10/10;
 			$free = $rcoin['c_freeze']*10/10;
 		}
+		$counttotalcount = $vol + $free;
 		$CoinINP .= $rtype->cointype."：".$vol;
-		$CoinINP .= "&nbsp;&nbsp;冻结：".$free."<br>";
+		$CoinINP .= "&nbsp;&nbsp;冻结：".$free."";
+		$rcv = $dsql->GetOne("select sum(amount) total_amount, sum(fee) total_fee from #@__btcrecharge WHERE userid='$uid' AND coinid='".$rtype->id."' AND dealmark = 1");
+		if($rcv)
+		{
+			$CoinINP .= "&nbsp;&nbsp;充值：".($rcv['total_amount']?$rcv['total_amount']:0)."";
+			$counttotalcount = $counttotalcount - ($rcv['total_amount']?$rcv['total_amount']:0);
+			$totalfee = ($rcv['total_fee']?$rcv['total_fee']:0);
+		}
+		
+		//所有客户该币种提现额之和  网站收取的该币种提现手续费之和
+		$rcv = $dsql->GetOne("select sum(amount) total_amount, sum(fee) total_fee from #@__btccash  WHERE userid='$uid' AND coinid='".$rtype->id."' AND dealmark = 1");
+		if($rcv)
+		{
+			$CoinINP .= "&nbsp;&nbsp;提现：". ($rcv['total_amount']?$rcv['total_amount']:0)."<br>";
+			$CoinINP .= "&nbsp;&nbsp;充提手续费：". ($totalfee + ($rcv['total_fee']?$rcv['total_fee']:0))."";
+			$counttotalcount = $counttotalcount + ($rcv['total_amount']?$rcv['total_amount']:0) + $totalfee + ($rcv['total_fee']?$rcv['total_fee']:0);
+		}
+		
+		//网站收取的该币种交易手续费之和
+		$rcv = $dsql->GetOne("select sum(bbkage) buyfee from #@__btcdeal where buserid = '$uid' and moneyid = '".$rtype->id."' ");
+		if($rcv)
+		{
+			$sbfee = ($rcv['buyfee']?$rcv['buyfee']:0);
+		}
+		
+		//该客户买入该币种之和-该客户该币种交易手续费
+		$rcv = $dsql->GetOne("select sum(tprice) totaltprice from #@__btcapply where dealtype = 0 and dealed = 1 and userid = '$uid' and moneyid = '".$rtype->id."' ");
+		if($rcv)
+		{
+			$CoinINP .= "&nbsp;&nbsp;买入：". ($rcv['totaltprice']?$rcv['totaltprice']:0)."";
+			$counttotalcount = $counttotalcount - ($rcv['totaltprice']?$rcv['totaltprice']:0);
+		}
+		$rcv = $dsql->GetOne("select sum(tprice) totaltprice from #@__btcapply where dealtype = 1 and dealed = 1 and userid = '$uid' and moneyid = '".$rtype->id."' ");
+		if($rcv)
+		{
+			$CoinINP .= "&nbsp;&nbsp;卖出：". ($rcv['totaltprice']?$rcv['totaltprice']:0)."<br>";
+			$counttotalcount = $counttotalcount + ($rcv['totaltprice']?$rcv['totaltprice']:0);
+		}
+		
+		//网站收取的该币种交易手续费之和
+		$rcv = $dsql->GetOne("select sum(sbkage) sellfee from #@__btcdeal where suserid = '$uid' and moneyid = '".$rtype->id."' ");
+		if($rcv)
+		{
+			$CoinINP .= "&nbsp;&nbsp;交易手续费：". ($sbfee + ($rcv['sellfee']?$rcv['sellfee']:0)).""; 
+			$counttotalcount = $counttotalcount + $sbfee + ($rcv['sellfee']?$rcv['sellfee']:0);
+		}
+		$CoinINP .= "&nbsp;&nbsp;差额：".$counttotalcount ."<br>";
 	}
 	return $CoinINP;
 }

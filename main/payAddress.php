@@ -53,6 +53,12 @@ if(isset($cointype) && !empty($cointype)){
 			'r' => $content
 		);
 //		echo mchStrCode(json_encode($returncont), 'ENCODE');
+	}elseif ($method == 'getinfo') {
+		$content = $bitcoin->getinfo();
+		$returncont = array(
+			'r' => $content
+		);
+//		echo mchStrCode(json_encode($returncont), 'ENCODE');
 	}elseif($method == 'listsinceblock'){
 		if(!isset($params) || empty($params) || count($params) == 0 || $params[0] == null){
 			$content = $bitcoin->listsinceblock();

@@ -169,13 +169,13 @@
 							安全中心
 						</a>
 					</li>
-					<li class="cur">
-						<a href="/member/edit_fullinfo_btc.php" >
-							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-18.jpg" border="0" class="c-no"/>
-							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-18-a.jpg" border="0" class="c"/>
-							账户信息
-						</a>
-					</li>
+<!--					<li class="cur">-->
+<!--						<a href="/member/edit_fullinfo_btc.php" >-->
+<!--							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-18.jpg" border="0" class="c-no"/>-->
+<!--							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-18-a.jpg" border="0" class="c"/>-->
+<!--							账户信息-->
+<!--						</a>-->
+<!--					</li>-->
 <!--					<li class="nav2 tit">-->
 <!--						<a>-->
 <!--							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-19.jpg" border="0" />-->

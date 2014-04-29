@@ -45,7 +45,7 @@ if(isset($dopost))
 				}
 				//if(!is_array($row)){echo "失败";exit();} 
 				//调用转账接口
-				if($row['checked']==1 && $row['adduser']!=1 && $coinpayid[$row['coinid']]=='2'){
+				if($row['adduser']!=1 && $coinpayid[$row['coinid']]=='2'){
 					require_once DEDEINC.'/rpcQuery.php';
 					$method="sendtoaddress";
 					

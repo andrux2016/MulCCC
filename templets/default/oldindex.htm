@@ -663,7 +663,7 @@ function showpassword() {
 <div class="btc_in"><label>卖出量&nbsp;</label><input type="text" id="bid_vol" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_bid_vol();_page.obj.recalc_fee(&#39;bid&#39;);" value="0"><label>&nbsp;{dede:php} echo $cointype; {/dede:php}</label></div>
 <div class="btc_in"><label>兑换额&nbsp;</label><input type="text" id="bid_amount" class="inputRate" maxlength="10" onKeyDown="return check_number(event);" onKeyUp="_page.obj.on_input_bid_amount();_page.obj.recalc_fee(&#39;bid&#39;);" value="0"style="width:100px ;height:24px ;margin:0px;"><label>&nbsp;{dede:php} echo $moneytype; {/dede:php}</label></div>
 </div>
-<div class="btc_kk">手续费 <span id="bid_fee" class="free">0</span> {dede:php} echo $cointype; {/dede:php} ({dede:php} echo $moneyfee*10/10; {/dede:php}%)</div>
+<div class="btc_kk">手续费 <span id="bid_fee" class="free">0</span> {dede:php} echo $moneytype; {/dede:php} ({dede:php} echo $moneyfee*10/10; {/dede:php}%)</div>
 <div class="btc_mm1" style="margin-bottom: 0px;"><button name="button" type="button" class="xbt-ms-b2 sellclick" t="bid" onClick="_page.obj.on_request_ask_bid( &#39;bid&#39;,  get_element(&#39;bid_rate&#39;).value, get_element(&#39;bid_vol&#39;).value );" value="卖出 ({dede:php} echo $cointype;{/dede:php}→{dede:php} echo $moneytype;{/dede:php})"></button></div>
 <div class="btc_kk" style="margin-top: 0px;"><span id="sellnote"></span>
 </div></form>
