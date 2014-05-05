@@ -52,10 +52,10 @@ foreach($cointypelist as $k => $v){
 	foreach($cointypelist[$k]["status"] as $key=>$tmpdtypearr){
 		
 		$rcv = $dsql->GetOne("SELECT sum(btccount) as count, sum(tprice) as total FROM #@__btcdeal where market='1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime>".strtotime("-1 day"));
-		$cointypelist[$k]["status"][$key]['count'] = $rcv->count? rtrimandformat($rcv->count, 10) : 0;
-		$cointypelist[$k]["status"][$key]['total'] = $rcv->total? rtrimandformat($rcv->total, 10) : 0;
+		$cointypelist[$k]["status"][$key]['count'] = $rcv['count']? rtrimandformat($rcv['count'], 10) : 0;
+		$cointypelist[$k]["status"][$key]['total'] = $rcv['total']? rtrimandformat($rcv['total'], 10) : 0;
 		$rcv = $dsql->GetOne("SELECT sum(btccount) as count, sum(tprice) as total FROM #@__btcdeal where market='1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime>".strtotime("-2 day")." AND dealtime<".strtotime("-1 day"));
-		$thedaybeforeyesterday = $rcv->total?rtrimandformat($rcv->total, 10) : 0;
+		$thedaybeforeyesterday = $rcv['total']?rtrimandformat($rcv['total'], 10) : 0;
 		$cointypelist[$k]["status"][$key]['updown'] = $thedaybeforeyesterday == 0? '0%' : ((($cointypelist[$k]["status"][$key]['total'] - $thedaybeforeyesterday)/$thedaybeforeyesterday) * 100).'%';
 	}
 	

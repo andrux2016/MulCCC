@@ -25,11 +25,11 @@ while($rcv = $dsql->GetObject())
 foreach($dtypearr as $key=>$tmpdtypearr){
 	
 	$rcv = $dsql->GetOne("SELECT sum(btccount) as count, sum(tprice) as total FROM #@__btcdeal where market='1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime>".strtotime("-1 day"));
-	$count = $rcv->count? $rcv->count : 0;
-	$total = $rcv->total? $rcv->total : 0;
+	$count = $rcv['count']? $rcv['count'] : 0;
+	$total = $rcv['total']? $rcv['total'] : 0;
 	$avg = ($total == 0 || $count == 0)? 0 : $count;
 	$rcv = $dsql->GetOne("SELECT avg FROM #@__statistics where coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." order by datetime desc ");
-	$oldavg = $rcv->avg? $rcv->avg : 0;
+	$oldavg = $rcv['avg']? $rcv['avg'] : 0;
 	$percent = $oldavg == 0? 0 : (($avg - $oldavg)/$oldavg);
 	$slq="insert into ".$cfg_dbprefix."statistics(datetime,coinid,moneyid,count,total,avg,percent) values(".strtotime("now").", ".$tmpdtypearr['coinid'].", ".$tmpdtypearr['moneyid'].", ".$count.", ".$total.", ".$avg.", ".$percent.")";
 	$rsnew = $dsql->ExecuteNoneQuery($slq);
