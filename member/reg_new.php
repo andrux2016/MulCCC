@@ -266,7 +266,13 @@ if($step == 1)
         if($dsql->ExecuteNoneQuery($inQuery))
         {
             $mid = $dsql->GetLastID();
-    
+
+            //推荐注册     
+            if($reward > 0){
+                $sql = "INSERT INTO `#@__reward` (`userid`, `reward_id`) VALUES ('$userid', '$reward')";
+                $db->ExecuteNoneQuery($sql);
+            }
+
             //写入默认会员详细资料
             if($mtype=='个人'){
                 $space='person';

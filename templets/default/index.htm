@@ -2,6 +2,7 @@
 <html>	
 	<head>
 		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=10" />
 		<meta name="description" content="多币交易平台,比特币,狗狗币,莱特币," />
 		<title>多币交易平台</title>
 		<!-- BEGIN SCRIPT INCLUDE -->
@@ -19,7 +20,7 @@
 					effect:'fade',
 					pauseOnHover:true,
 					captionOpacity:0,
-					pauseTime:17000
+					pauseTime:3000
 				});
 				$( "#tabs" ).tabs();
 			});
@@ -42,8 +43,8 @@
 			<div id="header" class="header-main">
 				<div id="header-content">
 					<div id="header-telephone">
-						<img src="{dede:global.cfg_templets_skin/}/images/phone.png" alt="Phone image" />
-						<span><a href="/member/">登录</a></span>&nbsp;<span><a href="/member/index_do.php?fmdo=user&dopost=regnew">注册</a></span>
+                        <span><a href="/member/">登录</a></span>&nbsp;
+                        <span><a href="/member/index_do.php?fmdo=user&dopost=regnew&u={dede:php} echo($_GET['u']);{/dede:php}">注册</a></span>
 					</div>
 					<div id="social-button">
 						<a href="#"><img src="{dede:global.cfg_templets_skin/}/images/facebook.png" alt="Facebook icon" /></a>
@@ -87,9 +88,9 @@
 				<div class="slider-wrapper theme-pascal">
 					<div id="slider" class="nivoSlider">
 						<!-- Place there a picture that will be displayed in main slider -->
+						<img src="{dede:global.cfg_templets_skin/}/images/slider3.jpg" alt="" title="#main3" />
 						<img src="{dede:global.cfg_templets_skin/}/images/slider1.jpg" alt="" title="#main1" />
 						<img src="{dede:global.cfg_templets_skin/}/images/slider2.jpg" alt="" title="#main2" />
-						<img src="{dede:global.cfg_templets_skin/}/images/slider3.jpg" alt="" title="#main3" />
 					</div>
 					<!-- Place there a caption text that will be displayed with a slider picture (id of div should been equal to the value of image's title attribute) -->
 					<!-- <div id="main1" class="nivo-html-caption">
@@ -109,25 +110,8 @@
 			<!-- BEGIN MAIN CONTENT -->
 			<div id="content-left" class="full-content">
 				<div class="divider"></div>
-				<!-- BEGIN SITE SECTION -->
-				<div id="site-section-wrap">
-					<div class="three-column">
-						<img src="{dede:global.cfg_templets_skin/}/images/menu_section.png" class="site-section-img" alt="Read menu" />
-					</div>
-					<div class="three-column">
-						<img src="{dede:global.cfg_templets_skin/}/images/blog_section.png" class="site-section-img" alt="Visit blog" />
-					</div>
-					<div class="three-column last-column">
-						<img src="{dede:global.cfg_templets_skin/}/images/contact_section.png" class="site-section-img" alt="Get in touch" />
-					</div>
-					<div class="clear"></div>
-				</div>
-				<!-- END SITE SECTION -->
-				<div class="divider"></div>
 				<!-- BEGIN OUR STORY -->
 				<div id="story-wrap">
-					<h1 id="story-header">交易列表</h1>
-					<div id="header-after-story">最新的主流虚拟币实时交易价格</div>
 					<div id="story-content">
 						<div id="tabs">
 							<ul>
@@ -170,7 +154,6 @@
 								共计1000亿，6次交易确认
 					</div>
 					<div class="clear"></div>
-					<div class="divider"></div>
 				</div>	
 				<!-- END OUR STORY -->
 				<!-- BEGIN DEALTIPS -->
@@ -196,6 +179,21 @@
 				 <!-- END DEALTIPS  -->
 			</div>
 			<!-- END MAIN CONTENT -->
+				<div class="divider"></div>
+				<!-- BEGIN SITE SECTION -->
+				<div id="site-section-wrap">
+					<div class="three-column">
+						<img src="{dede:global.cfg_templets_skin/}/images/menu_section.png" class="site-section-img" alt="Read menu" />
+					</div>
+					<div class="three-column">
+						<img src="{dede:global.cfg_templets_skin/}/images/blog_section.png" class="site-section-img" alt="Visit blog" />
+					</div>
+					<div class="three-column last-column">
+						<img src="{dede:global.cfg_templets_skin/}/images/contact_section.png" class="site-section-img" alt="Get in touch" />
+					</div>
+					<div class="clear"></div>
+				</div>
+				<!-- END SITE SECTION -->
 		</div>
 		<div class="clear"></div>
 		<!-- BEGIN PREFOOTER -->

@@ -86,6 +86,7 @@ $(document).ready(function(){
 					<input type="hidden" value="regbase" name="dopost"/>
 					<input type="hidden" value="1" name="step"/>
 					<input type="hidden" value="个人" name="mtype"/>
+					<input type="hidden" name="reward" value="<?php echo $_GET['u'];?>"/>
 					<div class="row-txt">
 						<div class="t1">10秒快速注册</div>                
 					</div>
@@ -250,7 +251,7 @@ $(document).ready(function(){
 						  ?>
 						
 						
-							<div class="field" style="padding-top: 10px;">
+							<div class="field">
 								<label class="rg">验证码：</label>	
 								<input type="text" class="intxt w200 input  input-vdcode" style="text-transform: uppercase;" onkeyup="checkvdcode();" id="vdcode" name="vdcode"/>
 								<img id="vdimgck" align="absmiddle" onclick="this.src=this.src+'?'" style="cursor: pointer;" alt="看不清？点击更换" src="../include/vdimgck.php"/>

@@ -58,7 +58,8 @@ aside, nav, article, figure {
 */
 
 /* Header */
-
+#header{margin-top:-15px;}
+#header, x:-moz-any-link, x:default{margin-top:0;}
 h1, h2, h3, h4, h5, h6 {
 	font-family:'å¾®è½¯é›…é»‘', sans-serif;
 	font-size:3em;
@@ -207,7 +208,7 @@ blockquote {
 }
 
 .story-pages {
-	padding-top:70px !important;
+	padding-top:30px !important;
 }
 
 .full-width {
@@ -429,7 +430,7 @@ input:focus, textarea:focus {
 */
 
 #header {
-	height:250px;
+	height:220px;
 	width:100%;
 	background-image:url(../images/header_bg.png);
 	position:relative;
@@ -437,7 +438,7 @@ input:focus, textarea:focus {
 }
 
 .header-main {
-	margin-bottom:30px;
+	margin-bottom:10px;
 	border-bottom:10px solid #B94747;
 }
 
@@ -720,11 +721,11 @@ input:focus, textarea:focus {
 #main-content {
 	width:960px;
 	margin:0 auto;
-	padding:45px 0 0 19px;
+	padding:25px 0 0 19px;
 }
 
 .main-page-content {
-	padding:30px 0 0 4px !important;
+	padding:20px 0 0 4px !important;
 }
 
 #content-left {
@@ -904,7 +905,7 @@ input:focus, textarea:focus {
 
 #slider-bg {
 	width:100%;
-	background-image:url(../images/slider_bg.png);
+	//background-image:url(../images/slider_bg.png);
 	z-index:0;
 }
 #slider-align {
@@ -1806,9 +1807,23 @@ input:focus, textarea:focus {
 	text-decoration:underline;
 }
 
+#tabs table{
+	border-top:1px solid #6CF;
+	border-left:1px solid #6CF;
+}
+#tabs td{
+	border-right:1px solid #6CF;
+	border-bottom:1px solid #6CF;
+	padding:16px;
+	text-align:center;
+	font:14px "¿¿¿¿";
+}
+#tabs .thead{background-color:#CEF;padding:16px;}
 
-#dealtips{font:13px/2 "å¾®è½¯é›…é»‘";}
-#dealtips h1{border: none;font: bolder 20px/1.2 ;margin: 5px 0 -10px 0;padding: 5px;text-align: center;}
+
+#dealtips{font:13px/2 "Microsoft YaHei";}
+#dealtips h1{clear:both;border: none;font: bolder 20px/1.2 ;margin: 5px 0 -10px 0;padding: 5px;text-align: center;}
+#dealtips h1, x:-moz-any-link, x:default{margin-top:50px;}
 #buytips, #saletips{
 	width: 430px;
 	float: left;
@@ -1876,8 +1891,19 @@ input:focus, textarea:focus {
 #tabs td{
 	border-right: 1px solid #6CF;
 	border-bottom: 1px solid #6CF;
-	padding: 5px 16px;
+	padding: 20px 16px;
 	text-align: center;
-	font: 14px "Î¢ÈíÑÅºÚ";
+	font: 14px "Microsoft Yahei";
 }
-#tabs .thead{background-color: #CEF;padding: 15px 16px;}
+#tabs .thead{background-color: #CEF;padding: 20px 16px;}
+
+.rewardList{line-height: 2em;}
+.rewardList li{
+	display: inline-block;
+	min-width: 195px;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #6cf;
+	text-align: center;
+}
+.c930{color: #930;}

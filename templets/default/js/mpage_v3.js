@@ -363,8 +363,8 @@ function mpage_operator(server_time, cur_symbol, uid) {
 				});
 				return
 			};
-			if (vol >= 1000000000) {
-				apprise('单笔交易量必须小于1000000000', {
+			if (vol >= 10000000000) {
+				apprise('单笔交易量必须小于10000000000', {
 					animate: false,
 					textOk: '确定'
 				});
