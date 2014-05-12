@@ -363,13 +363,6 @@ function mpage_operator(server_time, cur_symbol, uid) {
 				});
 				return
 			};
-			if (vol >= 10000000000) {
-				apprise('单笔交易量必须小于10000000000', {
-					animate: false,
-					textOk: '确定'
-				});
-				return
-			};
 			if (type == 'ask') {
 				var amount_ask_able = get_element('amount_ask_able').innerHTML;
 				if (vol > Number(amount_ask_able)) {

@@ -129,7 +129,7 @@ else{
 	
 if($dealtype==0){//买入**************************************************
 		$bbkageall=$tprice*$bkage;//手续费
-		$dsql->SetQuery("SELECT * FROM ".$cfg_dbprefix."btcorder WHERE dealtype=1 AND coinid='".$applist['coinid']."' AND moneyid='".$applist['moneyid']."' AND market='".$applist['market']."' AND uprice <= ".$applist['uprice']." ORDER BY uprice,ordertime");//执行SQL语句
+		$dsql->SetQuery("SELECT * FROM ".$cfg_dbprefix."btcorder WHERE dealtype=1 AND coinid='".$applist['coinid']."' AND moneyid='".$applist['moneyid']."' AND market='".$applist['market']."' AND uprice <= ".$applist['uprice']." ORDER BY uprice desc,ordertime");//执行SQL语句
 		
 		//$appcount = $applist['btccount']*(1-$bkage);//申请量
 		//$appcount =  $applist['btccount']-$applist['btccount']*(1/$applist['bkage']+1);//申请量
@@ -215,7 +215,7 @@ if($dealtype==0){//买入**************************************************
 }elseif($dealtype==1){//卖出*******************************************************************************************
 	
 	//读取符合要求的挂单
-	$dsql->SetQuery("SELECT * FROM ".$cfg_dbprefix."btcorder WHERE dealtype=0 AND coinid='".$applist['coinid']."' AND moneyid='".$applist['moneyid']."' AND market='".$applist['market']."' AND uprice >= ".$applist['uprice']." ORDER BY uprice DESC,ordertime");//执行SQL语句
+	$dsql->SetQuery("SELECT * FROM ".$cfg_dbprefix."btcorder WHERE dealtype=0 AND coinid='".$applist['coinid']."' AND moneyid='".$applist['moneyid']."' AND market='".$applist['market']."' AND uprice >= ".$applist['uprice']." ORDER BY uprice,ordertime");//执行SQL语句
 		
 		//$appcount = $applist['btccount']*(1-$bkage);//申请量
 		$appcount = $applist['btccount'];//申请量
