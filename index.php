@@ -7,9 +7,9 @@
 $nowtime = time();
 //自动生成HTML版
 
-
 if(isset($_GET['upcache']) || !file_exists('index.html'))
 {
+	require_once(dirname(__FILE__) . '/member/config.php');
 	require_once (dirname(__FILE__) . "/include/common.inc.php");
     require_once DEDEINC."/arc.partview.class.php";
 	$showmune=0;
@@ -54,10 +54,7 @@ foreach($cointypelist as $k => $v){
 		$rcv = $dsql->GetOne("SELECT sum(btccount) as count, sum(tprice) as total FROM #@__btcdeal where market='1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime>".strtotime("-1 day"));
 		$cointypelist[$k]["status"][$key]['count'] = $rcv['count']? rtrimandformat($rcv['count'], 10) : 0;
 		$cointypelist[$k]["status"][$key]['total'] = $rcv['total']? rtrimandformat($rcv['total'], 10) : 0;
-//		$rcv = $dsql->GetOne("SELECT sum(btccount) as count, sum(tprice) as total FROM #@__btcdeal where market='1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime>".strtotime("-2 day")." AND dealtime<".strtotime("-1 day"));
-//		$thedaybeforeyesterday = $rcv['total']?rtrimandformat($rcv['total'], 10) : 0;
-//		$cointypelist[$k]["status"][$key]['updown'] = $thedaybeforeyesterday == 0? '0%' : ((($cointypelist[$k]["status"][$key]['total'] - $thedaybeforeyesterday)/$thedaybeforeyesterday) * 100).'%';
-		$rcv = $dsql->GetOne("select uprice from #@__btcdeal where market = '1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime <". strtotime(date('Y-m-d')." 00:00:00") . " order by dealtime desc Limit 0,1");
+	$rcv = $dsql->GetOne("select uprice from #@__btcdeal where market = '1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime <". strtotime(date('Y-m-d')." 00:00:00") . " order by dealtime desc Limit 0,1");
 		$yesterday = $rcv['uprice']?rtrimandformat($rcv['uprice'], 10) : 0;
 		$rcv = $dsql->GetOne("select uprice from #@__btcdeal where market = '1' and coinid =".$tmpdtypearr['coinid']." and moneyid=".$tmpdtypearr['moneyid']." AND dealtime >". strtotime(date('Y-m-d')." 00:00:00"). " order by dealtime desc Limit 0,1");
 		$now = $rcv['uprice']?rtrimandformat($rcv['uprice'], 10) : 0;

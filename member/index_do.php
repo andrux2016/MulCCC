@@ -383,7 +383,7 @@ else if($fmdo=='login')
             $ucsynlogin = uc_user_synlogout();
         }
         #/aip}}
-        ShowMsg("成功退出登录！",$cfg_basehost,0,2000);
+        ShowMsg("成功退出登录！","index.php",0,2000);
         exit();
     }
 }

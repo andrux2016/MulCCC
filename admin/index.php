@@ -4,6 +4,7 @@
  *
  */
 require_once(dirname(__FILE__)."/config.php");
+CheckPurview('sys_Data,a_Check,a_AccCheck');
 require_once(DEDEINC.'/dedetag.class.php');
 $defaultIcoFile = DEDEDATA.'/admin/quickmenu.txt';
 $myIcoFile = DEDEDATA.'/admin/quickmenu-'.$cuserLogin->getUserID().'.txt';

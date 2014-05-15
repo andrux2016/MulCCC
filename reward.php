@@ -1,6 +1,6 @@
 ﻿<?php
-require_once('/member/config.php');
-require_once('/include/datalistcp.class.php');
+require_once(dirname(__FILE__). '/member/config.php');
+require_once(dirname(__FILE__). '/include/datalistcp.class.php');
 $mid = $cfg_ml->M_ID;   
 if ($mid <= 0) {
     header("location:/member");

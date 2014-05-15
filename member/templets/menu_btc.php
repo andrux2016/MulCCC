@@ -106,6 +106,13 @@
 							成交记录
 						</a>
 					</li>
+					<li>
+						<a href="/reward.php" target="_blank">
+							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-12.jpg" border="0" class="c-no"/>
+							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-12-a.jpg" border="0" class="c"/>
+							我的推荐
+						</a>
+					</li>
 					<li class="nav2 tit">
 						<a>
 							<img src="<?php echo $cfg_templets_skin; ?>/img/btb-yhgl-9.jpg" border="0" class="c-no"/>

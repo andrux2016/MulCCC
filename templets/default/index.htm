@@ -43,8 +43,14 @@
 			<div id="header" class="header-main">
 				<div id="header-content">
 					<div id="header-telephone">
-                        <span><a href="/member/">登录</a></span>&nbsp;
-                        <span><a href="/member/index_do.php?fmdo=user&dopost=regnew&u={dede:php} echo($_GET['u']);{/dede:php}">注册</a></span>
+						{dede:php}
+						if ($mid <= 0) {                        
+	                        echo '<span><a href="/member/">登录</a></span> &nbsp; <span>
+	                        <a href="/member/index_do.php?fmdo=user&dopost=regnew&u=' . $_GET['u'] . '">注册</a></span>';
+                        } else {
+                    		echo $cfg_ml->M_LoginID . ' <a href="/member/index_do.php?fmdo=login&dopost=exit">退出登录</a>';
+                    	}
+                    	{/dede:php}
 					</div>
 					<div id="social-button">
 						<a href="#"><img src="{dede:global.cfg_templets_skin/}/images/facebook.png" alt="Facebook icon" /></a>
