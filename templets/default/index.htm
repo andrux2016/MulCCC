@@ -44,11 +44,11 @@
 				<div id="header-content">
 					<div id="header-telephone">
 						{dede:php}
-						if ($mid <= 0) {                        
-	                        echo '<span><a href="/member/">登录</a></span> &nbsp; <span>
-	                        <a href="/member/index_do.php?fmdo=user&dopost=regnew&u=' . $_GET['u'] . '">注册</a></span>';
+						if ($cfg_ml->M_LoginID) { 
+							echo $cfg_ml->M_LoginID . ' <a href="/member/index_do.php?fmdo=login&dopost=exit">退出登录</a>';                       
                         } else {
-                    		echo $cfg_ml->M_LoginID . ' <a href="/member/index_do.php?fmdo=login&dopost=exit">退出登录</a>';
+                    		echo '<span><a href="/member/">登录</a></span> &nbsp; <span>
+	                        <a href="/member/index_do.php?fmdo=user&dopost=regnew&u=' . $_GET['u'] . '">注册</a></span>';
                     	}
                     	{/dede:php}
 					</div>
